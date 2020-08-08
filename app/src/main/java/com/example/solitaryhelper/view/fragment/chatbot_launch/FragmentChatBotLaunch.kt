@@ -8,4 +8,8 @@ class FragmentChatBotLaunch:BaseFragment<FragmentChatbotLaunchBinding>(R.layout.
     override fun FragmentChatbotLaunchBinding.setEventListener() {
 
     }
+
+    override fun FragmentChatbotLaunchBinding.setCreateView() {
+
+    }
 }

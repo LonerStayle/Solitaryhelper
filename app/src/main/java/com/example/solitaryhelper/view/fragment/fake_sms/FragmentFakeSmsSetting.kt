@@ -5,6 +5,10 @@ import com.example.solitaryhelper.view.base.BaseFragment
 
 class FragmentFakeSmsSetting:BaseFragment<FragmentFakeSmsSettingBinding>(R.layout.fragment_fake_sms_setting) {
     override fun FragmentFakeSmsSettingBinding.setEventListener() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun FragmentFakeSmsSettingBinding.setCreateView() {
+
     }
 }

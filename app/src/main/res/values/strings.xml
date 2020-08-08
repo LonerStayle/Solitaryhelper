@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Solitaryhelper</string>
+    <string name="app_name">아웃사이더 인생</string>
+<!--    메인-->
+    <string-array name="icon_text">
+        <item>아싸 스킬</item>
+        <item>할말 만들기</item>
+        <item>혼밥</item>
+        <item>동기부여</item>
+        <item>아싸 도우미</item>
+    </string-array>
 </resources>

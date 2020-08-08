@@ -5,6 +5,10 @@ import com.example.solitaryhelper.view.base.BaseFragment
 
 class FragmentSkill:BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill) {
     override fun FragmentSkillBinding.setEventListener() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun FragmentSkillBinding.setCreateView() {
+
     }
 }

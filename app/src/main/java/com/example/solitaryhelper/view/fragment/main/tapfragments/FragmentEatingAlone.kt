@@ -5,6 +5,10 @@ import com.example.solitaryhelper.view.base.BaseFragment
 
 class FragmentEatingAlone:BaseFragment<FragmentEatingAloneBinding>(R.layout.fragment_eating_alone) {
     override fun FragmentEatingAloneBinding.setEventListener() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun FragmentEatingAloneBinding.setCreateView() {
+
     }
 }

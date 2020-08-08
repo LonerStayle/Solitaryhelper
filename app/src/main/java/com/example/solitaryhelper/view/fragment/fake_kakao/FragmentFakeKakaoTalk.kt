@@ -6,6 +6,10 @@ import com.example.solitaryhelper.databinding.FragmentFakeKakaoTalkBinding
 
 class FragmentFakeKakaoTalk:BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun FragmentFakeKakaoTalkBinding.setCreateView() {
+
     }
 }

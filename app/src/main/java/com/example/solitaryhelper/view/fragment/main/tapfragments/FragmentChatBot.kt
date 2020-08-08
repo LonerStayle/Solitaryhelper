@@ -5,6 +5,10 @@ import com.example.solitaryhelper.view.base.BaseFragment
 
 class FragmentChatBot:BaseFragment<FragmentChatbotBinding>(R.layout.fragment_chatbot) {
     override fun FragmentChatbotBinding.setEventListener() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun FragmentChatbotBinding.setCreateView() {
+
     }
 }

@@ -5,6 +5,10 @@ import com.example.solitaryhelper.view.base.BaseFragment
 
 class FragmentWiseSayingCreate:BaseFragment<FragmentWiseSayingCreateBinding>(R.layout.fragment_wise_saying_create) {
     override fun FragmentWiseSayingCreateBinding.setEventListener() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun FragmentWiseSayingCreateBinding.setCreateView() {
+
     }
 }
