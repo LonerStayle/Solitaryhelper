@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view
+package com.example.solitaryhelper.view.contents
 
 object Contents {
     const val MAIN_FIRST_ITEM = 0

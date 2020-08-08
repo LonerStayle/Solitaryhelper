@@ -27,6 +27,15 @@
         <action
             android:id="@+id/action_mainFragment_to_fragmentChatBotLauch"
             app:destination="@id/fragmentChatBotLauch" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentFakeKakaoTalk"
+            app:destination="@id/fragmentFakeKakaoTalk" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentFakeCall"
+            app:destination="@id/fragmentFakeCall" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentFakeSms"
+            app:destination="@id/fragmentFakeSms" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeKaKaoTalkGuide"

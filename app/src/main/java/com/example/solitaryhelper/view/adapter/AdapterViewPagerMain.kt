@@ -2,7 +2,7 @@ package com.example.solitaryhelper.view.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.solitaryhelper.view.Contents
+import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.fragment.main.tapfragments.*
 
 class AdapterViewPagerMain(fr: Fragment) : FragmentStateAdapter(fr) {

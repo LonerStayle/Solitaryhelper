@@ -7,10 +7,80 @@
     android:layout_height="match_parent">
 
 
+    <ImageButton
+        android:id="@+id/imageButton_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_menu_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_kakaoTalk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:backgroundTint="#7986CB"
+        app:layout_constraintBottom_toTopOf="@+id/fab_call"
+        app:layout_constraintEnd_toEndOf="@+id/fab_call"
+        app:layout_constraintStart_toStartOf="@+id/fab_call"
+        app:srcCompat="@drawable/kakao_talk_logo"
+        android:focusable="true"
+        android:visibility="gone"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:backgroundTint="#7986CB"
+        app:layout_constraintBottom_toTopOf="@+id/fab_sms"
+        app:layout_constraintEnd_toEndOf="@+id/fab_sms"
+        app:layout_constraintStart_toStartOf="@+id/fab_sms"
+        app:srcCompat="@drawable/ic_baseline_phone_in_call_24"
+        android:focusable="true"
+        android:visibility="gone"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_sms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:backgroundTint="#7986CB"
+        app:layout_constraintBottom_toTopOf="@+id/fab_start"
+        app:layout_constraintEnd_toEndOf="@+id/fab_start"
+        app:layout_constraintStart_toStartOf="@+id/fab_start"
+        app:srcCompat="@drawable/ic_round_mode_sms_24"
+        android:focusable="true"
+        android:visibility="gone"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#1A237E"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout_main"
+        app:layout_constraintEnd_toEndOf="@+id/viewPager_main"
+        app:rippleColor="#3D5AFE"
+        app:srcCompat="@drawable/ic_round_play_arrow_24" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout_main"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/colorTabLayout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +88,6 @@
         app:tabRippleColor="@color/colorPointYellow"
         app:tabSelectedTextColor="@color/colorPointYellow"
         app:tabTextAppearance="@style/tab_textSize">
-
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -30,6 +99,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.viewpager2.widget.ViewPager2>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
