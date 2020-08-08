@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.solitaryhelper.view.fragment.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentFakeKaKaoTalkGuide"
+            app:destination="@id/fragmentFakeKaKaoTalkGuide" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentFakeCallGuide"
+            app:destination="@id/fragmentFakeCallGuide" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentFakeSmsSetting"
+            app:destination="@id/fragmentFakeSmsSetting" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentTalkCreate"
+            app:destination="@id/fragmentTalkCreate" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentWiseSayingCreate"
+            app:destination="@id/fragmentWiseSayingCreate" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentChatBotLauch"
+            app:destination="@id/fragmentChatBotLauch" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFakeKaKaoTalkGuide"
+        android:name="com.example.solitaryhelper.view.fragment.fake_kakao.FragmentFakeKaKaoTalkGuide"
+        android:label="FragmentFakeKaKaoTalkGuide" >
+        <action
+            android:id="@+id/action_fragmentFakeKaKaoTalkGuide_to_fragmentFakeKakaoTalk"
+            app:destination="@id/fragmentFakeKakaoTalk" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFakeCallGuide"
+        android:name="com.example.solitaryhelper.view.fragment.fake_call.FragmentFakeCallGuide"
+        android:label="FragmentFakeCallGuide" >
+        <action
+            android:id="@+id/action_fragmentFakeCallGuide_to_fragmentFakeCall"
+            app:destination="@id/fragmentFakeCall" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFakeSmsSetting"
+        android:name="com.example.solitaryhelper.view.fragment.fake_sms.FragmentFakeSmsSetting"
+        android:label="FragmentFakeSmsSetting" >
+        <action
+            android:id="@+id/action_fragmentFakeSmsSetting_to_fragmentFakeSms"
+            app:destination="@id/fragmentFakeSms" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTalkCreate"
+        android:name="com.example.solitaryhelper.view.fragment.talk.FragmentTalkCreate"
+        android:label="FragmentTalkCreate" />
+    <fragment
+        android:id="@+id/fragmentWiseSayingCreate"
+        android:name="com.example.solitaryhelper.view.fragment.wise_saying_create.FragmentWiseSayingCreate"
+        android:label="FragmentWiseSayingCreate" />
+    <fragment
+        android:id="@+id/fragmentChatBotLauch"
+        android:name="com.example.solitaryhelper.view.fragment.chatbot_launch.FragmentChatBotLaunch"
+        android:label="FragmentChatBotLauch" />
+    <fragment
+        android:id="@+id/fragmentFakeKakaoTalk"
+        android:name="com.example.solitaryhelper.view.fragment.fake_kakao.FragmentFakeKakaoTalk"
+        android:label="FragmentFakeKakaoTalk" >
+        <action
+            android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
+            app:destination="@id/fragmentFakeKakaoChat" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFakeKakaoChat"
+        android:name="com.example.solitaryhelper.view.fragment.fake_kakao.FragmentFakeKakaoChat"
+        android:label="FragmentFakeKakaoChat" />
+    <fragment
+        android:id="@+id/fragmentFakeCall"
+        android:name="com.example.solitaryhelper.view.fragment.fake_call.FragmentFakeCall"
+        android:label="FragmentFakeCall" />
+    <fragment
+        android:id="@+id/fragmentFakeSms"
+        android:name="com.example.solitaryhelper.view.fragment.fake_sms.FragmentFakeSms"
+        android:label="FragmentFakeSms" />
+</navigation>
