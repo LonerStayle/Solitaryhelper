@@ -166,9 +166,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun backButton() {
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            binding.apply {
+        binding.apply {
+            requireActivity().onBackPressedDispatcher.addCallback(this@MainFragment) {
+                if (drawerLayoutMain.isOpen)
                     drawerLayoutMain.closeDrawers()
+                else
+                    requireActivity().finish()
             }
         }
     }
