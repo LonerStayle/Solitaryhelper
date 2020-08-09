@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.fragment.wise_saying_create
+package com.example.solitaryhelper.view.fragment.wise_saying_fragments
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentWiseSayingCreateBinding
 import com.example.solitaryhelper.view.base.BaseFragment
