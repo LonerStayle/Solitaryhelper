@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/account"
-        android:title="test" />
+        android:id="@+id/item_wiseSayingList"
+        android:title="내가 만든 명언"
+        android:icon="@drawable/ic_baseline_wise_list_24"
+       />
     <item
-        android:id="@+id/item2"
-        android:title="2" />
+        android:id="@+id/item_ranking"
+        android:title="랭킹"
+        android:icon="@drawable/ic_baseline_ranking_24"
+
+        />
+
     <item
-        android:id="@+id/item3"
-        android:title="item3" />
+        android:id="@+id/item_helperInWishList"
+        android:title="아싸 도우미에서 찜한 정보"
+        android:icon="@drawable/ic_baseline_wishlist_24"
+      />
+
+    <item
+        android:id="@+id/item_contactTheDeveloper"
+        android:title="앱 문의하기"
+        android:icon="@drawable/ic_baseline_contect_24"
+       />
+    <item
+        android:id="@+id/item_setting"
+        android:title="설정"
+        android:icon="@drawable/ic_baseline_settings_24"
+        />
 </menu>

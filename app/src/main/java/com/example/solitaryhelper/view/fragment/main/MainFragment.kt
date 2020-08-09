@@ -11,6 +11,8 @@ import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentMainBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerMain
 import com.example.solitaryhelper.view.base.BaseFragment
+import com.example.solitaryhelper.view.utill.toastDebugTest
+import com.example.solitaryhelper.view.utill.toastShort
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -44,9 +46,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private val uiScope = CoroutineScope(Dispatchers.Main)
 
     override fun FragmentMainBinding.setCreateView() {
-
         setViewPagerAndTabLayoutSetting()
-//        setupToolbar()
     }
 
     override fun FragmentMainBinding.setEventListener() {
@@ -55,10 +55,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setFabKakaoTalkClickListener()
         setFabSmsClickListener()
         setFabStartClickListener()
-//        setupToolbarItemListener()
         setButtonMenuClickListener()
         setNavigationViewClickListener()
-        backButton()
+        backButtonClickListener()
     }
 
 
@@ -138,10 +137,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private fun setNavigationViewClickListener() = with(binding.navigationViewMain) {
         setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.account -> Toast.makeText(context, "account clicked", Toast.LENGTH_SHORT)
-                    .show()
-                R.id.item2 -> Toast.makeText(context, "item2 clicked", Toast.LENGTH_SHORT).show()
-                R.id.item3 -> Toast.makeText(context, "item3 clicked", Toast.LENGTH_SHORT).show()
+                R.id.item_wiseSayingList -> {}
+                R.id.item_ranking ->{}
+                R.id.item_helperInWishList ->{}
+                R.id.item_contactTheDeveloper -> {}
+                R.id.item_setting -> {}
             }
             return@setNavigationItemSelectedListener false
         }
@@ -165,7 +165,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
     }
 
-    private fun backButton() {
+    private fun backButtonClickListener() {
         binding.apply {
             requireActivity().onBackPressedDispatcher.addCallback(this@MainFragment) {
                 if (drawerLayoutMain.isOpen)
