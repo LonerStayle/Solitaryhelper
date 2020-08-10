@@ -1,23 +1,20 @@
 package com.example.solitaryhelper.view.activity
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.viewpager2.widget.ViewPager2
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ActivityAppGuideBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerAppGuide
-import com.example.solitaryhelper.view.pref.prefCheckRun
+import com.example.solitaryhelper.view.pref.PrefCheckRun
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.prefs.Preferences
 
 
 class AppGuideActivity : AppCompatActivity() {
@@ -37,7 +34,7 @@ class AppGuideActivity : AppCompatActivity() {
 
     private fun ActivityAppGuideBinding.checkFirstRun() {
 
-        if (!prefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark) {
+        if (!PrefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark) {
 
 
             CoroutineScope(Dispatchers.Main).launch {
@@ -48,7 +45,7 @@ class AppGuideActivity : AppCompatActivity() {
                 viewPagerAppGuide.visibility = View.VISIBLE
                 linerLayoutIndicators.visibility = View.VISIBLE
             }
-           prefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark = true
+           PrefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark = true
         } else {
 
             CoroutineScope(Dispatchers.Main).launch {

@@ -3,16 +3,16 @@ package com.example.solitaryhelper.view.pref
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 
-class prefCheckRun private constructor (val context: Context){
+class PrefCheckRun private constructor (val context: Context){
 
     enum class Key {
         APP_GUIDE_FIRST_RUN,
         MAIN_CREATE_ID_CHECK
     }
     companion object{
-        private var instance:prefCheckRun? = null
+        private var instance:PrefCheckRun? = null
 
-        fun getInstance(context: Context):prefCheckRun = instance?:prefCheckRun(context).also {
+        fun getInstance(context: Context):PrefCheckRun = instance?:PrefCheckRun(context).also {
             instance = it
         }
     }

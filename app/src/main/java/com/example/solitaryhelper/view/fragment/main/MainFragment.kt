@@ -1,35 +1,21 @@
 package com.example.solitaryhelper.view.fragment.main
 
 
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
-import android.widget.Toast
 import androidx.activity.addCallback
-
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentMainBinding
-import com.example.solitaryhelper.databinding.HeaderNavigationMainBinding
-import com.example.solitaryhelper.db.SolitaryHelperDatabase
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerMain
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.dialog.DialogCustom
-import com.example.solitaryhelper.view.pref.prefCheckRun
+import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.view.pref.PrefUserProfile
 import com.example.solitaryhelper.view.utill.toastDebugTest
-import com.example.solitaryhelper.view.utill.toastShort
-import com.example.solitaryhelper.viewmodel.MainViewModel
-import com.example.solitaryhelper.viewmodel.MainViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.dialog_main_id_create.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.header_navigation_main.*
 import kotlinx.android.synthetic.main.header_navigation_main.view.*
 
@@ -37,16 +23,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.prefs.Preferences
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
-    val viewModel by viewModels<MainViewModel> {
-        val database = SolitaryHelperDatabase.getInstance(requireContext())
-        val factory = MainViewModelFactory(database.dataSource)
-        factory
-    }
 
     private val iconImage by lazy {
         mutableListOf(
@@ -73,6 +53,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
 
     override fun FragmentMainBinding.setCreateView() {
+        naviHeaderView.textView_id.text = PrefUserProfile.getInstance(requireContext()).userId
+
         setIdCreate()
         setViewPagerAndTabLayoutSetting()
     }
@@ -86,19 +68,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setButtonMenuClickListener()
         setNavigationViewClickListener()
         backButtonClickListener()
-        naviHeaderView.button_test.setOnClickListener {
-            context?.toastDebugTest("눌렀다")
-            viewModel.idCreate("눌렀다.")
-        }
-    }
-
-    override fun FragmentMainBinding.setLiveDataInObserver() {
-        viewModel.userProfile.observe(viewLifecycleOwner, Observer {
-            if (!prefCheckRun.getInstance(requireContext()).mainCreateId)
-                return@Observer
-
-            naviHeaderView.textView_id.text = it.last().id
-        })
+naviHeaderView.button_test.setOnClickListener {
+    PrefUserProfile.getInstance(requireContext()).userId = "하이"
+    navigationViewMain.textView_id.text = "하이"
+}
     }
 
 
@@ -225,7 +198,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
         val dialog by lazy { DialogCustom(requireContext()) }
 
-        if (!prefCheckRun.getInstance(requireContext()).mainCreateId) {
+        if (!PrefCheckRun.getInstance(requireContext()).mainCreateId) {
 
             dialog.dialogMainIdCreate()
             val textId = dialog.dialogCreate.editText_createId.text
@@ -236,13 +209,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                     context?.toastDebugTest("닉네임을 설정해주세요.")
                     return@setOnClickListener
                 }
-
+                naviHeaderView.textView_id.text = textId.toString()
+                PrefUserProfile.getInstance(requireContext()).userId = textId.toString()
                 dialog.dialogCreate.dismiss()
-                prefCheckRun.getInstance(requireContext()).mainCreateId = true
-                viewModel.idCreate(textId.toString())
+                PrefCheckRun.getInstance(requireContext()).mainCreateId = true
             }
             dialog.dialogCreate.show()
         }
-
     }
 }

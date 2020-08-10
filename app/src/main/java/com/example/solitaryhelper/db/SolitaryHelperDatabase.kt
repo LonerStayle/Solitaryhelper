@@ -5,9 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.solitaryhelper.db.dao.Dao
-import com.example.solitaryhelper.db.entitiy.UserProfile
 
-@Database(entities = [UserProfile::class], exportSchema = false, version = 1)
+//@Database(entities = , exportSchema = false, version = 1)
 abstract class SolitaryHelperDatabase() : RoomDatabase() {
     abstract val dataSource: Dao
 
