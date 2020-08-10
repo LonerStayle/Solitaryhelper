@@ -12,8 +12,9 @@
             android:orientation="vertical">
 
             <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager_fakekakaoTalkInfo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="360dp"
                 android:layout_margin="16dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text="가짜 카카오톡"
-                    android:textSize="26sp"
+                    android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,6 +70,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager_fakeCallInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp" />
@@ -84,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text="가짜 전화"
-                    android:textSize="26sp"
+                    android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,6 +128,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager_fakeSmsInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp" />
@@ -141,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text="가짜 문자"
-                    android:textSize="26sp"
+                    android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

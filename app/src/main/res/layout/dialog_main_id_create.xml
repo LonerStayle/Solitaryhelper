@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="200dp"
-    android:padding="30dp"
-    android:background="#E8F5E9">
+    android:layout_height="wrap_content"
+    android:background="@drawable/main_dialoglayout_background"
+    android:padding="30dp">
 
 
     <Button
         android:id="@+id/button_createId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorMaterialLightMint"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/main_dialogbutton_background"
         android:text="확인"
-        android:textColor="#fff"
+        android:textColor="#000"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/editText_createId"
@@ -26,29 +26,41 @@
         android:id="@+id/editText_createId"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_background"
+        android:gravity="center"
+        android:hint="닉네임"
         android:inputType="textPersonName"
         android:maxLength="14"
         android:maxLines="1"
         android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:textCursorDrawable="@null"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textCursorDrawable="@null"
-        android:textColor="@android:color/black"
-        tools:text="안녕하세요 로너입니다" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_subTtitle" />
 
     <TextView
         android:id="@+id/textView_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="사용할 닉네임을 정해주세요"
+        android:textColor="@android:color/black"
         android:textStyle="bold"
-        android:textColor="@color/colorMaterialLightMint"
-        app:layout_constraintBottom_toTopOf="@+id/editText_createId"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_subTtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="마이 페이지에서 재설정 가능합니다."
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView_Title"
+        app:layout_constraintStart_toStartOf="@+id/textView_Title"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

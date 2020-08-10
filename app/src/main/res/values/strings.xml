@@ -8,4 +8,13 @@
         <item>동기부여</item>
         <item>아싸 도우미</item>
     </string-array>
+
+    <string-array name="skillToItem_list">
+        <item>abc</item>
+        <item>abd</item>
+        <item>abd</item>
+        <item>abd</item>
+        <item>abd</item>
+
+    </string-array>
 </resources>
