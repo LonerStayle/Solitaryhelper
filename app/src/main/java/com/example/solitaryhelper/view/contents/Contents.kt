@@ -8,4 +8,6 @@ object Contents {
     const val MAIN_FIFTH_ITEM = 4
     const val MAIN_TAB_LAYOUT_TOTAL_ICON_SIZE = 5
 
+    const val IMAGE_URL_DEFAULT_FILE_PATH = "android.resource://com.example.solitaryhelper/"
+
 }

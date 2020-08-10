@@ -1,20 +1,34 @@
 package com.example.solitaryhelper.view.fragment.main
 
 
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.addCallback
 
-import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentMainBinding
+import com.example.solitaryhelper.databinding.HeaderNavigationMainBinding
+import com.example.solitaryhelper.db.SolitaryHelperDatabase
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerMain
 import com.example.solitaryhelper.view.base.BaseFragment
+import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.view.utill.toastShort
+import com.example.solitaryhelper.viewmodel.MainViewModel
+import com.example.solitaryhelper.viewmodel.MainViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.dialog_main_id_create.*
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.header_navigation_main.*
+import kotlinx.android.synthetic.main.header_navigation_main.view.*
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +37,13 @@ import kotlinx.coroutines.launch
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
+
+    val viewModel by viewModels<MainViewModel> {
+        val database = SolitaryHelperDatabase.getInstance(requireContext())
+        val factory = MainViewModelFactory(database.dataSource)
+        factory
+    }
+
     private val iconImage by lazy {
         mutableListOf(
             R.drawable.ic_baseline_skill_24,
@@ -44,8 +65,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private val iconText by lazy { resources.getStringArray(R.array.icon_text) }
     private var fabStartEventInClickCheck = false
     private val uiScope = CoroutineScope(Dispatchers.Main)
+    private val naviViewTextViewId by lazy {
+        binding.navigationViewMain.inflateHeaderView(R.layout.header_navigation_main).textView_id
+    }
 
     override fun FragmentMainBinding.setCreateView() {
+        setIdCreate()
         setViewPagerAndTabLayoutSetting()
     }
 
@@ -58,6 +83,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setButtonMenuClickListener()
         setNavigationViewClickListener()
         backButtonClickListener()
+    }
+
+    override fun FragmentMainBinding.setLiveDataInObserver() {
+        viewModel.userProfile.observe(viewLifecycleOwner, Observer {
+            naviViewTextViewId.text = it.id
+        })
     }
 
 
@@ -137,11 +168,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private fun setNavigationViewClickListener() = with(binding.navigationViewMain) {
         setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.item_wiseSayingList -> {}
-                R.id.item_ranking ->{}
-                R.id.item_helperInWishList ->{}
-                R.id.item_contactTheDeveloper -> {}
-                R.id.item_setting -> {}
+                R.id.item_wiseSayingList -> {
+                }
+                R.id.item_ranking -> {
+                }
+                R.id.item_helperInWishList -> {
+                }
+                R.id.item_contactTheDeveloper -> {
+                }
+                R.id.item_setting -> {
+                }
             }
             return@setNavigationItemSelectedListener false
         }
@@ -174,5 +210,25 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                     requireActivity().finish()
             }
         }
+    }
+
+    private fun setIdCreate() {
+        val dialog by lazy { DialogCustom(requireContext()) }
+
+        if (TextUtils.isEmpty(naviViewTextViewId.text)) {
+            dialog.dialogMainIdCreate()
+
+            dialog.dialogCreate.button_createId.setOnClickListener {
+                val textId = dialog.dialogCreate.editText_createId.text
+                if (TextUtils.isEmpty(textId)) {
+                    context?.toastDebugTest("닉네임을 설정해주세요.")
+                    return@setOnClickListener
+                }
+
+                viewModel.idCreate(textId.toString())
+                dialog.dialogCreate.dismiss()
+            }
+        }
+        dialog.dialogCreate.show()
     }
 }

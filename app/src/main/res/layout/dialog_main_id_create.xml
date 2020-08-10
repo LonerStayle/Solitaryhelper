@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp"
+    android:padding="30dp"
+    android:background="#E8F5E9">
+
+
+    <Button
+        android:id="@+id/button_createId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorMaterialLightMint"
+        android:text="확인"
+        android:textColor="#fff"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/editText_createId"
+        app:layout_constraintStart_toStartOf="@+id/editText_createId"
+        app:layout_constraintTop_toBottomOf="@+id/editText_createId" />
+
+    <EditText
+        android:id="@+id/editText_createId"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background"
+        android:inputType="textPersonName"
+        android:maxLength="14"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textCursorDrawable="@null"
+        android:textColor="@android:color/black"
+        tools:text="안녕하세요 로너입니다" />
+
+    <TextView
+        android:id="@+id/textView_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="사용할 닉네임을 정해주세요"
+        android:textStyle="bold"
+        android:textColor="@color/colorMaterialLightMint"
+        app:layout_constraintBottom_toTopOf="@+id/editText_createId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

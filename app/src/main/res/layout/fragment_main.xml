@@ -122,7 +122,6 @@
             android:layout_gravity="start"
             android:background="#FFFFFF"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/header_navigation_main"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/menu" >
 
