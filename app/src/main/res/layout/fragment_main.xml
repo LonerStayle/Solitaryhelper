@@ -25,7 +25,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="gone"
-                app:backgroundTint="#7986CB"
+                app:backgroundTint="@color/colorLightViolet"
                 app:layout_constraintBottom_toTopOf="@+id/fab_call"
                 app:layout_constraintEnd_toEndOf="@+id/fab_call"
                 app:layout_constraintStart_toStartOf="@+id/fab_call"
@@ -39,7 +39,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="gone"
-                app:backgroundTint="#7986CB"
+                app:backgroundTint="@color/colorLightViolet"
                 app:layout_constraintBottom_toTopOf="@+id/fab_sms"
                 app:layout_constraintEnd_toEndOf="@+id/fab_sms"
                 app:layout_constraintStart_toStartOf="@+id/fab_sms"
@@ -53,7 +53,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="gone"
-                app:backgroundTint="#7986CB"
+                app:backgroundTint="@color/colorLightViolet"
                 app:layout_constraintBottom_toTopOf="@+id/fab_start"
                 app:layout_constraintEnd_toEndOf="@+id/fab_start"
                 app:layout_constraintStart_toStartOf="@+id/fab_start"
@@ -67,11 +67,11 @@
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:backgroundTint="#1A237E"
+                app:backgroundTint="@color/colorLightIndigo"
                 app:fabSize="auto"
                 app:layout_constraintBottom_toTopOf="@+id/tabLayout_main"
                 app:layout_constraintEnd_toEndOf="@+id/viewPager_main"
-                app:rippleColor="#3D5AFE"
+                app:rippleColor="@color/colorLightViolet"
                 app:srcCompat="@drawable/ic_round_play_arrow_24" />
 
             <com.google.android.material.tabs.TabLayout
@@ -79,6 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorVeryLightGray"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,13 +102,13 @@
 
             </androidx.viewpager2.widget.ViewPager2>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/button_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="#FFFFFF"
+                android:background="@android:color/transparent"
                 android:src="@drawable/ic_baseline_menu_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

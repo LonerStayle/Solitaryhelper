@@ -50,11 +50,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private var fabStartEventInClickCheck = false
     private val uiScope = CoroutineScope(Dispatchers.Main)
     private val naviHeaderView by lazy { binding.navigationViewMain.inflateHeaderView(R.layout.header_navigation_main) }
-
+    private val dialog by lazy { DialogCustom(requireContext()) }
 
     override fun FragmentMainBinding.setCreateView() {
         naviHeaderView.textView_id.text = PrefUserProfile.getInstance(requireContext()).userId
-
         setIdCreate()
         setViewPagerAndTabLayoutSetting()
     }
@@ -68,10 +67,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setButtonMenuClickListener()
         setNavigationViewClickListener()
         backButtonClickListener()
-naviHeaderView.button_test.setOnClickListener {
-    PrefUserProfile.getInstance(requireContext()).userId = "하이"
-    navigationViewMain.textView_id.text = "하이"
-}
+        setButtonIdChangeClickListener()
     }
 
 
@@ -183,6 +179,26 @@ naviHeaderView.button_test.setOnClickListener {
         }
     }
 
+    private fun setButtonIdChangeClickListener() {
+
+
+        naviHeaderView.button_idChange.setOnClickListener {
+            dialog.dialogMainIdCreate()
+            dialog.dialogCreate.show()
+
+            dialog.dialogCreate.button_createId.setOnClickListener {
+                val textId = dialog.dialogCreate.editText_createId.text
+                if (TextUtils.isEmpty(textId))
+                    context?.toastDebugTest("닉네임을 설정해주세요.")
+                 else{
+                    naviHeaderView.textView_id.text = textId.toString()
+                    PrefUserProfile.getInstance(requireContext()).userId = textId.toString()
+                    dialog.dialogCreate.dismiss()
+                }
+            }
+        }
+    }
+
     private fun backButtonClickListener() {
         binding.apply {
             requireActivity().onBackPressedDispatcher.addCallback(this@MainFragment) {
@@ -195,9 +211,6 @@ naviHeaderView.button_test.setOnClickListener {
     }
 
     private fun setIdCreate() {
-
-        val dialog by lazy { DialogCustom(requireContext()) }
-
         if (!PrefCheckRun.getInstance(requireContext()).mainCreateId) {
 
             dialog.dialogMainIdCreate()

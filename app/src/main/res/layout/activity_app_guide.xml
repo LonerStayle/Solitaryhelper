@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.AppGuideActivity"
-    android:background="@color/colorVeryLightGray">
+    android:background="#fff">
 
 
 
@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.29000002"
-        app:srcCompat="@drawable/app_logo_64" />
+        app:srcCompat="@drawable/applogo_hood_line_64" />
 
     <TextView
         android:id="@+id/textView_logoText"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="아싸 도우미"
-        android:textColor="@color/colorMaterialLightMint"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

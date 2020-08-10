@@ -6,4 +6,10 @@
     <color name="colorPointYellow">#FFD600</color>
     <color name="colorVeryLightGray">#F3F2F2</color>
     <color name="colorMaterialLightMint">#00B8D4</color>
+    <color name="colorLightBrown">#806B6B</color>
+    <color name="colorBrown">#494444</color>
+    <color name="colorLightSkyBlue">#29B6F6</color>
+    <color name="colorLightBlue">#0091EA</color>
+    <color name="colorLightViolet">#82B1FF</color>
+    <color name="colorLightIndigo">#304FFE</color>
 </resources>
