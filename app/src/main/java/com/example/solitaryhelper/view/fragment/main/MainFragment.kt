@@ -1,6 +1,8 @@
 package com.example.solitaryhelper.view.fragment.main
 
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -19,6 +21,7 @@ import com.example.solitaryhelper.db.SolitaryHelperDatabase
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerMain
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.dialog.DialogCustom
+import com.example.solitaryhelper.view.pref.prefCheckRun
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.view.utill.toastShort
 import com.example.solitaryhelper.viewmodel.MainViewModel
@@ -34,6 +37,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.prefs.Preferences
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
@@ -65,9 +69,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private val iconText by lazy { resources.getStringArray(R.array.icon_text) }
     private var fabStartEventInClickCheck = false
     private val uiScope = CoroutineScope(Dispatchers.Main)
-    private val naviViewTextViewId by lazy {
-        binding.navigationViewMain.inflateHeaderView(R.layout.header_navigation_main).textView_id
-    }
+    private val naviHeaderView by lazy { binding.navigationViewMain.inflateHeaderView(R.layout.header_navigation_main) }
+
 
     override fun FragmentMainBinding.setCreateView() {
         setIdCreate()
@@ -83,11 +86,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setButtonMenuClickListener()
         setNavigationViewClickListener()
         backButtonClickListener()
+        naviHeaderView.button_test.setOnClickListener {
+            context?.toastDebugTest("눌렀다")
+            viewModel.idCreate("눌렀다.")
+        }
     }
 
     override fun FragmentMainBinding.setLiveDataInObserver() {
         viewModel.userProfile.observe(viewLifecycleOwner, Observer {
-            naviViewTextViewId.text = it.id
+            if (!prefCheckRun.getInstance(requireContext()).mainCreateId)
+                return@Observer
+
+            naviHeaderView.textView_id.text = it.last().id
         })
     }
 
@@ -116,7 +126,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                     }
                 }
             }
-
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 for (i in 0..4) {
@@ -213,22 +222,27 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun setIdCreate() {
+
         val dialog by lazy { DialogCustom(requireContext()) }
 
-        if (TextUtils.isEmpty(naviViewTextViewId.text)) {
+        if (!prefCheckRun.getInstance(requireContext()).mainCreateId) {
+
             dialog.dialogMainIdCreate()
+            val textId = dialog.dialogCreate.editText_createId.text
 
             dialog.dialogCreate.button_createId.setOnClickListener {
-                val textId = dialog.dialogCreate.editText_createId.text
+
                 if (TextUtils.isEmpty(textId)) {
                     context?.toastDebugTest("닉네임을 설정해주세요.")
                     return@setOnClickListener
                 }
 
-                viewModel.idCreate(textId.toString())
                 dialog.dialogCreate.dismiss()
+                prefCheckRun.getInstance(requireContext()).mainCreateId = true
+                viewModel.idCreate(textId.toString())
             }
+            dialog.dialogCreate.show()
         }
-        dialog.dialogCreate.show()
+
     }
 }

@@ -15,13 +15,19 @@ class MainViewModel(private val dataSource: Dao) : ViewModel() {
 
     private val uiScope = CoroutineScope(Dispatchers.Main + Job())
     private val recordScope = CoroutineScope(Dispatchers.IO + Job())
-    val userProfile: LiveData<UserProfile>
+
+    val userProfile: LiveData<List<UserProfile>>
         get() = dataSource.getUserProfile()
 
 
     fun idCreate(id: String) {
         recordScope.launch {
-            dataSource.userProfileUpdate(UserProfile(id,null))
+            dataSource.userProfileInsert(UserProfile(id,0))
+        }
+    }
+    fun idDelete(userProfile: UserProfile){
+        recordScope.launch {
+            dataSource.userProfileInsert(userProfile)
         }
     }
 }

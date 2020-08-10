@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ActivityAppGuideBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerAppGuide
+import com.example.solitaryhelper.view.pref.prefCheckRun
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,7 +23,7 @@ import java.util.prefs.Preferences
 class AppGuideActivity : AppCompatActivity() {
 
 
-    private lateinit var prefs: SharedPreferences
+
     private var imageList: Array<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +36,8 @@ class AppGuideActivity : AppCompatActivity() {
     }
 
     private fun ActivityAppGuideBinding.checkFirstRun() {
-        prefs = getSharedPreferences(packageName, MODE_PRIVATE)
 
-        if (prefs.getBoolean("firstrun", true)) {
+        if (!prefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark) {
 
 
             CoroutineScope(Dispatchers.Main).launch {
@@ -48,7 +48,7 @@ class AppGuideActivity : AppCompatActivity() {
                 viewPagerAppGuide.visibility = View.VISIBLE
                 linerLayoutIndicators.visibility = View.VISIBLE
             }
-            prefs.edit().putBoolean("firstrun", false).apply()
+           prefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark = true
         } else {
 
             CoroutineScope(Dispatchers.Main).launch {

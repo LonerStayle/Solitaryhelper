@@ -1,20 +1,19 @@
 package com.example.solitaryhelper.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
 import com.example.solitaryhelper.db.entitiy.UserProfile
 import androidx.lifecycle.LiveData
+import androidx.room.*
+import androidx.room.Dao
 
 @Dao
 interface Dao {
    @Query("SELECT * FROM UserProfile")
-    fun getUserProfile():LiveData<UserProfile>
+    fun getUserProfile():LiveData<List<UserProfile>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun userProfileInsert(userProfile: UserProfile)
-    @Update
-    fun userProfileUpdate(userProfile: UserProfile)
+
+    @Delete
+    fun userProfileDelete(userProfile: UserProfile)
 
 }
