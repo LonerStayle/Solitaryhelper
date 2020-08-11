@@ -1,8 +1,11 @@
 package com.example.solitaryhelper.view.adapter
 
+import android.content.Context
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DimenRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
@@ -29,4 +32,6 @@ class AdapterViewPagerSkill(var textList: List<String> = listOf()) :
             test = textList[position]
         }
     }
+
+
 }

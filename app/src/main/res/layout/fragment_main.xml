@@ -16,7 +16,6 @@
             android:layout_height="match_parent">
 
 
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_kakaoTalk"
                 android:layout_width="wrap_content"
@@ -92,6 +91,7 @@
                 android:id="@+id/viewPager_main"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:saveEnabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/tabLayout_main"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -122,7 +122,7 @@
             android:background="#FFFFFF"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/menu" >
+            app:menu="@menu/menu">
 
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>

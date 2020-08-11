@@ -7,9 +7,10 @@ import com.example.solitaryhelper.localdb.dao.Dao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
-class MainViewModel(private val dataSource: Dao) : ViewModel() {
+class MainViewModel() : ViewModel() {
 
     private val uiScope = CoroutineScope(Dispatchers.Main + Job())
     private val recordScope = CoroutineScope(Dispatchers.IO + Job())
@@ -18,8 +19,17 @@ class MainViewModel(private val dataSource: Dao) : ViewModel() {
     val viewPagerController: LiveData<Boolean>
         get() = _viewPagerController
 
+     val _test = MutableLiveData<Int>()
+    val test : LiveData<Int>
+    get() = _test
+
     fun viewPagerControl(boolean: Boolean) {
-        _viewPagerController.value = boolean
+
+            _viewPagerController.postValue(boolean)
+
     }
 
+    fun test(int: Int){
+        _test.postValue(int)
+    }
 }

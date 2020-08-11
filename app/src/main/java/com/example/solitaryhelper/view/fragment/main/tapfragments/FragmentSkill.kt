@@ -1,45 +1,39 @@
 package com.example.solitaryhelper.view.fragment.main.tapfragments
 
-import android.view.LayoutInflater
-import android.view.MotionEvent
+
 import android.view.View
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+
 import androidx.viewpager2.widget.ViewPager2
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.databinding.FragmentMainBinding
+
 import com.example.solitaryhelper.databinding.FragmentSkillBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerSkill
 import com.example.solitaryhelper.view.base.BaseFragment
-import com.example.solitaryhelper.view.utill.toastDebugTest
-import com.example.solitaryhelper.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.fragment_main.*
+import com.example.solitaryhelper.view.itemDecoration.HorizontalMarginItemDecoration
+import java.lang.Math.abs
 
 class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill) {
 
-    private val viewModel_main by lazy{
-        ViewModelProvider(this).get(MainViewModel::class.java) }
+
     //    data class ViewPagerItem(
 //        var image: String,
 //        var text: String
 //    )
+
     private val textList by lazy {
         resources.getStringArray(R.array.skillToItem_list)
     }
+
 //    private var imageList: Array<String>? = null
 
 
     override fun FragmentSkillBinding.setEventListener() {
-        viewPagerListener()
+
     }
 
     override fun FragmentSkillBinding.setCreateView() {
-        /**
-         * fixme: 뷰페이저 오류 해결후 구문 삭제 대기.
-         */
-
         setAdapter()
+        setViewPagerSetting()
     }
 
     private fun FragmentSkillBinding.setAdapter() {
@@ -54,32 +48,47 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
 //            itemList.add(ViewPagerItem(imageList!![i], textList[i]))
 
         viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(textList.toList())
-
+        viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(textList.toList())
+        viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(textList.toList())
     }
 
-    private fun FragmentSkillBinding.viewPagerListener() {
+    private fun FragmentSkillBinding.setViewPagerSetting() {
+        /**
+         * 복붙한거라서 시간내서 꼭 연구하기.
+         */
+        fun setting(viewPager: ViewPager2) {
+            viewPager.offscreenPageLimit = 1
 
-        viewPagerFakekakaoTalkInfo.getChildAt(0).setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
 
-                when (p1?.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        viewModel_main.viewPagerControl(false)
-                        context?.toastDebugTest("실행 확인 1 ")
+     // 다음 및 이전 항목을 수평으로 번역하는 PageTransformer 추가
+    // 화면 중앙을 향하여 표시됩니다.
 
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        viewModel_main.viewPagerControl(true)
-                        context?.toastDebugTest("실행 확인 2 ")
-                        p0?.performClick()
-                    }
-                }
-                return true
+            val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
+            val currentItemHorizontalMarginPx =
+                resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
+            val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
+
+            val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
+                page.translationX = -pageTranslationX * position
+                // 다음 줄은 항목의 높이를 조정합니다. 이 효과를 원하지 않으면 제거 할 수 있습니다.
+
+                page.scaleY = 1 - (0.25f * kotlin.math.abs(position))
+                // 페이딩 효과를 원하면 다음 줄의 주석 처리를 제거하십시오.
+                // page.alpha = 0.25f + (1-abs (위치))
             }
-        })
+            viewPager.setPageTransformer(pageTransformer)
+
+     // ItemDecoration은 현재 (중앙) 항목의 가로 여백을 제공하므로
+     // 전체 화면 너비를 차지하지 않습니다. 그것 없이는 항목이 겹칩니다.
+
+            val itemDecoration = HorizontalMarginItemDecoration(
+                requireContext(), R.dimen.viewpager_current_item_horizontal_margin)
+            viewPager.addItemDecoration(itemDecoration)
+        }
+        setting(viewPagerFakeSmsInfo)
+        setting(viewPagerFakeCallInfo)
+        setting(viewPagerFakekakaoTalkInfo)
     }
-
-
 }
 
 

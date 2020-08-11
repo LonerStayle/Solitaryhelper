@@ -29,4 +29,5 @@ class AdapterViewPagerAppGuide(private val imageList:List<String> = listOf()) : 
             image = Contents.IMAGE_URL_DEFAULT_FILE_PATH+imageList[holder.adapterPosition]
         }
     }
+
 }

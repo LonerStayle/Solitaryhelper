@@ -8,10 +8,19 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.solitaryhelper.viewmodel.MainViewModel
+import com.example.solitaryhelper.viewmodel.MainViewModelFactory
+import androidx.lifecycle.ViewModelProvider
+import com.example.solitaryhelper.viewmodel.SharedViewModel
 
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
 
     protected lateinit var binding: VDB
+    protected val viewModelMain by viewModels<MainViewModel> { MainViewModelFactory() }
+    protected val viewModelShared by lazy {
+        ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

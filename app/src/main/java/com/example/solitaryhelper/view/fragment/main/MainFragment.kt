@@ -19,6 +19,8 @@ import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.pref.PrefUserProfile
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.viewmodel.MainViewModel
+import com.example.solitaryhelper.viewmodel.MainViewModelFactory
+import com.example.solitaryhelper.viewmodel.SharedViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.dialog_main_id_create.*
@@ -29,12 +31,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.FileDescriptor
+import java.io.PrintWriter
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
-
-    private val viewmodel by lazy{
-        ViewModelProvider(this).get(MainViewModel::class.java) }
 
     private val iconImage by lazy {
         mutableListOf(
@@ -66,11 +67,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private val dialog by lazy { DialogCustom(requireContext()) }
 
 
-    override
-
-    fun FragmentMainBinding.setCreateView() {
-        naviHeaderBinding.textViewId.text = PrefUserProfile.getInstance(requireContext()).userId
-        navigationViewMain.addHeaderView(naviHeaderBinding.root)
+    override fun FragmentMainBinding.setCreateView() {
+        setNavigationViewAndHeaderViewSetting()
         setIdCreate()
         setViewPagerAndTabLayoutSetting()
     }
@@ -84,18 +82,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setFabStartClickListener()
         setButtonMenuClickListener()
         setNavigationViewClickListener()
-        backButtonClickListener()
+        setbackButtonClickListener()
         setButtonIdChangeClickListener()
     }
 
-    override fun FragmentMainBinding.setLiveDataInObserver() {
-        viewmodel.viewPagerController.observe(viewLifecycleOwner, Observer {
-            if(it == null)
-                return@Observer
-            viewPagerMain.isUserInputEnabled = it
-        })
+    private fun FragmentMainBinding.setNavigationViewAndHeaderViewSetting() {
+        naviHeaderBinding.textViewId.text = PrefUserProfile.getInstance(requireContext()).userId
+        navigationViewMain.addHeaderView(naviHeaderBinding.root)
     }
-
 
     private fun FragmentMainBinding.setViewPagerAndTabLayoutSetting() {
         viewPagerMain.adapter = AdapterViewPagerMain(this@MainFragment)
@@ -110,6 +104,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 }
             }
         }.attach()
+        viewPagerMain.isUserInputEnabled = false
     }
 
     private fun FragmentMainBinding.setTabIconClickListener() {
@@ -225,7 +220,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
     }
 
-    private fun backButtonClickListener() {
+    private fun setbackButtonClickListener() {
         binding.apply {
             requireActivity().onBackPressedDispatcher.addCallback(this@MainFragment) {
                 if (drawerLayoutMain.isOpen)
