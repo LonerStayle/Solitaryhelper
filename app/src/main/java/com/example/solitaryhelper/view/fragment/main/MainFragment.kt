@@ -2,17 +2,23 @@ package com.example.solitaryhelper.view.fragment.main
 
 
 import android.text.TextUtils
+import android.view.LayoutInflater
 import androidx.activity.addCallback
-
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentMainBinding
+import com.example.solitaryhelper.databinding.HeaderNavigationMainBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerMain
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.pref.PrefUserProfile
 import com.example.solitaryhelper.view.utill.toastDebugTest
+import com.example.solitaryhelper.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.dialog_main_id_create.*
@@ -27,6 +33,8 @@ import kotlinx.coroutines.launch
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
+    private val viewmodel by lazy{
+        ViewModelProvider(this).get(MainViewModel::class.java) }
 
     private val iconImage by lazy {
         mutableListOf(
@@ -49,16 +57,26 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private val iconText by lazy { resources.getStringArray(R.array.icon_text) }
     private var fabStartEventInClickCheck = false
     private val uiScope = CoroutineScope(Dispatchers.Main)
-    private val naviHeaderView by lazy { binding.navigationViewMain.inflateHeaderView(R.layout.header_navigation_main) }
+    private val naviHeaderBinding by lazy {
+        DataBindingUtil.inflate<HeaderNavigationMainBinding>(
+            layoutInflater, R.layout.header_navigation_main,
+            binding.navigationViewMain, false
+        )
+    }
     private val dialog by lazy { DialogCustom(requireContext()) }
 
-    override fun FragmentMainBinding.setCreateView() {
-        naviHeaderView.textView_id.text = PrefUserProfile.getInstance(requireContext()).userId
+
+    override
+
+    fun FragmentMainBinding.setCreateView() {
+        naviHeaderBinding.textViewId.text = PrefUserProfile.getInstance(requireContext()).userId
+        navigationViewMain.addHeaderView(naviHeaderBinding.root)
         setIdCreate()
         setViewPagerAndTabLayoutSetting()
     }
 
     override fun FragmentMainBinding.setEventListener() {
+
         setTabIconClickListener()
         setFabCallClickListener()
         setFabKakaoTalkClickListener()
@@ -68,6 +86,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setNavigationViewClickListener()
         backButtonClickListener()
         setButtonIdChangeClickListener()
+    }
+
+    override fun FragmentMainBinding.setLiveDataInObserver() {
+        viewmodel.viewPagerController.observe(viewLifecycleOwner, Observer {
+            if(it == null)
+                return@Observer
+            viewPagerMain.isUserInputEnabled = it
+        })
     }
 
 
@@ -182,16 +208,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private fun setButtonIdChangeClickListener() {
 
 
-        naviHeaderView.button_idChange.setOnClickListener {
+        naviHeaderBinding.buttonIdChange.setOnClickListener {
             dialog.dialogMainIdCreate()
             dialog.dialogCreate.show()
 
-            dialog.dialogCreate.button_createId.setOnClickListener {
-                val textId = dialog.dialogCreate.editText_createId.text
+            dialog.dialogMainIdCreateBinding.buttonCreateId.setOnClickListener {
+                val textId = dialog.dialogMainIdCreateBinding.editTextCreateId.text
                 if (TextUtils.isEmpty(textId))
                     context?.toastDebugTest("닉네임을 설정해주세요.")
-                 else{
-                    naviHeaderView.textView_id.text = textId.toString()
+                else {
+                    naviHeaderBinding.textViewId.text = textId.toString()
                     PrefUserProfile.getInstance(requireContext()).userId = textId.toString()
                     dialog.dialogCreate.dismiss()
                 }
@@ -214,15 +240,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         if (!PrefCheckRun.getInstance(requireContext()).mainCreateId) {
 
             dialog.dialogMainIdCreate()
-            val textId = dialog.dialogCreate.editText_createId.text
+            val textId = dialog.dialogMainIdCreateBinding.editTextCreateId.text
 
-            dialog.dialogCreate.button_createId.setOnClickListener {
+            dialog.dialogMainIdCreateBinding.buttonCreateId.setOnClickListener {
 
                 if (TextUtils.isEmpty(textId)) {
                     context?.toastDebugTest("닉네임을 설정해주세요.")
                     return@setOnClickListener
                 }
-                naviHeaderView.textView_id.text = textId.toString()
+                naviHeaderBinding.textViewId.text = textId.toString()
                 PrefUserProfile.getInstance(requireContext()).userId = textId.toString()
                 dialog.dialogCreate.dismiss()
                 PrefCheckRun.getInstance(requireContext()).mainCreateId = true

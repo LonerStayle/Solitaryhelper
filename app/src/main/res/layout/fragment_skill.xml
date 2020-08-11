@@ -11,11 +11,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager_fakekakaoTalkInfo"
-                android:layout_width="match_parent"
-                android:layout_height="360dp"
-                android:layout_margin="16dp" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager_fakekakaoTalkInfo"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_margin="16dp"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:fillViewport= "true"/>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_skillInfoKaKaoTalkIntro"
@@ -73,7 +78,10 @@
                 android:id="@+id/viewPager_fakeCallInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
+                android:layout_margin="16dp"
+                android:paddingStart="50dp"
+                android:paddingEnd="50dp"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_skillInfoCallIntro"
@@ -131,7 +139,9 @@
                 android:id="@+id/viewPager_fakeSmsInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
+                android:layout_margin="16dp"
+                android:paddingStart="50dp"
+                android:paddingEnd="50dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_skillInfoSmsIntro"
