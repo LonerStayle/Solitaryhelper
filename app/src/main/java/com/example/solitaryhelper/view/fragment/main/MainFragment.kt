@@ -2,12 +2,8 @@ package com.example.solitaryhelper.view.fragment.main
 
 
 import android.text.TextUtils
-import android.view.LayoutInflater
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentMainBinding
@@ -18,21 +14,13 @@ import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.pref.PrefUserProfile
 import com.example.solitaryhelper.view.utill.toastDebugTest
-import com.example.solitaryhelper.viewmodel.MainViewModel
-import com.example.solitaryhelper.viewmodel.MainViewModelFactory
-import com.example.solitaryhelper.viewmodel.SharedViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.dialog_main_id_create.*
-import kotlinx.android.synthetic.main.header_navigation_main.*
-import kotlinx.android.synthetic.main.header_navigation_main.view.*
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.FileDescriptor
-import java.io.PrintWriter
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
@@ -225,13 +213,18 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             requireActivity().onBackPressedDispatcher.addCallback(this@MainFragment) {
                 if (drawerLayoutMain.isOpen)
                     drawerLayoutMain.closeDrawers()
-                else
-                    requireActivity().finish()
+
+//               else{
+//                    requireActivity().finish()
+//                    context?.toastDebugTest("얌")
+//                }
+
             }
         }
     }
 
     private fun setIdCreate() {
+
         if (!PrefCheckRun.getInstance(requireContext()).mainCreateId) {
 
             dialog.dialogMainIdCreate()

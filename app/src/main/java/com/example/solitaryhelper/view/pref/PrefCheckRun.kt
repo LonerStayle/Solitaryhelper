@@ -7,7 +7,8 @@ class PrefCheckRun private constructor (val context: Context){
 
     enum class Key {
         APP_GUIDE_FIRST_RUN,
-        MAIN_CREATE_ID_CHECK
+        MAIN_CREATE_ID_CHECK,
+        KAKAO_TALK_MESSAGE_SEND
     }
     companion object{
         private var instance:PrefCheckRun? = null
@@ -31,6 +32,12 @@ class PrefCheckRun private constructor (val context: Context){
     set(value) {
         pref.edit().putBoolean(Key.MAIN_CREATE_ID_CHECK.name,
             value).apply()
+    }
+
+    var kaKaoTalkMessageSend:Boolean
+    get() = pref.getBoolean(Key.KAKAO_TALK_MESSAGE_SEND.name,false)
+    set(value) {
+        pref.edit().putBoolean(Key.KAKAO_TALK_MESSAGE_SEND.name,value).apply()
     }
 
 }

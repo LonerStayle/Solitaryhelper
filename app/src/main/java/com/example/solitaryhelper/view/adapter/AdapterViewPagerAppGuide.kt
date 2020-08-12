@@ -10,7 +10,8 @@ import com.example.solitaryhelper.databinding.ActivityAppGuideBinding
 import com.example.solitaryhelper.databinding.ViewholderViewpagerAppguideitemBinding
 import com.example.solitaryhelper.view.contents.Contents
 
-class AdapterViewPagerAppGuide(private val imageList:List<String> = listOf()) : RecyclerView.Adapter<AdapterViewPagerAppGuide.ViewHolder>() {
+class AdapterViewPagerAppGuide(private val imageList:List<String> = listOf()) :
+    RecyclerView.Adapter<AdapterViewPagerAppGuide.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = DataBindingUtil.bind<ViewholderViewpagerAppguideitemBinding>(view)
@@ -26,7 +27,7 @@ class AdapterViewPagerAppGuide(private val imageList:List<String> = listOf()) : 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding?.apply {
-            image = Contents.IMAGE_URL_DEFAULT_FILE_PATH+imageList[holder.adapterPosition]
+            imageUri = imageList[holder.adapterPosition]
         }
     }
 

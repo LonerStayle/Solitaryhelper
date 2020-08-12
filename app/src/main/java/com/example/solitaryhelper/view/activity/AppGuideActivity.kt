@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ActivityAppGuideBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerAppGuide
+import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +61,7 @@ class AppGuideActivity : AppCompatActivity() {
         imageList = Array(4) { "" }
 
         for (i in imageList!!.indices) {
-            imageList!![i] += (resources.getIdentifier(
+            imageList!![i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH+resources.getIdentifier(
                 "sample$i", "drawable",
                 packageName
             ).toString())

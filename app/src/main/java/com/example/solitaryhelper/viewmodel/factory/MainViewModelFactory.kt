@@ -1,7 +1,7 @@
-package com.example.solitaryhelper.viewmodel
+package com.example.solitaryhelper.viewmodel.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.solitaryhelper.localdb.dao.Dao
+import com.example.solitaryhelper.viewmodel.MainViewModel
 
 
 class MainViewModelFactory():ViewModelProvider.Factory {

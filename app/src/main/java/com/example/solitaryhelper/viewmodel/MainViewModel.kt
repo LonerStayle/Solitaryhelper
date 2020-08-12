@@ -23,13 +23,6 @@ class MainViewModel() : ViewModel() {
     val test : LiveData<Int>
     get() = _test
 
-    fun viewPagerControl(boolean: Boolean) {
 
-            _viewPagerController.postValue(boolean)
 
-    }
-
-    fun test(int: Int){
-        _test.postValue(int)
-    }
 }

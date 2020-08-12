@@ -10,7 +10,7 @@
         android:name="com.example.solitaryhelper.view.fragment.main.MainFragment"
         android:label="MainFragment" >
         <action
-            android:id="@+id/action_mainFragment_to_fragmentFakeCallGuide"
+            android:id="@+id/action_mainFragment_to_fragmentFakeCallSetting"
             app:destination="@id/fragmentFakeCallSetting" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeSmsSetting"
@@ -71,7 +71,14 @@
     <fragment
         android:id="@+id/fragmentFakeKakaoChat"
         android:name="com.example.solitaryhelper.view.fragment.fake_kakao.FragmentFakeKakaoChat"
-        android:label="FragmentFakeKakaoChat" />
+        android:label="FragmentFakeKakaoChat" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="profileImage"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentFakeCall"
         android:name="com.example.solitaryhelper.view.fragment.fake_call.FragmentFakeCall"
