@@ -14,7 +14,6 @@ buildscript {
         def preference_version = '1.1.0'
         def glide_version = '4.11.0'
         def lifecycle_version = '2.2.0'
-        def room_version = '2.2.5'
         def junit_version = '4.12'
         def espresso_version = '3.2.0'
         def navigation_version = '2.3.0'
@@ -56,18 +55,20 @@ buildscript {
 
                 //레트로핏
                 "com.squareup.retrofit2:converter-gson:$retrofit_gson_version",
-                "com.squareup.retrofit2:retrofit:$retrofit_version"
+                "com.squareup.retrofit2:retrofit:$retrofit_version",
+
+                //룸
+                "androidx.room:room-runtime:2.2.5",
+                 "androidx.room:room-ktx:2.2.5"
         ]
         arch_libraries = [
                 // Navigation
                 "androidx.navigation:navigation-fragment-ktx:$navigation_version",
                 "androidx.navigation:navigation-ui-ktx:$navigation_version",
-                //룸
-                "androidx.room:room-ktx:$room_version"
+
         ]
         librariesKapt = [
-                "androidx.room:room-compiler:$room_version",
-                "androidx.room:room-runtime:$room_version"
+                "androidx.room:room-compiler:2.2.5"
         ]
         testLibraries = [
                 "junit:junit:$junit_version",

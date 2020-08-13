@@ -1,9 +1,13 @@
 package com.example.solitaryhelper.localdb.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+//
 data class KaKaoTalkData(
-    val image:String,
+
     val name:String,
-    val textList:Array<Array<String>>
+    val image:String,
+    val textBoxList:Array<Array<String>>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -11,17 +15,17 @@ data class KaKaoTalkData(
 
         other as KaKaoTalkData
 
-        if (image != other.image) return false
         if (name != other.name) return false
-        if (!textList.contentDeepEquals(other.textList)) return false
+        if (image != other.image) return false
+        if (!textBoxList.contentDeepEquals(other.textBoxList)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = image.hashCode()
-        result = 31 * result + name.hashCode()
-        result = 31 * result + textList.contentDeepHashCode()
+        var result = name.hashCode()
+        result = 31 * result + image.hashCode()
+        result = 31 * result + textBoxList.contentDeepHashCode()
         return result
     }
 }

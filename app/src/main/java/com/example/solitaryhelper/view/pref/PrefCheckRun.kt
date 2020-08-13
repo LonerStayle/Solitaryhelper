@@ -8,7 +8,8 @@ class PrefCheckRun private constructor (val context: Context){
     enum class Key {
         APP_GUIDE_FIRST_RUN,
         MAIN_CREATE_ID_CHECK,
-        KAKAO_TALK_MESSAGE_SEND
+        KAKAO_TALK_MESSAGE_SEND,
+        KAKAO_TALK_LIST_CREATE_CHECK_RUN
     }
     companion object{
         private var instance:PrefCheckRun? = null

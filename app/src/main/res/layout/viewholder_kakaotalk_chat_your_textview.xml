@@ -13,6 +13,10 @@
         <variable
             name="name"
             type="String" />
+
+        <variable
+            name="text"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,6 +50,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     bind:imageUrl="@{profile}" />
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -65,8 +70,9 @@
 
         <TextView
             android:id="@+id/textView_textPreview"
-            android:layout_width="65dp"
-            android:layout_height="17dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@{text}"
             app:layout_constraintBottom_toBottomOf="@+id/cardView"
             app:layout_constraintStart_toStartOf="@+id/textView_name"
             app:layout_constraintTop_toBottomOf="@+id/textView_name"

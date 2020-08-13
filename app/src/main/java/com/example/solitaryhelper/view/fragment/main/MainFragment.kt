@@ -16,7 +16,6 @@ import com.example.solitaryhelper.view.pref.PrefUserProfile
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -56,6 +55,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
 
     override fun FragmentMainBinding.setCreateView() {
+
+
         setNavigationViewAndHeaderViewSetting()
         setIdCreate()
         setViewPagerAndTabLayoutSetting()

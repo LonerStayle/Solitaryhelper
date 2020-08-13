@@ -9,18 +9,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.solitaryhelper.viewmodel.MainViewModel
-import com.example.solitaryhelper.viewmodel.factory.MainViewModelFactory
 import androidx.lifecycle.ViewModelProvider
+
+
 import com.example.solitaryhelper.viewmodel.SharedViewModel
 import com.example.solitaryhelper.viewmodel.SkillViewModel
+
 import com.example.solitaryhelper.viewmodel.factory.SkillViewModelFactory
 
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
 
     protected lateinit var binding: VDB
-
-    protected val viewModelMain by viewModels<MainViewModel> { MainViewModelFactory() }
     protected val viewModelSkill by viewModels<SkillViewModel> { SkillViewModelFactory() }
     protected val viewModelShared by lazy {
         ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)

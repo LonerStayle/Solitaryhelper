@@ -44,11 +44,13 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/editText_TalkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0.95" />
 
             <ImageView
+                android:id="@+id/imageView_smail"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
@@ -57,6 +59,7 @@
                 android:src="@drawable/sample0" />
 
             <ImageView
+                android:id="@+id/imageView_shop"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
@@ -75,7 +78,8 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     <ImageView
         android:id="@+id/imageView4"
@@ -125,5 +129,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <FrameLayout
+        android:id="@+id/layout_sendButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView_kaKaoChat">
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
