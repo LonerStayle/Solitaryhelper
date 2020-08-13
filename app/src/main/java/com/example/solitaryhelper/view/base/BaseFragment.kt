@@ -19,6 +19,7 @@ import com.example.solitaryhelper.viewmodel.factory.SkillViewModelFactory
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
 
     protected lateinit var binding: VDB
+
     protected val viewModelMain by viewModels<MainViewModel> { MainViewModelFactory() }
     protected val viewModelSkill by viewModels<SkillViewModel> { SkillViewModelFactory() }
     protected val viewModelShared by lazy {

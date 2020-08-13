@@ -9,6 +9,17 @@
         <variable
             name="kaKaoData"
             type="com.example.solitaryhelper.localdb.data.KaKaoTalkData" />
+
+        <variable
+            name="lastIndex"
+            type="String" />
+        <variable
+            name="noticeScore"
+            type="String" />
+        <variable
+            name="setVisible"
+            type="Integer" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +44,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imageView_imageProfile"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -48,12 +59,12 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="123"
+            android:text="@{kaKaoData.name}"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
@@ -61,15 +72,38 @@
 
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView_textPreview"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:maxLines="2"
-            android:text="하이요"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:text="@{lastIndex}"
+            app:layout_constraintStart_toStartOf="@+id/textView_name"
+            app:layout_constraintTop_toBottomOf="@+id/textView_name"
             tools:text="안녕하세요 로너입니다." />
+
+        <TextView
+            android:id="@+id/textView_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="오후 12:00"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_name" />
+
+        <TextView
+            android:id="@+id/textView_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{noticeScore}"
+            android:visibility="@{setVisible}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_textPreview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_textPreview" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

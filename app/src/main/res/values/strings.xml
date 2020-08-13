@@ -17,4 +17,32 @@
         <item>5</item>
     </string-array>
 
+    <string-array name="sample_list2">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+        <item>d</item>
+        <item>e</item>
+    </string-array>
+
+    <string-array name="sample_list3">
+        <item>1</item>
+        <item>2</item>
+
+    </string-array>
+
+    <string-array name="sample_list4">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+    </string-array>
+
+    <string-array name="sample_list5">
+        <item>a</item>
+        <item>2</item>
+        <item>c</item>
+        <item>4</item>
+        <item>e</item>
+    </string-array>
+
 </resources>

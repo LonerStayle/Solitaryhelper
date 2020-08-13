@@ -15,8 +15,13 @@ class FragmentFakeKakaoTalk :
 
     private val kaKaoNameList by lazy { resources.getStringArray(R.array.sample_list) }
     private val kaKaoTextList by lazy {
-        resources.getStringArray(R.array.sample_list)
-    }
+        arrayOf(  resources.getStringArray(R.array.sample_list),
+                resources.getStringArray(R.array.sample_list2),
+                resources.getStringArray(R.array.sample_list3),
+                resources.getStringArray(R.array.sample_list4),
+                resources.getStringArray(R.array.sample_list5)) }
+
+
 
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
@@ -40,11 +45,12 @@ class FragmentFakeKakaoTalk :
                 requireActivity().packageName
             ).toString())
             kakaoDataList.add(
-                KaKaoTalkData(   kaKaoImageProfileList[i],kaKaoNameList[i],kaKaoTextList[i])
+                KaKaoTalkData(   kaKaoImageProfileList[i],kaKaoNameList[i],kaKaoTextList)
             )
         }
 
-        recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(kakaoDataList.toList())
+        val shuffledList = kakaoDataList.shuffled()
+        recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(shuffledList)
                     {
                 findNavController().navigate(
                     FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
