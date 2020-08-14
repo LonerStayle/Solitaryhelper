@@ -82,6 +82,10 @@
         <argument
             android:name="ListBox"
             app:argType="string[]" />
+        <action
+            android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk2"
+            app:destination="@id/fragmentFakeKakaoTalk"
+            app:popUpTo="@id/fragmentFakeKakaoChat" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCall"

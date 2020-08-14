@@ -35,10 +35,10 @@ class PrefCheckRun private constructor (val context: Context){
             value).apply()
     }
 
-    var kaKaoTalkMessageSend:Boolean
-    get() = pref.getBoolean(Key.KAKAO_TALK_MESSAGE_SEND.name,false)
-    set(value) {
-        pref.edit().putBoolean(Key.KAKAO_TALK_MESSAGE_SEND.name,value).apply()
-    }
+//    var kaKaoTalkMessageSend:Boolean
+//    get() = pref.getBoolean(Key.KAKAO_TALK_MESSAGE_SEND.name,false)
+//    set(value) {
+//        pref.edit().putBoolean(Key.KAKAO_TALK_MESSAGE_SEND.name,value).apply()
+//    }
 
 }
