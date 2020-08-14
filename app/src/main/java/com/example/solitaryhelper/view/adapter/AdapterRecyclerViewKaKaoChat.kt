@@ -1,6 +1,5 @@
 package com.example.solitaryhelper.view.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,14 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
-import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
-import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
 
 
 class AdapterRecyclerViewKaKaoChat(
-    private val kakaoProfile: String,
-    private val kakaoName: String,
-    val myChatList: MutableList<KaKaoTalkChatData> = mutableListOf()
+    private val kaKaoProfile: String,
+    private val kaKaoName: String,
+     val chatList: MutableList<KaKaoTalkChatData> = mutableListOf()
 ) :
     RecyclerView.Adapter<AdapterRecyclerViewKaKaoChat.ViewHolder>() {
 
@@ -41,13 +39,12 @@ class AdapterRecyclerViewKaKaoChat(
 
     override fun getItemViewType(position: Int): Int {
 
-        return if (myChatList[position].user == true ) {
+        return if (chatList[position].user == true ) {
             MY_TEXT_SEND
         } else {
             YOUR_TEXT_SEND
         }
     }
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -71,20 +68,20 @@ class AdapterRecyclerViewKaKaoChat(
     }
 
 
-    override fun getItemCount(): Int = myChatList.count()
+    override fun getItemCount(): Int = chatList.count()
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
             holder.myTextBinding?.apply {
-                text = myChatList[holder.adapterPosition].textList
+                text = chatList[holder.adapterPosition].textList
             }
 
             holder.yourTextviewBinding?.apply {
-                profile = kakaoProfile
-                name = kakaoName
-                text = myChatList[holder.adapterPosition].textList
+                profile = kaKaoProfile
+                name = kaKaoName
+                text = chatList[holder.adapterPosition].textList
             }
 
 
