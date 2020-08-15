@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
+import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
 
 
 class AdapterRecyclerViewKaKaoChat(
     private val kaKaoProfile: String,
     private val kaKaoName: String,
-     val chatList: MutableList<KaKaoTalkChatData> = mutableListOf()
+    var chatList: MutableList<KaKaoTalkChatData> = mutableListOf()
 ) :
     RecyclerView.Adapter<AdapterRecyclerViewKaKaoChat.ViewHolder>() {
 
@@ -68,7 +68,7 @@ class AdapterRecyclerViewKaKaoChat(
     }
 
 
-    override fun getItemCount(): Int = chatList.count()
+    override fun getItemCount(): Int = chatList.size
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -17,7 +17,7 @@ class AdapterRecyclerViewKaKaoTalk(
     val clickEvent: (Int) -> Unit
 ) :
     RecyclerView.Adapter<AdapterRecyclerViewKaKaoTalk.ViewHolder>() {
-    private val visibleSettingList = mutableListOf(View.GONE)
+    private val visibleSettingList = mutableListOf(View.VISIBLE)
 
     private var i = 0
 
@@ -39,7 +39,7 @@ class AdapterRecyclerViewKaKaoTalk(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        while (i < kaKaoDataList.size - 1) {
+        while (i < kaKaoDataList.size-1) {
             fun random(): Int {
                 return when (Random.nextInt(2)) {
                     0 -> View.GONE
@@ -63,7 +63,6 @@ class AdapterRecyclerViewKaKaoTalk(
         holder.itemView.setOnClickListener {
             clickEvent(holder.adapterPosition)
         }
-
 
     }
 }

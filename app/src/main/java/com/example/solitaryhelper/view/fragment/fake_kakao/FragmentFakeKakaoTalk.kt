@@ -1,12 +1,15 @@
 package com.example.solitaryhelper.view.fragment.fake_kakao
 
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
-import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoTalkBinding
 import com.example.solitaryhelper.localdb.data.KaKaoTalkData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
+import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
+import java.util.*
+import java.util.Collections.swap
 
 class FragmentFakeKakaoTalk :
     BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
@@ -24,7 +27,7 @@ class FragmentFakeKakaoTalk :
 
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
-
+        setBackButtonListener()
     }
 
     override fun FragmentFakeKakaoTalkBinding.setCreateView() {
@@ -51,18 +54,35 @@ class FragmentFakeKakaoTalk :
                     kaKaoTextList
                 )
             )
+
         }
 
-        val shuffledList = kakaoDataList.shuffled()
 
-        binding.recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(shuffledList)
-        {
+        binding.recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(kakaoDataList)
+        {position ->
+
             findNavController().navigate(
                 FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
-                    profileImage = shuffledList[it].image, name = shuffledList[it].name
-                ,ListBox = shuffledList[it].textBoxList[it]
+                    profileImage = kakaoDataList[position].image, name = kakaoDataList[position].name
+                ,ListBox = kakaoDataList[position].textBoxList[position],position = position
                 )
+
             )
+
+            (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
+                swap(this.kaKaoDataList,position,0)
+                notifyItemMoved(position,0)
+                notifyDataSetChanged()
+            }
         }
         }
+
+    private fun setBackButtonListener() {
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+            findNavController().navigate(R.id.action_fragmentFakeKakaoTalk_to_mainFragment)
+        }
+
+    }
+
 }

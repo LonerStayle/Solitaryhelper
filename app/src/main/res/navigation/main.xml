@@ -20,7 +20,8 @@
             app:destination="@id/fragmentWiseSayingCreate" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeKakaoTalk"
-            app:destination="@id/fragmentFakeKakaoTalk" />
+            app:destination="@id/fragmentFakeKakaoTalk"
+            app:popUpTo="@id/mainFragment" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeCall"
             app:destination="@id/fragmentFakeCall" />
@@ -67,7 +68,11 @@
         <action
             android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
             app:destination="@id/fragmentFakeKakaoChat"
-            app:popUpTo="@id/fragmentFakeKakaoTalk" />
+            app:popUpTo="@id/fragmentFakeKakaoTalk"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_fragmentFakeKakaoTalk_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeKakaoChat"
@@ -82,10 +87,12 @@
         <argument
             android:name="ListBox"
             app:argType="string[]" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
         <action
-            android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk2"
-            app:destination="@id/fragmentFakeKakaoTalk"
-            app:popUpTo="@id/fragmentFakeKakaoChat" />
+            android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk"
+            app:destination="@id/fragmentFakeKakaoTalk" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCall"
