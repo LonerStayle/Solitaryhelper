@@ -11,9 +11,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        fun RecyclerView.disableItemAnimator() {
+//            (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
+//        }
+//
+//        // sample of using in Activity:
+//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+//                                  savedInstanceState: Bundle?): View? {
+//            myRecyclerView.disableItemAnimator()
+//            // ...
+//        }
+
     }
 
     override fun onStop() {
+
         PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun = false
         PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun2 = false
         PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun3 = false
@@ -35,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun19 = false
         PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun20 = false
 
+        PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
         super.onStop()
     }
 

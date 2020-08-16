@@ -215,10 +215,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 if (drawerLayoutMain.isOpen)
                     drawerLayoutMain.closeDrawers()
 
-//               else{
-//                    requireActivity().finish()
-//                    context?.toastDebugTest("얌")
-//                }
+               else{
+                    requireActivity().finish()
+                }
 
             }
         }

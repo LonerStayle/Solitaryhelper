@@ -9,6 +9,8 @@ class PrefCheckRun private constructor (val context: Context){
         APP_GUIDE_FIRST_RUN,
         MAIN_CREATE_ID_CHECK,
 
+        KAKAO_TALK_FIRST_RUN_CHECK,
+
         KAKAO_CHAT_OBSERVER_CONTROL_FIRST_RUN,
         KAKAO_CHAT_OBSERVER_CONTROL_FIRST_RUN2,
         KAKAO_CHAT_OBSERVER_CONTROL_FIRST_RUN3,
@@ -55,6 +57,14 @@ class PrefCheckRun private constructor (val context: Context){
         pref.edit().putBoolean(Key.MAIN_CREATE_ID_CHECK.name,
             value).apply()
     }
+
+    var kaKaoTalkFirstRunCheck:Boolean
+        get() = pref.getBoolean(Key.KAKAO_TALK_FIRST_RUN_CHECK.name,false)
+        set(value) {
+            pref.edit().putBoolean(Key.KAKAO_TALK_FIRST_RUN_CHECK.name,
+                value).apply()
+        }
+
 
     var kakaoChatObserverControlFirstRun:Boolean
     get() = pref.getBoolean(Key.KAKAO_CHAT_OBSERVER_CONTROL_FIRST_RUN.name,false)

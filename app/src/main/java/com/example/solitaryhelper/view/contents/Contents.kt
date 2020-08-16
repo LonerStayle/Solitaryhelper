@@ -10,4 +10,6 @@ object Contents {
 
     const val IMAGE_URL_DEFAULT_FILE_PATH = "android.resource://com.example.solitaryhelper/"
 
+     var AUTO_CHAT_DEALY = Math.random() * (20000 - 3000) + 3000
+
 }

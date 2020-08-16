@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 //
 data class KaKaoTalkData(
 
+    val id:Long,
     val name:String,
     val image:String,
     val textBoxList:Array<Array<String>>

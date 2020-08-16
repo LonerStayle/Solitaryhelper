@@ -20,7 +20,7 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
 //    )
 
     private val textList by lazy {
-        resources.getStringArray(R.array.sample_list)
+        resources.getStringArray(R.array.sample_list1)
     }
 
 //    private var imageList: Array<String>? = null

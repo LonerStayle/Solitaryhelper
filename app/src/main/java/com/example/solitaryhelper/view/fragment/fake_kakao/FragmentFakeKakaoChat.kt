@@ -1,12 +1,18 @@
 package com.example.solitaryhelper.view.fragment.fake_kakao
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
 import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
+import com.example.solitaryhelper.localdb.data.KaKaoTalkData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class FragmentFakeKakaoChat :
     BaseFragment<FragmentFakeKakaoChatBinding>(R.layout.fragment_fake_kakao_chat) {
@@ -20,6 +26,8 @@ class FragmentFakeKakaoChat :
 
     private var buttonClick = false
 
+    private var autoChatRun = false
+
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
         setButtonClickListener()
     }
@@ -29,13 +37,14 @@ class FragmentFakeKakaoChat :
         setChatDataList()
         setDefaultAdapter()
         setRecyclerView()
+        setAutoChat()
     }
+
 
     private fun FragmentFakeKakaoChatBinding.setRecyclerView() {
         recyclerViewKaKaoChat.setHasFixedSize(true)
 
     }
-
 
     private fun FragmentFakeKakaoChatBinding.setChatDataList() {
 
@@ -57,17 +66,15 @@ class FragmentFakeKakaoChat :
             return
     }
 
+
     private fun setDefaultAdapter() {
         if (!operationByPosition()) {
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                 when (args.position) {
-                    0 -> {
-                        viewModelKaKaoChat.insertAllList(this.chatList)
-                        PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun = true
-                    }
-                    1 ->{
-                        viewModelKaKaoChat.insertAllList2(this.chatList)
-                    }
+
+
+                    0 -> viewModelKaKaoChat.insertAllList(this.chatList)
+                    1 -> viewModelKaKaoChat.insertAllList2(this.chatList)
                     2 -> viewModelKaKaoChat.insertAllList3(this.chatList)
                     3 -> viewModelKaKaoChat.insertAllList4(this.chatList)
                     4 -> viewModelKaKaoChat.insertAllList5(this.chatList)
@@ -88,27 +95,47 @@ class FragmentFakeKakaoChat :
                     19 -> viewModelKaKaoChat.insertAllList20(this.chatList)
                 }
             }
-            when(args.position){
-
-                1-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2 = true
-                2-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3 = true
-                3-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4 = true
-                4-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5 = true
-                5-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6 = true
-                6-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7 = true
-                7-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8 = true
-                8-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9 = true
-                9-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10 = true
-                10-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11 = true
-                11-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12 = true
-                12-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13 = true
-                13-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14 = true
-                14-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15 = true
-                15-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16 = true
-                16-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17 = true
-                17-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18 = true
-                18-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19 = true
-                19-> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20 = true
+            when (args.position) {
+                0 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun =
+                    true
+                1 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2 =
+                    true
+                2 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3 =
+                    true
+                3 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4 =
+                    true
+                4 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5 =
+                    true
+                5 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6 =
+                    true
+                6 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7 =
+                    true
+                7 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8 =
+                    true
+                8 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9 =
+                    true
+                9 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10 =
+                    true
+                10 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11 =
+                    true
+                11 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12 =
+                    true
+                12 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13 =
+                    true
+                13 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14 =
+                    true
+                14 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15 =
+                    true
+                15 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16 =
+                    true
+                16 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17 =
+                    true
+                17 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18 =
+                    true
+                18 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19 =
+                    true
+                19 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20 =
+                    true
             }
 
         } else
@@ -315,23 +342,66 @@ class FragmentFakeKakaoChat :
         }
     }
 
+    private fun setAutoChat() {
+
+        when (args.position) {
+
+            0 -> {
+                CoroutineScope(Dispatchers.Main).launch {
+
+                    while (true) {
+                        delay((Math.random() * 10000).toLong())
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd(
+                            KaKaoTalkChatData(
+                                textList = "hjj",
+                                user = false
+                            )
+                        )
+
+                    }
+                }
+
+            }
+
+            1 -> {
+                CoroutineScope(Dispatchers.Main).launch {
+
+                    while (true) {
+                        delay((Math.random() * 10000).toLong())
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd2(
+                            KaKaoTalkChatData(
+                                textList = "hjj",
+                                user = false
+                            )
+                        )
+
+                    }
+                }
+
+            }
+        }
+    }
+
     override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
         when (args.position) {
             0 -> {
                 viewModelKaKaoChat.myChatText.observe(viewLifecycleOwner, Observer {
                     when {
-                        (operationByPosition() && !buttonClick) -> {
+                        (operationByPosition() && !buttonClick &&!autoChatRun ) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
                         }
 
-                        (buttonClick ) -> {
+                        (buttonClick || autoChatRun) -> {
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
                             }
                             buttonClick = false
+                            viewModelShared.runAutoChat(args.position)
                         }
                     }
                 })
@@ -339,18 +409,19 @@ class FragmentFakeKakaoChat :
             1 -> {
                 viewModelKaKaoChat.myChatText2.observe(viewLifecycleOwner, Observer {
                     when {
-                        (operationByPosition()) -> {
+                        (operationByPosition() && !buttonClick &&!autoChatRun ) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
                         }
 
-                        (buttonClick) -> {
+                        (buttonClick || autoChatRun) -> {
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
                             }
                             buttonClick = false
+                            viewModelShared.runAutoChat(args.position)
                         }
                     }
                 })
@@ -699,5 +770,10 @@ class FragmentFakeKakaoChat :
             }
 
         }
+    }
+
+    override fun onStop() {
+        autoChatRun = false
+        super.onStop()
     }
 }

@@ -54,7 +54,7 @@ class AdapterRecyclerViewKaKaoTalk(
 
         holder.binding?.apply {
             kaKaoData = kaKaoDataList[position]
-            lastIndex = kaKaoDataList[position].textBoxList[position].last()
+            lastIndex = kaKaoDataList[position].textBoxList[kaKaoDataList[position].id.toInt()].last()
             noticeScore = kaKaoDataList[position].textBoxList[position].size.toString()
             setVisible = visibleSettingList[position]
         }
