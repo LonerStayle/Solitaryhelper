@@ -1,10 +1,5 @@
 package com.example.solitaryhelper.localdb
 
-import android.content.Context
-import androidx.room.*
-import com.example.solitaryhelper.localdb.dao.KaKaoTalkChatDataDao
-
-
 
 //@Database(entities = [], exportSchema = false, version = 1)
 //abstract class SolitaryHelperDatabase : RoomDatabase() {

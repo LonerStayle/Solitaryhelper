@@ -8,11 +8,17 @@ import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
 import com.example.solitaryhelper.localdb.data.KaKaoTalkData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
+import com.example.solitaryhelper.view.contents.Contents
+import com.example.solitaryhelper.view.pref.PrefCheckPosition
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
+var test0 = 0
+var test1 = 0
+
 
 class FragmentFakeKakaoChat :
     BaseFragment<FragmentFakeKakaoChatBinding>(R.layout.fragment_fake_kakao_chat) {
@@ -38,6 +44,7 @@ class FragmentFakeKakaoChat :
         setDefaultAdapter()
         setRecyclerView()
         setAutoChat()
+
     }
 
 
@@ -70,71 +77,71 @@ class FragmentFakeKakaoChat :
     private fun setDefaultAdapter() {
         if (!operationByPosition()) {
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                when (args.position) {
+                when (args.itemIdPosition) {
 
 
-                    0 -> viewModelKaKaoChat.insertAllList(this.chatList)
-                    1 -> viewModelKaKaoChat.insertAllList2(this.chatList)
-                    2 -> viewModelKaKaoChat.insertAllList3(this.chatList)
-                    3 -> viewModelKaKaoChat.insertAllList4(this.chatList)
-                    4 -> viewModelKaKaoChat.insertAllList5(this.chatList)
-                    5 -> viewModelKaKaoChat.insertAllList6(this.chatList)
-                    6 -> viewModelKaKaoChat.insertAllList7(this.chatList)
-                    7 -> viewModelKaKaoChat.insertAllList8(this.chatList)
-                    8 -> viewModelKaKaoChat.insertAllList9(this.chatList)
-                    9 -> viewModelKaKaoChat.insertAllList10(this.chatList)
-                    10 -> viewModelKaKaoChat.insertAllList11(this.chatList)
-                    11 -> viewModelKaKaoChat.insertAllList12(this.chatList)
-                    12 -> viewModelKaKaoChat.insertAllList13(this.chatList)
-                    13 -> viewModelKaKaoChat.insertAllList14(this.chatList)
-                    14 -> viewModelKaKaoChat.insertAllList15(this.chatList)
-                    15 -> viewModelKaKaoChat.insertAllList16(this.chatList)
-                    16 -> viewModelKaKaoChat.insertAllList17(this.chatList)
-                    17 -> viewModelKaKaoChat.insertAllList18(this.chatList)
-                    18 -> viewModelKaKaoChat.insertAllList19(this.chatList)
-                    19 -> viewModelKaKaoChat.insertAllList20(this.chatList)
+                    0L -> viewModelKaKaoChat.insertAllList(this.chatList)
+                    1L -> viewModelKaKaoChat.insertAllList2(this.chatList)
+                    2L -> viewModelKaKaoChat.insertAllList3(this.chatList)
+                    3L -> viewModelKaKaoChat.insertAllList4(this.chatList)
+                    4L -> viewModelKaKaoChat.insertAllList5(this.chatList)
+                    5L -> viewModelKaKaoChat.insertAllList6(this.chatList)
+                    6L -> viewModelKaKaoChat.insertAllList7(this.chatList)
+                    7L -> viewModelKaKaoChat.insertAllList8(this.chatList)
+                    8L -> viewModelKaKaoChat.insertAllList9(this.chatList)
+                    9L -> viewModelKaKaoChat.insertAllList10(this.chatList)
+                    10L -> viewModelKaKaoChat.insertAllList11(this.chatList)
+                    11L -> viewModelKaKaoChat.insertAllList12(this.chatList)
+                    12L -> viewModelKaKaoChat.insertAllList13(this.chatList)
+                    13L -> viewModelKaKaoChat.insertAllList14(this.chatList)
+                    14L -> viewModelKaKaoChat.insertAllList15(this.chatList)
+                    15L -> viewModelKaKaoChat.insertAllList16(this.chatList)
+                    16L -> viewModelKaKaoChat.insertAllList17(this.chatList)
+                    17L -> viewModelKaKaoChat.insertAllList18(this.chatList)
+                    18L -> viewModelKaKaoChat.insertAllList19(this.chatList)
+                    19L -> viewModelKaKaoChat.insertAllList20(this.chatList)
                 }
             }
-            when (args.position) {
-                0 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun =
+            when (args.itemIdPosition) {
+                0L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun =
                     true
-                1 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2 =
+                1L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2 =
                     true
-                2 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3 =
+                2L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3 =
                     true
-                3 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4 =
+                3L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4 =
                     true
-                4 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5 =
+                4L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5 =
                     true
-                5 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6 =
+                5L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6 =
                     true
-                6 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7 =
+                6L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7 =
                     true
-                7 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8 =
+                7L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8 =
                     true
-                8 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9 =
+                8L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9 =
                     true
-                9 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10 =
+                9L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10 =
                     true
-                10 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11 =
+                10L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11 =
                     true
-                11 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12 =
+                11L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12 =
                     true
-                12 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13 =
+                12L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13 =
                     true
-                13 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14 =
+                13L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14 =
                     true
-                14 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15 =
+                14L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15 =
                     true
-                15 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16 =
+                15L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16 =
                     true
-                16 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17 =
+                16L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17 =
                     true
-                17 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18 =
+                17L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18 =
                     true
-                18 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19 =
+                18L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19 =
                     true
-                19 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20 =
+                19L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20 =
                     true
             }
 
@@ -144,27 +151,27 @@ class FragmentFakeKakaoChat :
 
     private fun operationByPosition(): Boolean {
 
-        return when (args.position) {
-            0 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun
-            1 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2
-            2 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3
-            3 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4
-            4 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5
-            5 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6
-            6 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7
-            7 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8
-            8 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9
-            9 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10
-            10 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11
-            11 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12
-            12 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13
-            13 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14
-            14 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15
-            15 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16
-            16 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17
-            17 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18
-            18 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19
-            19 -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20
+        return when (args.itemIdPosition) {
+            0L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun
+            1L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2
+            2L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3
+            3L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4
+            4L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5
+            5L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6
+            6L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7
+            7L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8
+            8L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9
+            9L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10
+            10L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11
+            11L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12
+            12L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13
+            13L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14
+            14L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15
+            15L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16
+            16L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17
+            17L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18
+            18L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19
+            19L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20
             else -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun
         }
     }
@@ -173,10 +180,10 @@ class FragmentFakeKakaoChat :
 
         buttonSend.setOnClickListener {
             buttonClick = true
-            when (args.position) {
+            when (args.itemIdPosition) {
 
 
-                0 -> {
+                0L -> {
                     viewModelKaKaoChat.insertItemAdd(
 
                         KaKaoTalkChatData(
@@ -185,7 +192,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                1 -> {
+                1L -> {
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -193,7 +200,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                2 -> {
+                2L -> {
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -201,7 +208,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                3 -> {
+                3L -> {
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -209,7 +216,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                4 -> {
+                4L -> {
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -217,7 +224,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                5 -> {
+                5L -> {
                     viewModelKaKaoChat.insertItemAdd6(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -225,7 +232,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                6 -> {
+                6L -> {
                     viewModelKaKaoChat.insertItemAdd7(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -233,7 +240,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                7 -> {
+                7L -> {
                     viewModelKaKaoChat.insertItemAdd8(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -241,7 +248,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                8 -> {
+                8L -> {
                     viewModelKaKaoChat.insertItemAdd9(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -249,7 +256,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                9 -> {
+                9L -> {
                     viewModelKaKaoChat.insertItemAdd10(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -257,7 +264,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                10 -> {
+                10L -> {
                     viewModelKaKaoChat.insertItemAdd11(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -265,7 +272,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                11 -> {
+                11L -> {
                     viewModelKaKaoChat.insertItemAdd12(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -273,7 +280,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                12 -> {
+                12L -> {
                     viewModelKaKaoChat.insertItemAdd13(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -281,7 +288,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                13 -> {
+                13L -> {
                     viewModelKaKaoChat.insertItemAdd14(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -289,7 +296,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                14 -> {
+                14L -> {
                     viewModelKaKaoChat.insertItemAdd15(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -297,7 +304,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                15 -> {
+                15L -> {
                     viewModelKaKaoChat.insertItemAdd16(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -305,7 +312,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                16 -> {
+                16L -> {
                     viewModelKaKaoChat.insertItemAdd17(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -313,7 +320,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                17 -> {
+                17L -> {
                     viewModelKaKaoChat.insertItemAdd18(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -321,7 +328,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                18 -> {
+                18L -> {
                     viewModelKaKaoChat.insertItemAdd19(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -329,7 +336,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                19 -> {
+                19L -> {
                     viewModelKaKaoChat.insertItemAdd20(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -343,36 +350,229 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setAutoChat() {
+        suspend fun autoProgram() {
+            viewModelShared
 
-        when (args.position) {
+            while (true) {
 
-            0 -> {
-                CoroutineScope(Dispatchers.Main).launch {
+                when(args.itemIdPosition) {
 
-                    while (true) {
-                        delay((Math.random() * 10000).toLong())
+                    0L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
                         autoChatRun = true
                         viewModelKaKaoChat.insertItemAdd(
                             KaKaoTalkChatData(
-                                textList = "hjj",
+                                textList = "${++test0}",
                                 user = false
                             )
                         )
 
                     }
-                }
-
-            }
-
-            1 -> {
-                CoroutineScope(Dispatchers.Main).launch {
-
-                    while (true) {
-                        delay((Math.random() * 10000).toLong())
+                    1L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
                         autoChatRun = true
                         viewModelKaKaoChat.insertItemAdd2(
                             KaKaoTalkChatData(
-                                textList = "hjj",
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    2L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd3(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    3L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd4(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    4L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd5(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    5L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd6(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    6L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd7(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    7L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd8(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    8L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd9(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    9L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd10(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    10L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd11(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    11L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd12(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    12L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd13(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    13L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd14(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+
+                    14L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd15(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    15L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd16(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    16L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd17(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    17L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd18(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    18L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd19(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
+                                user = false
+                            )
+                        )
+
+                    }
+                    19L -> {
+                        delay(Contents.AUTO_CHAT_DEALY)
+                        autoChatRun = true
+                        viewModelKaKaoChat.insertItemAdd20(
+                            KaKaoTalkChatData(
+                                textList = "${++test0}",
                                 user = false
                             )
                         )
@@ -380,400 +580,306 @@ class FragmentFakeKakaoChat :
                     }
                 }
 
+                autoChatRun = false
+                if (args.positionInChatList == 0)
+                    viewModelShared.runAutoChat(0)
+                else
+                    viewModelShared.runAutoChat(args.itemIdPosition.toInt())
             }
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            autoProgram()
         }
     }
 
+
     override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
-        when (args.position) {
-            0 -> {
+        when (args.itemIdPosition) {
+            0L -> {
                 viewModelKaKaoChat.myChatText.observe(viewLifecycleOwner, Observer {
                     when {
-                        (operationByPosition() && !buttonClick &&!autoChatRun ) -> {
+                        (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
-
-                        (buttonClick || autoChatRun) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
-                            viewModelShared.runAutoChat(args.position)
+
                         }
                     }
                 })
             }
-            1 -> {
+
+            1L -> {
                 viewModelKaKaoChat.myChatText2.observe(viewLifecycleOwner, Observer {
                     when {
-                        (operationByPosition() && !buttonClick &&!autoChatRun ) -> {
+                        (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
+
+                            buttonClick = false
                         }
 
-                        (buttonClick || autoChatRun) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
-                            buttonClick = false
-                            viewModelShared.runAutoChat(args.position)
-                        }
                     }
                 })
             }
-            2 -> {
+            2L -> {
                 viewModelKaKaoChat.myChatText3.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            3 -> {
+            3L -> {
                 viewModelKaKaoChat.myChatText4.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            4 -> {
+            4L -> {
                 viewModelKaKaoChat.myChatText5.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            5 -> {
+            5L -> {
                 viewModelKaKaoChat.myChatText6.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            6 -> {
+            6L -> {
                 viewModelKaKaoChat.myChatText7.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            7 -> {
+            7L -> {
                 viewModelKaKaoChat.myChatText8.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            8 -> {
+            8L -> {
                 viewModelKaKaoChat.myChatText9.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            9 -> {
+            9L -> {
                 viewModelKaKaoChat.myChatText10.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            10 -> {
+            10L -> {
                 viewModelKaKaoChat.myChatText11.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            11 -> {
+            11L -> {
                 viewModelKaKaoChat.myChatText12.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            12 -> {
+            12L -> {
                 viewModelKaKaoChat.myChatText13.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            13 -> {
+            13L -> {
                 viewModelKaKaoChat.myChatText14.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            14 -> {
+            14L -> {
                 viewModelKaKaoChat.myChatText15.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            15 -> {
+            15L -> {
                 viewModelKaKaoChat.myChatText16.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            16 -> {
+            16L -> {
                 viewModelKaKaoChat.myChatText17.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            17 -> {
+            17L -> {
                 viewModelKaKaoChat.myChatText18.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            18 -> {
+            18L -> {
                 viewModelKaKaoChat.myChatText19.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
-            19 -> {
+            19L -> {
                 viewModelKaKaoChat.myChatText20.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it.toMutableList()
                             )
-                        }
 
-                        (buttonClick) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                this.chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                            }
                             buttonClick = false
                         }
+
                     }
                 })
             }
 
+
+
         }
     }
 
-    override fun onStop() {
-        autoChatRun = false
-        super.onStop()
-    }
+
 }

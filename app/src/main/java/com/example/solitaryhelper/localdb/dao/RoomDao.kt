@@ -8,6 +8,6 @@ import androidx.lifecycle.LiveData
 
 
 
-interface KaKaoTalkChatDataDao {
+interface RoomDao {
 
 }

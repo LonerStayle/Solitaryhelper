@@ -1,7 +1,6 @@
 package com.example.solitaryhelper.viewmodel.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.solitaryhelper.localdb.dao.KaKaoTalkChatDataDao
 import com.example.solitaryhelper.viewmodel.KaKaoChatViewModel
 
 

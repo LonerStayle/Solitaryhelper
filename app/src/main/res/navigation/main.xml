@@ -86,11 +86,14 @@
             android:name="ListBox"
             app:argType="string[]" />
         <argument
-            android:name="position"
-            app:argType="integer" />
+            android:name="itemIdPosition"
+            app:argType="long" />
         <action
             android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk"
             app:destination="@id/fragmentFakeKakaoTalk" />
+        <argument
+            android:name="positionInChatList"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCall"

@@ -15,6 +15,8 @@ class SharedViewModel : ViewModel() {
     val firstRunKaKaoTalkClass = MutableLiveData<MutableList<KaKaoTalkData>>()
     val autoChatPosition = MutableLiveData<Int>()
 
+
+
     fun firstRunKaKaoTalkSetting(test: MutableList<KaKaoTalkData>) {
         firstRunKaKaoTalkClass.postValue(test)
     }
