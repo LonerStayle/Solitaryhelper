@@ -1,15 +1,13 @@
-package com.example.solitaryhelper.view.fragment.main.tapfragments
+package com.example.solitaryhelper.view.dest.main.tapfragments
 
 
 import androidx.navigation.fragment.findNavController
-
 import com.example.solitaryhelper.R
 
 import com.example.solitaryhelper.databinding.FragmentSkillBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerSkill
 
 import com.example.solitaryhelper.view.base.BaseFragment
-import com.example.solitaryhelper.view.contents.Contents
 
 class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill) {
 

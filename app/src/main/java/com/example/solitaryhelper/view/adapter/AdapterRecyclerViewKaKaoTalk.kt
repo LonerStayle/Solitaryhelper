@@ -8,15 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkTalkBinding
 import com.example.solitaryhelper.localdb.data.KaKaoTalkData
+import com.example.solitaryhelper.viewmodel.SharedViewModel
 
 
 import kotlin.random.Random
 
 class AdapterRecyclerViewKaKaoTalk(
-    var kaKaoDataList: List<KaKaoTalkData> = listOf(),
+    var kaKaoDataList: MutableList<KaKaoTalkData> = mutableListOf(),
     val clickEvent: (Int) -> Unit
+
 ) :
     RecyclerView.Adapter<AdapterRecyclerViewKaKaoTalk.ViewHolder>() {
+
     private val visibleSettingList = mutableListOf(View.VISIBLE)
 
     private var i = 0
@@ -38,8 +41,7 @@ class AdapterRecyclerViewKaKaoTalk(
     override fun getItemCount() = kaKaoDataList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        while (i < kaKaoDataList.size-1) {
+        while (i < kaKaoDataList.size - 1) {
             fun random(): Int {
                 return when (Random.nextInt(2)) {
                     0 -> View.GONE
@@ -54,9 +56,12 @@ class AdapterRecyclerViewKaKaoTalk(
 
         holder.binding?.apply {
             kaKaoData = kaKaoDataList[position]
+
             lastIndex = kaKaoDataList[position].textBoxList[kaKaoDataList[position].id.toInt()].last()
             noticeScore = kaKaoDataList[position].textBoxList[position].size.toString()
             setVisible = visibleSettingList[position]
+
+
         }
 
 

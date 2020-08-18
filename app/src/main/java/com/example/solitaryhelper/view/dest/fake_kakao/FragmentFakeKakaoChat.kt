@@ -1,23 +1,22 @@
-package com.example.solitaryhelper.view.fragment.fake_kakao
+package com.example.solitaryhelper.view.dest.fake_kakao
 
-import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
 import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
-import com.example.solitaryhelper.localdb.data.KaKaoTalkData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.view.pref.PrefCheckPosition
+
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.viewmodel.SharedViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 var test0 = 0
-var test1 = 0
+
 
 
 class FragmentFakeKakaoChat :
@@ -28,11 +27,17 @@ class FragmentFakeKakaoChat :
         )
     }
 
+    companion object{
+        var positionCheckList: Array<SharedViewModel.ZeroPositionCheck>? = null
+        var positionSendRunCheck: Boolean? = null
+    }
+
     private val chatDataList = mutableListOf<KaKaoTalkChatData>()
 
     private var buttonClick = false
 
     private var autoChatRun = false
+
 
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
         setButtonClickListener()
@@ -40,22 +45,45 @@ class FragmentFakeKakaoChat :
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
 
+        setPositionCheckData()
         setChatDataList()
         setDefaultAdapter()
         setRecyclerView()
         setAutoChat()
+    }
 
+    override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
+        setObserver()
     }
 
 
     private fun FragmentFakeKakaoChatBinding.setRecyclerView() {
         recyclerViewKaKaoChat.setHasFixedSize(true)
+    }
 
+    private fun setPositionCheckData() {
+        if (positionCheckList?.size == 0) {
+            for (i in 0..19) {
+                positionCheckList!![i] = SharedViewModel.ZeroPositionCheck(
+                    i, false
+                )
+
+                if (i == 0)
+                    positionCheckList!![0] = SharedViewModel.ZeroPositionCheck(
+                        0, true
+                    )
+            }
+        } else
+            return
     }
 
     private fun FragmentFakeKakaoChatBinding.setChatDataList() {
 
+
         if (!operationByPosition()) {
+            positionCheckList = Array(20) { SharedViewModel.ZeroPositionCheck(0, false) }
+
+
 
             for (i in args.ListBox.indices) {
 
@@ -69,6 +97,7 @@ class FragmentFakeKakaoChat :
             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                 args.profileImage, args.name, chatDataList
             )
+
         } else
             return
     }
@@ -190,7 +219,10 @@ class FragmentFakeKakaoChat :
                             textList = editTextTalkBox.text.toString(),
                             user = true
                         )
+
                     )
+
+
                 }
                 1L -> {
                     viewModelKaKaoChat.insertItemAdd2(
@@ -353,13 +385,16 @@ class FragmentFakeKakaoChat :
         suspend fun autoProgram() {
             viewModelShared
 
+
             while (true) {
 
-                when(args.itemIdPosition) {
+                when (args.itemIdPosition) {
 
                     0L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
+                        delay(15000)
+                        viewModelShared.sendToPosition(0)
                         autoChatRun = true
+                        positionSendRunCheck = true
                         viewModelKaKaoChat.insertItemAdd(
                             KaKaoTalkChatData(
                                 textList = "${++test0}",
@@ -369,8 +404,10 @@ class FragmentFakeKakaoChat :
 
                     }
                     1L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
+                        delay(8000)
+                        viewModelShared.sendToPosition(1)
                         autoChatRun = true
+                        positionSendRunCheck = true
                         viewModelKaKaoChat.insertItemAdd2(
                             KaKaoTalkChatData(
                                 textList = "${++test0}",
@@ -381,7 +418,9 @@ class FragmentFakeKakaoChat :
                     }
                     2L -> {
                         delay(Contents.AUTO_CHAT_DEALY)
+                        viewModelShared.sendToPosition(2)
                         autoChatRun = true
+                        positionSendRunCheck = true
                         viewModelKaKaoChat.insertItemAdd3(
                             KaKaoTalkChatData(
                                 textList = "${++test0}",
@@ -392,7 +431,9 @@ class FragmentFakeKakaoChat :
                     }
                     3L -> {
                         delay(Contents.AUTO_CHAT_DEALY)
+                        viewModelShared.sendToPosition(3)
                         autoChatRun = true
+                        positionSendRunCheck = true
                         viewModelKaKaoChat.insertItemAdd4(
                             KaKaoTalkChatData(
                                 textList = "${++test0}",
@@ -403,7 +444,9 @@ class FragmentFakeKakaoChat :
                     }
                     4L -> {
                         delay(Contents.AUTO_CHAT_DEALY)
+                        viewModelShared.sendToPosition(4)
                         autoChatRun = true
+                        positionSendRunCheck = true
                         viewModelKaKaoChat.insertItemAdd5(
                             KaKaoTalkChatData(
                                 textList = "${++test0}",
@@ -581,10 +624,7 @@ class FragmentFakeKakaoChat :
                 }
 
                 autoChatRun = false
-                if (args.positionInChatList == 0)
-                    viewModelShared.runAutoChat(0)
-                else
-                    viewModelShared.runAutoChat(args.itemIdPosition.toInt())
+
             }
         }
         CoroutineScope(Dispatchers.Main).launch {
@@ -593,7 +633,7 @@ class FragmentFakeKakaoChat :
     }
 
 
-    override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
+    private fun FragmentFakeKakaoChatBinding.setObserver() {
         when (args.itemIdPosition) {
             0L -> {
                 viewModelKaKaoChat.myChatText.observe(viewLifecycleOwner, Observer {
@@ -618,6 +658,7 @@ class FragmentFakeKakaoChat :
                             )
 
                             buttonClick = false
+
                         }
 
                     }
@@ -875,7 +916,6 @@ class FragmentFakeKakaoChat :
                     }
                 })
             }
-
 
 
         }

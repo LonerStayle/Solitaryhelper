@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.fragment.main
+package com.example.solitaryhelper.view.dest.main
 
 
 import android.text.TextUtils

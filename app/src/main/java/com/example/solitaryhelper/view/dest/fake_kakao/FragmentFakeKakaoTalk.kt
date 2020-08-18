@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.fragment.fake_kakao
+package com.example.solitaryhelper.view.dest.fake_kakao
 
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
@@ -9,12 +9,13 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-import java.util.*
+import com.example.solitaryhelper.view.utill.toastDebugTest
+import com.example.solitaryhelper.viewmodel.SharedViewModel
 import java.util.Collections.swap
 
 class FragmentFakeKakaoTalk :
     BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
-  private var noticeitemPositionChange = false
+    private var noticeitemPositionChange = false
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
         setBackButtonListener()
@@ -31,33 +32,32 @@ class FragmentFakeKakaoTalk :
             androidx.lifecycle.Observer {
 
 
-                if(!noticeitemPositionChange) {
-                    binding.recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(it)
-                    { position ->
-                        (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
-                            swap(this.kaKaoDataList, 0, position)
+                if (!noticeitemPositionChange) {
+                    binding.recyclerViewKaKaoChatList.adapter =
+                        AdapterRecyclerViewKaKaoTalk(it)
+                        { position ->
+                            (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
+                                swap(this.kaKaoDataList, 0, position)
 
-                        }
+                            }
 
-                        findNavController().navigate(
-                            FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
-                                profileImage = it[0].image,
-                                name = it[0].name,
-                                ListBox = it[0].textBoxList[it[0].id.toInt()],
-                                positionInChatList = position,
-                                itemIdPosition = it[0].id
+                            findNavController().navigate(
+                                FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
+                                    profileImage = it[0].image,
+                                    name = it[0].name,
+                                    ListBox = it[0].textBoxList[it[0].id.toInt()],
+                                    positionInChatList = position,
+                                    itemIdPosition = it[0].id
+                                )
                             )
-                        )
 
-                        (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
-                            swap(this.kaKaoDataList, 0, position)
+                            (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
+                                swap(this.kaKaoDataList, 0, position)
 
+                            }
                         }
-                    }
-                }else {
-                    (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
+                } else {
 
-                    }
                     noticeitemPositionChange = false
                     return@Observer
                 }
@@ -71,17 +71,17 @@ class FragmentFakeKakaoTalk :
             val kakaoDataList = mutableListOf<KaKaoTalkData>()
             val kaKaoTextList = arrayOf(
 
-                resources.getStringArray(R.array.sample_list1)  ,
-                resources.getStringArray(R.array.sample_list2)  ,
-                resources.getStringArray(R.array.sample_list3)  ,
-                resources.getStringArray(R.array.sample_list4)  ,
+                resources.getStringArray(R.array.sample_list1),
+                resources.getStringArray(R.array.sample_list2),
+                resources.getStringArray(R.array.sample_list3),
+                resources.getStringArray(R.array.sample_list4),
                 resources.getStringArray(R.array.sample_list5)
             )
 
             kaKaoImageProfileList = Array(kaKaoNameList.size) { "" }
             for (i in kaKaoImageProfileList.indices) {
                 kaKaoImageProfileList[i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                    "sample${1+i}",
+                    "sample${1 + i}",
                     "drawable",
                     requireActivity().packageName
                 ).toString())
@@ -103,7 +103,6 @@ class FragmentFakeKakaoTalk :
     }
 
 
-
     private fun setBackButtonListener() {
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
@@ -113,18 +112,47 @@ class FragmentFakeKakaoTalk :
     }
 
     private fun setNewMessageResponse() {
-        viewModelShared.autoChatPosition.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModelShared.sendToPosition.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+            (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
 
-                (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
-                    swap(this.kaKaoDataList, 0, it)
+                if (!FragmentFakeKakaoChat.positionCheckList!![it].positionZeroCheck &&
+                    FragmentFakeKakaoChat.positionSendRunCheck!!
+                ) {
+                    val cloneList = this.kaKaoDataList
+                    this.kaKaoDataList.add(0,cloneList[it])
+                    this.kaKaoDataList.removeAt(it+1)
+
+
+
+                    context?.toastDebugTest("이거 되는지 확인한다.")
+
+                    for (i in FragmentFakeKakaoChat.positionCheckList!!.indices) {
+                        FragmentFakeKakaoChat.positionCheckList!![i] =
+                            SharedViewModel.ZeroPositionCheck(i, false)
+                        if (i == it)
+                            FragmentFakeKakaoChat.positionCheckList?.set(
+                                it,
+                                SharedViewModel.ZeroPositionCheck(it, true)
+                            )
+                    }
+
+
+
+
                     notifyItemMoved(it, 0)
 
-                    viewModelShared.firstRunKaKaoTalkSetting(this.kaKaoDataList as MutableList<KaKaoTalkData>)
+                    viewModelShared.firstRunKaKaoTalkSetting(this.kaKaoDataList)
                     noticeitemPositionChange = true
+                    FragmentFakeKakaoChat.positionSendRunCheck = false
+
                 }
+
+
+            }
 
         })
     }
-
 }
+

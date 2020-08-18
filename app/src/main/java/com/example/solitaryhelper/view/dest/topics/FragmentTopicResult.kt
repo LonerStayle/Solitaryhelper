@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.fragment.topics
+package com.example.solitaryhelper.view.dest.topics
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentTopicGuideBinding
 import com.example.solitaryhelper.databinding.FragmentTopicResultBinding

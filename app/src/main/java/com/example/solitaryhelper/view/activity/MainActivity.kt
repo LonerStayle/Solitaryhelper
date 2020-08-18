@@ -3,7 +3,6 @@ package com.example.solitaryhelper.view.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.view.pref.PrefCheckPosition
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 
 class MainActivity : AppCompatActivity() {

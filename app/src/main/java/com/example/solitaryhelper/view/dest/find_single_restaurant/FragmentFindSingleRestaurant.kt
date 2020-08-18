@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.fragment.find_single_restaurant
+package com.example.solitaryhelper.view.dest.find_single_restaurant
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFindSingleRestaurantBinding
 import com.example.solitaryhelper.view.base.BaseFragment

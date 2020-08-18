@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.fragment.fake_sms
+package com.example.solitaryhelper.view.dest.fake_sms
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeSmsSettingBinding
 import com.example.solitaryhelper.view.base.BaseFragment

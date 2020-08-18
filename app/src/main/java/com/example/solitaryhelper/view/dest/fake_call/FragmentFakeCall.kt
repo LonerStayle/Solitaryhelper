@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.fragment.fake_call
+package com.example.solitaryhelper.view.dest.fake_call
 
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallBinding

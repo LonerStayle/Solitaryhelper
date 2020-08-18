@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.solitaryhelper.view.fragment.main.MainFragment"
-        android:label="MainFragment" >
+        android:name="com.example.solitaryhelper.view.dest.main.MainFragment"
+        android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeCallSetting"
             app:destination="@id/fragmentFakeCallSetting" />
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCallSetting"
-        android:name="com.example.solitaryhelper.view.fragment.fake_call.FragmentFakeCallSetting"
+        android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallSetting"
         android:label="fragmentFakeCallSetting">
         <action
             android:id="@+id/action_fragmentFakeCallGuide_to_fragmentFakeCall"
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeSmsSetting"
-        android:name="com.example.solitaryhelper.view.fragment.fake_sms.FragmentFakeSmsSetting"
+        android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSmsSetting"
         android:label="FragmentFakeSmsSetting" >
         <action
             android:id="@+id/action_fragmentFakeSmsSetting_to_fragmentFakeSms"
@@ -58,23 +58,22 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentWiseSayingCreate"
-        android:name="com.example.solitaryhelper.view.fragment.wise_saying_fragments.FragmentWiseSayingCreate"
+        android:name="com.example.solitaryhelper.view.dest.wise_saying_fragments.FragmentWiseSayingCreate"
         android:label="FragmentWiseSayingCreate" />
     <fragment
         android:id="@+id/fragmentFakeKakaoTalk"
-        android:name="com.example.solitaryhelper.view.fragment.fake_kakao.FragmentFakeKakaoTalk"
+        android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk"
         android:label="FragmentFakeKakaoTalk" >
         <action
             android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
-            app:destination="@id/fragmentFakeKakaoChat"
-            app:popUpToInclusive="false" />
+            app:destination="@id/fragmentFakeKakaoChat" />
         <action
             android:id="@+id/action_fragmentFakeKakaoTalk_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeKakaoChat"
-        android:name="com.example.solitaryhelper.view.fragment.fake_kakao.FragmentFakeKakaoChat"
+        android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat"
         android:label="FragmentFakeKakaoChat" >
         <argument
             android:name="name"
@@ -97,26 +96,26 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCall"
-        android:name="com.example.solitaryhelper.view.fragment.fake_call.FragmentFakeCall"
+        android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCall"
         android:label="FragmentFakeCall" />
     <fragment
         android:id="@+id/fragmentFakeSms"
-        android:name="com.example.solitaryhelper.view.fragment.fake_sms.FragmentFakeSms"
+        android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSms"
         android:label="FragmentFakeSms" />
     <fragment
         android:id="@+id/fragmentWiseSayingImageChange"
-        android:name="com.example.solitaryhelper.view.fragment.wise_saying_fragments.FragmentWiseSayingImageChange"
+        android:name="com.example.solitaryhelper.view.dest.wise_saying_fragments.FragmentWiseSayingImageChange"
         android:label="FragmentWiseSayingImageChange" />
     <fragment
         android:id="@+id/fragmentWiseSayingList"
-        android:name="com.example.solitaryhelper.view.fragment.wise_saying_fragments.FragmentWiseSayingList"
+        android:name="com.example.solitaryhelper.view.dest.wise_saying_fragments.FragmentWiseSayingList"
         android:label="FragmentWiseSayingList" />
     <fragment
         android:id="@+id/fragmentTopicGuide"
-        android:name="com.example.solitaryhelper.view.fragment.topics.FragmentTopicGuide"
+        android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicGuide"
         android:label="fragmentTopicGuide" />
     <fragment
         android:id="@+id/fragmentTopicResult"
-        android:name="com.example.solitaryhelper.view.fragment.topics.FragmentTopicResult"
+        android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicResult"
         android:label="FragmentTopicResult" />
 </navigation>
