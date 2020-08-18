@@ -12,7 +12,7 @@ class AdapterViewPagerMain(fr: Fragment) : FragmentStateAdapter(fr) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            Contents.MAIN_FIRST_ITEM -> FragmentSkill()
+            Contents.MAIN_FIRST_ITEM ->  FragmentSkill()
             Contents.MAIN_SECOND_ITEM -> FragmentTopic()
             Contents.MAIN_THIRD_ITEM -> FragmentEatingAlone()
             Contents.MAIN_FORCE_ITEM -> FragmentWiseSaying()

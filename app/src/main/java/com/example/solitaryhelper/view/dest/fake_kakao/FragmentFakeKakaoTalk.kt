@@ -17,11 +17,16 @@ class FragmentFakeKakaoTalk :
     BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
     private var noticeitemPositionChange = false
 
+    companion object {
+        var itemOrderList = arrayOf(0,1,2,3,4)
+    }
+
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
         setBackButtonListener()
     }
 
     override fun FragmentFakeKakaoTalkBinding.setCreateView() {
+
         setSendToAdapterToData()
         setNewMessageResponse()
     }
@@ -32,7 +37,11 @@ class FragmentFakeKakaoTalk :
             androidx.lifecycle.Observer {
 
 
+
+
                 if (!noticeitemPositionChange) {
+
+
                     binding.recyclerViewKaKaoChatList.adapter =
                         AdapterRecyclerViewKaKaoTalk(it)
                         { position ->
@@ -100,6 +109,8 @@ class FragmentFakeKakaoTalk :
         }
         if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck)
             viewModelShared.firstRunKaKaoTalkSetting(setCreateAnItemToSendToTheAdapter())
+
+
     }
 
 
@@ -111,48 +122,55 @@ class FragmentFakeKakaoTalk :
 
     }
 
-    private fun setNewMessageResponse() {
-        viewModelShared.sendToPosition.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
-            (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
+    private fun FragmentFakeKakaoTalkBinding.setNewMessageResponse() {
 
 
-                if (!FragmentFakeKakaoChat.positionCheckList!![it].positionZeroCheck &&
-                    FragmentFakeKakaoChat.positionSendRunCheck!!
-                ) {
-                    val cloneList = this.kaKaoDataList
-                    this.kaKaoDataList.add(0,cloneList[it])
-                    this.kaKaoDataList.removeAt(it+1)
+        viewModelShared.sendToPosition.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { position ->
+
+                (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
+
+                    if (!FragmentFakeKakaoChat.positionCheckList!![position].positionZeroCheck &&
+                        FragmentFakeKakaoChat.positionSendRunCheck!!
+                    ) {
+
+
+                        val index = itemOrderList.indexOf(position)
+
+                        this.kaKaoDataList.add(0,this.kaKaoDataList[index] )
+
+                        this.kaKaoDataList.removeAt(index + 1 )
 
 
 
-                    context?.toastDebugTest("이거 되는지 확인한다.")
+                        context?.toastDebugTest("이거 되는지 확인한다.")
 
-                    for (i in FragmentFakeKakaoChat.positionCheckList!!.indices) {
-                        FragmentFakeKakaoChat.positionCheckList!![i] =
-                            SharedViewModel.ZeroPositionCheck(i, false)
-                        if (i == it)
-                            FragmentFakeKakaoChat.positionCheckList?.set(
-                                it,
-                                SharedViewModel.ZeroPositionCheck(it, true)
-                            )
+                        for (i in FragmentFakeKakaoChat.positionCheckList!!.indices) {
+                            FragmentFakeKakaoChat.positionCheckList!![i] =
+                                SharedViewModel.ZeroPositionCheck(i, false)
+                            if (i == index)
+                                FragmentFakeKakaoChat.positionCheckList?.set(
+                                    index,
+                                    SharedViewModel.ZeroPositionCheck(index, true)
+                                )
+                        }
+
+                        notifyItemMoved(position, 0)
+
+                        viewModelShared.firstRunKaKaoTalkSetting(this.kaKaoDataList)
+                        noticeitemPositionChange = true
+                        FragmentFakeKakaoChat.positionSendRunCheck = false
+
+                        for (i in itemOrderList.indices) {
+                            itemOrderList[i] = kaKaoDataList[i].id.toInt()
+                        }
                     }
-
-
-
-
-                    notifyItemMoved(it, 0)
-
-                    viewModelShared.firstRunKaKaoTalkSetting(this.kaKaoDataList)
-                    noticeitemPositionChange = true
-                    FragmentFakeKakaoChat.positionSendRunCheck = false
-
                 }
 
-
-            }
-
-        })
+            })
     }
+
+
 }
 

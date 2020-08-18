@@ -10,14 +10,9 @@ import com.example.solitaryhelper.view.contents.Contents
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.viewmodel.SharedViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 var test0 = 0
-
-
 
 class FragmentFakeKakaoChat :
     BaseFragment<FragmentFakeKakaoChatBinding>(R.layout.fragment_fake_kakao_chat) {
@@ -28,15 +23,18 @@ class FragmentFakeKakaoChat :
     }
 
     companion object{
+
         var positionCheckList: Array<SharedViewModel.ZeroPositionCheck>? = null
         var positionSendRunCheck: Boolean? = null
+        var autoChatDoubleCheckRun = Array<Boolean>(20){false}
     }
+
+
 
     private val chatDataList = mutableListOf<KaKaoTalkChatData>()
 
     private var buttonClick = false
 
-    private var autoChatRun = false
 
 
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
@@ -44,12 +42,14 @@ class FragmentFakeKakaoChat :
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
+        //화면전환 후에도 사용이 지속되기 위한 빠른 초기화
+        viewModelShared
 
         setPositionCheckData()
         setChatDataList()
         setDefaultAdapter()
         setRecyclerView()
-        setAutoChat()
+        setRunAutoChatSetting()
     }
 
     override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
@@ -381,256 +381,102 @@ class FragmentFakeKakaoChat :
         }
     }
 
-    private fun setAutoChat() {
-        suspend fun autoProgram() {
-            viewModelShared
+    private fun setRunAutoChatSetting() {
+        fun setAutoChat() {
+            CoroutineScope(Dispatchers.Main ).launch {
+                setCoroutine() }
+        }
 
+        for(i in 0..19){
+            when {
+               args.itemIdPosition.toInt()==i && !autoChatDoubleCheckRun[i] -> setAutoChat()
+            }
+        }
+    }
 
-            while (true) {
+    private suspend fun setCoroutine(){
+        while (true) {
 
-                when (args.itemIdPosition) {
+            when (args.itemIdPosition) {
 
-                    0L -> {
-                        delay(15000)
+                0L -> {
+                    autoChatDoubleCheckRun[0] = true
+                    delay(5000)
                         viewModelShared.sendToPosition(0)
-                        autoChatRun = true
+
                         positionSendRunCheck = true
                         viewModelKaKaoChat.insertItemAdd(
                             KaKaoTalkChatData(
-                                textList = "${++test0}",
+                                textList = "1-${++test0}",
                                 user = false
                             )
                         )
 
-                    }
-                    1L -> {
-                        delay(8000)
+
+                }
+                1L -> {
+                    autoChatDoubleCheckRun[1] = true
+                        delay(10000)
                         viewModelShared.sendToPosition(1)
-                        autoChatRun = true
+
                         positionSendRunCheck = true
                         viewModelKaKaoChat.insertItemAdd2(
                             KaKaoTalkChatData(
-                                textList = "${++test0}",
+                                textList = "2-${++test0}",
                                 user = false
                             )
                         )
 
-                    }
-                    2L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        viewModelShared.sendToPosition(2)
-                        autoChatRun = true
-                        positionSendRunCheck = true
-                        viewModelKaKaoChat.insertItemAdd3(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
+                }
+                2L -> {
+                    autoChatDoubleCheckRun[2] = true
+                    delay(15000)
+                    viewModelShared.sendToPosition(2)
+
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd3(
+                        KaKaoTalkChatData(
+                            textList = "3-${++test0}",
+                            user = false
                         )
+                    )
 
-                    }
-                    3L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        viewModelShared.sendToPosition(3)
-                        autoChatRun = true
-                        positionSendRunCheck = true
-                        viewModelKaKaoChat.insertItemAdd4(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
+                }
+                3L -> {
+                    autoChatDoubleCheckRun[3] = true
+                    delay(20000)
+                    viewModelShared.sendToPosition(3)
+
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd4(
+                        KaKaoTalkChatData(
+                            textList = "4-${++test0}",
+                            user = false
                         )
+                    )
 
-                    }
-                    4L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        viewModelShared.sendToPosition(4)
-                        autoChatRun = true
-                        positionSendRunCheck = true
-                        viewModelKaKaoChat.insertItemAdd5(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
+                }
+                4L -> {
+                    autoChatDoubleCheckRun[4] = true
+                    delay(25000)
+                    viewModelShared.sendToPosition(4)
+
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd5(
+                        KaKaoTalkChatData(
+                            textList = "5-${++test0}",
+                            user = false
                         )
+                    )
 
-                    }
-                    5L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd6(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    6L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd7(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    7L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd8(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    8L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd9(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    9L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd10(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    10L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd11(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    11L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd12(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    12L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd13(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    13L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd14(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-
-                    14L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd15(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    15L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd16(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    16L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd17(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    17L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd18(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    18L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd19(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
-                    19L -> {
-                        delay(Contents.AUTO_CHAT_DEALY)
-                        autoChatRun = true
-                        viewModelKaKaoChat.insertItemAdd20(
-                            KaKaoTalkChatData(
-                                textList = "${++test0}",
-                                user = false
-                            )
-                        )
-
-                    }
                 }
 
-                autoChatRun = false
+                }
 
             }
+
         }
-        CoroutineScope(Dispatchers.Main).launch {
-            autoProgram()
-        }
-    }
+
 
 
     private fun FragmentFakeKakaoChatBinding.setObserver() {
