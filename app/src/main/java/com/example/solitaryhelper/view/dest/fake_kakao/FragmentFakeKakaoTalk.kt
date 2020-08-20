@@ -9,8 +9,8 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.viewmodel.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_fake_kakao_chat.*
 import java.util.Collections.swap
 
 class FragmentFakeKakaoTalk :
@@ -18,7 +18,7 @@ class FragmentFakeKakaoTalk :
     private var noticeitemPositionChange = false
 
     companion object {
-        var itemOrderList = arrayOf(0,1,2,3,4)
+        var itemOrderList = arrayOf(0, 1, 2, 3, 4)
     }
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
@@ -35,8 +35,6 @@ class FragmentFakeKakaoTalk :
         viewModelShared.firstRunKaKaoTalkClass.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
-
-
 
 
                 if (!noticeitemPositionChange) {
@@ -134,17 +132,13 @@ class FragmentFakeKakaoTalk :
                     if (!FragmentFakeKakaoChat.positionCheckList!![position].positionZeroCheck &&
                         FragmentFakeKakaoChat.positionSendRunCheck!!
                     ) {
-
+                        notifyItemMoved(position, 0)
 
                         val index = itemOrderList.indexOf(position)
+                        this.kaKaoDataList.add(0, this.kaKaoDataList[index])
+                        this.kaKaoDataList.removeAt(index + 1)
 
-                        this.kaKaoDataList.add(0,this.kaKaoDataList[index] )
-
-                        this.kaKaoDataList.removeAt(index + 1 )
-
-
-
-                        context?.toastDebugTest("이거 되는지 확인한다.")
+                       notifyItemRangeChanged(0,4)
 
                         for (i in FragmentFakeKakaoChat.positionCheckList!!.indices) {
                             FragmentFakeKakaoChat.positionCheckList!![i] =
@@ -156,8 +150,6 @@ class FragmentFakeKakaoTalk :
                                 )
                         }
 
-                        notifyItemMoved(position, 0)
-
                         viewModelShared.firstRunKaKaoTalkSetting(this.kaKaoDataList)
                         noticeitemPositionChange = true
                         FragmentFakeKakaoChat.positionSendRunCheck = false
@@ -165,11 +157,15 @@ class FragmentFakeKakaoTalk :
                         for (i in itemOrderList.indices) {
                             itemOrderList[i] = kaKaoDataList[i].id.toInt()
                         }
+
+
                     }
+
                 }
 
             })
     }
+
 
 
 }

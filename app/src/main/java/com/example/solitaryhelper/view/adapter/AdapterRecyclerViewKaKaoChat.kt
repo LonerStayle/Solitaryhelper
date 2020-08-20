@@ -12,8 +12,8 @@ import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
 
 
 class AdapterRecyclerViewKaKaoChat(
-    private val kaKaoProfile: String,
-    private val kaKaoName: String,
+    var kaKaoProfile: String,
+    var kaKaoName: String,
     var chatList: MutableList<KaKaoTalkChatData> = mutableListOf()
 ) :
     RecyclerView.Adapter<AdapterRecyclerViewKaKaoChat.ViewHolder>() {

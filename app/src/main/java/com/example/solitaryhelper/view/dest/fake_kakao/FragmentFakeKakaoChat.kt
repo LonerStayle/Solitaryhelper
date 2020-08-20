@@ -10,6 +10,7 @@ import com.example.solitaryhelper.view.contents.Contents
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.viewmodel.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_fake_kakao_chat.*
 import kotlinx.coroutines.*
 
 var test0 = 0
@@ -22,19 +23,17 @@ class FragmentFakeKakaoChat :
         )
     }
 
-    companion object{
+    companion object {
 
         var positionCheckList: Array<SharedViewModel.ZeroPositionCheck>? = null
         var positionSendRunCheck: Boolean? = null
-        var autoChatDoubleCheckRun = Array<Boolean>(20){false}
+        var autoChatDoubleCheckRun = Array<Boolean>(20) { false }
     }
-
 
 
     private val chatDataList = mutableListOf<KaKaoTalkChatData>()
 
     private var buttonClick = false
-
 
 
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
@@ -46,9 +45,8 @@ class FragmentFakeKakaoChat :
         viewModelShared
 
         setPositionCheckData()
-        setChatDataList()
-        setDefaultAdapter()
-        setRecyclerView()
+        setAdapter()
+        setBindValueInAdapter()
         setRunAutoChatSetting()
     }
 
@@ -56,10 +54,6 @@ class FragmentFakeKakaoChat :
         setObserver()
     }
 
-
-    private fun FragmentFakeKakaoChatBinding.setRecyclerView() {
-        recyclerViewKaKaoChat.setHasFixedSize(true)
-    }
 
     private fun setPositionCheckData() {
         if (positionCheckList?.size == 0) {
@@ -77,12 +71,11 @@ class FragmentFakeKakaoChat :
             return
     }
 
-    private fun FragmentFakeKakaoChatBinding.setChatDataList() {
+    private fun FragmentFakeKakaoChatBinding.setAdapter() {
 
 
         if (!operationByPosition()) {
             positionCheckList = Array(20) { SharedViewModel.ZeroPositionCheck(0, false) }
-
 
 
             for (i in args.ListBox.indices) {
@@ -94,20 +87,20 @@ class FragmentFakeKakaoChat :
                     )
                 )
             }
+
             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                 args.profileImage, args.name, chatDataList
             )
-
+            recyclerViewKaKaoChat.setHasFixedSize(true)
         } else
             return
     }
 
 
-    private fun setDefaultAdapter() {
+    private fun setBindValueInAdapter() {
         if (!operationByPosition()) {
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                 when (args.itemIdPosition) {
-
 
                     0L -> viewModelKaKaoChat.insertAllList(this.chatList)
                     1L -> viewModelKaKaoChat.insertAllList2(this.chatList)
@@ -383,18 +376,19 @@ class FragmentFakeKakaoChat :
 
     private fun setRunAutoChatSetting() {
         fun setAutoChat() {
-            CoroutineScope(Dispatchers.Main ).launch {
-                setCoroutine() }
+            CoroutineScope(Dispatchers.Main).launch {
+                setCoroutine()
+            }
         }
 
-        for(i in 0..19){
+        for (i in 0..19) {
             when {
-               args.itemIdPosition.toInt()==i && !autoChatDoubleCheckRun[i] -> setAutoChat()
+                args.itemIdPosition.toInt() == i && !autoChatDoubleCheckRun[i] -> setAutoChat()
             }
         }
     }
 
-    private suspend fun setCoroutine(){
+    private suspend fun setCoroutine() {
         while (true) {
 
             when (args.itemIdPosition) {
@@ -402,30 +396,30 @@ class FragmentFakeKakaoChat :
                 0L -> {
                     autoChatDoubleCheckRun[0] = true
                     delay(5000)
-                        viewModelShared.sendToPosition(0)
+                    viewModelShared.sendToPosition(0)
 
-                        positionSendRunCheck = true
-                        viewModelKaKaoChat.insertItemAdd(
-                            KaKaoTalkChatData(
-                                textList = "1-${++test0}",
-                                user = false
-                            )
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd(
+                        KaKaoTalkChatData(
+                            textList = "1-${++test0}",
+                            user = false
                         )
+                    )
 
 
                 }
                 1L -> {
                     autoChatDoubleCheckRun[1] = true
-                        delay(10000)
-                        viewModelShared.sendToPosition(1)
+                    delay(10000)
+                    viewModelShared.sendToPosition(1)
 
-                        positionSendRunCheck = true
-                        viewModelKaKaoChat.insertItemAdd2(
-                            KaKaoTalkChatData(
-                                textList = "2-${++test0}",
-                                user = false
-                            )
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd2(
+                        KaKaoTalkChatData(
+                            textList = "2-${++test0}",
+                            user = false
                         )
+                    )
 
                 }
                 2L -> {
@@ -471,295 +465,472 @@ class FragmentFakeKakaoChat :
 
                 }
 
-                }
-
             }
 
         }
 
+    }
 
 
     private fun FragmentFakeKakaoChatBinding.setObserver() {
         when (args.itemIdPosition) {
+
             0L -> {
                 viewModelKaKaoChat.myChatText.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
-                            buttonClick = false
-
                         }
+
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
+                        }
+
                     }
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
+
 
             1L -> {
                 viewModelKaKaoChat.myChatText2.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
-
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             2L -> {
                 viewModelKaKaoChat.myChatText3.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             3L -> {
                 viewModelKaKaoChat.myChatText4.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             4L -> {
                 viewModelKaKaoChat.myChatText5.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             5L -> {
                 viewModelKaKaoChat.myChatText6.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             6L -> {
                 viewModelKaKaoChat.myChatText7.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             7L -> {
                 viewModelKaKaoChat.myChatText8.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             8L -> {
                 viewModelKaKaoChat.myChatText9.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             9L -> {
                 viewModelKaKaoChat.myChatText10.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             10L -> {
                 viewModelKaKaoChat.myChatText11.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             11L -> {
                 viewModelKaKaoChat.myChatText12.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             12L -> {
                 viewModelKaKaoChat.myChatText13.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             13L -> {
                 viewModelKaKaoChat.myChatText14.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             14L -> {
                 viewModelKaKaoChat.myChatText15.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             15L -> {
                 viewModelKaKaoChat.myChatText16.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             16L -> {
                 viewModelKaKaoChat.myChatText17.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             17L -> {
                 viewModelKaKaoChat.myChatText18.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             18L -> {
                 viewModelKaKaoChat.myChatText19.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
+
+
             19L -> {
                 viewModelKaKaoChat.myChatText20.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                                args.profileImage, args.name, it.toMutableList()
+                                args.profileImage, args.name, it
                             )
+                        }
 
-                            buttonClick = false
+                        (isResumed) -> {
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                chatList.add(it.last())
+                                notifyItemInserted(chatList.lastIndex)
+                            }
                         }
 
                     }
+                    buttonClick = false
+                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 

@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+private var firstRun = true
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,6 +16,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        if (firstRun) {
+            firstRun = false
+            PrefCheckRun.getInstance(this@MainActivity).kaKaoTalkFirstRunCheck = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun2 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun3 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun4 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun5 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun6 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun7 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun8 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun9 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun10 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun11 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun12 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun13 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun14 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun15 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun16 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun17 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun18 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun19 = false
+            PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun20 = false
+        }
 //        fun RecyclerView.disableItemAnimator() {
 //            (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
 //        }
@@ -22,33 +51,6 @@ class MainActivity : AppCompatActivity() {
 //            // ...
 //        }
 
-    }
-
-    override fun onStop() {
-
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun2 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun3 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun4 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun5 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun6 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun7 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun8 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun9 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun10 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun11 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun12 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun13 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun14 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun15 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun16 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun17 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun18 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun19 = false
-        PrefCheckRun.getInstance(this).kakaoChatObserverControlFirstRun20 = false
-
-        PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
-        super.onStop()
     }
 
 }
