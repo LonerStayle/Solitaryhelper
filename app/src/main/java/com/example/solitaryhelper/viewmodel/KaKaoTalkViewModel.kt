@@ -47,9 +47,9 @@ class KaKaoTalkViewModel : ViewModel() {
 
 
         val oldTimeUp = 6000000L
-        val oldTimeDown = (Math.random() * (400000 - 50000) + 50000).toLong()
-        var newTimeUp = 300000L
-        val newTimeDown = (Math.random() * (60000 - 40000) + 40000).toLong()
+        val oldTimeDown = (Math.random() * (300000 - 50000) + 50000).toLong()
+        var newTimeUp = 2000000L
+        val newTimeDown = (Math.random() * (60000 - 30000) + 30000).toLong()
 
 
         for (i in dataList[0].textBoxList.indices) {

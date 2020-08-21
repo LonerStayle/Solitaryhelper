@@ -93,6 +93,9 @@
         <argument
             android:name="selectChatRoomCount"
             app:argType="integer" />
+        <argument
+            android:name="timeList"
+            app:argType="string[]" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCall"

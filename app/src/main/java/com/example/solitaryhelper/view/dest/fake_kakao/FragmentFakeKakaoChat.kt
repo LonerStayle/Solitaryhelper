@@ -6,10 +6,12 @@ import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
 import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
+import com.example.solitaryhelper.view.contents.Contents
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.viewmodel.SharedViewModel
 import kotlinx.coroutines.*
+import java.util.*
 
 var test0 = 0
 
@@ -32,6 +34,7 @@ class FragmentFakeKakaoChat :
 
     private var buttonClick = false
 
+    private val timeDisplay = Contents.timePattern.format(Date())
 
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
         setButtonClickListener()
@@ -40,7 +43,6 @@ class FragmentFakeKakaoChat :
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
         //화면전환 후에도 사용이 지속되기 위한 빠른 초기화
         viewModelShared
-
         setPositionCheckData()
         setAdapter()
         setBindValueInAdapter()
@@ -80,7 +82,8 @@ class FragmentFakeKakaoChat :
                 chatDataList.add(
                     KaKaoTalkChatData(
                         args.ListBox[i],
-                        false
+                        false,
+                        args.timeList[i]
                     )
                 )
             }
@@ -207,7 +210,8 @@ class FragmentFakeKakaoChat :
 
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
 
                         )
                     )
@@ -218,7 +222,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -227,7 +232,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -236,7 +242,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -245,7 +252,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -254,7 +262,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd6(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -263,7 +272,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd7(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -272,7 +282,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd8(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -281,7 +292,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd9(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -290,7 +302,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd10(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -299,7 +312,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd11(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -308,7 +322,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd12(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -317,7 +332,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd13(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -326,7 +342,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd14(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -335,7 +352,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd15(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -344,7 +362,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd16(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -353,7 +372,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd17(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -362,7 +382,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd18(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -371,7 +392,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd19(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -380,7 +402,8 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd20(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
-                            user = true
+                            user = true,
+                            timeList = timeDisplay
                         )
                     )
 
@@ -418,26 +441,40 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd(
                         KaKaoTalkChatData(
                             textList = "1-${test0++}",
-                            user = false
+                            user = false,
+                            timeList = timeDisplay
                         )
                     )
-                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(0,"1-${test0++}"))
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            0,
+                            "1-${test0++}",
+                            timeDisplay
+                        )
+                    )
 
                 }
                 1L -> {
 
-                    val text ="2-${test0++}"
-                        autoChatDoubleCheckRun[1] = true
+                    val text = "2-${test0++}"
+                    autoChatDoubleCheckRun[1] = true
                     delay(10000)
 
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
                             textList = text,
-                            user = false
+                            user = false,
+                            timeList = timeDisplay
                         )
                     )
-                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(1,text))
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            1,
+                            text,
+                            timeDisplay
+                        )
+                    )
                 }
                 2L -> {
                     autoChatDoubleCheckRun[2] = true
@@ -448,10 +485,17 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
                             textList = "3-${test0++}",
-                            user = false
+                            user = false,
+                            timeList = timeDisplay
                         )
                     )
-                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(2,"3-${test0++}"))
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            2,
+                            "3-${test0++}",
+                            timeDisplay
+                        )
+                    )
                 }
                 3L -> {
                     autoChatDoubleCheckRun[3] = true
@@ -462,10 +506,17 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
                             textList = "4-${test0++}",
-                            user = false
+                            user = false,
+                            timeList = timeDisplay
                         )
                     )
-                viewModelShared.sendToChanges(SharedViewModel.SendToChange(3,"4-${test0++}"))
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            3,
+                            "4-${test0++}",
+                            timeDisplay
+                        )
+                    )
                 }
                 4L -> {
 
@@ -475,10 +526,17 @@ class FragmentFakeKakaoChat :
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
                             textList = "5-${test0++}",
-                            user = false
+                            user = false,
+                            timeList = timeDisplay
                         )
                     )
-                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(4,"5-${test0++}"))
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            4,
+                            "5-${test0++}",
+                            timeDisplay
+                        )
+                    )
 
                 }
 

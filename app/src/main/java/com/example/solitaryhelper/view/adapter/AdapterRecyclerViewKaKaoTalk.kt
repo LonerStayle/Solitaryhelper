@@ -9,6 +9,7 @@ import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkTalkBinding
 import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk
+import com.example.solitaryhelper.view.utill.timeDisplay
 
 
 import kotlin.random.Random
@@ -46,7 +47,7 @@ class AdapterRecyclerViewKaKaoTalk(
             lastIndex = kaKaoDataList[position].itemLastText
             noticeScore = kaKaoDataList[position].chatNotification.toString()
             setVisible = kaKaoDataList[position].visibleSettingList
-            time = kaKaoDataList[position].itemTimeLast
+            time = kaKaoDataList[position].itemTimeLast?.let { timeDisplay(it) }
         }
 
         holder.itemView.setOnClickListener {

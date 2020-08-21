@@ -12,7 +12,8 @@ class SharedViewModel : ViewModel() {
     )
     data class SendToChange(
         val sendToPosition:Int,
-        val sendToLastText:String
+        val sendToLastText:String,
+        val sendToLastTime:String
     )
 
     val firstRunKaKaoTalkClass = MutableLiveData<MutableList<KaKaoTalkData>>()

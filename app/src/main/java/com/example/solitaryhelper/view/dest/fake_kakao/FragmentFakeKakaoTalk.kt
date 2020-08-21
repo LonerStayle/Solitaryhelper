@@ -26,10 +26,6 @@ class FragmentFakeKakaoTalk :
     companion object {
         var itemOrderList =
             arrayOf(0, 1, 2, 3, 4)
-//        var itemLastText: Array<String>? = null
-//        var chatNotification: Array<Int>? = null
-//        var messageArrivalTime: Array<String>? = null
-//        var visibleSettingList: MutableList<Int>? = null
     }
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
@@ -71,7 +67,8 @@ class FragmentFakeKakaoTalk :
                                     name = it[0].name,
                                     ListBox = it[0].textBoxList[it[0].id.toInt()],
                                     itemIdPosition = it[0].id,
-                                    selectChatRoomCount = roomSeletCount
+                                    selectChatRoomCount = roomSeletCount,
+                                    timeList = it[0].messageArrivalTime?.get(it[0].id.toInt())!!
                                 )
                             )
 
@@ -100,7 +97,7 @@ class FragmentFakeKakaoTalk :
             val chatNotification: Array<Int>?
             val lastTime: Array<String>?
             val visibleSettingList: Array<Int>
-            var timeList:Array<Array<String>>?
+            var timeList: Array<Array<String>>?
             itemLastText = Array(kaKaoNameList.size) { "" }
             chatNotification = Array(kaKaoNameList.size) { 0 }
             lastTime = Array(kaKaoNameList.size) { "" }
@@ -165,7 +162,7 @@ class FragmentFakeKakaoTalk :
             for (i in timeList.indices)
                 lastTime[i] = timeList[i].last().toString()
 
-            for(i in shuffleMode.indices) {
+            for (i in shuffleMode.indices) {
                 shuffleMode[i].messageArrivalTime = timeList
                 shuffleMode[i].itemTimeLast = lastTime[i]
 
@@ -210,8 +207,9 @@ class FragmentFakeKakaoTalk :
                         val index = itemOrderList.indexOf(changed.sendToPosition)
 
                         this.kaKaoDataList.add(0, this.kaKaoDataList[index])
-                        this.kaKaoDataList[0].itemLastText = changed.sendToLastText
 
+                        this.kaKaoDataList[0].itemLastText = changed.sendToLastText
+                        this.kaKaoDataList[0].itemTimeLast = changed.sendToLastTime
                         this.kaKaoDataList[0].chatNotification += 1
                         this.kaKaoDataList[0].visibleSettingList = View.VISIBLE
 

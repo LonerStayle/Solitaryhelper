@@ -9,6 +9,7 @@ import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
 import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
+import com.example.solitaryhelper.view.utill.timeDisplay
 
 
 class AdapterRecyclerViewKaKaoChat(
@@ -76,17 +77,18 @@ class AdapterRecyclerViewKaKaoChat(
 
             holder.myTextBinding?.apply {
                 text = chatList[holder.adapterPosition].textList
+
             }
 
             holder.yourTextviewBinding?.apply {
                 profile = kaKaoProfile
                 name = kaKaoName
                 text = chatList[holder.adapterPosition].textList
+                time = timeDisplay(chatList[holder.adapterPosition].timeList)
             }
 
-
-
     }
+
 }
 
 
