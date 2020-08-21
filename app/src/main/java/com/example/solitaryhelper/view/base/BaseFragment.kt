@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.solitaryhelper.localdb.SolitaryHelperDatabase
-import com.example.solitaryhelper.viewmodel.KaKaoChatViewModel
-import com.example.solitaryhelper.viewmodel.MainViewModel
+import com.example.solitaryhelper.viewmodel.*
 
 
-import com.example.solitaryhelper.viewmodel.SharedViewModel
-import com.example.solitaryhelper.viewmodel.SkillViewModel
 import com.example.solitaryhelper.viewmodel.factory.KaKaoChatViewModelFactory
 import com.example.solitaryhelper.viewmodel.factory.MainViewModelFactory
 
@@ -34,6 +32,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
     protected val viewModelShared by lazy {
         ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
     }
+    protected val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel>()
     protected val viewModelKaKaoChat by lazy{
         ViewModelProvider(requireActivity(),KaKaoChatViewModelFactory()).get(KaKaoChatViewModel::class.java)
     }
@@ -51,6 +50,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         setLiveDataInObserver()
         setCreateView()
         root
+
     }
 
     abstract fun VDB.setEventListener()

@@ -22,10 +22,9 @@ class FragmentFakeKakaoChat :
     }
 
     companion object {
-
         var positionCheckList: Array<SharedViewModel.ZeroPositionCheck>? = null
         var positionSendRunCheck: Boolean? = null
-        var autoChatDoubleCheckRun = Array<Boolean>(20) { false }
+        var autoChatDoubleCheckRun = Array(20) { false }
     }
 
 
@@ -209,8 +208,8 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true
-                        )
 
+                        )
                     )
 
 
@@ -222,6 +221,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 2L -> {
                     viewModelKaKaoChat.insertItemAdd3(
@@ -230,6 +230,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 3L -> {
                     viewModelKaKaoChat.insertItemAdd4(
@@ -238,6 +239,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 4L -> {
                     viewModelKaKaoChat.insertItemAdd5(
@@ -246,6 +248,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 5L -> {
                     viewModelKaKaoChat.insertItemAdd6(
@@ -254,6 +257,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 6L -> {
                     viewModelKaKaoChat.insertItemAdd7(
@@ -262,6 +266,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 7L -> {
                     viewModelKaKaoChat.insertItemAdd8(
@@ -270,6 +275,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 8L -> {
                     viewModelKaKaoChat.insertItemAdd9(
@@ -278,6 +284,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 9L -> {
                     viewModelKaKaoChat.insertItemAdd10(
@@ -286,6 +293,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 10L -> {
                     viewModelKaKaoChat.insertItemAdd11(
@@ -294,6 +302,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 11L -> {
                     viewModelKaKaoChat.insertItemAdd12(
@@ -302,6 +311,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 12L -> {
                     viewModelKaKaoChat.insertItemAdd13(
@@ -310,6 +320,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 13L -> {
                     viewModelKaKaoChat.insertItemAdd14(
@@ -318,6 +329,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 14L -> {
                     viewModelKaKaoChat.insertItemAdd15(
@@ -326,6 +338,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 15L -> {
                     viewModelKaKaoChat.insertItemAdd16(
@@ -334,6 +347,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 16L -> {
                     viewModelKaKaoChat.insertItemAdd17(
@@ -342,6 +356,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 17L -> {
                     viewModelKaKaoChat.insertItemAdd18(
@@ -350,6 +365,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 18L -> {
                     viewModelKaKaoChat.insertItemAdd19(
@@ -358,6 +374,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
                 19L -> {
                     viewModelKaKaoChat.insertItemAdd20(
@@ -366,6 +383,7 @@ class FragmentFakeKakaoChat :
                             user = true
                         )
                     )
+
                 }
 
             }
@@ -375,8 +393,8 @@ class FragmentFakeKakaoChat :
     private fun setRunAutoChatSetting() {
         fun setAutoChat() {
             CoroutineScope(Dispatchers.Main).launch {
-                if(args.selectChatRoomCount <= 5)
-                setCoroutine()
+                if (args.selectChatRoomCount <= 5)
+                    setCoroutine()
             }
         }
 
@@ -395,72 +413,72 @@ class FragmentFakeKakaoChat :
                 0L -> {
                     autoChatDoubleCheckRun[0] = true
                     delay(5000)
-                    viewModelShared.sendToPosition(0)
 
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd(
                         KaKaoTalkChatData(
-                            textList = "1-${++test0}",
+                            textList = "1-${test0++}",
                             user = false
                         )
                     )
-
+                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(0,"1-${test0++}"))
 
                 }
                 1L -> {
-                    autoChatDoubleCheckRun[1] = true
+
+                    val text ="2-${test0++}"
+                        autoChatDoubleCheckRun[1] = true
                     delay(10000)
-                    viewModelShared.sendToPosition(1)
 
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
-                            textList = "2-${++test0}",
+                            textList = text,
                             user = false
                         )
                     )
-
+                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(1,text))
                 }
                 2L -> {
                     autoChatDoubleCheckRun[2] = true
                     delay(15000)
-                    viewModelShared.sendToPosition(2)
+
 
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
-                            textList = "3-${++test0}",
+                            textList = "3-${test0++}",
                             user = false
                         )
                     )
-
+                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(2,"3-${test0++}"))
                 }
                 3L -> {
                     autoChatDoubleCheckRun[3] = true
                     delay(20000)
-                    viewModelShared.sendToPosition(3)
+
 
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
-                            textList = "4-${++test0}",
+                            textList = "4-${test0++}",
                             user = false
                         )
                     )
-
+                viewModelShared.sendToChanges(SharedViewModel.SendToChange(3,"4-${test0++}"))
                 }
                 4L -> {
+
                     autoChatDoubleCheckRun[4] = true
                     delay(25000)
-                    viewModelShared.sendToPosition(4)
-
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
-                            textList = "5-${++test0}",
+                            textList = "5-${test0++}",
                             user = false
                         )
                     )
+                    viewModelShared.sendToChanges(SharedViewModel.SendToChange(4,"5-${test0++}"))
 
                 }
 
@@ -487,6 +505,8 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
@@ -510,12 +530,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -533,12 +555,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -556,12 +580,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -579,12 +605,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -602,12 +630,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -625,12 +655,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -648,12 +680,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -671,12 +705,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -694,12 +730,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -717,12 +755,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -740,12 +780,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -763,12 +805,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -786,12 +830,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -809,12 +855,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -832,12 +880,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -855,12 +905,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -878,12 +930,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -901,12 +955,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 
@@ -924,12 +980,14 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+                                if (buttonClick) {
+                                }
                             }
                         }
 
                     }
                     buttonClick = false
-                       recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                 })
             }
 

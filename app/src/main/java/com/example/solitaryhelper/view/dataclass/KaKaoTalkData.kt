@@ -6,7 +6,12 @@ data class KaKaoTalkData(
     val id:Long,
     val name:String,
     val image:String,
-    val textBoxList:Array<Array<String>>
+    val textBoxList:Array<Array<String>>,
+    var itemLastText: String,
+    var chatNotification: Int,
+    var messageArrivalTime: Array<Array<String>>?,
+    var visibleSettingList: Int?,
+    var itemTimeLast:String?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

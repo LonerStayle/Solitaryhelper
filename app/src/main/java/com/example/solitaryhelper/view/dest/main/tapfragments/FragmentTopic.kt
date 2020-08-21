@@ -5,6 +5,7 @@ import com.example.solitaryhelper.view.base.BaseFragment
 
 class FragmentTopic:BaseFragment<FragmentTopicBinding>(R.layout.fragment_topic) {
     override fun FragmentTopicBinding.setEventListener() {
+        requireActivity().supportFragmentManager
 
     }
 

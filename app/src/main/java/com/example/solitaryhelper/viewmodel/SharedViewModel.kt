@@ -10,20 +10,23 @@ class SharedViewModel : ViewModel() {
         val currentIdPosition: Int,
         val positionZeroCheck:Boolean
     )
+    data class SendToChange(
+        val sendToPosition:Int,
+        val sendToLastText:String
+    )
 
     val firstRunKaKaoTalkClass = MutableLiveData<MutableList<KaKaoTalkData>>()
 
-    val sendToPosition = MutableLiveData<Int>()
+    val sendToChanges = MutableLiveData<SendToChange>()
 
 
     fun firstRunKaKaoTalkSetting(test: MutableList<KaKaoTalkData>) {
         firstRunKaKaoTalkClass.postValue(test)
     }
 
-    fun sendToPosition(int:Int){
-        sendToPosition.postValue(int)
+    fun sendToChanges(sendToChange: SendToChange){
+        sendToChanges.postValue(sendToChange)
     }
-
 
 
 }

@@ -1,5 +1,8 @@
 package com.example.solitaryhelper.view.contents
 
+import android.annotation.SuppressLint
+import java.text.SimpleDateFormat
+
 object Contents {
     const val MAIN_FIRST_ITEM = 0
     const val MAIN_SECOND_ITEM = 1
@@ -7,6 +10,9 @@ object Contents {
     const val MAIN_FORCE_ITEM = 3
     const val MAIN_FIFTH_ITEM = 4
     const val MAIN_TAB_LAYOUT_TOTAL_ICON_SIZE = 5
+
+    @SuppressLint("SimpleDateFormat")
+    val timePattern =SimpleDateFormat("aa hh:mm")
 
     const val IMAGE_URL_DEFAULT_FILE_PATH = "android.resource://com.example.solitaryhelper/"
 

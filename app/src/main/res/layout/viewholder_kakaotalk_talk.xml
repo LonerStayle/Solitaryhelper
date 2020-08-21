@@ -21,6 +21,9 @@
         <variable
             name="setVisible"
             type="Integer" />
+        <variable
+            name="time"
+            type="String" />
 
     </data>
 
@@ -90,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="오후 12:00"
+            android:text="@{time}"
             android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView_name"
             app:layout_constraintEnd_toEndOf="parent"
