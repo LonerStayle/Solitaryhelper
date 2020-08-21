@@ -91,7 +91,7 @@
             android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk"
             app:destination="@id/fragmentFakeKakaoTalk" />
         <argument
-            android:name="positionInChatList"
+            android:name="selectChatRoomCount"
             app:argType="integer" />
     </fragment>
     <fragment

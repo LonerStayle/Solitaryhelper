@@ -16,6 +16,7 @@ import java.util.Collections.swap
 class FragmentFakeKakaoTalk :
     BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
     private var noticeitemPositionChange = false
+    private var roomSeletCount = 0
 
     companion object {
         var itemOrderList = arrayOf(0, 1, 2, 3, 4)
@@ -36,7 +37,6 @@ class FragmentFakeKakaoTalk :
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
 
-
                 if (!noticeitemPositionChange) {
 
 
@@ -45,7 +45,7 @@ class FragmentFakeKakaoTalk :
                         { position ->
                             (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
                                 swap(this.kaKaoDataList, 0, position)
-
+                                ++roomSeletCount
                             }
 
                             findNavController().navigate(
@@ -53,8 +53,8 @@ class FragmentFakeKakaoTalk :
                                     profileImage = it[0].image,
                                     name = it[0].name,
                                     ListBox = it[0].textBoxList[it[0].id.toInt()],
-                                    positionInChatList = position,
-                                    itemIdPosition = it[0].id
+                                    itemIdPosition = it[0].id,
+                                    selectChatRoomCount = roomSeletCount
                                 )
                             )
 
@@ -72,10 +72,10 @@ class FragmentFakeKakaoTalk :
     }
 
     private fun setSendToAdapterToData() {
+
         fun setCreateAnItemToSendToTheAdapter(): MutableList<KaKaoTalkData> {
             val kaKaoNameList by lazy { resources.getStringArray(R.array.sample_list1) }
             val kaKaoImageProfileList: Array<String>?
-            val kakaoDataList = mutableListOf<KaKaoTalkData>()
             val kaKaoTextList = arrayOf(
 
                 resources.getStringArray(R.array.sample_list1),
@@ -85,6 +85,8 @@ class FragmentFakeKakaoTalk :
                 resources.getStringArray(R.array.sample_list5)
             )
 
+
+            val kakaoDataList = mutableListOf<KaKaoTalkData>()
             kaKaoImageProfileList = Array(kaKaoNameList.size) { "" }
             for (i in kaKaoImageProfileList.indices) {
                 kaKaoImageProfileList[i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
@@ -101,9 +103,15 @@ class FragmentFakeKakaoTalk :
                         kaKaoTextList
                     )
                 )
-                PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
             }
-            return kakaoDataList
+
+           val shuffleMode =  kakaoDataList.shuffled()
+            shuffleMode.sortedBy{it.id}
+            PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
+
+
+
+            return shuffleMode.toMutableList()
         }
         if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck)
             viewModelShared.firstRunKaKaoTalkSetting(setCreateAnItemToSendToTheAdapter())
@@ -138,7 +146,7 @@ class FragmentFakeKakaoTalk :
                         this.kaKaoDataList.add(0, this.kaKaoDataList[index])
                         this.kaKaoDataList.removeAt(index + 1)
 
-                       notifyItemRangeChanged(0,4)
+                        notifyItemRangeChanged(0, 5)
 
                         for (i in FragmentFakeKakaoChat.positionCheckList!!.indices) {
                             FragmentFakeKakaoChat.positionCheckList!![i] =
@@ -165,7 +173,6 @@ class FragmentFakeKakaoTalk :
 
             })
     }
-
 
 
 }

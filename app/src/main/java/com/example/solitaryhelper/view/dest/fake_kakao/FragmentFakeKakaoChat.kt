@@ -377,6 +377,7 @@ class FragmentFakeKakaoChat :
     private fun setRunAutoChatSetting() {
         fun setAutoChat() {
             CoroutineScope(Dispatchers.Main).launch {
+                if(args.selectChatRoomCount <= 5)
                 setCoroutine()
             }
         }
