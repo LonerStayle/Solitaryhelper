@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
-import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
+import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
 
 
 class AdapterRecyclerViewKaKaoChat(

@@ -4,13 +4,12 @@ import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoTalkBinding
-import com.example.solitaryhelper.localdb.data.KaKaoTalkData
+import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.viewmodel.SharedViewModel
-import kotlinx.android.synthetic.main.fragment_fake_kakao_chat.*
 import java.util.Collections.swap
 
 class FragmentFakeKakaoTalk :

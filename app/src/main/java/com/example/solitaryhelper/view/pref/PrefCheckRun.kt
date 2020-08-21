@@ -7,11 +7,9 @@ class PrefCheckRun private constructor (val context: Context){
 
     enum class Key {
         APP_GUIDE_FIRST_RUN,
-        MAIN_CREATE_ID_CHECK,
+        ID_EMPTY_CHECK,
 
         KAKAO_TALK_FIRST_RUN_CHECK,
-        LIST_POSITION_KAKAO_TALK,
-        ID_POSITION_CHAT_CHECK,
 
         KAKAO_CHAT_OBSERVER_CONTROL_FIRST_RUN,
         KAKAO_CHAT_OBSERVER_CONTROL_FIRST_RUN2,
@@ -53,10 +51,10 @@ class PrefCheckRun private constructor (val context: Context){
             value).apply()
     }
 
-    var mainCreateId:Boolean
-    get() = pref.getBoolean(Key.MAIN_CREATE_ID_CHECK.name,false)
+    var idEmptyCheck:Boolean
+    get() = pref.getBoolean(Key.ID_EMPTY_CHECK.name,false)
     set(value) {
-        pref.edit().putBoolean(Key.MAIN_CREATE_ID_CHECK.name,
+        pref.edit().putBoolean(Key.ID_EMPTY_CHECK.name,
             value).apply()
     }
 

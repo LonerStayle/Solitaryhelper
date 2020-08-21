@@ -10,13 +10,15 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
+import com.example.solitaryhelper.localdb.SolitaryHelperDatabase
 import com.example.solitaryhelper.viewmodel.KaKaoChatViewModel
+import com.example.solitaryhelper.viewmodel.MainViewModel
 
 
 import com.example.solitaryhelper.viewmodel.SharedViewModel
 import com.example.solitaryhelper.viewmodel.SkillViewModel
 import com.example.solitaryhelper.viewmodel.factory.KaKaoChatViewModelFactory
+import com.example.solitaryhelper.viewmodel.factory.MainViewModelFactory
 
 import com.example.solitaryhelper.viewmodel.factory.SkillViewModelFactory
 
@@ -24,6 +26,11 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
 
     protected lateinit var binding: VDB
     protected val viewModelSkill by viewModels<SkillViewModel> { SkillViewModelFactory() }
+    protected val viewModelMain by viewModels<MainViewModel> {
+        val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
+        val factory = MainViewModelFactory(dataBase.dataSource)
+        factory
+    }
     protected val viewModelShared by lazy {
         ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
     }

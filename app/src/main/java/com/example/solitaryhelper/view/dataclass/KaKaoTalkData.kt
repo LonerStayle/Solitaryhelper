@@ -1,7 +1,5 @@
-package com.example.solitaryhelper.localdb.data
+package com.example.solitaryhelper.view.dataclass
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 //
 data class KaKaoTalkData(
 

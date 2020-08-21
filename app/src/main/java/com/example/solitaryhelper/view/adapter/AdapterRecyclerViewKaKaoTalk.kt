@@ -7,8 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkTalkBinding
-import com.example.solitaryhelper.localdb.data.KaKaoTalkData
-import com.example.solitaryhelper.viewmodel.SharedViewModel
+import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 
 
 import kotlin.random.Random

@@ -2,7 +2,7 @@ package com.example.solitaryhelper.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
+import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
 
 
 class KaKaoChatViewModel() : ViewModel() {

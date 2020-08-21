@@ -4,6 +4,7 @@ package com.example.solitaryhelper.view.dest.main
 import android.text.TextUtils
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentMainBinding
@@ -12,7 +13,6 @@ import com.example.solitaryhelper.view.adapter.AdapterViewPagerMain
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-import com.example.solitaryhelper.view.pref.PrefUserProfile
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.apache.commons.lang3.StringUtils
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
@@ -51,15 +52,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             binding.navigationViewMain, false
         )
     }
+
     private val dialog by lazy { DialogCustom(requireContext()) }
 
 
     override fun FragmentMainBinding.setCreateView() {
 
-
         setNavigationViewAndHeaderViewSetting()
-        setIdCreate()
         setViewPagerAndTabLayoutSetting()
+        setIdCreate()
     }
 
     override fun FragmentMainBinding.setEventListener() {
@@ -72,11 +73,28 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setButtonMenuClickListener()
         setNavigationViewClickListener()
         setbackButtonClickListener()
-        setButtonIdChangeClickListener()
+
+    }
+
+    override fun FragmentMainBinding.setLiveDataInObserver() {
+        profileIdSetting()
+    }
+
+    private fun profileIdSetting() {
+        viewModelMain.userProfile.observe(viewLifecycleOwner, Observer {
+            if (it == null) {
+                PrefCheckRun.getInstance(requireContext()).idEmptyCheck = false
+                return@Observer
+            }
+            else {
+                naviHeaderBinding.textViewId.text = it.userId
+                PrefCheckRun.getInstance(requireContext()).idEmptyCheck= true
+            }
+        })
     }
 
     private fun FragmentMainBinding.setNavigationViewAndHeaderViewSetting() {
-        naviHeaderBinding.textViewId.text = PrefUserProfile.getInstance(requireContext()).userId
+
         navigationViewMain.addHeaderView(naviHeaderBinding.root)
     }
 
@@ -189,33 +207,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
     }
 
-    private fun setButtonIdChangeClickListener() {
-
-
-        naviHeaderBinding.buttonIdChange.setOnClickListener {
-            dialog.dialogMainIdCreate()
-            dialog.dialogCreate.show()
-
-            dialog.dialogMainIdCreateBinding.buttonCreateId.setOnClickListener {
-                val textId = dialog.dialogMainIdCreateBinding.editTextCreateId.text
-                if (TextUtils.isEmpty(textId))
-                    context?.toastDebugTest("닉네임을 설정해주세요.")
-                else {
-                    naviHeaderBinding.textViewId.text = textId.toString()
-                    PrefUserProfile.getInstance(requireContext()).userId = textId.toString()
-                    dialog.dialogCreate.dismiss()
-                }
-            }
-        }
-    }
 
     private fun setbackButtonClickListener() {
         binding.apply {
             requireActivity().onBackPressedDispatcher.addCallback(this@MainFragment) {
                 if (drawerLayoutMain.isOpen)
                     drawerLayoutMain.closeDrawers()
-
-               else{
+                else {
                     requireActivity().finish()
                 }
 
@@ -224,24 +222,39 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun setIdCreate() {
+        val textId = dialog.dialogMainIdCreateBinding.editTextCreateId.text
+        fun logicInMakeId() {
+            if (TextUtils.isEmpty(textId))
+                context?.toastDebugTest("닉네임을 설정해주세요.")
+            else {
+                viewModelMain.insertUserProfileId(textId.toString())
+                dialog.dialogCreate.dismiss()
+            }
+        }
 
-        if (!PrefCheckRun.getInstance(requireContext()).mainCreateId) {
+        setButtonIdChangeClickListener { logicInMakeId() }
+
+        if (!PrefCheckRun.getInstance(requireContext()).idEmptyCheck) {
 
             dialog.dialogMainIdCreate()
-            val textId = dialog.dialogMainIdCreateBinding.editTextCreateId.text
 
             dialog.dialogMainIdCreateBinding.buttonCreateId.setOnClickListener {
+                logicInMakeId()
 
-                if (TextUtils.isEmpty(textId)) {
-                    context?.toastDebugTest("닉네임을 설정해주세요.")
-                    return@setOnClickListener
-                }
-                naviHeaderBinding.textViewId.text = textId.toString()
-                PrefUserProfile.getInstance(requireContext()).userId = textId.toString()
-                dialog.dialogCreate.dismiss()
-                PrefCheckRun.getInstance(requireContext()).mainCreateId = true
             }
             dialog.dialogCreate.show()
+        }
+    }
+
+    private fun setButtonIdChangeClickListener(logic: () -> Unit) {
+
+        naviHeaderBinding.buttonIdChange.setOnClickListener {
+            dialog.dialogMainIdCreate()
+            dialog.dialogCreate.show()
+
+            dialog.dialogMainIdCreateBinding.buttonCreateId.setOnClickListener {
+                logic()
+            }
         }
     }
 }

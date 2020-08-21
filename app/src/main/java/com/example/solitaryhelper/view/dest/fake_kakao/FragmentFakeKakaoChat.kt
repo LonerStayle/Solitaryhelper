@@ -3,14 +3,12 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
-import com.example.solitaryhelper.localdb.data.KaKaoTalkChatData
+import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
-import com.example.solitaryhelper.view.contents.Contents
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.viewmodel.SharedViewModel
-import kotlinx.android.synthetic.main.fragment_fake_kakao_chat.*
 import kotlinx.coroutines.*
 
 var test0 = 0
