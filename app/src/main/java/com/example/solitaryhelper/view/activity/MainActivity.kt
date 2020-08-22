@@ -9,15 +9,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private var firstRun = true
+var autoChatRun = true
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        autoChatRun = true
 
         if (firstRun) {
             firstRun = false
+
             PrefCheckRun.getInstance(this@MainActivity).kaKaoTalkFirstRunCheck = false
             PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun = false
             PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun2 = false

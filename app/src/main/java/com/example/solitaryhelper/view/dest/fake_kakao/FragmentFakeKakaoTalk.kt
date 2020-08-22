@@ -11,10 +11,7 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-import com.example.solitaryhelper.viewmodel.SharedViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 import java.util.Collections.swap
 import kotlin.random.Random
 
@@ -194,9 +191,8 @@ class FragmentFakeKakaoTalk :
 
                 (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
-                    if (!FragmentFakeKakaoChat.positionCheckList!![changed.sendToPosition].positionZeroCheck &&
-                        FragmentFakeKakaoChat.positionSendRunCheck!!
-                    ) {
+                    if (FragmentFakeKakaoChat.positionSendRunCheck!!) {
+
                         for (i in itemOrderList.indices) {
                             itemOrderList[i] = kaKaoDataList[i].id.toInt()
                         }
@@ -214,19 +210,6 @@ class FragmentFakeKakaoTalk :
                         this.kaKaoDataList[0].visibleSettingList = View.VISIBLE
 
                         this.kaKaoDataList.removeAt(index + 1)
-
-                        CoroutineScope(Dispatchers.IO).launch {
-                            for (i in FragmentFakeKakaoChat.positionCheckList!!.indices) {
-                                FragmentFakeKakaoChat.positionCheckList!![i] =
-                                    SharedViewModel.ZeroPositionCheck(i, false)
-                                if (i == index)
-                                    FragmentFakeKakaoChat.positionCheckList?.set(
-                                        index,
-                                        SharedViewModel.ZeroPositionCheck(index, true)
-                                    )
-                            }
-
-                        }
 
                         notifyItemRangeChanged(0, 5)
 

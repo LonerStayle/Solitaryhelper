@@ -1,8 +1,12 @@
 package com.example.solitaryhelper.view.dest.fake_kakao
 
+import android.app.NotificationManager
+import android.content.Context
+import android.media.SoundPool
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
+import com.example.solitaryhelper.view.activity.autoChatRun
 import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
@@ -22,9 +26,15 @@ class FragmentFakeKakaoChat :
             requireArguments()
         )
     }
+    private val soundPool by lazy {
+        SoundPool.Builder()
+            .build()
+    }
 
     companion object {
-        var positionCheckList: Array<SharedViewModel.ZeroPositionCheck>? = null
+        const val NOTIFICATION_ID = 1001
+        const val NOTIFICATION_ID_2 = 1002
+
         var positionSendRunCheck: Boolean? = null
         var autoChatDoubleCheckRun = Array(20) { false }
     }
@@ -36,14 +46,17 @@ class FragmentFakeKakaoChat :
 
     private val timeDisplay = Contents.timePattern.format(Date())
 
+    private val soundId by lazy { soundPool.load(requireContext(), R.raw.kakaotalkpool, 1) }
+
+
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
         setButtonClickListener()
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
         //화면전환 후에도 사용이 지속되기 위한 빠른 초기화
-        viewModelShared
-        setPositionCheckData()
+        viewModelShared; soundPool; soundId
+
         setAdapter()
         setBindValueInAdapter()
         setRunAutoChatSetting()
@@ -54,27 +67,10 @@ class FragmentFakeKakaoChat :
     }
 
 
-    private fun setPositionCheckData() {
-        if (positionCheckList?.size == 0) {
-            for (i in 0..19) {
-                positionCheckList!![i] = SharedViewModel.ZeroPositionCheck(
-                    i, false
-                )
-
-                if (i == 0)
-                    positionCheckList!![0] = SharedViewModel.ZeroPositionCheck(
-                        0, true
-                    )
-            }
-        } else
-            return
-    }
-
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 
 
         if (!operationByPosition()) {
-            positionCheckList = Array(20) { SharedViewModel.ZeroPositionCheck(0, false) }
 
 
             for (i in args.ListBox.indices) {
@@ -229,6 +225,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 2L -> {
+
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -239,6 +236,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 3L -> {
+
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -249,6 +247,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 4L -> {
+
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -259,6 +258,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 5L -> {
+
                     viewModelKaKaoChat.insertItemAdd6(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -269,6 +269,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 6L -> {
+
                     viewModelKaKaoChat.insertItemAdd7(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -279,6 +280,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 7L -> {
+
                     viewModelKaKaoChat.insertItemAdd8(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -289,6 +291,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 8L -> {
+
                     viewModelKaKaoChat.insertItemAdd9(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -299,6 +302,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 9L -> {
+
                     viewModelKaKaoChat.insertItemAdd10(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -309,6 +313,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 10L -> {
+
                     viewModelKaKaoChat.insertItemAdd11(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -319,6 +324,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 11L -> {
+
                     viewModelKaKaoChat.insertItemAdd12(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -329,6 +335,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 12L -> {
+
                     viewModelKaKaoChat.insertItemAdd13(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -339,6 +346,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 13L -> {
+
                     viewModelKaKaoChat.insertItemAdd14(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -349,6 +357,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 14L -> {
+
                     viewModelKaKaoChat.insertItemAdd15(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -359,6 +368,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 15L -> {
+
                     viewModelKaKaoChat.insertItemAdd16(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -369,6 +379,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 16L -> {
+
                     viewModelKaKaoChat.insertItemAdd17(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -379,6 +390,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 17L -> {
+
                     viewModelKaKaoChat.insertItemAdd18(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -389,6 +401,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 18L -> {
+
                     viewModelKaKaoChat.insertItemAdd19(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -399,6 +412,7 @@ class FragmentFakeKakaoChat :
 
                 }
                 19L -> {
+
                     viewModelKaKaoChat.insertItemAdd20(
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
@@ -414,6 +428,7 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setRunAutoChatSetting() {
+
         fun setAutoChat() {
             CoroutineScope(Dispatchers.Main).launch {
                 if (args.selectChatRoomCount <= 5)
@@ -428,15 +443,28 @@ class FragmentFakeKakaoChat :
         }
     }
 
+
     private suspend fun setCoroutine() {
-        while (true) {
+
+
+        val manager =
+            requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        viewModelKaKaoChat.clearExistingNotifications(0, manager = manager)
+// 백그라운드에서 살 수 있도록 초기화
+        val context = requireContext()
+        val activtyContext = requireActivity().baseContext
+
+        while (autoChatRun) {
 
             when (args.itemIdPosition) {
 
                 0L -> {
+
                     autoChatDoubleCheckRun[0] = true
                     delay(5000)
-
+                    if(!autoChatRun)
+                        return
+                   
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd(
                         KaKaoTalkChatData(
@@ -452,6 +480,18 @@ class FragmentFakeKakaoChat :
                             timeDisplay
                         )
                     )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                        "1",
+                            "1-${test0++}",
+                            activtyContext
+                        )
+                    }
 
                 }
                 1L -> {
@@ -459,6 +499,8 @@ class FragmentFakeKakaoChat :
                     val text = "2-${test0++}"
                     autoChatDoubleCheckRun[1] = true
                     delay(10000)
+                    if(!autoChatRun)
+                        return
 
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd2(
@@ -475,10 +517,22 @@ class FragmentFakeKakaoChat :
                             timeDisplay
                         )
                     )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                        "2",
+                            "2-${test0++}",
+                            activtyContext)
+                    }
                 }
                 2L -> {
                     autoChatDoubleCheckRun[2] = true
                     delay(15000)
+                    if(!autoChatRun)
+                        return
 
 
                     positionSendRunCheck = true
@@ -496,10 +550,22 @@ class FragmentFakeKakaoChat :
                             timeDisplay
                         )
                     )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                        "3",
+                            "3-${test0++}",
+                            activtyContext)
+                    }
                 }
                 3L -> {
                     autoChatDoubleCheckRun[3] = true
                     delay(20000)
+                    if(!autoChatRun)
+                        return
 
 
                     positionSendRunCheck = true
@@ -517,11 +583,23 @@ class FragmentFakeKakaoChat :
                             timeDisplay
                         )
                     )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "4",
+                            "4-${test0++}",
+                            activtyContext)
+                    }
                 }
                 4L -> {
 
                     autoChatDoubleCheckRun[4] = true
                     delay(25000)
+                    if(!autoChatRun)
+                        return
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
@@ -536,8 +614,18 @@ class FragmentFakeKakaoChat :
                             "5-${test0++}",
                             timeDisplay
                         )
-                    )
 
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "5",
+                            "5-${test0++}",
+                            activtyContext)
+                    }
                 }
 
             }
@@ -563,6 +651,7 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 chatList.add(it.last())
                                 notifyItemInserted(chatList.lastIndex)
+
                                 if (buttonClick) {
                                 }
                             }

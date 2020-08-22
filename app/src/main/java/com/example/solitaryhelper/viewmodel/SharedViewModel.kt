@@ -6,10 +6,7 @@ import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 
 
 class SharedViewModel : ViewModel() {
-    data class ZeroPositionCheck(
-        val currentIdPosition: Int,
-        val positionZeroCheck:Boolean
-    )
+
     data class SendToChange(
         val sendToPosition:Int,
         val sendToLastText:String,
@@ -19,7 +16,6 @@ class SharedViewModel : ViewModel() {
     val firstRunKaKaoTalkClass = MutableLiveData<MutableList<KaKaoTalkData>>()
 
     val sendToChanges = MutableLiveData<SendToChange>()
-
 
     fun firstRunKaKaoTalkSetting(test: MutableList<KaKaoTalkData>) {
         firstRunKaKaoTalkClass.postValue(test)

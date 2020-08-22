@@ -20,6 +20,14 @@
         <variable
             name="time"
             type="String" />
+
+        <variable
+            name="profileVisible"
+            type="Integer" />
+
+        <variable
+            name="timeVisible"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +59,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    bind:imageUrl="@{profile}" />
+                    bind:imageUrl="@{profile}"
+                    android:visibility="@{profileVisible}"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -68,7 +77,8 @@
             android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
-            tools:text="loner" />
+            tools:text="loner"
+            android:visibility="@{profileVisible}"/>
 
 
         <TextView
@@ -88,6 +98,7 @@
             android:layout_marginTop="9dp"
             android:layout_marginEnd="16dp"
             android:text="@{time}"
+            android:visibility="@{timeVisible}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

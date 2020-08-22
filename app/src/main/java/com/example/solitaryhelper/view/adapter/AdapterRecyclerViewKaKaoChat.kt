@@ -1,10 +1,14 @@
 package com.example.solitaryhelper.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+
 import androidx.recyclerview.widget.RecyclerView
+
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
@@ -24,6 +28,9 @@ class AdapterRecyclerViewKaKaoChat(
         const val YOUR_TEXT_SEND = 2
     }
 
+    private var profileVisibleList: Array<Int>? = null
+    private var timeVisibleList: Array<Int>? = null
+
     inner class ViewHolder : RecyclerView.ViewHolder {
         var myTextBinding: ViewholderKakaotalkChatMyTextviewBinding? = null
         var yourTextviewBinding: ViewholderKakaotalkChatYourTextviewBinding? = null
@@ -35,12 +42,42 @@ class AdapterRecyclerViewKaKaoChat(
         constructor(binding: ViewholderKakaotalkChatYourTextviewBinding) : super(binding.root) {
             yourTextviewBinding = binding
         }
+
+        fun setProfileVisible() {
+            profileVisibleList = Array(chatList.size) { 0 }
+       for (i in 1 until profileVisibleList!!.size) {
+           if (adapterPosition != 0) {
+               if (chatList[adapterPosition].user != chatList[adapterPosition - 1].user)
+                   profileVisibleList!![i]= View.VISIBLE
+               else
+                   profileVisibleList!![i]= View.INVISIBLE
+           }
+       }
+
+
+        }
+
+        fun setTimeVisible() {
+            timeVisibleList = Array(chatList.size) { 0 }
+
+            for (i in 1 until timeVisibleList!!.size)
+
+                    if ( (chatList[i].timeList == chatList[i - 1].timeList)
+                       && chatList[i].user == chatList[i - 1].user)
+                    {
+                        timeVisibleList!![i - 1] = View.INVISIBLE
+                        timeVisibleList!![i] = View.VISIBLE
+                    }
+                    else
+                        timeVisibleList!![i] = View.VISIBLE
+
+        }
     }
 
 
     override fun getItemViewType(position: Int): Int {
 
-        return if (chatList[position].user == true ) {
+        return if (chatList[position].user == true) {
             MY_TEXT_SEND
         } else {
             YOUR_TEXT_SEND
@@ -53,17 +90,17 @@ class AdapterRecyclerViewKaKaoChat(
         val binding: ViewDataBinding
 
 
-         return if (viewType == MY_TEXT_SEND) {
+        return if (viewType == MY_TEXT_SEND) {
             binding = DataBindingUtil.inflate<ViewholderKakaotalkChatMyTextviewBinding>(
                 inflater, R.layout.viewholder_kakaotalk_chat_my_textview, parent, false
             )
             ViewHolder(binding)
-        }else{
+        } else {
 
             binding = DataBindingUtil.inflate<ViewholderKakaotalkChatYourTextviewBinding>(
                 inflater, R.layout.viewholder_kakaotalk_chat_your_textview, parent, false
             )
-             ViewHolder(binding)
+            ViewHolder(binding)
         }
 
     }
@@ -74,21 +111,29 @@ class AdapterRecyclerViewKaKaoChat(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        holder.setProfileVisible()
+        holder.setTimeVisible()
 
-            holder.myTextBinding?.apply {
-                text = chatList[holder.adapterPosition].textList
+        holder.myTextBinding?.apply {
+            text = chatList[holder.adapterPosition].textList
+            time = timeDisplay(chatList[holder.adapterPosition].timeList)
+        }
 
-            }
+        holder.yourTextviewBinding?.apply {
+            profile = kaKaoProfile
+            name = kaKaoName
+            text = chatList[holder.adapterPosition].textList
+            time = timeDisplay(chatList[holder.adapterPosition].timeList)
+            profileVisible = profileVisibleList!![holder.adapterPosition]
+            timeVisible = timeVisibleList!![holder.adapterPosition]
 
-            holder.yourTextviewBinding?.apply {
-                profile = kaKaoProfile
-                name = kaKaoName
-                text = chatList[holder.adapterPosition].textList
-                time = timeDisplay(chatList[holder.adapterPosition].timeList)
-            }
+        }
+
 
     }
 
 }
+
+
 
 

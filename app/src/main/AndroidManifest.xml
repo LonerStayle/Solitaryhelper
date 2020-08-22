@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.MainActivity">
-
+        </activity>
+        <activity android:name=".view.activity.AutoChatRunCheckActiviy">
         </activity>
     </application>
 

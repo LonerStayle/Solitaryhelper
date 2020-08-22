@@ -1,16 +1,27 @@
 package com.example.solitaryhelper.view.base
 
+import android.app.*
+import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Icon
+import android.os.Build
+import android.os.Build.VERSION_CODES.Q
+
 import android.os.Bundle
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDeepLinkBuilder
+import com.example.solitaryhelper.R
 import com.example.solitaryhelper.localdb.SolitaryHelperDatabase
 import com.example.solitaryhelper.viewmodel.*
 
@@ -19,6 +30,7 @@ import com.example.solitaryhelper.viewmodel.factory.KaKaoChatViewModelFactory
 import com.example.solitaryhelper.viewmodel.factory.MainViewModelFactory
 
 import com.example.solitaryhelper.viewmodel.factory.SkillViewModelFactory
+
 
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
 
@@ -33,9 +45,15 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
     }
     protected val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel>()
-    protected val viewModelKaKaoChat by lazy{
-        ViewModelProvider(requireActivity(),KaKaoChatViewModelFactory()).get(KaKaoChatViewModel::class.java)
+    protected val viewModelKaKaoChat by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            KaKaoChatViewModelFactory()
+        ).get(KaKaoChatViewModel::class.java)
     }
+
+
+
 
 
     override fun onCreateView(
@@ -46,9 +64,11 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         lifecycleOwner = this@BaseFragment
         binding = this
 
+
         setEventListener()
         setLiveDataInObserver()
         setCreateView()
+
         root
 
     }
@@ -56,4 +76,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
     abstract fun VDB.setEventListener()
     abstract fun VDB.setCreateView()
     open fun VDB.setLiveDataInObserver() = Unit
+
+
 }
+
