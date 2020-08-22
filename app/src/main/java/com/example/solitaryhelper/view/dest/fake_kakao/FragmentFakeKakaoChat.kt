@@ -63,9 +63,16 @@ class FragmentFakeKakaoChat :
     }
 
     override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
+        setTotalScore()
         setObserver()
+
     }
 
+    private fun FragmentFakeKakaoChatBinding.setTotalScore(){
+        viewModelShared.kaKaoChatTotalNotificationScore.observe(viewLifecycleOwner, Observer {
+            textViewTotalChatScore.text = it.toString()
+        })
+    }
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 

@@ -50,16 +50,20 @@ class FragmentFakeKakaoTalk :
                         AdapterRecyclerViewKaKaoTalk(it)
                         { position ->
 
-                            (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
+                            (binding.recyclerViewKaKaoChatList.adapter as
+                                    AdapterRecyclerViewKaKaoTalk).apply {
                                 swap(this.kaKaoDataList, 0, position)
                                 ++roomSeletCount
 
                                 this.kaKaoDataList[0].visibleSettingList = View.GONE
                                 this.kaKaoDataList[0].chatNotification = 0
+                                viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
+                                { list -> list.chatNotification })
                             }
 
                             findNavController().navigate(
-                                FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
+                                FragmentFakeKakaoTalkDirections.
+                                actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
                                     profileImage = it[0].image,
                                     name = it[0].name,
                                     ListBox = it[0].textBoxList[it[0].id.toInt()],
@@ -71,6 +75,7 @@ class FragmentFakeKakaoTalk :
 
                             (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
                                 swap(this.kaKaoDataList, 0, position)
+
                             }
                         }
 

@@ -17,12 +17,18 @@ class SharedViewModel : ViewModel() {
 
     val sendToChanges = MutableLiveData<SendToChange>()
 
+    val kaKaoChatTotalNotificationScore = MutableLiveData<Int>()
+
     fun firstRunKaKaoTalkSetting(test: MutableList<KaKaoTalkData>) {
         firstRunKaKaoTalkClass.postValue(test)
     }
 
     fun sendToChanges(sendToChange: SendToChange){
         sendToChanges.postValue(sendToChange)
+    }
+
+    fun kaKaoChatTotalNotificationScore(score:Int){
+        kaKaoChatTotalNotificationScore.postValue(score)
     }
 
 
