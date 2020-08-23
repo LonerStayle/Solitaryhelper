@@ -53,9 +53,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
             KaKaoChatViewModelFactory()
         ).get(KaKaoChatViewModel::class.java)
     }
-
-
-
+    protected val viewModelCall by viewModels<CallViewModel>()
 
 
     override fun onCreateView(
@@ -78,6 +76,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
     fun RecyclerView.disableItemAnimator() {
         (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
     }
+
     abstract fun VDB.setEventListener()
     abstract fun VDB.setCreateView()
     open fun VDB.setLiveDataInObserver() = Unit

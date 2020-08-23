@@ -18,4 +18,5 @@ object Contents {
 
      var AUTO_CHAT_DEALY = (Math.random() * (20000 - 3000) + 3000).toLong()
 
+    var kaKaoTalkAdapterFirstRunMark = false
 }

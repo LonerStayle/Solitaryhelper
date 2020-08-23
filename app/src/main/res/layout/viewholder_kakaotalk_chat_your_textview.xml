@@ -59,8 +59,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    bind:imageUrl="@{profile}"
-                    android:visibility="@{profileVisible}"/>
+                    android:visibility="@{profileVisible}"
+                    bind:imageUrl="@{profile}"/>
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -77,8 +79,9 @@
             android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
-            tools:text="loner"
-            android:visibility="@{profileVisible}"/>
+            android:visibility="@{profileVisible}"
+            tools:text="loner"/>
+
 
 
         <TextView

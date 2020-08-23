@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Log
+import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -239,6 +241,7 @@ class KaKaoChatViewModel() : ViewModel() {
         message: String,
         activityContext: Context
 
+
     ) {
         clearExistingNotifications(FragmentFakeKakaoChat.NOTIFICATION_ID, manager)
         clearExistingNotifications(FragmentFakeKakaoChat.NOTIFICATION_ID_2, manager)
@@ -295,8 +298,37 @@ class KaKaoChatViewModel() : ViewModel() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-}
 
+}
+//    fun setTimeVisible(chatList:List<KaKaoTalkChatData>,timeVisibleList: MutableList<Int>?) {
+//        if ((chatList.last().timeList == chatList[chatList.lastIndex - 1].timeList)
+//            && chatList.last().user == chatList[chatList.lastIndex - 1].user
+//        ) {
+//            timeVisibleList?.set(timeVisibleList.lastIndex - 1, View.INVISIBLE)
+//            timeVisibleList?.add(View.VISIBLE)
+//
+//        } else
+//            timeVisibleList?.add(View.VISIBLE)
+//
+//
+//    }
+
+
+
+
+//    fun setProfileVisible(chatList:List<KaKaoTalkChatData>,thisprofileVisibleList: MutableList<Int>?) {
+//        if (chatList.last().user != chatList[chatList.lastIndex - 1].user ||
+//            chatList.last().timeList != chatList[chatList.lastIndex-1].timeList) {
+//            thisprofileVisibleList?.add(View.VISIBLE)
+//
+//            Log.d(
+//                "opop9",
+//                "불리언 체크:${chatList.last().user != chatList[chatList.lastIndex - 1].user}\n" +
+//                        "시간 체크:${chatList.last().timeList != chatList[chatList.lastIndex - 1].timeList}"
+//            )
+//        }else
+//            thisprofileVisibleList?.add(View.INVISIBLE)
+//    }
 //val pendingIntent = NavDeepLinkBuilder(context)
 //    .setGraph(R.navigation.nav_graph)
 //    .setDestination(R.id.android)

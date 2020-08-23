@@ -94,7 +94,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun FragmentMainBinding.setNavigationViewAndHeaderViewSetting() {
-
         navigationViewMain.addHeaderView(naviHeaderBinding.root)
     }
 

@@ -1,14 +1,11 @@
 package com.example.solitaryhelper.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
@@ -20,6 +17,7 @@ class AdapterRecyclerViewKaKaoChat(
     var kaKaoProfile: String,
     var kaKaoName: String,
     var chatList: MutableList<KaKaoTalkChatData> = mutableListOf()
+
 ) :
     RecyclerView.Adapter<AdapterRecyclerViewKaKaoChat.ViewHolder>() {
 
@@ -28,8 +26,8 @@ class AdapterRecyclerViewKaKaoChat(
         const val YOUR_TEXT_SEND = 2
     }
 
-    private var profileVisibleList: Array<Int>? = null
-    private var timeVisibleList: Array<Int>? = null
+   private var profileVisibleList= MutableList<Int> (chatList.size) {View.VISIBLE}
+   private var timeVisibleList= MutableList<Int>  (chatList.size) {View.VISIBLE}
 
     inner class ViewHolder : RecyclerView.ViewHolder {
         var myTextBinding: ViewholderKakaotalkChatMyTextviewBinding? = null
@@ -43,34 +41,33 @@ class AdapterRecyclerViewKaKaoChat(
             yourTextviewBinding = binding
         }
 
-        fun setProfileVisible() {
-            profileVisibleList = Array(chatList.size) { 0 }
-       for (i in 1 until profileVisibleList!!.size) {
-           if (adapterPosition != 0) {
-               if (chatList[adapterPosition].user != chatList[adapterPosition - 1].user)
-                   profileVisibleList!![i]= View.VISIBLE
-               else
-                   profileVisibleList!![i]= View.INVISIBLE
-           }
-       }
-
-
-        }
 
         fun setTimeVisible() {
-            timeVisibleList = Array(chatList.size) { 0 }
 
-            for (i in 1 until timeVisibleList!!.size)
 
-                    if ( (chatList[i].timeList == chatList[i - 1].timeList)
-                       && chatList[i].user == chatList[i - 1].user)
-                    {
-                        timeVisibleList!![i - 1] = View.INVISIBLE
-                        timeVisibleList!![i] = View.VISIBLE
-                    }
-                    else
-                        timeVisibleList!![i] = View.VISIBLE
+            for (i in 1 until chatList.size) {
+                if (i != 0) {
+                    if ((chatList[i].timeList == chatList[i - 1].timeList) &&
+                        chatList[i].timeList == chatList[i - 1].timeList
+                    ) {
+                        timeVisibleList[i - 1] = View.INVISIBLE
+                        timeVisibleList[i] = View.VISIBLE
+                    } else
+                        timeVisibleList[i] = View.VISIBLE
+                }
+            }
+        }
 
+        fun setProfileVisible() {
+
+            for (i in 1 until chatList.size) {
+                if (chatList[i].user != chatList[i - 1].user||
+                    chatList[i].timeList != chatList[i-1].timeList)
+
+                    profileVisibleList[i] = View.VISIBLE
+                else
+                    profileVisibleList[i] = View.INVISIBLE
+            }
         }
     }
 
@@ -83,7 +80,7 @@ class AdapterRecyclerViewKaKaoChat(
             YOUR_TEXT_SEND
         }
     }
-
+    override fun getItemId(position: Int) = position.toLong()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -102,6 +99,8 @@ class AdapterRecyclerViewKaKaoChat(
             )
             ViewHolder(binding)
         }
+
+
 
     }
 
@@ -124,11 +123,10 @@ class AdapterRecyclerViewKaKaoChat(
             name = kaKaoName
             text = chatList[holder.adapterPosition].textList
             time = timeDisplay(chatList[holder.adapterPosition].timeList)
-            profileVisible = profileVisibleList!![holder.adapterPosition]
-            timeVisible = timeVisibleList!![holder.adapterPosition]
+            profileVisible = profileVisibleList[holder.adapterPosition]
+            timeVisible = timeVisibleList[holder.adapterPosition]
 
         }
-
 
     }
 

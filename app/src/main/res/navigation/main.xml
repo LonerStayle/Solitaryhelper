@@ -100,7 +100,18 @@
     <fragment
         android:id="@+id/fragmentFakeCall"
         android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCall"
-        android:label="FragmentFakeCall" />
+        android:label="FragmentFakeCall" >
+        <argument
+            android:name="callPartyName"
+            app:argType="string" />
+        <argument
+            android:name="callMode"
+            app:argType="integer" />
+        <argument
+            android:name="callReservationTime"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentFakeSms"
         android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSms"

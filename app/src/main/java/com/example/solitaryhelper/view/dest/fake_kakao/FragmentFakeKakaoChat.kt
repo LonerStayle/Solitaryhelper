@@ -3,6 +3,7 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 import android.app.NotificationManager
 import android.content.Context
 import android.media.SoundPool
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
@@ -41,6 +42,10 @@ class FragmentFakeKakaoChat :
     }
 
 
+    private var thisProfileVisibleList: MutableList<Int>? = null
+
+    private var thisTimeVisibleList: MutableList<Int>? = null
+
     private val chatDataList = mutableListOf<KaKaoTalkChatData>()
 
     private var buttonClick = false
@@ -53,6 +58,7 @@ class FragmentFakeKakaoChat :
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
+
         //화면전환 후에도 사용이 지속되기 위한 빠른 초기화
         viewModelShared; soundPool; soundId
 
@@ -75,9 +81,12 @@ class FragmentFakeKakaoChat :
     }
 
     private fun FragmentFakeKakaoChatBinding.setRecyclerViewSetting() {
+        (recyclerViewKaKaoChat.adapter as? AdapterRecyclerViewKaKaoChat)?.setHasStableIds(true)
         recyclerViewKaKaoChat.setHasFixedSize(true)
         recyclerViewKaKaoChat.disableItemAnimator()
-        recyclerViewKaKaoChat.setItemViewCacheSize(20)
+        recyclerViewKaKaoChat.setItemViewCacheSize(12)
+
+
     }
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
@@ -97,9 +106,14 @@ class FragmentFakeKakaoChat :
                 )
             }
 
+            thisProfileVisibleList = MutableList(chatDataList.size) { View.VISIBLE }
+            thisTimeVisibleList = MutableList(chatDataList.size) { View.VISIBLE }
+
+
             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                 args.profileImage, args.name, chatDataList
             )
+
 
         } else
             return
@@ -133,51 +147,54 @@ class FragmentFakeKakaoChat :
                     19L -> viewModelKaKaoChat.insertAllList20(this.chatList)
                 }
             }
-            when (args.itemIdPosition) {
-                0L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun =
-                    true
-                1L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2 =
-                    true
-                2L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3 =
-                    true
-                3L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4 =
-                    true
-                4L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5 =
-                    true
-                5L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6 =
-                    true
-                6L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7 =
-                    true
-                7L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8 =
-                    true
-                8L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9 =
-                    true
-                9L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10 =
-                    true
-                10L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11 =
-                    true
-                11L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12 =
-                    true
-                12L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13 =
-                    true
-                13L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14 =
-                    true
-                14L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15 =
-                    true
-                15L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16 =
-                    true
-                16L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17 =
-                    true
-                17L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18 =
-                    true
-                18L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19 =
-                    true
-                19L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20 =
-                    true
-            }
-
+            setOperationByPositionTrue()
         } else
             return
+    }
+
+    private fun setOperationByPositionTrue() {
+        when (args.itemIdPosition) {
+            0L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun =
+                true
+            1L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun2 =
+                true
+            2L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun3 =
+                true
+            3L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun4 =
+                true
+            4L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun5 =
+                true
+            5L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun6 =
+                true
+            6L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun7 =
+                true
+            7L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun8 =
+                true
+            8L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun9 =
+                true
+            9L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun10 =
+                true
+            10L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun11 =
+                true
+            11L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun12 =
+                true
+            12L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun13 =
+                true
+            13L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun14 =
+                true
+            14L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun15 =
+                true
+            15L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun16 =
+                true
+            16L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun17 =
+                true
+            17L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun18 =
+                true
+            18L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun19 =
+                true
+            19L -> PrefCheckRun.getInstance(requireContext()).kakaoChatObserverControlFirstRun20 =
+                true
+        }
     }
 
     private fun operationByPosition(): Boolean {
@@ -657,21 +674,17 @@ class FragmentFakeKakaoChat :
 
             0L -> {
                 viewModelKaKaoChat.myChatText.observe(viewLifecycleOwner, Observer {
+
+
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
-                        }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-
-                                if (buttonClick) {
-                                }
-                            }
                         }
 
                     }
@@ -685,23 +698,16 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText2.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
-
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -710,23 +716,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText3.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -735,23 +737,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText4.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -760,23 +758,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText5.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -785,23 +779,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText6.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -810,23 +800,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText7.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -835,23 +821,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText8.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -860,23 +842,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText9.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -885,23 +863,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText10.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -910,23 +884,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText11.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -935,23 +905,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText12.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -960,23 +926,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText13.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -985,23 +947,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText14.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -1010,23 +968,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText15.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -1035,23 +989,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText16.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -1060,23 +1010,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText17.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -1085,23 +1031,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText18.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -1110,23 +1052,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText19.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
@@ -1135,23 +1073,19 @@ class FragmentFakeKakaoChat :
                 viewModelKaKaoChat.myChatText20.observe(viewLifecycleOwner, Observer {
                     when {
                         (operationByPosition()) -> {
+
+
+                            Log.d("opop2222", "2222번 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
+
                         }
 
-                        (isResumed) -> {
-                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                chatList.add(it.last())
-                                notifyItemInserted(chatList.lastIndex)
-                                if (buttonClick) {
-                                }
-                            }
-                        }
 
                     }
-                    buttonClick = false
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+                    buttonClick = false
                 })
             }
 
