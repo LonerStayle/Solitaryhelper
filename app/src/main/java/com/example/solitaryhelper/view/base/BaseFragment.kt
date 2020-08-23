@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkBuilder
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.localdb.SolitaryHelperDatabase
 import com.example.solitaryhelper.viewmodel.*
@@ -73,6 +75,9 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
 
     }
 
+    fun RecyclerView.disableItemAnimator() {
+        (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
+    }
     abstract fun VDB.setEventListener()
     abstract fun VDB.setCreateView()
     open fun VDB.setLiveDataInObserver() = Unit

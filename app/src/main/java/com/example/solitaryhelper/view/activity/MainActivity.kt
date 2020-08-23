@@ -43,16 +43,8 @@ class MainActivity : AppCompatActivity() {
             PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun19 = false
             PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun20 = false
         }
-//        fun RecyclerView.disableItemAnimator() {
-//            (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
-//        }
-//
-//        // sample of using in Activity:
-//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-//                                  savedInstanceState: Bundle?): View? {
-//            myRecyclerView.disableItemAnimator()
-//            // ...
-//        }
+
+
 
     }
 

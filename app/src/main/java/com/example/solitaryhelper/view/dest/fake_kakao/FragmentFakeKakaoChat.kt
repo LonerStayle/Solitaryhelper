@@ -3,6 +3,7 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 import android.app.NotificationManager
 import android.content.Context
 import android.media.SoundPool
+import android.view.View
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
@@ -44,19 +45,18 @@ class FragmentFakeKakaoChat :
 
     private var buttonClick = false
 
-    private val timeDisplay = Contents.timePattern.format(Date())
-
     private val soundId by lazy { soundPool.load(requireContext(), R.raw.kakaotalkpool, 1) }
 
 
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
-        setButtonClickListener()
+        setMyTestSendButtonClickListener()
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
         //화면전환 후에도 사용이 지속되기 위한 빠른 초기화
         viewModelShared; soundPool; soundId
 
+        setRecyclerViewSetting()
         setAdapter()
         setBindValueInAdapter()
         setRunAutoChatSetting()
@@ -65,13 +65,19 @@ class FragmentFakeKakaoChat :
     override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
         setTotalScore()
         setObserver()
-
     }
 
-    private fun FragmentFakeKakaoChatBinding.setTotalScore(){
+
+    private fun FragmentFakeKakaoChatBinding.setTotalScore() {
         viewModelShared.kaKaoChatTotalNotificationScore.observe(viewLifecycleOwner, Observer {
             textViewTotalChatScore.text = it.toString()
         })
+    }
+
+    private fun FragmentFakeKakaoChatBinding.setRecyclerViewSetting() {
+        recyclerViewKaKaoChat.setHasFixedSize(true)
+        recyclerViewKaKaoChat.disableItemAnimator()
+        recyclerViewKaKaoChat.setItemViewCacheSize(20)
     }
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
@@ -94,7 +100,7 @@ class FragmentFakeKakaoChat :
             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                 args.profileImage, args.name, chatDataList
             )
-            recyclerViewKaKaoChat.setHasFixedSize(true)
+
         } else
             return
     }
@@ -201,7 +207,7 @@ class FragmentFakeKakaoChat :
         }
     }
 
-    private fun FragmentFakeKakaoChatBinding.setButtonClickListener() {
+    private fun FragmentFakeKakaoChatBinding.setMyTestSendButtonClickListener() {
 
         buttonSend.setOnClickListener {
             buttonClick = true
@@ -214,7 +220,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
 
                         )
                     )
@@ -226,7 +232,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -237,7 +243,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -248,7 +254,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -259,7 +265,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -270,7 +276,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -281,7 +287,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -292,7 +298,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -303,7 +309,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -314,7 +320,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -325,7 +331,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -336,7 +342,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -347,7 +353,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -358,7 +364,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -369,7 +375,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -380,7 +386,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -391,7 +397,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -402,7 +408,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -413,7 +419,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -424,7 +430,7 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = editTextTalkBox.text.toString(),
                             user = true,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
 
@@ -469,22 +475,22 @@ class FragmentFakeKakaoChat :
 
                     autoChatDoubleCheckRun[0] = true
                     delay(5000)
-                    if(!autoChatRun)
+                    if (!autoChatRun)
                         return
-                   
+
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd(
                         KaKaoTalkChatData(
                             textList = "1-${test0++}",
                             user = false,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             0,
                             "1-${test0++}",
-                            timeDisplay
+                            Contents.timePattern.format(Date())
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
@@ -494,7 +500,7 @@ class FragmentFakeKakaoChat :
                             R.drawable.sample2,
                             context,
                             manager,
-                        "1",
+                            "1",
                             "1-${test0++}",
                             activtyContext
                         )
@@ -506,7 +512,7 @@ class FragmentFakeKakaoChat :
                     val text = "2-${test0++}"
                     autoChatDoubleCheckRun[1] = true
                     delay(10000)
-                    if(!autoChatRun)
+                    if (!autoChatRun)
                         return
 
                     positionSendRunCheck = true
@@ -514,14 +520,14 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = text,
                             user = false,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             1,
                             text,
-                            timeDisplay
+                            Contents.timePattern.format(Date())
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
@@ -530,15 +536,16 @@ class FragmentFakeKakaoChat :
                             R.drawable.sample2,
                             context,
                             manager,
-                        "2",
+                            "2",
                             "2-${test0++}",
-                            activtyContext)
+                            activtyContext
+                        )
                     }
                 }
                 2L -> {
                     autoChatDoubleCheckRun[2] = true
                     delay(15000)
-                    if(!autoChatRun)
+                    if (!autoChatRun)
                         return
 
 
@@ -547,14 +554,14 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = "3-${test0++}",
                             user = false,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             2,
                             "3-${test0++}",
-                            timeDisplay
+                            Contents.timePattern.format(Date())
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
@@ -563,15 +570,16 @@ class FragmentFakeKakaoChat :
                             R.drawable.sample2,
                             context,
                             manager,
-                        "3",
+                            "3",
                             "3-${test0++}",
-                            activtyContext)
+                            activtyContext
+                        )
                     }
                 }
                 3L -> {
                     autoChatDoubleCheckRun[3] = true
                     delay(20000)
-                    if(!autoChatRun)
+                    if (!autoChatRun)
                         return
 
 
@@ -580,14 +588,14 @@ class FragmentFakeKakaoChat :
                         KaKaoTalkChatData(
                             textList = "4-${test0++}",
                             user = false,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             3,
                             "4-${test0++}",
-                            timeDisplay
+                            Contents.timePattern.format(Date())
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
@@ -598,28 +606,29 @@ class FragmentFakeKakaoChat :
                             manager,
                             "4",
                             "4-${test0++}",
-                            activtyContext)
+                            activtyContext
+                        )
                     }
                 }
                 4L -> {
 
                     autoChatDoubleCheckRun[4] = true
                     delay(25000)
-                    if(!autoChatRun)
+                    if (!autoChatRun)
                         return
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
                             textList = "5-${test0++}",
                             user = false,
-                            timeList = timeDisplay
+                            timeList = Contents.timePattern.format(Date())
                         )
                     )
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             4,
                             "5-${test0++}",
-                            timeDisplay
+                            Contents.timePattern.format(Date())
                         )
 
                     )
@@ -631,7 +640,8 @@ class FragmentFakeKakaoChat :
                             manager,
                             "5",
                             "5-${test0++}",
-                            activtyContext)
+                            activtyContext
+                        )
                     }
                 }
 
