@@ -5,10 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.solitaryhelper.localdb.dao.RoomDao
+import com.example.solitaryhelper.localdb.entitiy.Sms
 import com.example.solitaryhelper.localdb.entitiy.UserProfile
 
 
-@Database(entities = [UserProfile::class], exportSchema = false, version = 1)
+@Database(entities = [UserProfile::class,Sms::class], exportSchema = false, version = 1)
 abstract class SolitaryHelperDatabase : RoomDatabase() {
     abstract val dataSource: RoomDao
 
@@ -19,7 +20,7 @@ abstract class SolitaryHelperDatabase : RoomDatabase() {
             INSTANCE ?: Room.databaseBuilder(
                 context,
                 SolitaryHelperDatabase::class.java,
-                "SolitaryHelperDatabase1"
+                "SolitaryHelperDatabase"
             ).fallbackToDestructiveMigration()
                 .build().also {
                     INSTANCE = it

@@ -39,8 +39,11 @@ class FragmentFakeKakaoChat :
 
         var positionSendRunCheck: Boolean? = null
         var autoChatDoubleCheckRun = Array(20) { false }
+
     }
 
+
+    private var onCreateViewFirstRun = true
 
     private var thisProfileVisibleList: MutableList<Int>? = null
 
@@ -125,7 +128,9 @@ class FragmentFakeKakaoChat :
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                 when (args.itemIdPosition) {
 
-                    0L ->{ viewModelKaKaoChat.insertAllList(this.chatList);Log.d("opop3","전체 리스트 인서트") }
+                    0L -> {
+                        viewModelKaKaoChat.insertAllList(this.chatList);Log.d("opop3", "전체 리스트 인서트")
+                    }
                     1L -> viewModelKaKaoChat.insertAllList2(this.chatList)
                     2L -> viewModelKaKaoChat.insertAllList3(this.chatList)
                     3L -> viewModelKaKaoChat.insertAllList4(this.chatList)
@@ -674,36 +679,27 @@ class FragmentFakeKakaoChat :
 
             0L -> {
                 viewModelKaKaoChat.myChatText.observe(viewLifecycleOwner, Observer {
-//                    val chatList = (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).chatList
 
                     when {
-                        (operationByPosition()) -> {
-
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
 
+                            onCreateViewFirstRun = false
                         }
-//                        (operationByPosition()&& chatList.isNullOrEmpty()) -> {
-//
-//
-//                            Log.d("opop1", "비었을떄 실행")
-//                            recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-//                                args.profileImage, args.name, it
-//                            )
-//
-//                        }
-//                        (operationByPosition()&& chatList.isNotEmpty()) -> {
-//                            Log.d("opop2", "안 비었을때 실행")
-//                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-//                                chatList.add(it.last())
-//                                notifyItemChanged(chatList.lastIndex)
-//                            }
-//                        }
-                    }
 
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
+                            Log.d("opop2", "안 비었을때 실행")
+                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                this.chatList = it
+
+                                notifyItemInserted(chatList.lastIndex)
+                            }
+                        }
+                    }
 
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                     buttonClick = false

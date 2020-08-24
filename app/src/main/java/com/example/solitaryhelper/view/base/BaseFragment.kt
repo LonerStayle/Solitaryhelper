@@ -32,6 +32,7 @@ import com.example.solitaryhelper.viewmodel.factory.KaKaoChatViewModelFactory
 import com.example.solitaryhelper.viewmodel.factory.MainViewModelFactory
 
 import com.example.solitaryhelper.viewmodel.factory.SkillViewModelFactory
+import com.example.solitaryhelper.viewmodel.factory.SmsViewModelFactory
 
 
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
@@ -54,6 +55,12 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         ).get(KaKaoChatViewModel::class.java)
     }
     protected val viewModelCall by viewModels<CallViewModel>()
+
+    protected val viewModelSms by viewModels<SmsViewModel> {
+        val database = SolitaryHelperDatabase.getInstance(requireContext())
+        val factory = SmsViewModelFactory(database.dataSource)
+        factory
+    }
 
 
     override fun onCreateView(

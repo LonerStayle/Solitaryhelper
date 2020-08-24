@@ -26,8 +26,8 @@ class AdapterRecyclerViewKaKaoChat(
         const val YOUR_TEXT_SEND = 2
     }
 
-   private var profileVisibleList= MutableList<Int> (chatList.size) {View.VISIBLE}
-   private var timeVisibleList= MutableList<Int>  (chatList.size) {View.VISIBLE}
+    private var profileVisibleList: MutableList<Int>? = null
+    private var timeVisibleList: MutableList<Int>? = null
 
     inner class ViewHolder : RecyclerView.ViewHolder {
         var myTextBinding: ViewholderKakaotalkChatMyTextviewBinding? = null
@@ -42,7 +42,7 @@ class AdapterRecyclerViewKaKaoChat(
         }
 
 
-        fun setTimeVisible() {
+        fun setTimeVisible(timeVisibleList:MutableList<Int>) {
 
 
             for (i in 1 until chatList.size) {
@@ -58,11 +58,12 @@ class AdapterRecyclerViewKaKaoChat(
             }
         }
 
-        fun setProfileVisible() {
+        fun setProfileVisible(profileVisibleList:MutableList<Int>) {
 
             for (i in 1 until chatList.size) {
-                if (chatList[i].user != chatList[i - 1].user||
-                    chatList[i].timeList != chatList[i-1].timeList)
+                if (chatList[i].user != chatList[i - 1].user ||
+                    chatList[i].timeList != chatList[i - 1].timeList
+                )
 
                     profileVisibleList[i] = View.VISIBLE
                 else
@@ -80,6 +81,7 @@ class AdapterRecyclerViewKaKaoChat(
             YOUR_TEXT_SEND
         }
     }
+
     override fun getItemId(position: Int) = position.toLong()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -101,7 +103,6 @@ class AdapterRecyclerViewKaKaoChat(
         }
 
 
-
     }
 
 
@@ -110,8 +111,11 @@ class AdapterRecyclerViewKaKaoChat(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.setProfileVisible()
-        holder.setTimeVisible()
+        profileVisibleList = MutableList(chatList.size) { View.VISIBLE }
+        timeVisibleList = MutableList(chatList.size) { View.VISIBLE }
+
+        holder.setProfileVisible(profileVisibleList!!)
+        holder.setTimeVisible(timeVisibleList!!)
 
         holder.myTextBinding?.apply {
             text = chatList[holder.adapterPosition].textList
@@ -123,8 +127,8 @@ class AdapterRecyclerViewKaKaoChat(
             name = kaKaoName
             text = chatList[holder.adapterPosition].textList
             time = timeDisplay(chatList[holder.adapterPosition].timeList)
-            profileVisible = profileVisibleList[holder.adapterPosition]
-            timeVisible = timeVisibleList[holder.adapterPosition]
+            profileVisible = profileVisibleList!![holder.adapterPosition]
+            timeVisible = timeVisibleList!![holder.adapterPosition]
 
         }
 

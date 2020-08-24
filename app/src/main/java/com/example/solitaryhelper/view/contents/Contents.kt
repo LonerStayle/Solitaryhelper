@@ -14,6 +14,8 @@ object Contents {
     const val CALL_DELAY_NOTICATION_ENABLED_ON = 1
     const val CALL_DELAY_NOTICATION_ENABLED_OFF = 0
 
+    const val SMS_SETTING_TAB_LAYOUT_TOTAL_SIZE = 2
+
 
     @SuppressLint("SimpleDateFormat")
     val timePattern =SimpleDateFormat("aa hh:mm")

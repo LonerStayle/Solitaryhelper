@@ -98,8 +98,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun FragmentMainBinding.setViewPagerAndTabLayoutSetting() {
-        viewPagerMain.adapter = AdapterViewPagerMain(this@MainFragment)
 
+        viewPagerMain.adapter = AdapterViewPagerMain(this@MainFragment)
         TabLayoutMediator(tabLayoutMain, viewPagerMain) { tab, position ->
 
             for (i in 0..4) {
