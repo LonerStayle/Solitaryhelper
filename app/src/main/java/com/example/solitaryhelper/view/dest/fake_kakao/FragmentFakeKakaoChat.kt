@@ -125,7 +125,7 @@ class FragmentFakeKakaoChat :
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                 when (args.itemIdPosition) {
 
-                    0L -> viewModelKaKaoChat.insertAllList(this.chatList)
+                    0L ->{ viewModelKaKaoChat.insertAllList(this.chatList);Log.d("opop3","전체 리스트 인서트") }
                     1L -> viewModelKaKaoChat.insertAllList2(this.chatList)
                     2L -> viewModelKaKaoChat.insertAllList3(this.chatList)
                     3L -> viewModelKaKaoChat.insertAllList4(this.chatList)
@@ -674,20 +674,37 @@ class FragmentFakeKakaoChat :
 
             0L -> {
                 viewModelKaKaoChat.myChatText.observe(viewLifecycleOwner, Observer {
-
+//                    val chatList = (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).chatList
 
                     when {
                         (operationByPosition()) -> {
 
 
-                            Log.d("opop2222", "2222번 실행")
+                            Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                                 args.profileImage, args.name, it
                             )
 
                         }
-
+//                        (operationByPosition()&& chatList.isNullOrEmpty()) -> {
+//
+//
+//                            Log.d("opop1", "비었을떄 실행")
+//                            recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
+//                                args.profileImage, args.name, it
+//                            )
+//
+//                        }
+//                        (operationByPosition()&& chatList.isNotEmpty()) -> {
+//                            Log.d("opop2", "안 비었을때 실행")
+//                            (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+//                                chatList.add(it.last())
+//                                notifyItemChanged(chatList.lastIndex)
+//                            }
+//                        }
                     }
+
+
                     recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
                     buttonClick = false
                 })

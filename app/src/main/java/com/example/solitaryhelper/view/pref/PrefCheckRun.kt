@@ -8,7 +8,7 @@ class PrefCheckRun private constructor (val context: Context){
     enum class Key {
         APP_GUIDE_FIRST_RUN,
         ID_EMPTY_CHECK,
-        AUTO_CHAT_RUN,
+        CALL_DELAY_COTROL,
         KAKAO_TALK_FIRST_RUN_CHECK,
 
         KAKAO_CHAT_OBSERVER_CONTROL_FIRST_RUN,
@@ -58,11 +58,12 @@ class PrefCheckRun private constructor (val context: Context){
             value).apply()
     }
 
-    var autoChatRun:Boolean
-    get() = pref.getBoolean(Key.AUTO_CHAT_RUN.name,false)
+    var callDelayCotrol:Int
+    get() = pref.getInt(Key.CALL_DELAY_COTROL.name,0)
     set(value) {
-        pref.edit().putBoolean(Key.AUTO_CHAT_RUN.name,value).apply()
+        pref.edit().putInt(Key.CALL_DELAY_COTROL.name,value).apply()
     }
+
 
     var kaKaoTalkFirstRunCheck:Boolean
         get() = pref.getBoolean(Key.KAKAO_TALK_FIRST_RUN_CHECK.name,false)

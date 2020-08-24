@@ -108,9 +108,11 @@
             android:name="callMode"
             app:argType="integer" />
         <argument
-            android:name="callReservationTime"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:name="callNotication"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentFakeCall_to_fragmentFakeCallAgreeScreen"
+            app:destination="@id/fragmentFakeCallAgreeScreen" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeSms"
@@ -132,4 +134,15 @@
         android:id="@+id/fragmentTopicResult"
         android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicResult"
         android:label="FragmentTopicResult" />
+    <fragment
+        android:id="@+id/fragmentFakeCallAgreeScreen"
+        android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallAgreeScreen"
+        android:label="FragmentFakeCallAgreeScreen" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -11,6 +11,10 @@ object Contents {
     const val MAIN_FIFTH_ITEM = 4
     const val MAIN_TAB_LAYOUT_TOTAL_ICON_SIZE = 5
 
+    const val CALL_DELAY_NOTICATION_ENABLED_ON = 1
+    const val CALL_DELAY_NOTICATION_ENABLED_OFF = 0
+
+
     @SuppressLint("SimpleDateFormat")
     val timePattern =SimpleDateFormat("aa hh:mm")
 

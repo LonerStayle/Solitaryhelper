@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
@@ -37,15 +38,16 @@ class CallViewModel : ViewModel() {
         }
     }
 
-    fun basic(manager: NotificationManager,context: Context,args:Bundle) {
+    fun basic(manager: NotificationManager,context: Context,args:Bundle,
+    @DrawableRes icon:Int,title:String,text:String,channelId:String) {
         clearExistingNotifications(444444,manager)
         clearExistingNotifications(123123,manager)
         createNotificationChannel(context, NotificationManagerCompat.IMPORTANCE_DEFAULT, false,
-          "call", "App notification channel")
+            channelId, "App notification channel")
 
-        val channelId = "Call"
-        val title = "전화에 응하시겠습니까?"
-        val content = "몰래 눌러주세요"
+        val channelId = channelId
+        val title = title
+        val content = text
 
         val pendingIntent = NavDeepLinkBuilder(context)
             .setGraph(R.navigation.main)
@@ -54,7 +56,8 @@ class CallViewModel : ViewModel() {
             .createPendingIntent()
 
         val builder = NotificationCompat.Builder(context, channelId)
-        builder.setSmallIcon(R.drawable.applogo_hood_line_64)
+        builder.setSmallIcon(icon)
+
         builder.setContentTitle(title)
         builder.setContentText(content)
         builder.priority = NotificationCompat.PRIORITY_DEFAULT
