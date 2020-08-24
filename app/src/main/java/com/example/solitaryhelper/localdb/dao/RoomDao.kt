@@ -22,8 +22,16 @@ interface RoomDao {
     @Insert
     fun insertSms(sms: Sms)
 
+    @Insert
+    fun insertSmsList(smsList:List<Sms>)
+
     @Delete
     fun deleteSms(sms: Sms)
+
+    @Delete
+    fun deleteSmsList(smsList: List<Sms>)
+
+
 
 
 

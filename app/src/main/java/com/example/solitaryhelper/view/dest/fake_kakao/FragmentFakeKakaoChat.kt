@@ -42,8 +42,6 @@ class FragmentFakeKakaoChat :
 
     }
 
-
-
     private var onCreateViewFirstRun = true
     private var onCreateViewFirstRun2 = true
     private var onCreateViewFirstRun3 = true
@@ -1281,6 +1279,4 @@ class FragmentFakeKakaoChat :
 
         }
     }
-
-
 }

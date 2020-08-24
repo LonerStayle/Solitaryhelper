@@ -6,8 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
-import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderSmsCustomMytextBinding
 import com.example.solitaryhelper.databinding.ViewholderSmsCustomYourtextBinding
 import com.example.solitaryhelper.localdb.entitiy.Sms

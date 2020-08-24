@@ -51,9 +51,9 @@ class FragmentFakeSmsSettingCustom :
         buttonYourText.setOnClickListener {
             buttonClickMode = !buttonClickMode
             if (myTextMode)
-                it.setBackgroundColor(Color.parseColor("fff"))
+                it.setBackgroundColor(Color.parseColor("#FFF"))
             else {
-                it.setBackgroundColor(Color.parseColor("000"))
+                it.setBackgroundColor(Color.parseColor("#000"))
             }
         }
     }
