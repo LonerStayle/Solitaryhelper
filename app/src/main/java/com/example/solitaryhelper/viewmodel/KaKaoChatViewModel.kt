@@ -13,8 +13,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavDeepLinkBuilder
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.view.activity.AutoChatRunCheckActiviy
 import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat
 import com.example.solitaryhelper.view.dialog.DialogCustom
@@ -258,13 +258,19 @@ class KaKaoChatViewModel() : ViewModel() {
         val style = NotificationCompat.MessagingStyle(user1)
             .addMessage(message, timestamp, user1)
 
-        val intent = Intent(activityContext, AutoChatRunCheckActiviy::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-        val pendingIntent = PendingIntent.getActivity(
-            context, 0,
-            intent, PendingIntent.FLAG_UPDATE_CURRENT
-        )
+
+//        val intent = Intent(activityContext, AutoChatRunCheckActiviy::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//
+//        val pendingIntent = PendingIntent.getActivity(
+//            context, 0,
+//            intent, PendingIntent.FLAG_UPDATE_CURRENT
+//        )
+        val pendingIntent = NavDeepLinkBuilder(context)
+    .setGraph(R.navigation.main)
+    .setDestination(R.id.fragmentAutoChatRunCheck)
+    .createPendingIntent()
 
         val builder = NotificationCompat.Builder(context, channelId)
         builder.setSmallIcon(icon)

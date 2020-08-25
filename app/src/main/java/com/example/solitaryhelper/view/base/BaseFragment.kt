@@ -26,13 +26,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.localdb.SolitaryHelperDatabase
 import com.example.solitaryhelper.viewmodel.*
-
-
-import com.example.solitaryhelper.viewmodel.factory.KaKaoChatViewModelFactory
-import com.example.solitaryhelper.viewmodel.factory.MainViewModelFactory
-
-import com.example.solitaryhelper.viewmodel.factory.SkillViewModelFactory
-import com.example.solitaryhelper.viewmodel.factory.SmsViewModelFactory
+import com.example.solitaryhelper.viewmodel.factory.*
 
 
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
@@ -61,6 +55,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         val factory = SmsViewModelFactory(database.dataSource)
         factory
     }
+    protected val viewModelTopic by viewModels<TopicViewModel> { TopicViewModelFactory() }
 
 
     override fun onCreateView(

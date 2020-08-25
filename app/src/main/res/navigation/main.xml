@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_mainFragment_to_fragmentTopicResult"
             app:destination="@id/fragmentTopicResult" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentAutoChatRunCheck"
+            app:destination="@id/fragmentAutoChatRunCheck" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCallSetting"
@@ -133,7 +136,16 @@
     <fragment
         android:id="@+id/fragmentTopicResult"
         android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicResult"
-        android:label="FragmentTopicResult" />
+        android:label="FragmentTopicResult" >
+        <argument
+            android:name="ages"
+            app:argType="integer"
+            android:defaultValue="2" />
+        <argument
+            android:name="gender"
+            app:argType="string"
+            android:defaultValue="m" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentFakeCallAgreeScreen"
         android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallAgreeScreen"
@@ -144,5 +156,13 @@
         <argument
             android:name="image"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAutoChatRunCheck"
+        android:name="com.example.solitaryhelper.view.dest.FragmentAutoChatRunCheck"
+        android:label="FragmentAutoChatRunCheck" >
+        <action
+            android:id="@+id/action_fragmentAutoChatRunCheck_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

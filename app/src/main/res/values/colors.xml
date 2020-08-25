@@ -12,4 +12,6 @@
     <color name="colorLightBlue">#0091EA</color>
     <color name="colorLightViolet">#82B1FF</color>
     <color name="colorLightIndigo">#304FFE</color>
+    <color name="kaKaoTalkBackGround">#FAFF00</color>
+    <color name="kaKaoTalkFontColor">#3C1E1E</color>
 </resources>

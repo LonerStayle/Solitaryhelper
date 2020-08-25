@@ -23,6 +23,7 @@ var test0 = 0
 
 class FragmentFakeKakaoChat :
     BaseFragment<FragmentFakeKakaoChatBinding>(R.layout.fragment_fake_kakao_chat) {
+
     private val args by lazy {
         FragmentFakeKakaoChatArgs.fromBundle(
             requireArguments()
@@ -38,7 +39,7 @@ class FragmentFakeKakaoChat :
         const val NOTIFICATION_ID_2 = 1002
 
         var positionSendRunCheck: Boolean? = null
-        var autoChatDoubleCheckRun = Array(20) { false }
+         var autoChatDoubleCheckRun = Array(20) { false }
 
     }
 
@@ -76,6 +77,7 @@ class FragmentFakeKakaoChat :
 
 
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
+
         setMyTestSendButtonClickListener()
     }
 
@@ -715,6 +717,7 @@ class FragmentFakeKakaoChat :
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex -1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }

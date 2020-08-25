@@ -11,8 +11,13 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 import java.util.Collections.swap
+import java.util.logging.Handler
 import kotlin.random.Random
 
 class FragmentFakeKakaoTalk :
@@ -30,20 +35,51 @@ class FragmentFakeKakaoTalk :
     }
 
     override fun FragmentFakeKakaoTalkBinding.setCreateView() {
+        setProgrssControl()
         setSendToAdapterToData()
         setNewMessageResponse()
         setRecyclerViewSetting()
+
+
     }
 
     override fun FragmentFakeKakaoTalkBinding.setLiveDataInObserver() {
         setAdapterDataUpdate()
+
     }
 
-    private fun FragmentFakeKakaoTalkBinding.setRecyclerViewSetting(){
+    private fun FragmentFakeKakaoTalkBinding.setProgrssControl() {
+        if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck) {
+            CoroutineScope(Dispatchers.Main).launch {
+                progressbarLayout.visibility = View.VISIBLE
+                imageViewKaKao.visibility = View.VISIBLE
+
+                bottomNavigationView.visibility = View.GONE
+                viewLine.visibility = View.GONE
+                recyclerViewKaKaoChatList.visibility = View.GONE
+                imageView2.visibility = View.GONE
+                textView2.visibility = View.GONE
+                linearLayoutButtonList.visibility = View.GONE
+
+                delay(2000)
+                progressbarLayout.visibility = View.GONE
+                imageViewKaKao.visibility = View.GONE
+                bottomNavigationView.visibility = View.VISIBLE
+                viewLine.visibility = View.VISIBLE
+                recyclerViewKaKaoChatList.visibility = View.VISIBLE
+                imageView2.visibility = View.VISIBLE
+                textView2.visibility = View.VISIBLE
+                linearLayoutButtonList.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun FragmentFakeKakaoTalkBinding.setRecyclerViewSetting() {
 
         recyclerViewKaKaoChatList.disableItemAnimator()
         recyclerViewKaKaoChatList.setHasFixedSize(true)
     }
+
     private fun setSendToAdapterToData() {
 
 
@@ -156,11 +192,12 @@ class FragmentFakeKakaoTalk :
                                 this.kaKaoDataList[0].chatNotification = 0
                                 viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
                                 { list -> list.chatNotification })
+
+
                             }
 
                             findNavController().navigate(
-                                FragmentFakeKakaoTalkDirections.
-                                actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
+                                FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
                                     profileImage = it[0].image,
                                     name = it[0].name,
                                     ListBox = it[0].textBoxList[it[0].id.toInt()],
@@ -176,6 +213,7 @@ class FragmentFakeKakaoTalk :
                             }
                         }
 
+
                 } else {
 
                     noticeitemPositionChange = false
@@ -184,9 +222,6 @@ class FragmentFakeKakaoTalk :
             })
 
     }
-
-
-
 
 
     private fun setBackButtonListener() {

@@ -3,6 +3,7 @@ package com.example.solitaryhelper.view.dest.fake_sms.settingfragments
 import android.graphics.Color
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeSmsSettingCustomBinding
 import com.example.solitaryhelper.localdb.entitiy.Sms
@@ -10,6 +11,7 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewSmsCustom
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.view.utill.toastDebugTest
 import java.util.*
 
 class FragmentFakeSmsSettingCustom :
@@ -17,17 +19,20 @@ class FragmentFakeSmsSettingCustom :
 
     private var myTextMode = false
     private var setRecyclerViewAdapter = false
+
     override fun FragmentFakeSmsSettingCustomBinding.setEventListener() {
         setYourButtonClickListener()
         setButtonSendListener()
+        setFABclickListener()
     }
 
-
-    override fun FragmentFakeSmsSettingCustomBinding.setCreateView() {
-
-    }
+    override fun FragmentFakeSmsSettingCustomBinding.setCreateView() {}
 
     override fun FragmentFakeSmsSettingCustomBinding.setLiveDataInObserver() {
+        setObserver()
+    }
+
+    private fun FragmentFakeSmsSettingCustomBinding.setObserver() {
         viewModelSms.SmsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it ?: return@Observer
             if (!setRecyclerViewAdapter) {
@@ -36,7 +41,7 @@ class FragmentFakeSmsSettingCustom :
                 setRecyclerViewAdapter = true
 
             }
-            if (setRecyclerViewAdapter ) {
+            if (setRecyclerViewAdapter) {
                 (recyclerViewSmsSettingCustom.adapter as? AdapterRecyclerViewSmsCustom)?.apply {
                     this.smsList.add(it.last())
                     notifyItemInserted(it.lastIndex)
@@ -45,6 +50,17 @@ class FragmentFakeSmsSettingCustom :
         })
     }
 
+    private fun FragmentFakeSmsSettingCustomBinding.setFABclickListener() {
+        floatingActionButtonInfo.setOnClickListener {
+
+            if (recyclerViewSmsSettingCustom.adapter == null) {
+                context?.toastDebugTest("문자 창을 만들어주세요")
+                return@setOnClickListener
+            }
+
+            findNavController().navigate(R.id.action_fragmentFakeSmsSetting_to_fragmentFakeSms)
+        }
+    }
 
     private fun FragmentFakeSmsSettingCustomBinding.setYourButtonClickListener() {
         var buttonClickMode = false

@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,14 +47,17 @@ class AdapterRecyclerViewKaKaoChat(
 
 
             for (i in 1 until chatList.size) {
-                if (i != 0) {
-                    if ((chatList[i].timeList == chatList[i - 1].timeList) &&
-                        chatList[i].timeList == chatList[i - 1].timeList
-                    ) {
-                        timeVisibleList[i - 1] = View.INVISIBLE
-                        timeVisibleList[i] = View.VISIBLE
-                    } else
-                        timeVisibleList[i] = View.VISIBLE
+
+                if ((chatList[i].timeList == chatList[i - 1].timeList) &&
+                    chatList[i].user == chatList[i - 1].user
+                ) {
+
+                    timeVisibleList[i - 1] = View.INVISIBLE
+                    timeVisibleList[i] = View.VISIBLE
+
+                } else {
+                    timeVisibleList[i] = View.VISIBLE
+
                 }
             }
         }
