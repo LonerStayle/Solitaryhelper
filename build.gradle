@@ -24,6 +24,7 @@ buildscript {
         def groupie_version ='2.8.1'
         def apache_commons_version = '3.0'
         def spin_kit = '1.4.0'
+        def goolgle_gps_service = '17.0.0'
         libraries = [
                 //kotlin 기본 라이브러리
                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -71,7 +72,11 @@ buildscript {
                 "org.apache.commons:commons-lang3:$apache_commons_version",
 
                 //스핀 킷
-                "com.github.ybq:Android-SpinKit:$spin_kit"
+                "com.github.ybq:Android-SpinKit:$spin_kit",
+
+                //google gps services
+                "com.google.android.gms:play-services-location:$goolgle_gps_service",
+                "com.google.android.gms:play-services-maps:$goolgle_gps_service"
         ]
         arch_libraries = [
                 // Navigation

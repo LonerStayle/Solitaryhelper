@@ -46,7 +46,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation libraries
     implementation arch_libraries
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
     implementation files('libs\\libDaumMapAndroid.jar')
     kapt librariesKapt
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
