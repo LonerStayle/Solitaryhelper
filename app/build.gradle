@@ -48,9 +48,7 @@ dependencies {
     implementation arch_libraries
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation files('libs\\libDaumMapAndroid.jar')
-    implementation files('libs\\libDaumMapAndroid.jar')
     kapt librariesKapt
-    implementation files('libs/libDaumMapAndroid.jar')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation testLibraries
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -31,8 +31,10 @@
         <activity android:name=".view.activity.MainActivity">
         </activity>
 
-
-
+        <service
+            android:foregroundServiceType="location">
+            <!-- Any inner elements would go here. -->
+        </service>
     </application>
 
 
