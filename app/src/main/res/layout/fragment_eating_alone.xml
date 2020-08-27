@@ -12,7 +12,8 @@
          android:layout_height="wrap_content"
          android:layout_marginStart="54dp"
          android:layout_marginEnd="54dp"
-         android:text="빠른 혼밥집 찾기"
+         android:text="혼밥 찾기"
+         android:textStyle="bold"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent" />
@@ -25,24 +26,8 @@
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toBottomOf="@+id/button_sendEatingHouse"
-         android:layout_margin="12dp">
-
-          <TextView
-              android:id="@+id/textView_CurrentPositionInfo"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:hint="수신중..."
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              tools:layout_editor_absoluteY="253dp" />
-
-          <TextView
-              android:id="@+id/textView_buttonCurrentPositionInfo"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="현재위치"
-              tools:layout_editor_absoluteX="183dp"
-              tools:layout_editor_absoluteY="173dp" />
+         android:padding="12dp"
+       >
 
      </RelativeLayout>
 

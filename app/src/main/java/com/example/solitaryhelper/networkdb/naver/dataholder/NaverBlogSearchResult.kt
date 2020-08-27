@@ -1,9 +1,12 @@
 package com.example.solitaryhelper.networkdb.naver.dataholder
 
-data class NaverNewsSearchResult(
+
+data class NaverBlogSearchResult(
     val lastBuildDate: String,
+    val postdate: String,
     val total: Int,
     val start: Int,
     val display: Int,
-    val items: List<NaverNews>
+    val items: List<NaverBlog>
+
 )

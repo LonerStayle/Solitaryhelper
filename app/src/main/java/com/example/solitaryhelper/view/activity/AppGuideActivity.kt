@@ -46,7 +46,7 @@ class AppGuideActivity : AppCompatActivity() {
                 viewPagerAppGuide.visibility = View.VISIBLE
                 linerLayoutIndicators.visibility = View.VISIBLE
             }
-           PrefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark = true
+
         } else {
 
             CoroutineScope(Dispatchers.Main).launch {
@@ -95,6 +95,7 @@ class AppGuideActivity : AppCompatActivity() {
                         buttonAppStart.setOnClickListener {
                             startActivity(Intent(this@AppGuideActivity, MainActivity::class.java))
                             finish()
+                            PrefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark = true
                         }
                     }
                     viewPagerAppGuide.currentItem != imageList!!.lastIndex ->{

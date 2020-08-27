@@ -34,7 +34,7 @@
             android:id="@+id/action_mainFragment_to_fragmentWiseSayingImageChange"
             app:destination="@id/fragmentWiseSayingImageChange" />
         <action
-            android:id="@+id/_fragmentTopicGuide"
+            android:id="@+id/mainToFragmentTopicGuide"
             app:destination="@id/fragmentTopicGuide" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentTopicResult"
@@ -139,12 +139,10 @@
         android:label="FragmentTopicResult" >
         <argument
             android:name="ages"
-            app:argType="integer"
-            android:defaultValue="2" />
+            app:argType="string" />
         <argument
             android:name="gender"
-            app:argType="string"
-            android:defaultValue="m" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCallAgreeScreen"

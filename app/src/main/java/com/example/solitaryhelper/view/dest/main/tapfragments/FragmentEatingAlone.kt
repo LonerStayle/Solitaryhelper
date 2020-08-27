@@ -1,20 +1,34 @@
 package com.example.solitaryhelper.view.dest.main.tapfragments
 
 import android.Manifest
+import android.R.attr
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
+import android.net.Uri
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentEatingAloneBinding
 import com.example.solitaryhelper.view.base.BaseFragment
+import com.example.solitaryhelper.view.dialog.DialogSimple
+import com.example.solitaryhelper.view.utill.toastDebugTest
+import com.example.solitaryhelper.view.utill.toastLongTime
+import com.example.solitaryhelper.view.utill.toastShort
 import com.google.android.gms.location.*
-import kotlinx.android.synthetic.main.fragment_fake_kakao_talk.*
+import kotlinx.android.synthetic.main.fragment_eating_alone.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import java.util.*
+import kotlin.time.milliseconds
 
 
 class FragmentEatingAlone :
@@ -22,39 +36,110 @@ class FragmentEatingAlone :
 
 
     companion object {
-
         const val REQUEST_ACCESS_COARSE_LOCATION_AND_ACCESS_FINE_LOCATION = 1111
     }
 
     var fusedLocationClient: FusedLocationProviderClient? = null
     var locationCallback: LocationCallback? = null
     var locationRequest: LocationRequest? = null
-
-    val mapView by lazy { MapView(requireActivity()) }
-
+    private val mapView by lazy { MapView(requireContext()) }
     var playerLatitude: Double? = null
     var playerLongitude: Double? = null
-    override fun FragmentEatingAloneBinding.setEventListener() {
-        buttonSendEatingHouse.setOnClickListener {
-        }
+    private val eatingList by lazy { resources.getStringArray(R.array.eatingList) }
 
+    override fun FragmentEatingAloneBinding.setEventListener() {
+
+        buttonClickListener()
     }
+
 
     override fun FragmentEatingAloneBinding.setCreateView() {
         initLocation()
+        mapViewContainer.addView(mapView)
+        mapLocationPlus()
         setMap()
-
 
     }
 
-    private fun FragmentEatingAloneBinding.setMap() {
-        mapLocationPlus()
-        mapViewContainer.addView(mapView)
+    private fun FragmentEatingAloneBinding.buttonClickListener() {
+
+        buttonSendEatingHouse.setOnClickListener {
+
+
+            if (ActivityCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        requireActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+                ) {
+                    DialogSimple.show(requireContext(),
+                        "사용자의 위치권한 요청.",
+                        "빠른 혼밥을 찾기위해 당신의 권한이 필요합니다." +
+                                "걱정마세요 앱 나갈때마다 사용자의 위치정보는 리셋돼요 ",
+                        "응 믿어볼게 ",
+                        {
+                            ActivityCompat.requestPermissions(
+                                requireActivity(),
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION
+                                ),
+                                REQUEST_ACCESS_COARSE_LOCATION_AND_ACCESS_FINE_LOCATION
+                            )
+                        },
+                        "미안 거절할게",
+                        { return@show })
+                }
+
+            } else {
+                try {
+                    val shuffled = eatingList.toList().shuffled()
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(3500L)
+                        context?.toastDebugTest("다시 이용하고 싶으면 \n뒤로가기를 눌러 앱으로 돌아가주세요")
+                    }
+
+                    val url = "kakaomap://search?q=${shuffled[0]}&p=$playerLatitude,$playerLongitude"
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent)
+                    context?.toastLongTime("혼밥 찾기 버튼을 누를때 마다 \n새로운 장소를 추천해드립니다. ")
+
+
+                } catch (e: Exception) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(3500L)
+                        context?.toastDebugTest("설치 완료 후 뒤로가기를 눌러 \n앱으로 돌아가서 다시 버튼을 누르시면 실행이 됩니다.")
+                    }
+                    context?.toastLongTime("카카오 지도와 연동되어 사용됩니다.\n설치를 하셔야 혼밥 찾기를 사용하실 수 있습니다.")
+                    val url = "https://play.google.com/store/apps/details?id=net.daum.android.map"
+//                    https://map.kakao.com/?q=맛집&p=37.537229,127.005515
+//                    https://play.google.com/store/apps/details?id=net.daum.android.map
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent)
+                }
+
+            }
+        }
+    }
+
+    private fun setMap() {
+
 
         if (playerLatitude == null || playerLongitude == null)
             mapView.setMapCenterPoint(
                 MapPoint.mapPointWithGeoCoord(37.551444, 126.994359),
-                true)
+                true
+            )
         else
             mapView.setMapCenterPoint(
                 MapPoint.mapPointWithGeoCoord(
@@ -64,7 +149,7 @@ class FragmentEatingAlone :
             )
 
 
-        mapView.setZoomLevel(7, true)
+        mapView.setZoomLevel(3, true)
         mapView.zoomIn(true)
         mapView.zoomOut(true)
 
@@ -72,35 +157,41 @@ class FragmentEatingAlone :
     }
 
     private fun mapLocationPlus() {
-
+        CoroutineScope(Dispatchers.Main).launch {
             var latitudRandom: Double
             var longitudeRandom: Double
 
             var i = 0
-            while (i < 100) {
-
+            while (i < 86) {
 
                 mapView.addPOIItem(MapPOIItem().apply {
 
                     if (playerLatitude == null || playerLongitude == null) {
-                        latitudRandom = Math.random() * (37.651444 - 37.450000) + 37.450000
-                        longitudeRandom = Math.random() * (127.094359 - 126.850000) + 126.850000
+                        latitudRandom =
+                            Math.random() * ((37.551444 + 0.025) - (37.551444 - 0.025)) + (37.551444 - 0.025)
+                        longitudeRandom =
+                            Math.random() * ((126.994359 + 0.025) - (126.994359 - 0.025)) + (126.994359 - 0.025)
+
+                        itemName =
+                            "서울 기준 혼밥집 위치를 잡아봤습니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
                     } else {
                         latitudRandom =
-                            Math.random() * (playerLatitude!!+0.1 - playerLatitude!! - 0.2) + playerLatitude!!+0.1 - 0.2
+                            Math.random() * (playerLatitude!! + 0.05 - playerLatitude!! - 0.05) + playerLatitude!! - 0.05
                         longitudeRandom =
-                            Math.random() * (playerLongitude!!+0.1 - playerLongitude!! - 0.2) + playerLongitude!!+0.1 - 0.2
+                            Math.random() * (playerLongitude!! + 0.05 - playerLongitude!! - 0.05) + playerLongitude!! - 0.05
+
+                        itemName =
+                            "근처에 확인된 혼밥집들입니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
                     }
-                    itemName =
-                        "근처에 확인된 혼밥집들입니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
                     tag = i
                     mapPoint = MapPoint.mapPointWithGeoCoord(latitudRandom, longitudeRandom)
                     markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
                     selectedMarkerType =
                         MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-                } )
+                })
                 i++
             }
+        }
     }
 
     private fun initLocation() {
@@ -117,14 +208,29 @@ class FragmentEatingAlone :
             )
             != PackageManager.PERMISSION_GRANTED
         ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                REQUEST_ACCESS_COARSE_LOCATION_AND_ACCESS_FINE_LOCATION
-            )
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                DialogSimple.show(requireContext(),
+                    "사용자의 위치권한 요청.",
+                    "빠른 혼밥을 찾기위해 당신의 권한이 필요합니다." +
+                            "걱정마세요 앱 나갈때마다 사용자의 위치정보는 리셋돼요 ",
+                    "응 믿어볼게 ",
+                    {
+                        ActivityCompat.requestPermissions(
+                            requireActivity(),
+                            arrayOf(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                            ),
+                            REQUEST_ACCESS_COARSE_LOCATION_AND_ACCESS_FINE_LOCATION
+                        )
+                    },
+                    "미안 거절할게",
+                    { return@show })
+            }
 
         } else {
             fusedLocationClient!!.lastLocation
@@ -162,6 +268,19 @@ class FragmentEatingAlone :
                 }
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient?.removeLocationUpdates(locationCallback)
+
+        mapViewContainer.visibility = View.GONE
+    }
+
+
+    override fun onResume() {
+        mapViewContainer.gravity = View.VISIBLE
+        super.onResume()
     }
 
 

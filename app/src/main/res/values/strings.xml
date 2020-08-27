@@ -45,4 +45,19 @@
         <item>5-</item>
     </string-array>
 
+    <string-array name="eatingList">
+        <item>혼밥</item>
+        <item>싸움의 고수</item>
+        <item>라멘</item>
+        <item>기사식당</item>
+        <item>분식집</item>
+        <item>토스트</item>
+        <item>패스트푸드</item>
+        <item>국밥</item>
+        <item>푸드코트</item>
+        <item>국수</item>
+        <item>밥</item>
+
+    </string-array>
+
 </resources>

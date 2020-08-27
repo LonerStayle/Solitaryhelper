@@ -12,7 +12,6 @@ import com.example.solitaryhelper.view.utill.toastDebugTest
 
 class FragmentTopic : BaseFragment<FragmentTopicBinding>(R.layout.fragment_topic) {
     private val genders = arrayOf("남성", "여성")
-    private var selectGenders: String? = null
 
     override fun FragmentTopicBinding.setEventListener() {
         setSeekBarListener()
@@ -22,29 +21,32 @@ class FragmentTopic : BaseFragment<FragmentTopicBinding>(R.layout.fragment_topic
 
     override fun FragmentTopicBinding.setCreateView() {
         setSpinnerAdapter()
+        imageViewGuide.setOnClickListener {
+            findNavController().navigate(R.id.mainToFragmentTopicGuide)
+        }
     }
 
     private fun FragmentTopicBinding.setButtonSearch() {
         buttonSearch.setOnClickListener {
-            if (TextUtils.isEmpty(selectGenders))
-                context?.toastDebugTest("대화할 성별을 선택해주세요")
+            if (TextUtils.isEmpty(textViewAge.text.toString()))
+                context?.toastDebugTest("사용자의 연령대를 선택해주세요")
             else
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToFragmentTopicResult(
-                        ageText!!.toInt(), selectGenders!!
-                    )
+                        textViewAge.text.toString(), textViewGender.text.toString())
                 )
         }
     }
 
     private fun FragmentTopicBinding.setSpinnerListener() {
         spinnerGenderSelect.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {selectGenders = genders[0]}
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                textViewGender.text = genders[0]}
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when (p2) {
-                    0 -> selectGenders = genders[0]
-                    1 -> selectGenders = genders[1]
+                    0 ->{  textViewGender.text = genders[0]}
+                    1 ->{  textViewGender.text = genders[1]}
                 }
             }
 
@@ -60,10 +62,11 @@ class FragmentTopic : BaseFragment<FragmentTopicBinding>(R.layout.fragment_topic
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
 
-                when (p1) {
-                    0 -> ageText = "중,고등학생"
-                    1 -> ageText = "2030청년"
-                    2 -> ageText = "4050중년"
+                ageText = when (p1) {
+                    0 -> "10대"
+                    1 -> "20~30대"
+                    2 -> "40~50대"
+                    else -> "20~30대"
                 }
             }
 
@@ -71,6 +74,7 @@ class FragmentTopic : BaseFragment<FragmentTopicBinding>(R.layout.fragment_topic
             }
 
             override fun onStopTrackingTouch(p0: SeekBar?) {
+
             }
 
         })

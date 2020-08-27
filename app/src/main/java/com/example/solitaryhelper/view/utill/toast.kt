@@ -12,3 +12,7 @@ fun Context.toastShort( @StringRes message:Int) {
 fun Context.toastDebugTest(message: String) {
     Toast.makeText(this, message , Toast.LENGTH_SHORT).show()
 }
+
+fun Context.toastLongTime(message: String) {
+    Toast.makeText(this, message , Toast.LENGTH_LONG).show()
+}

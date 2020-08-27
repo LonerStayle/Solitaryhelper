@@ -39,7 +39,7 @@ class TopicViewModel : ViewModel() {
         get() = _blogYoungGirlHair
 
     private val _blogOldManFashion = MutableLiveData<List<NaverBlog>>()
-    val blogYoungOldManFashion: LiveData<List<NaverBlog>>
+    val blogOldManFashion: LiveData<List<NaverBlog>>
         get() = _blogOldManFashion
 
     private val _blogOldGirlFashion = MutableLiveData<List<NaverBlog>>()
@@ -61,7 +61,7 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogMovie(movie: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = movie).item
+            val movie = NaverApiClient.api.searchBlog(query = "$movie 최신 영화 상영작").items
             _blogMovie.postValue(movie)
             //2020년 8월 최신 영화 상영작
         }
@@ -69,7 +69,7 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogMusic(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music).item
+            val movie = NaverApiClient.api.searchBlog(query = "멜론 $music 노래 듣기 ").items
             _blogMusic.postValue(movie)
 
 //            멜론 2020년 8월 노래 듣기
@@ -78,7 +78,7 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogFashion(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music).item
+            val movie = NaverApiClient.api.searchBlog(query = "$music 패션 트렌드").items
             _blogFashion.postValue(movie)
 
 //    2020년 8월 패션 트렌드
@@ -88,7 +88,7 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungManFashion(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music, sort = "date").item
+            val movie = NaverApiClient.api.searchBlog(query = "$music 남자 옷 추천").items
             _blogYoungManFashion.postValue(movie)
 
 //      2020년 남자 옷 추천
@@ -97,7 +97,7 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungGirlFashion(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music, sort = "date").item
+            val movie = NaverApiClient.api.searchBlog(query = "$music 여자 옷 추천").items
             _blogYoungManFashion.postValue(movie)
 
 //      2020년 여자 옷 추천
@@ -107,7 +107,8 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungManHair(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music, sort = "sim").item
+            val movie =
+                NaverApiClient.api.searchBlog(query = "$music 남자 헤어스타일 추천").items
             _blogYoungManHair.postValue(movie)
 
 //       2020년 8월 남자 헤어스타일 추천
@@ -116,56 +117,59 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungGirlHair(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music, sort = "sim").item
+            val movie =
+                NaverApiClient.api.searchBlog(query = "$music 여자 헤어스타일 추천").items
             _blogYoungGirlFashion.postValue(movie)
 
 //     2020년 8월 여자 헤어스타일 추천
         }
     }
 
-    fun insertBlogOldMANFashion(music: String) {
+    fun insertBlogOldMANFashion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music, sort = "sim").item
+            val movie = NaverApiClient.api.searchBlog(query = "중년 남성옷").items
             _blogOldManFashion.postValue(movie)
 
 //     중년 남성 옷
         }
     }
 
-    fun insertBlogOldGirlFashion(music: String) {
+    fun insertBlogOldGirlFashion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = music, sort = "sim").item
+            val movie = NaverApiClient.api.searchBlog(query = "중년 여성옷").items
             _blogOldGirlFashion.postValue(movie)
 
 //     중년 여성 옷
         }
     }
 
-    fun insertBlogStudentManFashion(music: String) {
+    fun insertBlogStudentManFashion() {
         CoroutineScope(Dispatchers.IO).launch {
             val movie =
-                NaverApiClient.api.searchBlog(query = music, display = 100, sort = "sim").item
+                NaverApiClient.api.searchBlog(query = "10대 남성 옷", display = 100).items
             _blogStudentManFashion.postValue(movie)
 
 //     10대 남성 옷
         }
     }
 
-    fun insertBlogStudentGirlFashion(music: String) {
+    fun insertBlogStudentGirlFashion() {
         CoroutineScope(Dispatchers.IO).launch {
             val movie =
-                NaverApiClient.api.searchBlog(query = music, display = 100, sort = "sim").item
+                NaverApiClient.api.searchBlog(query = "10대 여성 옷", display = 100).items
             _blogStudentGirlFashion.postValue(movie)
 
             // 10대 여성 옷
         }
     }
 
-    fun insertNaverNewsSearch(news:String) {
-
-        CoroutineScope(Dispatchers.IO).launch {
+    fun insertNaverNewsSearch() {
+        CoroutineScope(Dispatchers.Main).launch {
             val movie =
-                NaverApiClient.api.searchNews(query = news, display = 100, sort = "sim").items
+                NaverApiClient.api.searchNews(
+                    query = "재미 유행 인기 예능",
+                    display = 100
+                ).items
             _newsTrend.postValue(movie)
 
             //     재미 유행 인기 예능

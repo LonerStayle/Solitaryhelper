@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide
 import com.example.solitaryhelper.view.contents.Contents
 
 
-@BindingAdapter("bind:imageUrl")
-fun imageUrl(view: ImageView,url:String) = Glide.with(view.context).load(url).dontAnimate().into(view)
+@BindingAdapter("imageUrl")
+fun imageUrl(view:ImageView,url:String) = Glide.with(view.context).load(url).dontAnimate().into(view)
 
 @BindingAdapter("min")
 fun min(view:NumberPicker,min:Int) { view.minValue = min}

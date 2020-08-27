@@ -3,27 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.solitaryhelper">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/applogo_hood_line_64"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="n">
 
-        <meta-data android:name="com.kakao.sdk.AppKey"
-            android:value="552a0c77b52b52b771f3006eb1f5e640"/>
+
+
         <activity android:name=".view.activity.AppGuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,9 +32,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.MainActivity">
+
+            <intent-filter>
+                <data android:scheme="kakaomap://open" />
+                <data android:scheme="https://map.kakao.com"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
         </activity>
 
-
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="552a0c77b52b52b771f3006eb1f5e640" />
     </application>
 
 
