@@ -2,7 +2,9 @@ package com.example.solitaryhelper.view.contents
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
+import java.util.*
 
+@SuppressLint("SimpleDateFormat")
 object Contents {
     const val MAIN_FIRST_ITEM = 0
     const val MAIN_SECOND_ITEM = 1
@@ -17,10 +19,13 @@ object Contents {
     const val SMS_SETTING_TAB_LAYOUT_TOTAL_SIZE = 2
 
 
-    @SuppressLint("SimpleDateFormat")
+
     val timePattern =SimpleDateFormat("aa hh:mm")
 
+    val topicTimeYearMonth = SimpleDateFormat("yyyy년 MM월" ,Locale.KOREAN)
+    val topicTimeOnlyYear = SimpleDateFormat("yyyy년",Locale.KOREAN)
     const val IMAGE_URL_DEFAULT_FILE_PATH = "android.resource://com.example.solitaryhelper/"
+
 
      var AUTO_CHAT_DEALY = (Math.random() * (20000 - 3000) + 3000).toLong()
 

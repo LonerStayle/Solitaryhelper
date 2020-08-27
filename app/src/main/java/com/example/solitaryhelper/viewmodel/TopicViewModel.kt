@@ -7,6 +7,7 @@ import com.example.solitaryhelper.networkdb.naver.dataholder.NaverNews
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class TopicViewModel : ViewModel() {
 
@@ -69,7 +70,7 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogMusic(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "멜론 $music 노래 듣기 ").items
+            val movie = NaverApiClient.api.searchBlog(query = "멜론 $music 노래 듣기").items
             _blogMusic.postValue(movie)
 
 //            멜론 2020년 8월 노래 듣기
@@ -164,7 +165,7 @@ class TopicViewModel : ViewModel() {
     }
 
     fun insertNaverNewsSearch() {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val movie =
                 NaverApiClient.api.searchNews(
                     query = "재미 유행 인기 예능",

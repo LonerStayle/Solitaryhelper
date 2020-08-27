@@ -3,30 +3,29 @@ package com.example.solitaryhelper.view.dest.topics
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.databinding.FragmentTopicGuideBinding
+
 import com.example.solitaryhelper.databinding.FragmentTopicResultBinding
 import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlog
 import com.example.solitaryhelper.networkdb.naver.dataholder.NaverNews
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewTopicResult
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
+
+import com.example.solitaryhelper.view.contents.Contents.topicTimeOnlyYear
+import com.example.solitaryhelper.view.contents.Contents.topicTimeYearMonth
+import com.example.solitaryhelper.view.utill.toPicTextControl
+import com.example.solitaryhelper.view.utill.topicTimeDisplay
+import kotlinx.android.synthetic.main.fragment_topic_result.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
+
 import java.util.*
 import kotlin.properties.Delegates
-import kotlin.random.Random.Default.nextInt
-
-/**
- *
-10대 -> 최신영화, 최신 패션 트렌드, 최신음악, 최신 뉴스,최신 머리추천,10대 복
-20~30대 -> 최신영화, 최신 패션 트렌드, 최신음악, 최신 뉴스,최신 머리추천, 최신 옷 추천
-50대 -> 최신영화, 최신 패션 트렌드, 최신음악, 최신 뉴스,중년 남성 옷추천
- */
 
 
 @SuppressLint("SimpleDateFormat")
@@ -52,134 +51,143 @@ class FragmentTopicResult :
 
     private var blogList: MutableList<NaverBlog> = mutableListOf()
     private var imageList: Array<String>? = null
-
-
-    private val timeYearMonth by lazy { SimpleDateFormat("yyyy년mm월").format(Date(System.currentTimeMillis())) }
-
-    //영 패션만
-
-    private val timeOnlyYear by lazy { SimpleDateFormat("yyyy년").format(Date(System.currentTimeMillis())) }
+    private var apiSetComplete = false
 
     override fun FragmentTopicResultBinding.setEventListener() {
         imageViewNewsClickListener()
     }
 
     override fun FragmentTopicResultBinding.setCreateView() {
-        binding.imageUrl = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-            "sample6", "drawable",
-            requireActivity().packageName
-        ).toString())
-
         setCurrentAgeGroups()
-        setData()
+        setApi {
+            setData(it)
+        }
     }
 
 
     override fun FragmentTopicResultBinding.setLiveDataInObserver() {
-        setObserver()
-
+        setNewsTrendObserver()
+        setBlogObserver()
     }
 
-
-    private fun FragmentTopicResultBinding.setObserver() {
-
+    private fun FragmentTopicResultBinding.setNewsTrendObserver() {
 
         viewModelTopic.newsTrend.observe(viewLifecycleOwner, Observer { list ->
             val shuffled = list.shuffled()
             newsData = shuffled[0]
-            newsTitle = newsData!!.title
-            newsText = newsData!!.description
+            newsTitle = toPicTextControl(newsData!!.title)
+            newsText = toPicTextControl(newsData!!.description)
 
         })
-        viewModelTopic.blogMovie.observe(viewLifecycleOwner, Observer {
+    }
 
-            blogList.add(it.shuffled()[0])
+
+    private fun setBlogObserver() {
+
+        viewModelTopic.blogMovie.observe(viewLifecycleOwner, Observer {
+            val shuffled = it.shuffled()
+            blogList.add(shuffled[0])
 
 
         })
         viewModelTopic.blogMusic.observe(viewLifecycleOwner, Observer {
-
-            blogList.add(it.shuffled()[0])
+            val shuffled = it.shuffled()
+            blogList.add(shuffled[0])
 
         })
         viewModelTopic.blogFashion.observe(viewLifecycleOwner, Observer {
-
             blogList.add(it.shuffled()[0])
-
-
+            blogList.add(it.shuffled()[1])
+            blogList.add(it.shuffled()[2])
         })
 
 
         viewModelTopic.blogStudentManFashion.observe(viewLifecycleOwner, Observer {
 
-
-            if (currentAgeGroup == YOUNG_STUDENT_MAN)
-                blogList.add(it.shuffled()[0])
-            else
+            if (it.isNullOrEmpty())
                 return@Observer
 
-
+            if (currentAgeGroup == YOUNG_STUDENT_MAN) {
+                blogList.add(it.shuffled()[0])
+            } else
+                return@Observer
         })
         viewModelTopic.blogStudentGirlFashion.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
 
-
-            if (currentAgeGroup == YOUNG_STUDENT_GIRL)
+            if (currentAgeGroup == YOUNG_STUDENT_GIRL) {
                 blogList.add(it.shuffled()[0])
-            else
+            } else
                 return@Observer
 
         })
 
         viewModelTopic.blogYoungManHair.observe(viewLifecycleOwner, Observer {
-
+            if (it.isNullOrEmpty())
+                return@Observer
 
             if (currentAgeGroup == YOUNG_STUDENT_MAN ||
                 currentAgeGroup == YOUTH_MAN
-            )
+            ) {
                 blogList.add(it.shuffled()[0])
-            else
+            } else
                 return@Observer
 
 
         })
         viewModelTopic.blogYoungGirlHair.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
 
             if (currentAgeGroup == YOUNG_STUDENT_GIRL ||
                 currentAgeGroup == YOUTH_GIRL
-            )
+            ) {
                 blogList.add(it.shuffled()[0])
-            else
+            } else
                 return@Observer
 
         })
 
         viewModelTopic.blogYoungManFashion.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
 
-            if (currentAgeGroup == YOUTH_MAN)
+            if (currentAgeGroup == YOUTH_MAN) {
                 blogList.add(it.shuffled()[0])
-            else
+
+            } else
                 return@Observer
         })
 
         viewModelTopic.blogYoungGirlFashion.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
 
-            if (currentAgeGroup == YOUTH_GIRL)
+            if (currentAgeGroup == YOUTH_GIRL) {
                 blogList.add(it.shuffled()[0])
-            else
+
+            } else
                 return@Observer
         })
         viewModelTopic.blogOldManFashion.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
 
-            if (currentAgeGroup == MIDDLE_AGE_MAN)
+            if (currentAgeGroup == MIDDLE_AGE_MAN) {
                 blogList.add(it.shuffled()[0])
-            else
+                blogList.add(it.shuffled()[1])
+            } else
                 return@Observer
         })
         viewModelTopic.blogOldGirlFashion.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
 
-            if (currentAgeGroup == MIDDLE_AGE_GIRL)
+            if (currentAgeGroup == MIDDLE_AGE_GIRL) {
                 blogList.add(it.shuffled()[0])
-            else
+                blogList.add(it.shuffled()[1])
+            } else
                 return@Observer
         })
     }
@@ -187,13 +195,13 @@ class FragmentTopicResult :
     private fun FragmentTopicResultBinding.imageViewNewsClickListener() {
 
         imageViewNews.setOnClickListener {
-            val url = newsData!!.originallink
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            imageClickEvnetLogic(newsData!!.originallink)
         }
     }
 
     private fun setCurrentAgeGroups() {
+
+
         when {
             topicArgs.ages == "10대" && topicArgs.gender == "남성" -> currentAgeGroup =
                 YOUNG_STUDENT_MAN
@@ -209,26 +217,54 @@ class FragmentTopicResult :
                 MIDDLE_AGE_GIRL
         }
 
+    }
+
+    private fun setApi(setApiCompleteAfter: (Boolean) -> Unit) {
         viewModelTopic.insertNaverNewsSearch()
-        viewModelTopic.insertBlogFashion(timeYearMonth)
-        viewModelTopic.insertBlogMusic(timeYearMonth)
-        viewModelTopic.insertBlogMovie(timeYearMonth)
+        viewModelTopic.insertBlogFashion(topicTimeDisplay(topicTimeYearMonth.format(Date())))
+        viewModelTopic.insertBlogMusic(topicTimeDisplay(topicTimeYearMonth.format(Date())))
+        viewModelTopic.insertBlogMovie(topicTimeDisplay(topicTimeYearMonth.format(Date())))
+
         when (currentAgeGroup) {
             YOUNG_STUDENT_MAN -> {
                 viewModelTopic.insertBlogStudentManFashion()
-                viewModelTopic.insertBlogYoungManHair(timeYearMonth)
+                viewModelTopic.insertBlogYoungManHair(
+                    topicTimeDisplay(
+                        topicTimeYearMonth.format(
+                            Date()
+                        )
+                    )
+                )
             }
             YOUNG_STUDENT_GIRL -> {
                 viewModelTopic.insertBlogStudentGirlFashion()
-                viewModelTopic.insertBlogYoungGirlHair(timeYearMonth)
+                viewModelTopic.insertBlogYoungGirlHair(
+                    topicTimeDisplay(
+                        topicTimeYearMonth.format(
+                            Date()
+                        )
+                    )
+                )
             }
             YOUTH_MAN -> {
-                viewModelTopic.insertBlogYoungManHair(timeYearMonth)
-                viewModelTopic.insertBlogYoungManFashion(timeOnlyYear)
+                viewModelTopic.insertBlogYoungManHair(
+                    topicTimeDisplay(
+                        topicTimeYearMonth.format(
+                            Date()
+                        )
+                    )
+                )
+                viewModelTopic.insertBlogYoungManFashion(topicTimeOnlyYear.format(Date()))
             }
             YOUTH_GIRL -> {
-                viewModelTopic.insertBlogYoungGirlHair(timeYearMonth)
-                viewModelTopic.insertBlogYoungGirlFashion(timeOnlyYear)
+                viewModelTopic.insertBlogYoungGirlHair(
+                    topicTimeDisplay(
+                        topicTimeYearMonth.format(
+                            Date()
+                        )
+                    )
+                )
+                viewModelTopic.insertBlogYoungGirlFashion(topicTimeOnlyYear.format(Date()))
             }
             MIDDLE_AGE_MAN -> viewModelTopic.insertBlogOldMANFashion()
 
@@ -236,23 +272,49 @@ class FragmentTopicResult :
 
         }
 
+        apiSetComplete = true
+        setApiCompleteAfter(apiSetComplete)
+
     }
 
-    private fun setData() {
-        CoroutineScope(Dispatchers.IO).launch {
+    private fun setData(apiSetComplete: Boolean) {
+        binding.imageUrl = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+            "sample6", "drawable",
+            requireActivity().packageName
+        ).toString())
 
-            delay(5000L)
+        if (apiSetComplete) {
+            CoroutineScope(Dispatchers.Main).launch {
 
-            imageList = Array(blogList.size) { "" }
+                delay(2600L)
+                binding.spinKit.visibility = View.GONE
+                binding.imageViewNews.visibility = View.VISIBLE
+                imageList = Array(blogList.size) { "" }
 
-            for (i in blogList.indices) {
-                imageList!![i] = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                    "sample$i", "drawable",
-                    requireActivity().packageName
-                ).toString())
+                for (i in blogList.indices) {
+                    imageList!![i] =
+                        (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                            "sample$i", "drawable",
+                            requireActivity().packageName
+                        ).toString())
+                }
+                binding.recyclerViewTopicResult.adapter =
+                    AdapterRecyclerViewTopicResult(blogList, imageList!!) {
+                        for (i in blogList.indices) {
+                            when (it) {
+                                i -> {
+                                    imageClickEvnetLogic(blogList[i].link)
+                                }
+                            }
+                        }
+                    }
             }
-            binding.recyclerViewTopicResult.adapter =
-                AdapterRecyclerViewTopicResult(blogList, imageList!!)
         }
+    }
+
+    private fun imageClickEvnetLogic(link: String) {
+        val url = link
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 }

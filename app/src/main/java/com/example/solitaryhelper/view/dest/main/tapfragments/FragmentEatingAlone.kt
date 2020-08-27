@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.Uri
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +43,7 @@ class FragmentEatingAlone :
     var fusedLocationClient: FusedLocationProviderClient? = null
     var locationCallback: LocationCallback? = null
     var locationRequest: LocationRequest? = null
-    private val mapView by lazy { MapView(requireContext()) }
+    private val mapView by lazy { MapView(requireActivity()) }
     var playerLatitude: Double? = null
     var playerLongitude: Double? = null
     private val eatingList by lazy { resources.getStringArray(R.array.eatingList) }
@@ -246,7 +247,7 @@ class FragmentEatingAlone :
                     it.printStackTrace()
                 }
 
-//            fusedLocationClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+
 
             locationRequest = LocationRequest.create()
             locationRequest?.run {
@@ -266,22 +267,23 @@ class FragmentEatingAlone :
                         }
                     }
                 }
+
+            fusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
 
     }
 
     override fun onPause() {
-        super.onPause()
+        mapViewContainer.removeView(mapView)
         fusedLocationClient?.removeLocationUpdates(locationCallback)
+        super.onPause()
+    }
 
-        mapViewContainer.visibility = View.GONE
+//    override fun onStop() {
+
+//        super.onStop()
     }
 
 
-    override fun onResume() {
-        mapViewContainer.gravity = View.VISIBLE
-        super.onResume()
-    }
 
 
-}

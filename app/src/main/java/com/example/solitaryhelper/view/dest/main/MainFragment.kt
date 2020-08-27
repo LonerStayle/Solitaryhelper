@@ -256,4 +256,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             }
         }
     }
+
+    override fun onPause() {
+        binding.navigationViewMain.removeHeaderView(naviHeaderBinding.root)
+        super.onPause()
+    }
 }
