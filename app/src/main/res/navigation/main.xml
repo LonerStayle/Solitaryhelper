@@ -93,13 +93,16 @@
         android:label="FragmentFakeCall" >
         <argument
             android:name="callPartyName"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="임하나" />
         <argument
             android:name="callMode"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="3" />
         <argument
             android:name="callNotication"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="1" />
         <action
             android:id="@+id/action_fragmentFakeCall_to_fragmentFakeCallAgreeScreen"
             app:destination="@id/fragmentFakeCallAgreeScreen" />

@@ -1,8 +1,396 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+<!--        첫시작 <-->
+        <variable
+            name="oneAndOne"
+            type="String" />
+
+        <variable
+            name="oneAndTwo"
+            type="String" />
+
+<!--        두번째 질문-->
+
+        <variable
+            name="twoAndOne"
+            type="String" />
+
+        <variable
+            name="twoAndTwo"
+            type="String" />
+
+        <variable
+            name="twoAndThree"
+            type="String" />
+
+        <variable
+            name="twoAndFour"
+            type="String" />
+
+<!--두번째 질문안에 혼자놀기 추천 질문         -->
+
+        <variable
+            name="SoloOne"
+            type="String" />
+        <variable
+            name="SoloTwo"
+            type="String" />
+        <variable
+            name="SoloThree"
+            type="String" />
+        <variable
+            name="SoloFour"
+            type="String" />
+
+
+<!--        세번째 질문 -->
+
+        <variable
+            name="threeAndOne"
+            type="String" />
+
+        <variable
+            name="threeAndTwo"
+            type="String" />
+
+        <variable
+            name="threeAndThree"
+            type="String" />
+
+        <variable
+            name="threeAndFour"
+            type="String" />
+
+        <variable
+            name="threeAndFive"
+            type="String" />
+
+        <variable
+            name="threeAndSix"
+            type="String" />
+
+        <variable
+            name="threeAndSeven"
+            type="String" />
+
+        <variable
+            name="threeAndEight"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_chatBot"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_chatBotOneSideConversationAnswer"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+        >
+
+            <TextView
+                android:id="@+id/textView_oneAnswerQuestionOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{oneAndOne}"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView_oneAnswerQuestionTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{oneAndTwo}"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                tools:text=" 하이 " />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_chatBotTwoSideConversationAnswer"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+
+            <TextView
+                android:id="@+id/textView_twoAnswerQuestionOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{twoAndOne}"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                tools:text="넌 누구니?" />
+
+            <TextView
+                android:id="@+id/textView_twoAnswerQuestionTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{twoAndTwo}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text=" 하이 " />
+
+            <TextView
+                android:id="@+id/textView_twoAnswerQuestionThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{twoAndThree}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text=" 하이 " />
+
+            <TextView
+                android:id="@+id/textView_twoAnswerQuestionFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{twoAndFour}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="넌 누구니?" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_Solo"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+
+            <TextView
+                android:id="@+id/textView_SoloOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{SoloOne}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="넌 누구니?" />
+
+            <TextView
+                android:id="@+id/textView_SoloTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{SoloTwo}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text=" 하이 " />
+
+            <TextView
+                android:id="@+id/textView_SoloThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{SoloThree}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text=" 하이 " />
+
+            <TextView
+                android:id="@+id/textView_SoloFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{SoloFour}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="넌 누구니?" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_chatBotThreeSideConversationAnswer"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndOne}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="넌 누구니?" />
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndTwo}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="하이" />
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndThree}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="넌 누구니?" />
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndFour}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="하이" />
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndFive}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="넌 누구니?" />
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionSix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndSix}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="하이" />
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionSeven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndSeven}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="넌 누구니?" />
+
+            <TextView
+                android:id="@+id/textView_threeAnswerQuestionEight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/chatbot_textview_background"
+                android:padding="4dp"
+                android:text="@{threeAndEight}"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                tools:text="하이" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="2dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

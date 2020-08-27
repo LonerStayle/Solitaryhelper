@@ -114,11 +114,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun FragmentMainBinding.setTabIconClickListener() {
+
         tabLayoutMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 for (i in 0..4) {
                     when (tab?.position) {
                         i -> tab.setIcon(iconSelectImage[i])
+                        4 -> fabStart.hide()
                     }
                 }
             }
@@ -127,6 +129,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 for (i in 0..4) {
                     when (tab?.position) {
                         i -> tab.setIcon(iconImage[i])
+                        4 -> fabStart.show()
                     }
                 }
             }

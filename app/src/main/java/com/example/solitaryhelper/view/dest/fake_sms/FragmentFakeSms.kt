@@ -17,8 +17,8 @@ class FragmentFakeSms:BaseFragment<FragmentFakeSmsBinding>(R.layout.fragment_fak
 
     override fun FragmentFakeSmsBinding.setLiveDataInObserver() {
         viewModelSms.SmsList.observe(viewLifecycleOwner, Observer {
-            it?:return@Observer
             recyclerViewSms.adapter = AdapterRecyclerViewSmsCustom(it as MutableList<Sms>)
+
         })
     }
 }

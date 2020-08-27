@@ -19,6 +19,5 @@ class FragmentFakeSmsSettingPamphlet :
     override fun FragmentFakeSmsSettingPamphletBinding.setCreateView() {
 
 
-
     }
 }

@@ -565,7 +565,7 @@
         <item>어~ 왔어? 어서오고 물어봐</item>
     </string-array>
 
-    <string-array name="chatBotGreetingsConversationAnswer">
+    <string-array name="chatBotOneSideConversationAnswer">
         <item>넌 누구니?</item>
         <item>아싸의 대처법 </item>
     </string-array>
@@ -581,6 +581,14 @@
         <item>인싸가 되고싶어 </item>
         <item>아싸가 혼밥 하는 방법</item>
         <item>뒤로 가기 </item>
+    </string-array>
+
+    <string-array name="chatBotSoloGameAnswer">
+        <item>혼자 클럽가서 노는법</item>
+        <item>혼술 할만한 곳</item>
+        <item>혼자 음악과 춤을 즐기는법</item>
+        <item>뒤로가기</item>
+
     </string-array>
 
     <string-array name="chatBotTwoInOneSide">

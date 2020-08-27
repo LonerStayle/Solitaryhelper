@@ -21,6 +21,7 @@ class FragmentFakeSmsSetting :
             when (position) {
                 0 -> tab.text = "저장 목록"
                 1 -> tab.text = "문자 리스트 만들기"
+
             }
         }.attach()
     }

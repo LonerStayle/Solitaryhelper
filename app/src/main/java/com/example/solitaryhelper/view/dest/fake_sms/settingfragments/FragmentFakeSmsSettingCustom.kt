@@ -34,13 +34,12 @@ class FragmentFakeSmsSettingCustom :
 
     private fun FragmentFakeSmsSettingCustomBinding.setObserver() {
         viewModelSms.SmsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            it ?: return@Observer
             if (!setRecyclerViewAdapter) {
                 recyclerViewSmsSettingCustom.adapter =
                     AdapterRecyclerViewSmsCustom(it.toMutableList())
                 setRecyclerViewAdapter = true
-
             }
+
             if (setRecyclerViewAdapter) {
                 (recyclerViewSmsSettingCustom.adapter as? AdapterRecyclerViewSmsCustom)?.apply {
                     this.smsList.add(it.last())
@@ -63,13 +62,15 @@ class FragmentFakeSmsSettingCustom :
     }
 
     private fun FragmentFakeSmsSettingCustomBinding.setYourButtonClickListener() {
+
         var buttonClickMode = false
         buttonYourText.setOnClickListener {
+
             buttonClickMode = !buttonClickMode
             if (myTextMode)
-                it.setBackgroundColor(Color.parseColor("#FFF"))
+                it.setBackgroundColor(Color.parseColor("#FFFFFF"))
             else {
-                it.setBackgroundColor(Color.parseColor("#000"))
+                it.setBackgroundColor(Color.parseColor("#000000"))
             }
         }
     }
