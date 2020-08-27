@@ -21,10 +21,16 @@ import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_fake_sms.*
+import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 
 class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.fragment_wise_saying) {
 
+    private val wiseList by lazy {
+        resources.getStringArray(R.array.wiseList)
+    }
+    private val stack = Stack<String>()
 
     private val shortcutManager by lazy {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -43,18 +49,49 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
     }
 
     override fun FragmentWiseSayingBinding.setEventListener() {
-        button2.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                addShortcutToNotification()
-            } else {
-                context?.toastDebugTest("이 기능은 안드로이드11 이상에서만 사용하실 수 있습니다. ")
-            }
+
+        buttonBubbleDataUseClickListener()
+        buttonMainTabVisible()
+        buttonPrevClickListener()
+        buttonNextClickListener()
+
+    }
+
+
+
+    override fun FragmentWiseSayingBinding.setCreateView() {
+        createNotificationChannel()
+        setWiseText()
+    }
+
+
+    private fun FragmentWiseSayingBinding.buttonPrevClickListener() {
+       buttonPriv.setOnClickListener {
+           wiseText = if (stack.isEmpty())
+               wiseList[Random().nextInt(wiseList.size)]
+           else
+               stack.pop()
+       }
+
+    }
+
+    private fun FragmentWiseSayingBinding.setWiseText() {
+        wiseText = wiseList[Random().nextInt(wiseList.size)]
+    }
+
+    private fun FragmentWiseSayingBinding.buttonNextClickListener() {
+        buttonNext.setOnClickListener {
+            stack.push(wiseText)
+            wiseText = wiseList[Random().nextInt(wiseList.size)]
         }
 
+    }
+
+    private fun FragmentWiseSayingBinding.buttonMainTabVisible() {
         var click = false
         buttonMainTabVisible.setOnClickListener {
             click = !click
-           val mainTab = requireActivity().findViewById<TabLayout>(R.id.tabLayout_main)
+            val mainTab = requireActivity().findViewById<TabLayout>(R.id.tabLayout_main)
 
             if (click)
                 mainTab.visibility = View.GONE
@@ -63,18 +100,18 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
         }
     }
 
-
-    override fun FragmentWiseSayingBinding.setCreateView() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            createNotificationChannel()
+    private fun FragmentWiseSayingBinding.buttonBubbleDataUseClickListener() {
+        buttonBubbleDataUse.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                addShortcutToNotification()
+            } else {
+                context?.toastDebugTest("이 기능은 안드로이드11 이상에서만 사용하실 수 있습니다. ")
+            }
         }
-
-
     }
 
-
     @RequiresApi(Build.VERSION_CODES.R)
-    private fun FragmentWiseSayingBinding.addShortcutToNotification() {
+    private fun addShortcutToNotification() {
 
         val receiverHeader =
             Icon.createWithResource(requireContext(), R.drawable.ic_launcher_background)
@@ -149,19 +186,21 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
         shortcutManager.pushDynamicShortcut(shortcutInfo)
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
+
     private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(
+                "notification_channel_id",
+                "name",
+                importance
+            ).apply {
+                description = "descriptionText"
+            }
+            notificationManager.createNotificationChannel(channel)
 
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel = NotificationChannel(
-            "notification_channel_id",
-            "name",
-            importance
-        ).apply {
-            description = "descriptionText"
+        } else {
+            return
         }
-        notificationManager.createNotificationChannel(channel)
-
     }
-
 }

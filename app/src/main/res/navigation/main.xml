@@ -16,9 +16,6 @@
             android:id="@+id/action_mainFragment_to_fragmentFakeSmsSetting"
             app:destination="@id/fragmentFakeSmsSetting" />
         <action
-            android:id="@+id/action_mainFragment_to_fragmentWiseSayingCreate"
-            app:destination="@id/fragmentWiseSayingCreate" />
-        <action
             android:id="@+id/action_mainFragment_to_fragmentFakeKakaoTalk"
             app:destination="@id/fragmentFakeKakaoTalk" />
         <action
@@ -27,12 +24,6 @@
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeSms"
             app:destination="@id/fragmentFakeSms" />
-        <action
-            android:id="@+id/action_mainFragment_to_fragmentWiseSayingList"
-            app:destination="@id/fragmentWiseSayingList" />
-        <action
-            android:id="@+id/action_mainFragment_to_fragmentWiseSayingImageChange"
-            app:destination="@id/fragmentWiseSayingImageChange" />
         <action
             android:id="@+id/mainToFragmentTopicGuide"
             app:destination="@id/fragmentTopicGuide" />
@@ -59,10 +50,6 @@
             android:id="@+id/action_fragmentFakeSmsSetting_to_fragmentFakeSms"
             app:destination="@id/fragmentFakeSms" />
     </fragment>
-    <fragment
-        android:id="@+id/fragmentWiseSayingCreate"
-        android:name="com.example.solitaryhelper.view.dest.wise_saying_fragments.FragmentWiseSayingCreate"
-        android:label="FragmentWiseSayingCreate" />
     <fragment
         android:id="@+id/fragmentFakeKakaoTalk"
         android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk"
@@ -122,14 +109,6 @@
         android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSms"
         android:label="FragmentFakeSms" />
     <fragment
-        android:id="@+id/fragmentWiseSayingImageChange"
-        android:name="com.example.solitaryhelper.view.dest.wise_saying_fragments.FragmentWiseSayingImageChange"
-        android:label="FragmentWiseSayingImageChange" />
-    <fragment
-        android:id="@+id/fragmentWiseSayingList"
-        android:name="com.example.solitaryhelper.view.dest.wise_saying_fragments.FragmentWiseSayingList"
-        android:label="FragmentWiseSayingList" />
-    <fragment
         android:id="@+id/fragmentTopicGuide"
         android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicGuide"
         android:label="fragmentTopicGuide" />
@@ -158,7 +137,7 @@
     <fragment
         android:id="@+id/fragmentAutoChatRunCheck"
         android:name="com.example.solitaryhelper.view.dest.FragmentAutoChatRunCheck"
-        android:label="FragmentAutoChatRunCheck" >
+        android:label="FragmentAutoChatRunCheck">
         <action
             android:id="@+id/action_fragmentAutoChatRunCheck_to_mainFragment"
             app:destination="@id/mainFragment" />
