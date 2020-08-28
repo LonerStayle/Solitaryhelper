@@ -158,7 +158,6 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
 
     override fun onPause() {
         if (args.callMode == 3) {
-            sound.stop()
             sound.reset()
             sound.release()
         }

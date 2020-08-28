@@ -3,6 +3,7 @@ package com.example.solitaryhelper.view.dest.main.tapfragments
 import android.Manifest
 import android.R.attr
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
@@ -43,11 +44,16 @@ class FragmentEatingAlone :
     var fusedLocationClient: FusedLocationProviderClient? = null
     var locationCallback: LocationCallback? = null
     var locationRequest: LocationRequest? = null
-    private val mapView by lazy { MapView(requireActivity()) }
+    private val mapView by lazy{MapView(requireActivity())}
     var playerLatitude: Double? = null
     var playerLongitude: Double? = null
     private val eatingList by lazy { resources.getStringArray(R.array.eatingList) }
+    private var fristRun:Boolean = false
 
+    override fun onAttach(context: Context) {
+mapView
+        super.onAttach(context)
+    }
     override fun FragmentEatingAloneBinding.setEventListener() {
 
         buttonClickListener()
@@ -163,23 +169,23 @@ class FragmentEatingAlone :
             var longitudeRandom: Double
 
             var i = 0
-            while (i < 86) {
+            while (i < 30) {
 
                 mapView.addPOIItem(MapPOIItem().apply {
 
                     if (playerLatitude == null || playerLongitude == null) {
                         latitudRandom =
-                            Math.random() * ((37.551444 + 0.025) - (37.551444 - 0.025)) + (37.551444 - 0.025)
+                            Math.random() * ((37.551444 + 0.01) - (37.551444 - 0.01)) + (37.551444 - 0.01)
                         longitudeRandom =
-                            Math.random() * ((126.994359 + 0.025) - (126.994359 - 0.025)) + (126.994359 - 0.025)
+                            Math.random() * ((126.994359 + 0.01) - (126.994359 - 0.01)) + (126.994359 - 0.01)
 
                         itemName =
                             "서울 기준 혼밥집 위치를 잡아봤습니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
                     } else {
                         latitudRandom =
-                            Math.random() * (playerLatitude!! + 0.05 - playerLatitude!! - 0.05) + playerLatitude!! - 0.05
+                            Math.random() * (playerLatitude!! + 0.01 - playerLatitude!! - 0.01) + playerLatitude!! - 0.01
                         longitudeRandom =
-                            Math.random() * (playerLongitude!! + 0.05 - playerLongitude!! - 0.05) + playerLongitude!! - 0.05
+                            Math.random() * (playerLongitude!! + 0.01 - playerLongitude!! - 0.01) + playerLongitude!! - 0.01
 
                         itemName =
                             "근처에 확인된 혼밥집들입니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
@@ -268,9 +274,18 @@ class FragmentEatingAlone :
                     }
                 }
 
-            fusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+//            fusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
 
+    }
+
+    override fun onResume() {
+        if(fristRun)
+        mapViewContainer.addView(mapView)
+        else
+            fristRun = false
+
+        super.onResume()
     }
 
     override fun onPause() {

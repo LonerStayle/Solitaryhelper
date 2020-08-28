@@ -20,9 +20,9 @@ class SmsViewModel(private val dataSource: RoomDao) : ViewModel() {
         }
 
     }
-    fun smsDelete(sms: Sms){
+    fun smsAllDelete(sms: List<Sms>){
         ioScope.launch {
-            dataSource.deleteSms(sms)
+            dataSource.deleteSmsList(sms)
         }
     }
 

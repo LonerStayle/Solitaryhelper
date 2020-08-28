@@ -2,6 +2,7 @@ package com.example.solitaryhelper.view.dest.main
 
 
 import android.text.TextUtils
+import android.view.View
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -120,7 +121,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 for (i in 0..4) {
                     when (tab?.position) {
                         i -> tab.setIcon(iconSelectImage[i])
-                        4 -> fabStart.hide()
+                        4 -> {fabStart.hide();buttonMenu.visibility = View.GONE}
                     }
                 }
             }
@@ -129,7 +130,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 for (i in 0..4) {
                     when (tab?.position) {
                         i -> tab.setIcon(iconImage[i])
-                        4 -> fabStart.show()
+                        4 -> {fabStart.show();fabStart.hide();buttonMenu.visibility = View.VISIBLE}
                     }
                 }
             }

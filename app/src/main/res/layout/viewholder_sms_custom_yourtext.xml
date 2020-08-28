@@ -23,6 +23,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="12sp"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:background="@android:color/transparent"
             tools:text="안녕하세요 로너입니다. " />
 
         <EditText
@@ -31,6 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textSize="10sp"
+            android:background="@android:color/transparent"
+            android:inputType="textMultiLine|textNoSuggestions"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="@+id/textView" />

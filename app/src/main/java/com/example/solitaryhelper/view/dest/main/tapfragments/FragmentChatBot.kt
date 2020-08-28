@@ -78,7 +78,7 @@ class FragmentChatBot : BaseFragment<FragmentChatbotBinding>(R.layout.fragment_c
     private fun FragmentChatbotBinding.setOneAndTwoClickListener() {
         textViewOneAnswerQuestionTwo.setOnClickListener {
             setNextPage(chatBotOneSideConversationAnswer[1]) {
-                setSoloVisible()
+                setTwoAnswerVisible()
             }
         }
     }
@@ -106,38 +106,39 @@ class FragmentChatBot : BaseFragment<FragmentChatbotBinding>(R.layout.fragment_c
 
 
     private fun FragmentChatbotBinding.setOneAnswerVisible() {
-        frameLayoutChatBotOneSideConversationAnswer.visibility = View.VISIBLE
-        frameLayoutChatBotTwoSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotThreeSideConversationAnswer.visibility = View.GONE
-        frameLayoutSolo.visibility = View.GONE
+        layoutChatBotOneSideConversationAnswer.visibility = View.VISIBLE
+        layoutChatBotTwoSideConversationAnswer.visibility = View.GONE
+        layoutChatBotThreeSideConversationAnswer.visibility = View.GONE
+        layoutSolo.visibility = View.GONE
     }
 
     private fun FragmentChatbotBinding.setTwoAnswerVisible() {
-        frameLayoutChatBotOneSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotTwoSideConversationAnswer.visibility = View.VISIBLE
-        frameLayoutChatBotThreeSideConversationAnswer.visibility = View.GONE
-        frameLayoutSolo.visibility = View.GONE
+        layoutChatBotOneSideConversationAnswer.visibility = View.GONE
+        layoutChatBotTwoSideConversationAnswer.visibility = View.VISIBLE
+        layoutChatBotThreeSideConversationAnswer.visibility = View.GONE
+        layoutSolo.visibility = View.GONE
     }
 
     private fun FragmentChatbotBinding.setThreeAnswerVisible() {
-        frameLayoutChatBotOneSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotTwoSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotThreeSideConversationAnswer.visibility = View.VISIBLE
-        frameLayoutSolo.visibility = View.GONE
+        layoutChatBotOneSideConversationAnswer.visibility = View.GONE
+        layoutChatBotTwoSideConversationAnswer.visibility = View.GONE
+        layoutChatBotThreeSideConversationAnswer.visibility = View.VISIBLE
+        layoutSolo.visibility = View.GONE
     }
 
     private fun FragmentChatbotBinding.setSoloVisible() {
-        frameLayoutChatBotOneSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotTwoSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotThreeSideConversationAnswer.visibility = View.GONE
-        frameLayoutSolo.visibility = View.VISIBLE
+
+        layoutChatBotOneSideConversationAnswer.visibility = View.GONE
+        layoutChatBotTwoSideConversationAnswer.visibility = View.GONE
+        layoutChatBotThreeSideConversationAnswer.visibility = View.GONE
+        layoutSolo.visibility = View.VISIBLE
     }
 
     private fun FragmentChatbotBinding.setAllGONE() {
-        frameLayoutChatBotOneSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotTwoSideConversationAnswer.visibility = View.GONE
-        frameLayoutChatBotThreeSideConversationAnswer.visibility = View.GONE
-        frameLayoutSolo.visibility = View.GONE
+        layoutChatBotOneSideConversationAnswer.visibility = View.GONE
+        layoutChatBotTwoSideConversationAnswer.visibility = View.GONE
+        layoutChatBotThreeSideConversationAnswer.visibility = View.GONE
+        layoutSolo.visibility = View.GONE
     }
 
     private fun FragmentChatbotBinding.setOneAndOneClickListener() {
@@ -151,12 +152,9 @@ class FragmentChatBot : BaseFragment<FragmentChatbotBinding>(R.layout.fragment_c
 
     private fun FragmentChatbotBinding.setTwoAndOneClickListener() {
         textViewTwoAnswerQuestionOne.setOnClickListener {
-            setMyTextInsert(
-                chatBotTwoSideConversationAnswer[0],
-                chatBotTwoInOneSide[0]
-            ) {
-                setTwoAnswerVisible()
-            }
+        setNextPage(chatBotTwoSideConversationAnswer[0]){
+            setSoloVisible()
+        }
         }
     }
 
@@ -232,20 +230,30 @@ class FragmentChatBot : BaseFragment<FragmentChatbotBinding>(R.layout.fragment_c
                     notifyItemInserted(textList.lastIndex)
                     notifyItemChanged(textList.lastIndex - 1)
                 }
-                for (i in chatBotTwoInThreeSide.indices) {
-                    controlList.add(ChatListControl(chatBotTwoInTwoSide[i]))
-                }
+
+
+
                 (recyclerViewChatBot.adapter as AdapterRecyclerViewChatBot).apply {
-                    this.textList = controlList
-                    delay(2000)
-                    notifyItemChanged(textList.lastIndex - 4)
+
+
+
+
+
+
+
+                    this.textList.add(ChatListControl(chatBotTwoInTwoSide[0]))
+                    notifyItemInserted(textList.lastIndex )
                     delay(3000)
-                    notifyItemChanged(textList.lastIndex - 3)
+                    this.textList.add(ChatListControl(chatBotTwoInTwoSide[1]))
+                    notifyItemInserted(textList.lastIndex )
                     delay(3000)
-                    notifyItemChanged(textList.lastIndex - 2)
+                    this.textList.add(ChatListControl(chatBotTwoInTwoSide[2]))
+                    notifyItemInserted(textList.lastIndex )
                     delay(3000)
-                    notifyItemChanged(textList.lastIndex - 1)
+                    this.textList.add(ChatListControl(chatBotTwoInTwoSide[3]))
+                    notifyItemInserted(textList.lastIndex )
                     delay(3000)
+                    this.textList.add(ChatListControl(chatBotTwoInTwoSide[4]))
                     notifyItemInserted(textList.lastIndex)
                 }
                 recyclerViewChatBot.scrollToPosition(controlList.lastIndex)

@@ -98,296 +98,349 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-            android:id="@+id/frameLayout_chatBotOneSideConversationAnswer"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_chatBotOneSideConversationAnswer"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-        >
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/textView_oneAnswerQuestionOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{oneAndOne}"
                 android:textColor="#fff"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_oneAnswerQuestionTwo"
+                app:layout_constraintStart_toStartOf="@+id/textView_oneAnswerQuestionTwo"
+                app:layout_constraintTop_toBottomOf="@+id/textView_oneAnswerQuestionTwo" />
 
             <TextView
                 android:id="@+id/textView_oneAnswerQuestionTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{oneAndTwo}"
                 android:textColor="#fff"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text=" 하이 " />
 
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
-            android:id="@+id/frameLayout_chatBotTwoSideConversationAnswer"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_chatBotTwoSideConversationAnswer"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent">
 
 
             <TextView
                 android:id="@+id/textView_twoAnswerQuestionOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{twoAndOne}"
                 android:textColor="#fff"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/view5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="넌 누구니?" />
 
             <TextView
                 android:id="@+id/textView_twoAnswerQuestionTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{twoAndTwo}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_twoAnswerQuestionOne"
+                app:layout_constraintStart_toStartOf="@+id/textView_twoAnswerQuestionOne"
+                app:layout_constraintTop_toBottomOf="@+id/textView_twoAnswerQuestionOne"
                 tools:text=" 하이 " />
 
             <TextView
                 android:id="@+id/textView_twoAnswerQuestionThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{twoAndThree}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view5"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text=" 하이 " />
 
             <TextView
                 android:id="@+id/textView_twoAnswerQuestionFour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{twoAndFour}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_twoAnswerQuestionThree"
+                app:layout_constraintStart_toStartOf="@+id/textView_twoAnswerQuestionThree"
+                app:layout_constraintTop_toBottomOf="@+id/textView_twoAnswerQuestionThree"
                 tools:text="넌 누구니?" />
-        </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frameLayout_Solo"
+            <View
+                android:id="@+id/view5"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_Solo"
             android:layout_width="0dp"
             android:layout_height="120dp"
 
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent">
 
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView_SoloOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
+
                 android:layout_marginTop="8dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{SoloOne}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/view6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="넌 누구니?" />
 
             <TextView
                 android:id="@+id/textView_SoloTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{SoloTwo}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view6"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text=" 하이 " />
 
             <TextView
                 android:id="@+id/textView_SoloThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{SoloThree}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_SoloOne"
+                app:layout_constraintStart_toStartOf="@+id/textView_SoloOne"
+                app:layout_constraintTop_toBottomOf="@+id/textView_SoloOne"
                 tools:text=" 하이 " />
 
             <TextView
                 android:id="@+id/textView_SoloFour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{SoloFour}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_SoloTwo"
+                app:layout_constraintStart_toStartOf="@+id/textView_SoloTwo"
+                app:layout_constraintTop_toBottomOf="@+id/textView_SoloTwo"
                 tools:text="넌 누구니?" />
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
-            android:id="@+id/frameLayout_chatBotThreeSideConversationAnswer"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_chatBotThreeSideConversationAnswer"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="140dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndOne}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_threeAnswerQuestionTwo"
+                app:layout_constraintStart_toStartOf="@+id/textView_threeAnswerQuestionTwo"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="넌 누구니?" />
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|bottom"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="30dp"
+
+                android:layout_marginTop="16dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndTwo}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_threeAnswerQuestionThree"
+                app:layout_constraintStart_toStartOf="@+id/textView_threeAnswerQuestionThree"
+                app:layout_constraintTop_toBottomOf="@+id/textView_threeAnswerQuestionOne"
                 tools:text="하이" />
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
+
+                android:layout_marginTop="16dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndThree}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_threeAnswerQuestionTwo"
                 tools:text="넌 누구니?" />
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionFour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
-                android:layout_marginTop="60dp"
+
+                android:layout_marginTop="24dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndFour}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_threeAnswerQuestionFive"
+                app:layout_constraintStart_toStartOf="@+id/textView_threeAnswerQuestionFive"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="하이" />
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionFive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="60dp"
+
+                android:layout_marginTop="32dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndFive}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.44"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_threeAnswerQuestionFour"
                 tools:text="넌 누구니?" />
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionSix"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|top"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
+
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndSix}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_threeAnswerQuestionSeven"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:text="하이" />
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionSeven"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|center"
-                android:layout_marginEnd="16dp"
+
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndSeven}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_threeAnswerQuestionEight"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:text="넌 누구니?" />
 
             <TextView
                 android:id="@+id/textView_threeAnswerQuestionEight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="30dp"
+
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/chatbot_textview_background"
                 android:padding="4dp"
                 android:text="@{threeAndEight}"
                 android:textColor="#fff"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:text="하이" />
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/view4"
             android:layout_width="2dp"
             android:layout_height="1dp"
-            android:layout_marginBottom="120dp"
+            android:layout_marginBottom="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

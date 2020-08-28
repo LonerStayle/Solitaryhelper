@@ -16,12 +16,12 @@
 
     <ImageView
         android:id="@+id/imageView_chatBotImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/sample0"
+        android:src="@drawable/applogo_hood_64"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,18 +33,22 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="아싸도우미"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView_chatBotImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_chatText"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@{chatBotText}"
+        android:textColor="#232323"
         app:layout_constraintStart_toEndOf="@+id/imageView_chatBotImage"
-        app:layout_constraintTop_toBottomOf="@+id/textView_chatBotId" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_chatBotId"
+        tools:text="aaaa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

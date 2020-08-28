@@ -47,6 +47,8 @@
                 android:id="@+id/editText_TalkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:inputType="textNoSuggestions|textImeMultiLine"
                 android:layout_weight="0.95" />
 
             <ImageView

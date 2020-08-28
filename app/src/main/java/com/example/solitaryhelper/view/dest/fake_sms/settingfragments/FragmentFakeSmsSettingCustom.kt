@@ -24,6 +24,13 @@ class FragmentFakeSmsSettingCustom :
         setYourButtonClickListener()
         setButtonSendListener()
         setFABclickListener()
+        buttonDelete.setOnClickListener {
+
+            if((recyclerViewSmsSettingCustom.adapter as AdapterRecyclerViewSmsCustom).smsList.isNullOrEmpty()) {
+                context?.toastDebugTest("리스트가 비어 있습니다.")
+            }else
+            viewModelSms.smsAllDelete((recyclerViewSmsSettingCustom.adapter as AdapterRecyclerViewSmsCustom).smsList)
+        }
     }
 
     override fun FragmentFakeSmsSettingCustomBinding.setCreateView() {}
@@ -34,18 +41,12 @@ class FragmentFakeSmsSettingCustom :
 
     private fun FragmentFakeSmsSettingCustomBinding.setObserver() {
         viewModelSms.SmsList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            if (!setRecyclerViewAdapter) {
-                recyclerViewSmsSettingCustom.adapter =
-                    AdapterRecyclerViewSmsCustom(it.toMutableList())
-                setRecyclerViewAdapter = true
-            }
+            if (it.isNullOrEmpty())
+                return@Observer
 
-            if (setRecyclerViewAdapter) {
-                (recyclerViewSmsSettingCustom.adapter as? AdapterRecyclerViewSmsCustom)?.apply {
-                    this.smsList.add(it.last())
-                    notifyItemInserted(it.lastIndex)
-                }
-            }
+                recyclerViewSmsSettingCustom.adapter =
+                    AdapterRecyclerViewSmsCustom(it as MutableList<Sms>)
+
         })
     }
 
@@ -62,15 +63,16 @@ class FragmentFakeSmsSettingCustom :
     }
 
     private fun FragmentFakeSmsSettingCustomBinding.setYourButtonClickListener() {
-
         var buttonClickMode = false
         buttonYourText.setOnClickListener {
-
             buttonClickMode = !buttonClickMode
-            if (myTextMode)
+
+            myTextMode = if (buttonClickMode) {
                 it.setBackgroundColor(Color.parseColor("#FFFFFF"))
-            else {
+                true
+            }else {
                 it.setBackgroundColor(Color.parseColor("#000000"))
+                false
             }
         }
     }
@@ -92,7 +94,7 @@ class FragmentFakeSmsSettingCustom :
 
                 viewModelSms.smsInsert(
                     editTextMessage.text.toString(),
-                    true, Contents.timePattern.format(
+                    false, Contents.timePattern.format(
                         Date()
                     )
                 )
