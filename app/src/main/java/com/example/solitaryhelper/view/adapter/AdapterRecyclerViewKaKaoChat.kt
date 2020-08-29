@@ -27,6 +27,7 @@ class AdapterRecyclerViewKaKaoChat(
     }
 
     private var profileVisibleList: MutableList<Int>? = null
+    private var nameVisibleList: MutableList<Int>? = null
     private var timeVisibleList: MutableList<Int>? = null
 
     inner class ViewHolder : RecyclerView.ViewHolder {
@@ -74,6 +75,19 @@ class AdapterRecyclerViewKaKaoChat(
             }
         }
 
+        fun setNameVisible(nameVisibleList: MutableList<Int>) {
+
+            for (i in 1 until chatList.size) {
+                if (chatList[i].user != chatList[i - 1].user ||
+                    chatList[i].timeList != chatList[i - 1].timeList
+                )
+
+                    nameVisibleList.add(View.VISIBLE)
+                else
+                    nameVisibleList.add(View.GONE)
+            }
+        }
+
         fun setTimeVisibleToLastIndex(timeVisibleList: MutableList<Int>, last: Int) {
 
 
@@ -98,6 +112,17 @@ class AdapterRecyclerViewKaKaoChat(
                 profileVisibleList.add(View.VISIBLE)
             else
                 profileVisibleList.add(View.INVISIBLE)
+
+        }
+
+        fun setNameVisibleToLastIndex(nameVisibleList: MutableList<Int>, last: Int) {
+
+            if (chatList[last].user != chatList[last - 1].user ||
+                chatList[last].timeList != chatList[last - 1].timeList
+            )
+                nameVisibleList.add(View.VISIBLE)
+            else
+                nameVisibleList.add(View.GONE)
 
         }
 
@@ -146,14 +171,17 @@ class AdapterRecyclerViewKaKaoChat(
         if (profileVisibleList.isNullOrEmpty()) {
             profileVisibleList = MutableList(1) { View.VISIBLE }
             timeVisibleList = MutableList(1) { View.VISIBLE }
+            nameVisibleList = MutableList(1) { View.VISIBLE }
         }
 
         if (profileVisibleList?.size == 1) {
             holder.setProfileVisible(profileVisibleList!!)
             holder.setTimeVisible(timeVisibleList!!)
+            holder.setNameVisible(nameVisibleList!!)
         } else {
             holder.setProfileVisibleToLastIndex(profileVisibleList!!, chatList.lastIndex)
             holder.setTimeVisibleToLastIndex(timeVisibleList!!, chatList.lastIndex)
+            holder.setNameVisibleToLastIndex(nameVisibleList!!, chatList.lastIndex)
         }
 
         holder.myTextBinding?.apply {
@@ -166,8 +194,9 @@ class AdapterRecyclerViewKaKaoChat(
 
             text = chatList[holder.adapterPosition].textList
             time = kakaoTimeDisplay(chatList[holder.adapterPosition].timeList)
+            goneVisible = nameVisibleList!![holder.adapterPosition]
             cardView.visibility = profileVisibleList!![holder.adapterPosition]
-            profileVisible = profileVisibleList!![holder.adapterPosition]
+            profileImageVisible = profileVisibleList!![holder.adapterPosition]
             timeVisible = timeVisibleList!![holder.adapterPosition]
             profile = kaKaoProfile
             name = kaKaoName

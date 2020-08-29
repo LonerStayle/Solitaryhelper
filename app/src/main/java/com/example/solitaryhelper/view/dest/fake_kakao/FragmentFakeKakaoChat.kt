@@ -171,7 +171,7 @@ class FragmentFakeKakaoChat :
 
                 chatDataList.add(
                     KaKaoTalkChatData(
-                       textList[i],
+                        textList[i],
                         false,
                         args.timeList[i]
                     )
@@ -1297,11 +1297,12 @@ class FragmentFakeKakaoChat :
 
     private fun FragmentFakeKakaoChatBinding.setBackButtonListener() {
         imageViewBackButton.setOnClickListener {
-
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk)
-            }
+            requireActivity().onBackPressed()
         }
+        textViewTotalChatScore.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
 
     }
 
@@ -1325,7 +1326,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                               it[it.lastIndex].textList = chatTextControl(it.last().textList)
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1355,6 +1356,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1384,6 +1386,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1413,6 +1416,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1442,6 +1446,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1471,6 +1476,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1500,6 +1506,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1529,6 +1536,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1558,6 +1566,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1587,6 +1596,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1616,6 +1626,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1645,6 +1656,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1674,6 +1686,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1704,6 +1717,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1733,6 +1747,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1762,6 +1777,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1791,6 +1807,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1820,6 +1837,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1849,6 +1867,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1879,6 +1898,7 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)

@@ -22,11 +22,16 @@
             type="String" />
 
         <variable
-            name="profileVisible"
+            name="profileImageVisible"
             type="Integer" />
 
         <variable
             name="timeVisible"
+            type="Integer" />
+
+
+        <variable
+            name="goneVisible"
             type="Integer" />
     </data>
 
@@ -54,7 +59,7 @@
                     android:id="@+id/imageView_imageProfile"
                     android:layout_width="38dp"
                     android:layout_height="42dp"
-                    android:visibility="@{profileVisible}"
+                    android:visibility="@{profileImageVisible}"
                     app:imageUrl="@{profile}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -73,8 +78,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@{name}"
-            android:textColor="@android:color/black"
-            android:visibility="@{profileVisible}"
+            android:textSize="10sp"
+            android:textColor="@color/veryLightWhite"
+            android:visibility="@{goneVisible}"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
             tools:text="loner" />
@@ -89,7 +95,7 @@
             android:padding="6dp"
             android:text="@{text}"
             android:textColor="#0E0E0E"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView_name"
             app:layout_constraintTop_toBottomOf="@+id/textView_name"
@@ -102,7 +108,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="2dp"
             android:text="@{time}"
-            android:textColor="#99FFFFFF"
+            android:textColor="@color/veryLightWhite"
             android:textSize="8sp"
             android:visibility="@{timeVisible}"
             app:layout_constraintBottom_toBottomOf="@+id/textView_textPreview"
