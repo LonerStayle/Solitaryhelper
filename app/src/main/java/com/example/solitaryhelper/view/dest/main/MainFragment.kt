@@ -193,9 +193,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun FragmentMainBinding.setFabSmsClickListener() {
-        fabSms.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSms)
-        }
+        context?.toastDebugTest("아직 준비중인 기능입니다. \n UI만 완성후 바로 공개 예정.")
+//        fabSms.setOnClickListener {
+//            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSms)
+//        }
     }
 
     private fun FragmentMainBinding.setFabKakaoTalkClickListener() {
@@ -205,9 +206,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun FragmentMainBinding.setFabCallClickListener() {
-        fabCall.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCall)
-        }
+        context?.toastDebugTest("아직 준비중인 기능입니다. \n UI만 완성되면 바로 공개 예정.")
+//        fabCall.setOnClickListener {
+//            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCall)
+//        }
     }
 
 

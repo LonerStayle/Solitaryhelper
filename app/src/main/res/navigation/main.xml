@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.solitaryhelper.view.dest.main.MainFragment"
-        android:label="MainFragment">
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeCallSetting"
             app:destination="@id/fragmentFakeCallSetting" />
@@ -37,7 +38,8 @@
     <fragment
         android:id="@+id/fragmentFakeCallSetting"
         android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallSetting"
-        android:label="fragmentFakeCallSetting">
+        android:label="fragmentFakeCallSetting"
+        tools:layout="@layout/fragment_fake_call_setting">
         <action
             android:id="@+id/action_fragmentFakeCallGuide_to_fragmentFakeCall"
             app:destination="@id/fragmentFakeCall" />
@@ -45,7 +47,8 @@
     <fragment
         android:id="@+id/fragmentFakeSmsSetting"
         android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSmsSetting"
-        android:label="FragmentFakeSmsSetting" >
+        android:label="FragmentFakeSmsSetting"
+        tools:layout="@layout/fragment_fake_sms_setting_custom">
         <action
             android:id="@+id/action_fragmentFakeSmsSetting_to_fragmentFakeSms"
             app:destination="@id/fragmentFakeSms" />
@@ -53,7 +56,8 @@
     <fragment
         android:id="@+id/fragmentFakeKakaoTalk"
         android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk"
-        android:label="FragmentFakeKakaoTalk" >
+        android:label="FragmentFakeKakaoTalk"
+        tools:layout="@layout/fragment_fake_kakao_talk">
         <action
             android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
             app:destination="@id/fragmentFakeKakaoChat" />
@@ -64,7 +68,8 @@
     <fragment
         android:id="@+id/fragmentFakeKakaoChat"
         android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat"
-        android:label="FragmentFakeKakaoChat" >
+        android:label="FragmentFakeKakaoChat"
+        tools:layout="@layout/fragment_fake_kakao_chat">
         <argument
             android:name="name"
             app:argType="string" />
@@ -90,7 +95,8 @@
     <fragment
         android:id="@+id/fragmentFakeCall"
         android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCall"
-        android:label="FragmentFakeCall" >
+        android:label="FragmentFakeCall"
+        tools:layout="@layout/fragment_fake_call">
         <argument
             android:name="callPartyName"
             app:argType="string"
@@ -110,15 +116,18 @@
     <fragment
         android:id="@+id/fragmentFakeSms"
         android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSms"
-        android:label="FragmentFakeSms" />
+        android:label="FragmentFakeSms"
+        tools:layout="@layout/fragment_fake_sms"/>
     <fragment
         android:id="@+id/fragmentTopicGuide"
         android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicGuide"
-        android:label="fragmentTopicGuide" />
+        android:label="fragmentTopicGuide"
+        tools:layout="@layout/fragment_topic_guide"/>
     <fragment
         android:id="@+id/fragmentTopicResult"
         android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicResult"
-        android:label="FragmentTopicResult" >
+        android:label="FragmentTopicResult"
+        tools:layout="@layout/fragment_topic_result">
         <argument
             android:name="ages"
             app:argType="string" />
@@ -129,7 +138,8 @@
     <fragment
         android:id="@+id/fragmentFakeCallAgreeScreen"
         android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallAgreeScreen"
-        android:label="FragmentFakeCallAgreeScreen" >
+        android:label="FragmentFakeCallAgreeScreen"
+        tools:layout="@layout/fragment_fake_call_agree_screen">
         <argument
             android:name="name"
             app:argType="string" />
@@ -140,7 +150,8 @@
     <fragment
         android:id="@+id/fragmentAutoChatRunCheck"
         android:name="com.example.solitaryhelper.view.dest.FragmentAutoChatRunCheck"
-        android:label="FragmentAutoChatRunCheck">
+        android:label="FragmentAutoChatRunCheck"
+        tools:layout="@layout/fragment_autochatrun">
         <action
             android:id="@+id/action_fragmentAutoChatRunCheck_to_mainFragment"
             app:destination="@id/mainFragment" />

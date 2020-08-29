@@ -236,25 +236,12 @@ class FragmentChatBot : BaseFragment<FragmentChatbotBinding>(R.layout.fragment_c
                 (recyclerViewChatBot.adapter as AdapterRecyclerViewChatBot).apply {
 
 
-
-
-
-
-
                     this.textList.add(ChatListControl(chatBotTwoInTwoSide[0]))
-                    notifyItemInserted(textList.lastIndex )
-                    delay(3000)
                     this.textList.add(ChatListControl(chatBotTwoInTwoSide[1]))
-                    notifyItemInserted(textList.lastIndex )
-                    delay(3000)
                     this.textList.add(ChatListControl(chatBotTwoInTwoSide[2]))
-                    notifyItemInserted(textList.lastIndex )
-                    delay(3000)
                     this.textList.add(ChatListControl(chatBotTwoInTwoSide[3]))
-                    notifyItemInserted(textList.lastIndex )
-                    delay(3000)
                     this.textList.add(ChatListControl(chatBotTwoInTwoSide[4]))
-                    notifyItemInserted(textList.lastIndex)
+                   notifyDataSetChanged()
                 }
                 recyclerViewChatBot.scrollToPosition(controlList.lastIndex)
                 delay(2000)

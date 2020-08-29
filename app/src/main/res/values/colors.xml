@@ -14,4 +14,5 @@
     <color name="colorLightIndigo">#304FFE</color>
     <color name="kaKaoTalkBackGround">#FAFF00</color>
     <color name="kaKaoTalkFontColor">#3C1E1E</color>
+    <color name="kakaoTalkNotice">#F87566</color>
 </resources>

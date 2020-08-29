@@ -8,6 +8,8 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.example.solitaryhelper.R
@@ -21,6 +23,10 @@ import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_fake_sms.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.random.Random.Default.nextInt
 
@@ -60,8 +66,28 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
 
 
     override fun FragmentWiseSayingBinding.setCreateView() {
+        setAnimTextViewStartInfoAnim()
+        setAnimTextViewInfoAnimation()
+
         createNotificationChannel()
         setWiseText()
+    }
+
+    private fun FragmentWiseSayingBinding.setAnimTextViewStartInfoAnim() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.wise_textview_start_info)
+            textViewStartInfo.startAnimation(anim)
+            delay(5000)
+            textViewWiseList.visibility = View.VISIBLE
+            textViewStartInfo.visibility = View. GONE
+            textViewInfo.visibility = View.VISIBLE
+        }
+
+    }
+
+    private fun FragmentWiseSayingBinding.setAnimTextViewInfoAnimation() {
+        val textViewInfoAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.textviewinfo)
+        textViewInfo.startAnimation(textViewInfoAnim)
     }
 
 

@@ -12,29 +12,39 @@
             type="String" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="right">
-
-    <TextView
-        android:id="@+id/textView_textPreview"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{text}"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="안녕하세요 로너입니다." />
+        android:layout_gravity="right"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/textView_time"
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:text="@{time}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView_textPreview"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView_textPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kakao_mychatbubble"
+            android:gravity="right"
+            android:padding="8dp"
+            android:text="@{text}"
+            android:textColor="#070707"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="안녕하세요 로너입니다." />
+
+        <TextView
+            android:id="@+id/textView_time"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_marginEnd="4dp"
+            android:text="@{time}"
+            android:textSize="8dp"
+            android:textColor="#40ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView_textPreview" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

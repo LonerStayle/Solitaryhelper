@@ -45,7 +45,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@{chatBotText}"
-        android:textColor="#232323"
+        android:textColor="#131313"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:background="@drawable/kakao_mychatbubble"
         app:layout_constraintStart_toEndOf="@+id/imageView_chatBotImage"
         app:layout_constraintTop_toBottomOf="@+id/textView_chatBotId"
         tools:text="aaaa" />

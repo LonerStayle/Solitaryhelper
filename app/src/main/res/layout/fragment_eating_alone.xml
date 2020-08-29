@@ -14,6 +14,7 @@
          android:layout_marginEnd="54dp"
          android:text="혼밥 찾기"
          android:textStyle="bold"
+         android:background="@drawable/main_dialoglayout_background"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent" />
@@ -28,6 +29,12 @@
          app:layout_constraintTop_toBottomOf="@+id/button_sendEatingHouse"
          android:padding="12dp"
        >
+          <ImageView
+              android:id="@+id/mapViewAfter"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:visibility="gone"
+              android:src="@drawable/mapviewimage"/>
 
      </RelativeLayout>
 

@@ -279,7 +279,7 @@ class FragmentTopicResult :
 
     private fun setData(apiSetComplete: Boolean) {
         binding.imageUrl = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-            "sample6", "drawable",
+            "topicnews", "drawable",
             requireActivity().packageName
         ).toString())
 
@@ -294,7 +294,7 @@ class FragmentTopicResult :
                 for (i in blogList.indices) {
                     imageList!![i] =
                         (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                            "sample$i", "drawable",
+                            "topic$i", "drawable",
                             requireActivity().packageName
                         ).toString())
                 }

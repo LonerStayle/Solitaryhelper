@@ -3,9 +3,16 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 import android.app.NotificationManager
 import android.content.Context
 import android.media.SoundPool
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+
+import androidx.activity.addCallback
+
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
 import com.example.solitaryhelper.view.activity.autoChatRun
@@ -15,15 +22,18 @@ import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.view.utill.chatTextControl
+import com.example.solitaryhelper.view.utill.chatTextListControl
+import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.viewmodel.SharedViewModel
 import kotlinx.coroutines.*
 import java.util.*
 
-var test0 = 0
 
 class FragmentFakeKakaoChat :
     BaseFragment<FragmentFakeKakaoChatBinding>(R.layout.fragment_fake_kakao_chat) {
 
+    private val chatbotText by lazy { resources.getStringArray(R.array.chatTalk) }
     private val args by lazy {
         FragmentFakeKakaoChatArgs.fromBundle(
             requireArguments()
@@ -39,7 +49,7 @@ class FragmentFakeKakaoChat :
         const val NOTIFICATION_ID_2 = 1002
 
         var positionSendRunCheck: Boolean? = null
-         var autoChatDoubleCheckRun = Array(20) { false }
+        var autoChatDoubleCheckRun = Array(20) { false }
 
     }
 
@@ -77,30 +87,67 @@ class FragmentFakeKakaoChat :
 
 
     override fun FragmentFakeKakaoChatBinding.setEventListener() {
-
+        setBackButtonListener()
         setMyTestSendButtonClickListener()
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
+        name = args.name
 
         //화면전환 후에도 사용이 지속되기 위한 빠른 초기화
         viewModelShared; soundPool; soundId
-
+        setButtonVisible()
         setRecyclerViewSetting()
         setAdapter()
         setBindValueInAdapter()
         setRunAutoChatSetting()
     }
 
+
     override fun FragmentFakeKakaoChatBinding.setLiveDataInObserver() {
         setTotalScore()
         setObserver()
     }
 
+    private fun FragmentFakeKakaoChatBinding.setButtonVisible() {
+        editTextTalkBox.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (TextUtils.isEmpty(editTextTalkBox.text)) {
+                    buttonSend.setBackgroundResource(0)
+                    buttonSend.setImageResource(R.drawable.kakao_chat_bottom0)
+                    buttonSend.setPadding(0, 0, 0, 0)
+
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (TextUtils.isEmpty(editTextTalkBox.text)) {
+                    buttonSend.setBackgroundResource(0)
+                    buttonSend.setImageResource(R.drawable.kakao_chat_bottom0)
+                    buttonSend.setPadding(0, 0, 0, 0)
+
+                }
+                buttonSend.setImageResource(R.drawable.ic_baseline_arrow_upward_24)
+                buttonSend.setPadding(2, 2, 2, 2)
+                buttonSend.setBackgroundResource(R.drawable.kakao_chat_button)
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (TextUtils.isEmpty(editTextTalkBox.text)) {
+                    buttonSend.setBackgroundResource(0)
+                    buttonSend.setImageResource(R.drawable.kakao_chat_bottom0)
+                    buttonSend.setPadding(0, 0, 0, 0)
+
+                }
+            }
+
+        })
+    }
 
     private fun FragmentFakeKakaoChatBinding.setTotalScore() {
         viewModelShared.kaKaoChatTotalNotificationScore.observe(viewLifecycleOwner, Observer {
-            textViewTotalChatScore.text = it.toString()
+            toTalScore = it.toString()
         })
     }
 
@@ -115,6 +162,7 @@ class FragmentFakeKakaoChat :
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 
+        val textList = chatTextListControl(args.ListBox)
 
         if (!operationByPosition()) {
 
@@ -123,7 +171,7 @@ class FragmentFakeKakaoChat :
 
                 chatDataList.add(
                     KaKaoTalkChatData(
-                        args.ListBox[i],
+                       textList[i],
                         false,
                         args.timeList[i]
                     )
@@ -253,6 +301,11 @@ class FragmentFakeKakaoChat :
     private fun FragmentFakeKakaoChatBinding.setMyTestSendButtonClickListener() {
 
         buttonSend.setOnClickListener {
+            keyBoardShowHiding(requireContext(), editTextTalkBox)
+
+            if (TextUtils.isEmpty(editTextTalkBox.text))
+                return@setOnClickListener
+
             buttonClick = true
             when (args.itemIdPosition) {
 
@@ -501,7 +554,7 @@ class FragmentFakeKakaoChat :
 
 
     private suspend fun setCoroutine() {
-
+        val list = chatbotText.toList()
 
         val manager =
             requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -517,14 +570,16 @@ class FragmentFakeKakaoChat :
                 0L -> {
 
                     autoChatDoubleCheckRun[0] = true
-                    delay(5000)
+                    delay(Contents.AUTO_CHAT_DEALY)
                     if (!autoChatRun)
                         return
 
+
+                    val shuffleMode = list.shuffled()
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd(
                         KaKaoTalkChatData(
-                            textList = "1-${test0++}",
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -532,7 +587,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             0,
-                            "1-${test0++}",
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -544,7 +599,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             "1",
-                            "1-${test0++}",
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -552,16 +607,15 @@ class FragmentFakeKakaoChat :
                 }
                 1L -> {
 
-                    val text = "2-${test0++}"
                     autoChatDoubleCheckRun[1] = true
-                    delay(10000)
+                    delay(Contents.AUTO_CHAT_DEALY)
                     if (!autoChatRun)
                         return
-
+                    val shuffleMode = list.shuffled()
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
-                            textList = text,
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -569,33 +623,35 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             1,
-                            text,
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.sample2,
                             context,
                             manager,
-                            "2",
-                            "2-${test0++}",
+                            "1",
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
+
                 }
                 2L -> {
+
                     autoChatDoubleCheckRun[2] = true
-                    delay(15000)
+                    delay(Contents.AUTO_CHAT_DEALY)
                     if (!autoChatRun)
                         return
-
-
+                    val shuffleMode = list.shuffled()
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
-                            textList = "3-${test0++}",
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -603,33 +659,35 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             2,
-                            "3-${test0++}",
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.sample2,
                             context,
                             manager,
-                            "3",
-                            "3-${test0++}",
+                            "1",
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
+
                 }
                 3L -> {
+
                     autoChatDoubleCheckRun[3] = true
-                    delay(20000)
+                    delay(Contents.AUTO_CHAT_DEALY)
                     if (!autoChatRun)
                         return
-
-
+                    val shuffleMode = list.shuffled()
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
-                            textList = "4-${test0++}",
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -637,32 +695,35 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             3,
-                            "4-${test0++}",
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.sample2,
                             context,
                             manager,
-                            "4",
-                            "4-${test0++}",
+                            "1",
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
+
                 }
                 4L -> {
 
                     autoChatDoubleCheckRun[4] = true
-                    delay(25000)
+                    delay(Contents.AUTO_CHAT_DEALY)
                     if (!autoChatRun)
                         return
+                    val shuffleMode = list.shuffled()
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
-                            textList = "5-${test0++}",
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -670,30 +731,579 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             4,
-                            "5-${test0++}",
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
-
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.sample2,
                             context,
                             manager,
-                            "5",
-                            "5-${test0++}",
+                            "1",
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
+
+                }
+                5L -> {
+
+                    autoChatDoubleCheckRun[5] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd6(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            5,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                6L -> {
+
+                    autoChatDoubleCheckRun[6] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd7(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            6,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                7L -> {
+
+                    autoChatDoubleCheckRun[7] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd8(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            7,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                8L -> {
+
+                    autoChatDoubleCheckRun[8] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd9(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            8,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                9L -> {
+
+                    autoChatDoubleCheckRun[9] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd10(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            9,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                10L -> {
+
+                    autoChatDoubleCheckRun[10] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd11(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            10,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                11L -> {
+
+                    autoChatDoubleCheckRun[11] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd12(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            11,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                12L -> {
+
+                    autoChatDoubleCheckRun[12] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd13(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            12,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                13L -> {
+
+                    autoChatDoubleCheckRun[13] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd14(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            13,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                14L -> {
+
+                    autoChatDoubleCheckRun[14] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd15(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            14,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                15L -> {
+
+                    autoChatDoubleCheckRun[15] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd16(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            15,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                16L -> {
+
+                    autoChatDoubleCheckRun[16] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd17(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            16,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                17L -> {
+
+                    autoChatDoubleCheckRun[17] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd18(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            17,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                18L -> {
+
+                    autoChatDoubleCheckRun[18] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd19(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            18,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
+                }
+                19L -> {
+
+                    autoChatDoubleCheckRun[19] = true
+                    delay(Contents.AUTO_CHAT_DEALY)
+                    if (!autoChatRun)
+                        return
+                    val shuffleMode = list.shuffled()
+                    positionSendRunCheck = true
+                    viewModelKaKaoChat.insertItemAdd20(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            19,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.sample2,
+                            context,
+                            manager,
+                            "1",
+                            shuffleMode[0],
+                            activtyContext
+                        )
+                    }
+
                 }
 
-            }
 
+            }
+        }
+    }
+
+    private fun FragmentFakeKakaoChatBinding.setBackButtonListener() {
+        imageViewBackButton.setOnClickListener {
+
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk)
+            }
         }
 
     }
-
 
     private fun FragmentFakeKakaoChatBinding.setObserver() {
         when (args.itemIdPosition) {
@@ -715,9 +1325,10 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                               it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
-                                notifyItemChanged(chatList.lastIndex -1)
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -727,12 +1338,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             1L -> {
                 viewModelKaKaoChat.myChatText2.observe(viewLifecycleOwner, Observer {
+
                     when {
-                        (operationByPosition() && onCreateViewFirstRun2) -> {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -742,11 +1352,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun2 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun2) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -756,12 +1367,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             2L -> {
                 viewModelKaKaoChat.myChatText3.observe(viewLifecycleOwner, Observer {
+
                     when {
-                        (operationByPosition() && onCreateViewFirstRun3) -> {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -771,11 +1381,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun3 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun3) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -785,12 +1396,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             3L -> {
                 viewModelKaKaoChat.myChatText4.observe(viewLifecycleOwner, Observer {
+
                     when {
-                        (operationByPosition() && onCreateViewFirstRun4) -> {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -800,11 +1410,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun4 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun4) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -814,12 +1425,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             4L -> {
                 viewModelKaKaoChat.myChatText5.observe(viewLifecycleOwner, Observer {
+
                     when {
-                        (operationByPosition() && onCreateViewFirstRun5) -> {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -829,11 +1439,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun5 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun5) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -843,12 +1454,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             5L -> {
                 viewModelKaKaoChat.myChatText6.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun6) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -858,11 +1468,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun6 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun6) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -872,12 +1483,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             6L -> {
                 viewModelKaKaoChat.myChatText7.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun7) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -887,11 +1497,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun7 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun7) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -901,12 +1512,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             7L -> {
                 viewModelKaKaoChat.myChatText8.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun8) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -916,11 +1526,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun8 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun8) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -930,12 +1541,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             8L -> {
                 viewModelKaKaoChat.myChatText9.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun9) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -945,11 +1555,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun9 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun9) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -959,12 +1570,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             9L -> {
                 viewModelKaKaoChat.myChatText10.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun10) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -974,11 +1584,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun10 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun10) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -988,12 +1599,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             10L -> {
                 viewModelKaKaoChat.myChatText11.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun11) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1003,11 +1613,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun11 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun11) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1017,12 +1628,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             11L -> {
                 viewModelKaKaoChat.myChatText12.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun12) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1032,11 +1642,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun12 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun12) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1046,12 +1657,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             12L -> {
                 viewModelKaKaoChat.myChatText13.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun13) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1061,13 +1671,15 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun13 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun13) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
+
                         }
                     }
 
@@ -1075,12 +1687,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             13L -> {
                 viewModelKaKaoChat.myChatText14.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun14) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1090,11 +1701,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun14 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun14) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1104,12 +1716,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             14L -> {
                 viewModelKaKaoChat.myChatText15.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun15) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1119,11 +1730,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun15 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun15) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1133,12 +1745,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             15L -> {
                 viewModelKaKaoChat.myChatText16.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun16) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1148,11 +1759,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun16 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun16) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1162,12 +1774,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             16L -> {
                 viewModelKaKaoChat.myChatText17.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun17) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1177,11 +1788,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun17 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun17) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1191,12 +1803,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             17L -> {
                 viewModelKaKaoChat.myChatText18.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun18) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1206,11 +1817,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun18 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun18) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1220,12 +1832,11 @@ class FragmentFakeKakaoChat :
                     buttonClick = false
                 })
             }
-
-
             18L -> {
                 viewModelKaKaoChat.myChatText19.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun19) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1235,11 +1846,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun19 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun19) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }
@@ -1250,11 +1862,11 @@ class FragmentFakeKakaoChat :
                 })
             }
 
-
             19L -> {
                 viewModelKaKaoChat.myChatText20.observe(viewLifecycleOwner, Observer {
-                   when {
-                        (operationByPosition() && onCreateViewFirstRun20) -> {
+
+                    when {
+                        (operationByPosition() && onCreateViewFirstRun) -> {
 
                             Log.d("opop1", "비었을떄 실행")
                             recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
@@ -1264,11 +1876,12 @@ class FragmentFakeKakaoChat :
                             onCreateViewFirstRun20 = false
                         }
 
-                        (operationByPosition() && !onCreateViewFirstRun20) -> {
+                        (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                                 this.chatList = it
 
+                                notifyItemChanged(chatList.lastIndex - 1)
                                 notifyItemInserted(chatList.lastIndex)
                             }
                         }

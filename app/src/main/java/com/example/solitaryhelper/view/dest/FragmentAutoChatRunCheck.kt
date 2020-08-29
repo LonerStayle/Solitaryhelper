@@ -20,9 +20,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class FragmentAutoChatRunCheck :BaseFragment<FragmentAutochatrunBinding>(R.layout.fragment_autochatrun) {
-
-
+class FragmentAutoChatRunCheck :
+    BaseFragment<FragmentAutochatrunBinding>(R.layout.fragment_autochatrun) {
 
 
     override fun FragmentAutochatrunBinding.setEventListener() {
@@ -31,11 +30,12 @@ class FragmentAutoChatRunCheck :BaseFragment<FragmentAutochatrunBinding>(R.layou
 
     override fun FragmentAutochatrunBinding.setCreateView() {
         CoroutineScope(Dispatchers.Main).launch {
-            for(i in 0..19)
-            autoChatDoubleCheckRun[i] = false
-
+            for (i in 0..19)
+                autoChatDoubleCheckRun[i] = false
+            autoChatRun = false
             delay(1500L)
             requireActivity().finish()
+
         }
 
     }

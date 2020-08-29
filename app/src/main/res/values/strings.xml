@@ -9,41 +9,169 @@
         <item>아싸 도우미</item>
     </string-array>
 
+    <string-array name="sample_name">
+
+        <item>박시현</item>
+        <item>박태윤</item>
+        <item>박민규</item>
+        <item>박수호</item>
+        <item>김현준</item>
+             
+        <item>김유준</item>
+        <item>김정우</item>
+        <item>김승현</item>
+        <item>김승우</item>
+        <item>조서연</item>
+    
+        <item>천서진</item>
+        <item>천서우</item>
+        <item>우빈</item>    
+        <item>이안</item>
+        <item>민호</item>
+
+        <item>민혁</item>
+        <item>지율</item>
+        <item>성준</item>
+        <item>서우</item>
+        <item>지한</item>
+
+    </string-array>
+
     <string-array name="sample_list1">
-        <item>1-</item>
-        <item>1-</item>
-        <item>1-</item>
-        <item>1-</item>
-        <item>1-</item>
+        <item>본래 이 어플은 챗봇 api를 이용할 생각이었습니다. 다른 부분을 만지다가 개발 작품 20분전에 확인.. ; </item>
+        <item>어휴.. 1인개발로 분량 잘못잡아서 망했다..</item>
+        <item>어서오세영 안드로이드 개발자 분덜!</item>
+        <item>이참에 하고싶었던 사이드 프로젝트! gdg여러분 덕분에 가능했습니다. 좋은 대회 감사드립니다~</item>
+        <item>기다리면 게속 자동으로 카톡이 올겁니다. </item>
+        <item>외로운 아싸 혹은 뻘쭘한 상황에서 연락하는척 할 때, 어색해서 인터넷 하는거 티안내고 카톡하는척 할때 필요한 기능입니다.</item>
+        <item>이 이방 말고 아래 채팅방들을 보면 일상대화 하는척 하는 채팅들이 보이실겁니다. 저런 느낌이에요 ㅋㅋ </item>
     </string-array>
 
     <string-array name="sample_list2">
-        <item>2-</item>
-        <item>2_</item>
-        <item>2_</item>
-        <item>2_</item>
-        <item>2_</item>
+        <item>어제 집은 잘들어갔어?</item>
+        <item>ㅋㅋㅋㅋ 어제 넘나 취해서 깜짝놀랐자너 </item>
+        <item>암튼 재밌었다.</item>
+        <item>아 근데 숙취가 안되네.</item>
+        <item>나만 머리 깨질거 같니?</item>
     </string-array>
 
     <string-array name="sample_list3">
-        <item>3-</item>
-        <item>3-</item>
+        <item>야</item>
+        <item>뭐해</item>
 
     </string-array>
 
     <string-array name="sample_list4">
-        <item>4-</item>
-        <item>4-</item>
-        <item>4-</item>
+        <item>아 졸립다.</item>
+        <item>회사가기 싫어</item>
+        <item>퇴사 할까.. </item>
     </string-array>
 
     <string-array name="sample_list5">
-        <item>5-</item>
-        <item>5-</item>
-        <item>5-</item>
-        <item>5-</item>
-        <item>5-</item>
+        <item>배고파..</item>
+        <item>점심 뭐먹지</item>
+        <item>밥 추천좀 </item>
+        <item>치킨 먹을까 ㅋㅋㅋㅋㅋ</item>
     </string-array>
+
+
+    <string-array name="sample_list6">
+        <item>배고파..</item>
+        <item>점심 뭐먹지</item>
+        <item>밥 추천좀 </item>
+        <item>치킨 먹을까 ㅋㅋㅋㅋㅋ</item>
+    </string-array>
+
+    <string-array name="sample_list7">
+        <item>게임 추천좀</item>
+
+    </string-array>
+    <string-array name="sample_list8">
+        <item>어제 뭐했어?</item>
+
+    </string-array>
+    <string-array name="sample_list9">
+        <item>오늘 몇시에 볼까 ㅋㅋㅋㅋ</item>
+        <item>기대 된다.</item>
+
+    </string-array>
+    <string-array name="sample_list10">
+        <item>어휴 모기때문에 짜증나 죽겠어 </item>
+        <item>다 죽었음 좋겠다.</item>
+    </string-array>
+    <string-array name="sample_list11">
+        <item>이번에 영상 뜬거 봤어?</item>
+        <item>완전 대박이던뎅 ㅎㅎ </item>
+
+    </string-array>
+    <string-array name="sample_list12">
+        <item>역시 갓흥민</item>
+        <item>소름 돋았다</item>
+
+    </string-array>
+    <string-array name="sample_list13">
+        <item>밥 추천좀 </item>
+        <item>오늘은 국수가 땡기네  ㅋㅋㅋㅋㅋ</item>
+    </string-array>
+
+    <string-array name="sample_list14">
+        <item>간단한 국밥 ㄱㄱ?</item>
+
+    </string-array>
+    <string-array name="sample_list15">
+        <item>오늘 홍대나 갈까 </item>
+        <item>아님 강남을 갈까</item>
+
+    </string-array>
+
+    <string-array name="sample_list16">
+        <item>역시 페이커야 </item>
+
+    </string-array>
+    <string-array name="sample_list17">
+        <item>지금 출근 하고있는데</item>
+        <item>출근하기전에 왜 퇴근하고 싶지?</item>
+
+    </string-array>
+    <string-array name="sample_list18">
+      <item>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</item>
+        <item>대박</item>
+
+    </string-array>
+    <string-array name="sample_list19">
+        <item>와 세상 진짜 흉흉하다 </item>
+        <item>어제 기사뜬거 봤어? </item>
+        <item>진짜 조심해야돼 </item>
+
+    </string-array>
+    <string-array name="sample_list20">
+        <item>안녕 ㅋㅋㅋㅋㅋㅋ </item>
+
+    </string-array>
+
+<string-array name="chatTalk">
+    <item>정식 릴리지 후에 챗봇 api를 이용하여 유저간의 대화가 가능하게끔 할 예정입니다.</item>
+    <item>지금은 소통이 잘안되는게 함정.. 흑흑</item>
+    <item> 까똑~ </item>
+    <item> 요런식으로 자꾸 카톡이 갑니다.</item>
+    <item>구글 정책상 올려도 되는 어플인지는 모르겠으나 ㅋㅋㅋ 만들어놓구봅니다.</item>
+    <item>그래서 어떻게 됬어? (이런식으로 유저챗에 반응)</item>
+    <item>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</item>
+    <item> 헐 진짜?</item>
+    <item>뭐야 ㅋㅋㅋㅋㅋ </item>
+    <item>오오 대박이다 </item>
+    <item> 크으 축하해 ~!!</item>
+    <item> 심심하면 영화 한편 어때? </item>
+    <item> 나도 알고 싶다..</item>
+    <item> 나도 연애하고 싶다..</item>
+    <item> 그래서?</item>
+    <item>ㅋㅋㅋㅋ 오 천재인줄</item>
+    <item> 와 역시 다르네!!</item>
+    <item> 최고다 정말 ..</item>
+    <item> 예능 뭐보는데? </item>
+    <item>몇시에? </item>
+
+</string-array>
 
     <string-array name="eatingList">
         <item>혼밥</item>

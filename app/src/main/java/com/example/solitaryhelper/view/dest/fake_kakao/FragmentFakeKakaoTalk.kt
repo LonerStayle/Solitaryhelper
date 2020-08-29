@@ -27,7 +27,7 @@ class FragmentFakeKakaoTalk :
 
     companion object {
         var itemOrderList =
-            arrayOf(0, 1, 2, 3, 4)
+            arrayOf(0, 1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19)
     }
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
@@ -35,39 +35,54 @@ class FragmentFakeKakaoTalk :
     }
 
     override fun FragmentFakeKakaoTalkBinding.setCreateView() {
+        setImageViewAd()
         setProgrssControl()
         setSendToAdapterToData()
         setNewMessageResponse()
         setRecyclerViewSetting()
-
-
     }
+
+
 
     override fun FragmentFakeKakaoTalkBinding.setLiveDataInObserver() {
         setAdapterDataUpdate()
 
     }
 
+    //랜덤 광고사진 가져오기
+    private fun setImageViewAd() {
+        val imageList = Array<String> (3){""}
+        for (i in 0..2) {
+            imageList[i] = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                "kakao_ad${i}",
+                "drawable",
+                requireActivity().packageName
+            ).toString())
+        }
+        binding.adImage = imageList.toList().shuffled()[0]
+    }
+
     private fun FragmentFakeKakaoTalkBinding.setProgrssControl() {
         if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck) {
             CoroutineScope(Dispatchers.Main).launch {
+
                 progressbarLayout.visibility = View.VISIBLE
                 imageViewKaKao.visibility = View.VISIBLE
 
-                bottomNavigationView.visibility = View.GONE
+                bottomLayout.visibility = View.GONE
                 viewLine.visibility = View.GONE
                 recyclerViewKaKaoChatList.visibility = View.GONE
-                imageView2.visibility = View.GONE
+                imageViewAd.visibility = View.GONE
                 textView2.visibility = View.GONE
                 linearLayoutButtonList.visibility = View.GONE
 
                 delay(2000)
                 progressbarLayout.visibility = View.GONE
                 imageViewKaKao.visibility = View.GONE
-                bottomNavigationView.visibility = View.VISIBLE
+                bottomLayout.visibility = View.VISIBLE
                 viewLine.visibility = View.VISIBLE
                 recyclerViewKaKaoChatList.visibility = View.VISIBLE
-                imageView2.visibility = View.VISIBLE
+                imageViewAd.visibility = View.VISIBLE
                 textView2.visibility = View.VISIBLE
                 linearLayoutButtonList.visibility = View.VISIBLE
             }
@@ -75,7 +90,6 @@ class FragmentFakeKakaoTalk :
     }
 
     private fun FragmentFakeKakaoTalkBinding.setRecyclerViewSetting() {
-
         recyclerViewKaKaoChatList.disableItemAnimator()
         recyclerViewKaKaoChatList.setHasFixedSize(true)
     }
@@ -84,7 +98,7 @@ class FragmentFakeKakaoTalk :
 
 
         fun setCreateAnItemToSendToTheAdapter(): MutableList<KaKaoTalkData> {
-            val kaKaoNameList by lazy { resources.getStringArray(R.array.sample_list1) }
+            val kaKaoNameList by lazy { resources.getStringArray(R.array.sample_name) }
             val kaKaoImageProfileList: Array<String>?
             val itemLastText: Array<String>?
             val chatNotification: Array<Int>?
@@ -97,12 +111,29 @@ class FragmentFakeKakaoTalk :
             visibleSettingList = Array(kaKaoNameList.size) { 0 }
 
             val kaKaoTextList = arrayOf(
-
                 resources.getStringArray(R.array.sample_list1),
                 resources.getStringArray(R.array.sample_list2),
                 resources.getStringArray(R.array.sample_list3),
                 resources.getStringArray(R.array.sample_list4),
-                resources.getStringArray(R.array.sample_list5)
+                resources.getStringArray(R.array.sample_list5),
+
+                resources.getStringArray(R.array.sample_list6),
+                resources.getStringArray(R.array.sample_list7),
+                resources.getStringArray(R.array.sample_list8),
+                resources.getStringArray(R.array.sample_list9),
+                resources.getStringArray(R.array.sample_list10),
+
+                resources.getStringArray(R.array.sample_list11),
+                resources.getStringArray(R.array.sample_list12),
+                resources.getStringArray(R.array.sample_list13),
+                resources.getStringArray(R.array.sample_list14),
+                resources.getStringArray(R.array.sample_list15),
+
+                resources.getStringArray(R.array.sample_list16),
+                resources.getStringArray(R.array.sample_list17),
+                resources.getStringArray(R.array.sample_list18),
+                resources.getStringArray(R.array.sample_list19),
+                resources.getStringArray(R.array.sample_list20)
             )
 
             fun visibleRandomCrate(i: Int): Int {
@@ -116,7 +147,7 @@ class FragmentFakeKakaoTalk :
                 }
             }
 
-            for (i in kaKaoNameList.indices) {
+            for (i in kaKaoTextList.indices) {
                 itemLastText[i] = kaKaoTextList[i].last()
                 chatNotification[i] = kaKaoTextList[i].size
                 visibleSettingList[i] = visibleRandomCrate(i)
@@ -124,10 +155,10 @@ class FragmentFakeKakaoTalk :
 
 
             val kakaoDataList = mutableListOf<KaKaoTalkData>()
-            kaKaoImageProfileList = Array(kaKaoNameList.size) { "" }
-            for (i in kaKaoImageProfileList.indices) {
-                kaKaoImageProfileList[i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                    "sample${1 + i}",
+            kaKaoImageProfileList = Array(kaKaoTextList.size) { "" }
+            for (i in kaKaoTextList.indices) {
+                kaKaoImageProfileList[i] = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                    "sample$i",
                     "drawable",
                     requireActivity().packageName
                 ).toString())
@@ -147,22 +178,36 @@ class FragmentFakeKakaoTalk :
                 )
             }
 
-
             timeList = viewModelKaKaoTalk.setTimeList(kakaoDataList.toList())
 
             for (i in timeList.indices) {
                 kakaoDataList[i].messageArrivalTime = timeList
             }
-            val shuffleMode = kakaoDataList.shuffled()
-            shuffleMode.sortedBy { it.id }
-            PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
+
 
             for (i in kakaoDataList.indices) {
-                lastTime[i] = shuffleMode[i].messageArrivalTime?.get(i)?.last()!!
-                shuffleMode[i].itemTimeLast = lastTime[i]
+                lastTime[i] = kakaoDataList[i].messageArrivalTime?.get(i)?.last()!!
+                kakaoDataList[i].itemTimeLast = lastTime[i]
             }
+            PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
 
-            return shuffleMode.toMutableList()
+            return kakaoDataList.toMutableList()
+
+//            timeList = viewModelKaKaoTalk.setTimeList(kakaoDataList.toList())
+//
+//            for (i in timeList.indices) {
+//                kakaoDataList[i].messageArrivalTime = timeList
+//            }
+//            val shuffleMode = kakaoDataList.shuffled()
+//            shuffleMode.sortedBy { it.id }
+//            PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
+//
+//            for (i in kakaoDataList.indices) {
+//                lastTime[i] = shuffleMode[i].messageArrivalTime?.get(i)?.last()!!
+//                shuffleMode[i].itemTimeLast = lastTime[i]
+//            }
+//
+//            return shuffleMode.toMutableList()
         }
         if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck) {
             val dataList = setCreateAnItemToSendToTheAdapter()
@@ -190,9 +235,9 @@ class FragmentFakeKakaoTalk :
 
                                 this.kaKaoDataList[0].visibleSettingList = View.GONE
                                 this.kaKaoDataList[0].chatNotification = 0
+
                                 viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
                                 { list -> list.chatNotification })
-
 
                             }
 
@@ -263,8 +308,11 @@ class FragmentFakeKakaoTalk :
                         this.kaKaoDataList.removeAt(index + 1)
 
                         notifyItemRangeChanged(0, 5)
+                        viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
+                        { list -> list.chatNotification })
 
                         viewModelShared.firstRunKaKaoTalkSetting(this.kaKaoDataList)
+
                         noticeitemPositionChange = true
                         FragmentFakeKakaoChat.positionSendRunCheck = false
 

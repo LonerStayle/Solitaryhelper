@@ -21,6 +21,7 @@
         <variable
             name="setVisible"
             type="Integer" />
+
         <variable
             name="time"
             type="String" />
@@ -52,11 +53,11 @@
                     android:id="@+id/imageView_imageProfile"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    app:imageUrl="@{kaKaoData.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:imageUrl="@{kaKaoData.image}"
                     tools:src="@drawable/sample0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -71,6 +72,7 @@
             android:layout_marginTop="8dp"
             android:text="@{kaKaoData.name}"
             android:textColor="@android:color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
             tools:text="loner" />
@@ -83,6 +85,7 @@
             android:layout_marginTop="4dp"
             android:maxLines="2"
             android:text="@{lastIndex}"
+            android:background="@drawable/kakao_textbubble"
             app:layout_constraintStart_toStartOf="@+id/textView_name"
             app:layout_constraintTop_toBottomOf="@+id/textView_name"
             tools:text="안녕하세요 로너입니다." />
@@ -97,19 +100,26 @@
             android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_name" />
+            app:layout_constraintTop_toTopOf="@+id/textView_name"
+            tools:text="오전 0시" />
 
         <TextView
             android:id="@+id/textView_notice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:background="@drawable/kakao_talk_notication"
+            android:gravity="center"
             android:text="@{noticeScore}"
-            android:textSize="12sp"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="10sp"
+            android:textStyle="bold"
             android:visibility="@{setVisible}"
             app:layout_constraintBottom_toBottomOf="@+id/textView_textPreview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_textPreview" />
+            app:layout_constraintEnd_toEndOf="@+id/textView_time"
+            app:layout_constraintTop_toTopOf="@+id/textView_textPreview"
+            tools:text="1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

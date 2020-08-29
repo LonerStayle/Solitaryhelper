@@ -8,6 +8,7 @@ import com.example.solitaryhelper.databinding.FragmentSkillBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerSkill
 
 import com.example.solitaryhelper.view.base.BaseFragment
+import com.example.solitaryhelper.view.utill.toastDebugTest
 
 class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill) {
 
@@ -61,14 +62,16 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
         }
     }
     private fun FragmentSkillBinding.setLayoutSkillInfoCallIntro(){
-        layoutSkillInfoCallIntro.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCallSetting)
-        }
+        context?.toastDebugTest("아직 준비중인 기능입니다. \n UI만 완성후 바로 공개 예정.")
+//        layoutSkillInfoCallIntro.setOnClickListener {
+//            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCallSetting)
+//        }
     }
     private fun FragmentSkillBinding.setLayoutSkillInfoSmsIntro(){
-        layoutSkillInfoSmsIntro.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSmsSetting)
-        }
+        context?.toastDebugTest("아직 준비중인 기능입니다. \n UI만 완성후 바로 공개 예정.")
+//        layoutSkillInfoSmsIntro.setOnClickListener {
+//            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSmsSetting)
+//        }
     }
 }
 

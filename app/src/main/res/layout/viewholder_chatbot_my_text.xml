@@ -18,6 +18,8 @@
         android:layout_marginBottom="16dp"
         android:text="@{mySelect}"
         tools:text ="안녕하세요 로너입니다."
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

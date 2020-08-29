@@ -44,16 +44,18 @@ class FragmentEatingAlone :
     var fusedLocationClient: FusedLocationProviderClient? = null
     var locationCallback: LocationCallback? = null
     var locationRequest: LocationRequest? = null
-    private val mapView by lazy{MapView(requireActivity())}
+    private val mapView by lazy { MapView(requireActivity()) }
     var playerLatitude: Double? = null
     var playerLongitude: Double? = null
+
     private val eatingList by lazy { resources.getStringArray(R.array.eatingList) }
-    private var fristRun:Boolean = false
+    private var fristRun: Boolean = false
 
     override fun onAttach(context: Context) {
-mapView
+        mapView
         super.onAttach(context)
     }
+
     override fun FragmentEatingAloneBinding.setEventListener() {
 
         buttonClickListener()
@@ -72,70 +74,35 @@ mapView
 
         buttonSendEatingHouse.setOnClickListener {
 
+            try {
+                val shuffled = eatingList.toList().shuffled()
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(3500L)
+                    context?.toastDebugTest("다시 이용하고 싶으면 \n뒤로가기를 눌러 앱으로 돌아가주세요")
+                    delay(2000L)
+                    context?.toastDebugTest("믿고 기다리시면 알아서 화면이 변합니다!")
 
-            if (ActivityCompat.checkSelfPermission(
-                    requireActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-                != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(
-                    requireActivity(),
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        requireActivity(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    )
-                ) {
-                    DialogSimple.show(requireContext(),
-                        "사용자의 위치권한 요청.",
-                        "빠른 혼밥을 찾기위해 당신의 권한이 필요합니다." +
-                                "걱정마세요 앱 나갈때마다 사용자의 위치정보는 리셋돼요 ",
-                        "응 믿어볼게 ",
-                        {
-                            ActivityCompat.requestPermissions(
-                                requireActivity(),
-                                arrayOf(
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION
-                                ),
-                                REQUEST_ACCESS_COARSE_LOCATION_AND_ACCESS_FINE_LOCATION
-                            )
-                        },
-                        "미안 거절할게",
-                        { return@show })
                 }
 
-            } else {
-                try {
-                    val shuffled = eatingList.toList().shuffled()
-                    CoroutineScope(Dispatchers.Main).launch {
-                        delay(3500L)
-                        context?.toastDebugTest("다시 이용하고 싶으면 \n뒤로가기를 눌러 앱으로 돌아가주세요")
-                    }
-
-                    val url = "kakaomap://search?q=${shuffled[0]}&p=$playerLatitude,$playerLongitude"
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(intent)
-                    context?.toastLongTime("혼밥 찾기 버튼을 누를때 마다 \n새로운 장소를 추천해드립니다. ")
+                val url = "kakaomap://search?q=${shuffled[0]}&p=$playerLatitude,$playerLongitude"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent)
+                context?.toastLongTime("혼밥 찾기 버튼을 누를때 마다 \n새로운 장소를 추천해드립니다. ")
 
 
-                } catch (e: Exception) {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        delay(3500L)
-                        context?.toastDebugTest("설치 완료 후 뒤로가기를 눌러 \n앱으로 돌아가서 다시 버튼을 누르시면 실행이 됩니다.")
-                    }
-                    context?.toastLongTime("카카오 지도와 연동되어 사용됩니다.\n설치를 하셔야 혼밥 찾기를 사용하실 수 있습니다.")
-                    val url = "https://play.google.com/store/apps/details?id=net.daum.android.map"
+            } catch (e: Exception) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(3500L)
+                    context?.toastDebugTest("설치 완료 후 뒤로가기를 눌러 \n앱으로 돌아가서 다시 버튼을 누르시면 실행이 됩니다.")
+                }
+                context?.toastLongTime("카카오 지도와 연동되어 사용됩니다.\n설치를 하셔야 혼밥 찾기를 사용하실 수 있습니다.")
+                val url = "https://play.google.com/store/apps/details?id=net.daum.android.map"
 //                    https://map.kakao.com/?q=맛집&p=37.537229,127.005515
 //                    https://play.google.com/store/apps/details?id=net.daum.android.map
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(intent)
-                }
-
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent)
             }
+
         }
     }
 
@@ -169,23 +136,23 @@ mapView
             var longitudeRandom: Double
 
             var i = 0
-            while (i < 30) {
+            while (i < 20) {
 
                 mapView.addPOIItem(MapPOIItem().apply {
 
                     if (playerLatitude == null || playerLongitude == null) {
                         latitudRandom =
-                            Math.random() * ((37.551444 + 0.01) - (37.551444 - 0.01)) + (37.551444 - 0.01)
+                            Math.random() * ((37.551444 + 0.005) - (37.551444 - 0.005)) + (37.551444 - 0.005)
                         longitudeRandom =
-                            Math.random() * ((126.994359 + 0.01) - (126.994359 - 0.01)) + (126.994359 - 0.01)
+                            Math.random() * ((126.994359 + 0.005) - (126.994359 - 0.005)) + (126.994359 - 0.005)
 
                         itemName =
                             "서울 기준 혼밥집 위치를 잡아봤습니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
                     } else {
                         latitudRandom =
-                            Math.random() * (playerLatitude!! + 0.01 - playerLatitude!! - 0.01) + playerLatitude!! - 0.01
+                            Math.random() * (playerLatitude!! + 0.005 - playerLatitude!! - 0.005) + playerLatitude!! - 0.005
                         longitudeRandom =
-                            Math.random() * (playerLongitude!! + 0.01 - playerLongitude!! - 0.01) + playerLongitude!! - 0.01
+                            Math.random() * (playerLongitude!! + 0.005 - playerLongitude!! - 0.005) + playerLongitude!! - 0.005
 
                         itemName =
                             "근처에 확인된 혼밥집들입니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
@@ -254,7 +221,6 @@ mapView
                 }
 
 
-
             locationRequest = LocationRequest.create()
             locationRequest?.run {
                 priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -266,38 +232,38 @@ mapView
                     override fun onLocationResult(locationResult: LocationResult?) {
                         locationResult?.let {
                             for ((i, location) in it.locations.withIndex()) {
-                                playerLatitude = location.latitude;playerLongitude =
-                                    location.longitude
+                                playerLatitude = location.latitude; playerLongitude =location.longitude
                                 Log.d("opop8", "#$i ${location.latitude} , ${location.longitude}")
                             }
                         }
                     }
                 }
 
-//            fusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+            fusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
 
     }
 
-    override fun onResume() {
-        if(fristRun)
-        mapViewContainer.addView(mapView)
-        else
-            fristRun = false
-
-        super.onResume()
-    }
+//    override fun onResume() {
+//        if (fristRun)
+//            mapViewContainer.addView(mapView)
+//        else
+//            fristRun = false
+//
+//        super.onResume()
+//    }
 
     override fun onPause() {
         mapViewContainer.removeView(mapView)
         fusedLocationClient?.removeLocationUpdates(locationCallback)
+        binding.mapViewAfter.visibility = View.VISIBLE
         super.onPause()
     }
 
 //    override fun onStop() {
 
 //        super.onStop()
-    }
+}
 
 
 

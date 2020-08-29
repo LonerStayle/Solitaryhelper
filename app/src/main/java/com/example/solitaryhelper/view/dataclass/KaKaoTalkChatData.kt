@@ -1,7 +1,7 @@
 package com.example.solitaryhelper.view.dataclass
 
 data class KaKaoTalkChatData(
-    val textList: String,
+    var textList: String,
     val user: Boolean?,
     val timeList:String
 )
