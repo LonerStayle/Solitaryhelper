@@ -24,16 +24,22 @@ class FragmentFakeSmsSettingCustom :
         setYourButtonClickListener()
         setButtonSendListener()
         setFABclickListener()
+        setButtonDeleteClickListener()
+    }
+
+    private fun FragmentFakeSmsSettingCustomBinding.setButtonDeleteClickListener() {
         buttonDelete.setOnClickListener {
 
-            if((recyclerViewSmsSettingCustom.adapter as AdapterRecyclerViewSmsCustom).smsList.isNullOrEmpty()) {
+            if ((recyclerViewSmsSettingCustom.adapter as AdapterRecyclerViewSmsCustom).smsList.isNullOrEmpty()) {
                 context?.toastDebugTest("리스트가 비어 있습니다.")
-            }else
-            viewModelSms.smsAllDelete((recyclerViewSmsSettingCustom.adapter as AdapterRecyclerViewSmsCustom).smsList)
+            } else
+                viewModelSms.smsAllDelete((recyclerViewSmsSettingCustom.adapter as AdapterRecyclerViewSmsCustom).smsList)
         }
     }
 
-    override fun FragmentFakeSmsSettingCustomBinding.setCreateView() {}
+    override fun FragmentFakeSmsSettingCustomBinding.setCreateView() {
+        context?.toastDebugTest("아직 준비중인 기능입니다.")
+    }
 
     override fun FragmentFakeSmsSettingCustomBinding.setLiveDataInObserver() {
         setObserver()
@@ -58,7 +64,8 @@ class FragmentFakeSmsSettingCustom :
                 return@setOnClickListener
             }
 
-            findNavController().navigate(R.id.action_fragmentFakeSmsSetting_to_fragmentFakeSms)
+            context?.toastDebugTest("아직 준비중인 기능입니다.")
+//            findNavController().navigate(R.id.action_fragmentFakeSmsSetting_to_fragmentFakeSms)
         }
     }
 

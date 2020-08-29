@@ -4,6 +4,7 @@ import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeSmsSettingBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerSmsSetting
 import com.example.solitaryhelper.view.base.BaseFragment
+import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayoutMediator
 
 class FragmentFakeSmsSetting :
@@ -11,6 +12,7 @@ class FragmentFakeSmsSetting :
     override fun FragmentFakeSmsSettingBinding.setEventListener() {}
 
     override fun FragmentFakeSmsSettingBinding.setCreateView() {
+        context?.toastDebugTest("아직 UI를 준비중입니다.")
         setViewPagerAndTabLayoutSetting()
     }
 

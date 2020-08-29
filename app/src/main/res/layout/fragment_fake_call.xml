@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#121111">
 
         <ImageView
             android:id="@+id/imageView_currencyImage"
@@ -20,24 +21,26 @@
             app:layout_constraintBottom_toTopOf="@+id/textView_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/newsample0" />
 
-        <Button
+        <ImageView
             android:id="@+id/button_callAgree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginEnd="68dp"
-            android:text="Button"
+            android:src="@drawable/ic_baseline_call_24"
+            android:text="통화버튼"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/view2"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-        <Button
+        <ImageView
             android:id="@+id/button_callCancle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="68dp"
-            android:text="Button"
+            android:src="@drawable/ic_baseline_call_end_24"
+            android:text="통화 종료버튼"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view2"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
@@ -58,6 +61,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:text="@{text}"
+            tools:text="이름"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/view2"
             app:layout_constraintEnd_toEndOf="@+id/view2"
             app:layout_constraintStart_toStartOf="@+id/view2" />

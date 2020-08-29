@@ -20,6 +20,7 @@ import com.example.solitaryhelper.view.dataclass.KaKaoTalkChatData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
+import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.chatTextControl
@@ -162,7 +163,7 @@ class FragmentFakeKakaoChat :
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 
-        val textList = chatTextListControl(args.ListBox)
+
 
         if (!operationByPosition()) {
 
@@ -171,11 +172,11 @@ class FragmentFakeKakaoChat :
 
                 chatDataList.add(
                     KaKaoTalkChatData(
-                        textList[i],
+                        args.ListBox[i],
                         false,
-                        args.timeList[i]
+                        args.timeList[i])
                     )
-                )
+
             }
 
             thisProfileVisibleList = MutableList(chatDataList.size) { View.VISIBLE }
@@ -579,7 +580,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -587,7 +588,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             0,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -595,11 +596,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -615,7 +616,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -623,7 +624,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             1,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -631,11 +632,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -651,7 +652,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -659,7 +660,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             2,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -667,11 +668,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -687,7 +688,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -695,7 +696,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             3,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -703,11 +704,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -723,7 +724,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -731,7 +732,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             4,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -739,11 +740,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -759,7 +760,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd6(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -767,7 +768,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             5,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -775,11 +776,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -795,7 +796,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd7(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -803,7 +804,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             6,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -811,11 +812,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -831,7 +832,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd8(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -839,7 +840,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             7,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -847,11 +848,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -867,7 +868,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd9(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -875,7 +876,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             8,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -883,11 +884,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -903,7 +904,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd10(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -911,7 +912,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             9,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -919,11 +920,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -939,7 +940,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd11(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -947,7 +948,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             10,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -955,11 +956,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -975,7 +976,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd12(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -983,7 +984,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             11,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -991,11 +992,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1011,7 +1012,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd13(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1019,7 +1020,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             12,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1027,11 +1028,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1047,7 +1048,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd14(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1055,7 +1056,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             13,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1063,11 +1064,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1083,7 +1084,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd15(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1091,7 +1092,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             14,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1099,11 +1100,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1119,7 +1120,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd16(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1127,7 +1128,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             15,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1135,11 +1136,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1155,7 +1156,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd17(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1163,7 +1164,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             16,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1171,11 +1172,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1191,7 +1192,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd18(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1199,7 +1200,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             17,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1207,11 +1208,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1227,7 +1228,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd19(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1235,7 +1236,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             18,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1243,11 +1244,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }
@@ -1263,7 +1264,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd20(
                         KaKaoTalkChatData(
-                            textList = shuffleMode[0],
+                            textList = chatTextControl(shuffleMode[0]),
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1271,7 +1272,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             19,
-                            shuffleMode[0],
+                            chatTextControl(shuffleMode[0]),
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1279,11 +1280,11 @@ class FragmentFakeKakaoChat :
 
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
-                            R.drawable.sample2,
+                            R.drawable.newsample2,
                             context,
                             manager,
-                            "1",
-                            shuffleMode[0],
+                            binding.name!!,
+                            chatTextControl(shuffleMode[0]),
                             activtyContext
                         )
                     }

@@ -10,8 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderViewpagerSkillBinding
+import com.example.solitaryhelper.view.dest.main.tapfragments.FragmentSkill
 
-class AdapterViewPagerSkill(var textList: List<String> = listOf()) :
+class AdapterViewPagerSkill(var itemList: List<FragmentSkill.ViewPagerItem> = listOf()) :
     RecyclerView.Adapter<AdapterViewPagerSkill.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -24,12 +25,13 @@ class AdapterViewPagerSkill(var textList: List<String> = listOf()) :
                 .inflate(R.layout.viewholder_viewpager_skill, parent, false)
         )
 
-    override fun getItemCount(): Int = textList.size
+    override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding?.apply {
-            test = textList[position]
+            test = itemList[position].text
+            image = itemList[position].image
         }
     }
 

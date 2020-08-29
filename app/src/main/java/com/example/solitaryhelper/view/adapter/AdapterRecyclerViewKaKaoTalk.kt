@@ -44,11 +44,11 @@ class AdapterRecyclerViewKaKaoTalk(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding?.apply {
-            kaKaoData = kaKaoDataList[position]
-            lastIndex = kaKaoDataList[position].itemLastText
-            noticeScore = kaKaoDataList[position].chatNotification.toString()
-            setVisible = kaKaoDataList[position].visibleSettingList
-            time = kaKaoDataList[position].itemTimeLast?.let { kakaoTimeDisplay(it) }
+            kaKaoData = kaKaoDataList[holder.adapterPosition]
+            lastIndex = kaKaoDataList[holder.adapterPosition].itemLastText
+            noticeScore = kaKaoDataList[holder.adapterPosition].chatNotification.toString()
+            setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList
+            time = kaKaoDataList[holder.adapterPosition].itemTimeLast?.let { kakaoTimeDisplay(it) }
         }
 
         holder.itemView.setOnClickListener {

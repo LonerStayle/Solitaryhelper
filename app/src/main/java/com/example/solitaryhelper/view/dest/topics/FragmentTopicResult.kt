@@ -2,8 +2,10 @@ package com.example.solitaryhelper.view.dest.topics
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 
@@ -17,12 +19,14 @@ import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.contents.Contents.topicTimeOnlyYear
 import com.example.solitaryhelper.view.contents.Contents.topicTimeYearMonth
 import com.example.solitaryhelper.view.utill.toPicTextControl
+import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.view.utill.topicTimeDisplay
 import kotlinx.android.synthetic.main.fragment_topic_result.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 import java.util.*
 import kotlin.properties.Delegates
@@ -41,6 +45,9 @@ class FragmentTopicResult :
         const val MIDDLE_AGE_GIRL = 30002
     }
 
+   private val dp by lazy{ resources.displayMetrics.density}
+    private val recyclerViewAnim by lazy{ AnimationUtils.loadAnimation(requireContext()
+        ,R.anim.topic_recyclerview)}
     private var currentAgeGroup by Delegates.notNull<Int>()
     private var newsData: NaverNews? = null
     private val topicArgs by lazy {
@@ -58,18 +65,25 @@ class FragmentTopicResult :
     }
 
     override fun FragmentTopicResultBinding.setCreateView() {
+        context?.toastDebugTest("UI는 아직 준비중 입니다.")
         setCurrentAgeGroups()
         setApi {
             setData(it)
         }
+        setTime()
     }
 
 
     override fun FragmentTopicResultBinding.setLiveDataInObserver() {
+
         setNewsTrendObserver()
         setBlogObserver()
     }
 
+    private fun FragmentTopicResultBinding.setTime() {
+        textViewCurrentTime.text =
+            SimpleDateFormat("yyyy년 mm월 dd일 기준", Locale.KOREAN).format(Date())
+    }
     private fun FragmentTopicResultBinding.setNewsTrendObserver() {
 
         viewModelTopic.newsTrend.observe(viewLifecycleOwner, Observer { list ->
@@ -220,6 +234,8 @@ class FragmentTopicResult :
     }
 
     private fun setApi(setApiCompleteAfter: (Boolean) -> Unit) {
+
+
         viewModelTopic.insertNaverNewsSearch()
         viewModelTopic.insertBlogFashion(topicTimeDisplay(topicTimeYearMonth.format(Date())))
         viewModelTopic.insertBlogMusic(topicTimeDisplay(topicTimeYearMonth.format(Date())))
@@ -277,27 +293,28 @@ class FragmentTopicResult :
 
     }
 
-    private fun setData(apiSetComplete: Boolean) {
-        binding.imageUrl = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+    private fun FragmentTopicResultBinding.setData(apiSetComplete: Boolean) {
+        imageUrl = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
             "topicnews", "drawable",
             requireActivity().packageName
         ).toString())
-
         if (apiSetComplete) {
             CoroutineScope(Dispatchers.Main).launch {
 
-                delay(2600L)
-                binding.spinKit.visibility = View.GONE
-                binding.imageViewNews.visibility = View.VISIBLE
-                imageList = Array(blogList.size) { "" }
 
-                for (i in blogList.indices) {
+                delay(2600L)
+                root.setBackgroundColor(Color.parseColor("#000000"))
+                imageList = Array(blogList.size) { "" }
+var i = 0
+                while (i < blogList.size) {
                     imageList!![i] =
                         (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
                             "topic$i", "drawable",
                             requireActivity().packageName
                         ).toString())
+                    i++
                 }
+
                 binding.recyclerViewTopicResult.adapter =
                     AdapterRecyclerViewTopicResult(blogList, imageList!!) {
                         for (i in blogList.indices) {
@@ -308,8 +325,25 @@ class FragmentTopicResult :
                             }
                         }
                     }
+                setVisible()
+                imageViewNews.animate().translationY(1000*dp).setDuration(1L).withEndAction {
+                    imageViewNews.animate().translationY(0*dp).setDuration(2000).withEndAction {
+                        recyclerViewTopicResult.visibility = View.VISIBLE
+
+                    }
+                }
             }
+
         }
+    }
+
+    private fun FragmentTopicResultBinding.setVisible() {
+        spinKit.visibility = View.GONE
+        imageViewNews.visibility = View.VISIBLE
+        textViewCurrentTime.visibility = View.VISIBLE
+        textViewData.visibility = View.VISIBLE
+        textViewNewsText.visibility = View.VISIBLE
+        textViewNewsTitle.visibility = View.VISIBLE
     }
 
     private fun imageClickEvnetLogic(link: String) {

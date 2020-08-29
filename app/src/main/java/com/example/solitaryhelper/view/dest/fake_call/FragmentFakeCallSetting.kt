@@ -33,6 +33,7 @@ class FragmentFakeCallSetting :
 
 
     override fun FragmentFakeCallSettingBinding.setCreateView() {
+        context?.toastDebugTest("아직 완성하지 못한 UI입니다.")
         numberPickerSetting()
 //        setSpinnerAdapter()
 
@@ -49,8 +50,9 @@ class FragmentFakeCallSetting :
         buttonCallStart.setOnClickListener {
             Log.d("opop4","넘버피커 값:${numberPickerDelayNoticationEnabled.value}\n" +
                     "딜레이 값 ${PrefCheckRun.getInstance(requireContext()).callDelayCotrol}")
-            if (TextUtils.isEmpty(editTextNameWrite.text))
+            if (TextUtils.isEmpty(editTextNameWrite.text.toString()))
                 context?.toastDebugTest("수신 받을 가짜 이름을 적어주세요")
+
             else {
                 findNavController().navigate(
                     FragmentFakeCallSettingDirections.actionFragmentFakeCallGuideToFragmentFakeCall(

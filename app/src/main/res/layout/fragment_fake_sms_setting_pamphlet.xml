@@ -10,22 +10,26 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:layout_marginTop="8dp"
+        android:text="억지로 만들어진 인싸들 모임을 \n 피할수 있는 상황을 만들기 위해 의도한 기능입니다."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/imageView_first" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/textView_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text=" 사용 방법은 CUSTOM 기능을 통해 내 채팅, 상대방채팅을 구별하여 만들고 버튼을 눌러 캡쳐화면으로 넘어가 자신의 폰으로 캡쳐해서 증거제출용으로 사용하시면 됩니다."
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_two" />
 
@@ -39,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/sample2"
+        android:src="@drawable/fakesmsintro"
      />
 
     <ImageView
@@ -51,9 +55,9 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView_one"
         android:visibility="gone"
-        android:src="@drawable/sample1" />
+        android:src="@drawable/fakesms2" />
 
     <ImageView
         android:id="@+id/imageView_thiree"
@@ -64,16 +68,18 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView_two"
         android:visibility="gone"
-       android:src="@drawable/sample3" />
+       android:src="@drawable/fakesms3" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textView_three"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:visibility="gone"
+        android:text="갑자기 다른 약속을 잡혔다는 증거제출로 카톡방에 올리시거나 어떤 특정상황에 가벼운 마음으로 증거제출 하기 용도입니다. "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_thiree" />

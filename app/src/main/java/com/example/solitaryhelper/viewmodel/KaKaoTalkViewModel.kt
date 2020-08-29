@@ -61,9 +61,9 @@ class KaKaoTalkViewModel : ViewModel() {
         timeChatListPosition19 = Array(dataList[19].textBoxList.size) { "" }
 
 
-        var oldTimeUp = 6000000L
-        val oldTimeDown = (Math.random() * (300000 - 50000) + 50000).toLong()
-        var newTimeUp = 2000000L
+
+
+        var newTimeUp = 6000000L
         val newTimeDown = (Math.random() * (80000 - 40000) + 40000).toLong()
 
 
@@ -96,64 +96,64 @@ class KaKaoTalkViewModel : ViewModel() {
 
 
         for (i in dataList[5].textBoxList.indices) {
-            newTimeUp = -newTimeDown
+            newTimeUp -=newTimeDown
             timeChatListPosition5!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[6].textBoxList.indices) {
-            oldTimeUp = -oldTimeDown
-            timeChatListPosition6!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -=newTimeDown
+            timeChatListPosition6!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[7].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition7!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition7!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[8].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition8!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition8!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[9].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition9!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition9!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[10].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition10!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition10!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[11].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition11!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition11!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[12].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition12!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition12!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[13].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition13!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition13!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[14].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition14!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition14!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[15].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition15!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition15!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[16].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition16!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition16!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[17].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition17!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition17!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[18].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition18!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition18!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
         for (i in dataList[19].textBoxList.indices) {
-            oldTimeUp -= oldTimeDown
-            timeChatListPosition19!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - oldTimeUp))
+            newTimeUp -= newTimeDown
+            timeChatListPosition19!![i] += Contents.timePattern.format(Date(System.currentTimeMillis() - newTimeUp))
         }
 
 

@@ -88,43 +88,43 @@ class AdapterRecyclerViewKaKaoChat(
             }
         }
 
-        fun setTimeVisibleToLastIndex(timeVisibleList: MutableList<Int>, last: Int) {
-
-
-            if ((chatList[last].timeList == chatList[last - 1].timeList) &&
-                chatList[last].user == chatList[last - 1].user
-            ) {
-
-                timeVisibleList[last] = View.INVISIBLE
-                timeVisibleList.add(View.VISIBLE)
-
-            } else {
-                timeVisibleList.add(View.VISIBLE)
-            }
-
-        }
-
-        fun setProfileVisibleToLastIndex(profileVisibleList: MutableList<Int>, last: Int) {
-
-            if (chatList[last].user != chatList[last - 1].user ||
-                chatList[last].timeList != chatList[last - 1].timeList
-            )
-                profileVisibleList.add(View.VISIBLE)
-            else
-                profileVisibleList.add(View.INVISIBLE)
-
-        }
-
-        fun setNameVisibleToLastIndex(nameVisibleList: MutableList<Int>, last: Int) {
-
-            if (chatList[last].user != chatList[last - 1].user ||
-                chatList[last].timeList != chatList[last - 1].timeList
-            )
-                nameVisibleList.add(View.VISIBLE)
-            else
-                nameVisibleList.add(View.GONE)
-
-        }
+//        fun setTimeVisibleToLastIndex(timeVisibleList: MutableList<Int>, last: Int) {
+//
+//
+//            if ((chatList[last].timeList == chatList[last - 1].timeList) &&
+//                chatList[last].user == chatList[last - 1].user
+//            ) {
+//
+//                timeVisibleList[last] = View.INVISIBLE
+//                timeVisibleList.add(View.VISIBLE)
+//
+//            } else {
+//                timeVisibleList.add(View.VISIBLE)
+//            }
+//
+//        }
+//
+//        fun setProfileVisibleToLastIndex(profileVisibleList: MutableList<Int>, last: Int) {
+//
+//            if (chatList[last].user != chatList[last - 1].user ||
+//                chatList[last].timeList != chatList[last - 1].timeList
+//            )
+//                profileVisibleList.add(View.VISIBLE)
+//            else
+//                profileVisibleList.add(View.INVISIBLE)
+//
+//        }
+//
+//        fun setNameVisibleToLastIndex(nameVisibleList: MutableList<Int>, last: Int) {
+//
+//            if (chatList[last].user != chatList[last - 1].user ||
+//                chatList[last].timeList != chatList[last - 1].timeList
+//            )
+//                nameVisibleList.add(View.VISIBLE)
+//            else
+//                nameVisibleList.add(View.GONE)
+//
+//        }
 
 
     }
@@ -168,21 +168,21 @@ class AdapterRecyclerViewKaKaoChat(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        if (profileVisibleList.isNullOrEmpty()) {
+//        if (profileVisibleList.isNullOrEmpty()) {
             profileVisibleList = MutableList(1) { View.VISIBLE }
             timeVisibleList = MutableList(1) { View.VISIBLE }
             nameVisibleList = MutableList(1) { View.VISIBLE }
-        }
+//        }
 
-        if (profileVisibleList?.size == 1) {
+//        if (profileVisibleList?.size == 1) {
             holder.setProfileVisible(profileVisibleList!!)
             holder.setTimeVisible(timeVisibleList!!)
             holder.setNameVisible(nameVisibleList!!)
-        } else {
-            holder.setProfileVisibleToLastIndex(profileVisibleList!!, chatList.lastIndex)
-            holder.setTimeVisibleToLastIndex(timeVisibleList!!, chatList.lastIndex)
-            holder.setNameVisibleToLastIndex(nameVisibleList!!, chatList.lastIndex)
-        }
+//        } else {
+//            holder.setProfileVisibleToLastIndex(profileVisibleList!!, chatList.lastIndex)
+//            holder.setTimeVisibleToLastIndex(timeVisibleList!!, chatList.lastIndex)
+//            holder.setNameVisibleToLastIndex(nameVisibleList!!, chatList.lastIndex)
+//        }
 
         holder.myTextBinding?.apply {
 
@@ -200,7 +200,6 @@ class AdapterRecyclerViewKaKaoChat(
             timeVisible = timeVisibleList!![holder.adapterPosition]
             profile = kaKaoProfile
             name = kaKaoName
-
 
         }
 
