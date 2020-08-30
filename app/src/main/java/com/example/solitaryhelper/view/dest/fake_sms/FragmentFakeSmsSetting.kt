@@ -12,7 +12,7 @@ class FragmentFakeSmsSetting :
     override fun FragmentFakeSmsSettingBinding.setEventListener() {}
 
     override fun FragmentFakeSmsSettingBinding.setCreateView() {
-        context?.toastDebugTest("아직 UI를 준비중입니다.")
+        context?.toastDebugTest("아직 완성되지 못한 기능 입니다.")
         setViewPagerAndTabLayoutSetting()
     }
 
@@ -21,9 +21,8 @@ class FragmentFakeSmsSetting :
         TabLayoutMediator(tabLayoutSmsSetting, viewPagerSmsSettings) { tab, position ->
 
             when (position) {
-                0 -> tab.text = "저장 목록"
-                1 -> tab.text = "문자 리스트 만들기"
-
+                0 -> tab.text = "가짜 문자 설명"
+                1 -> tab.text = "가짜 문자 만들기"
             }
         }.attach()
     }

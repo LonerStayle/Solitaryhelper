@@ -78,9 +78,16 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
             val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.wise_textview_start_info)
             textViewStartInfo.startAnimation(anim)
             delay(5000)
-            textViewWiseList.visibility = View.VISIBLE
             textViewStartInfo.visibility = View. GONE
-            textViewInfo.visibility = View.VISIBLE
+            textViewInfo.animate().alphaBy(0f).alpha(1.0f).setDuration(1000L).withStartAction {
+                textViewWiseList.animate().alphaBy(0f).alpha(1.0f).setDuration(1000L).withEndAction {
+                    textViewWiseList.visibility = View.VISIBLE
+                    textViewInfo.visibility = View.VISIBLE
+                    textViewInfo.startAnimation(anim)
+                }
+            }
+
+
         }
 
     }
@@ -119,10 +126,13 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
             click = !click
             val mainTab = requireActivity().findViewById<TabLayout>(R.id.tabLayout_main)
 
-            if (click)
+            if (click) {
                 mainTab.visibility = View.GONE
-            else
+                it.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_up_24)
+            }else {
                 mainTab.visibility = View.VISIBLE
+                it.setBackgroundResource(R.drawable.ic_outline_details_24)
+            }
         }
     }
 
@@ -140,15 +150,15 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
     private fun addShortcutToNotification() {
 
         val receiverHeader =
-            Icon.createWithResource(requireContext(), R.drawable.ic_launcher_background)
+            Icon.createWithResource(requireContext(), R.drawable.applogo_hood_line_64)
         val receiver = Person.Builder()
-            .setName("얌얌")
+            .setName("아싸도우미 명언 바로보기")
             .setIcon(receiverHeader).build()
         val timestamp = System.currentTimeMillis()
         val style = Notification.MessagingStyle(receiver)
             .addMessage(
                 Notification.MessagingStyle.Message(
-                    "얌",
+                    "버블을 이용하면 명언을 언제든 볼 수 있어요.",
                     timestamp,
                     receiver
                 )
@@ -174,7 +184,7 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
             .setSuppressNotification(true)
             .build()
 
-        val notification = Notification.Builder(requireContext(), "notification_channel_id")
+        val notification = Notification.Builder(requireContext(), "bubble")
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentIntent(pendingIntent)
             .setStyle(style)
@@ -192,7 +202,7 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
         val icon = Icon.createWithResource(requireContext(), R.drawable.ic_launcher_background)
 
         val person = Person.Builder()
-            .setName("얌")
+            .setName("아싸도우미 명언 바로보기")
             .setIcon(icon)
             .build()
 
@@ -201,8 +211,8 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
 
         val shortcutInfo = ShortcutInfo.Builder(requireContext(), "contact")
             .setLongLived(true)
-            .setShortLabel("contact")
-            .setLongLabel("라랄랄")
+            .setShortLabel("아싸도우미 명언 바로보기")
+            .setLongLabel("아싸도우미 명언 바로보기")
             .setIcon(icon)
             .setPerson(person)
             .setCategories(setOf("com.jacob.material.bubbles.category.TEXT_SHARE_TARGET"))
@@ -217,8 +227,8 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel(
-                "notification_channel_id",
-                "name",
+                "bubble",
+                "아싸도우미 명언 바로보기",
                 importance
             ).apply {
                 description = "descriptionText"

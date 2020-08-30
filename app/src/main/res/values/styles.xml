@@ -21,6 +21,11 @@
         <item name="android:textSize">20sp</item>
 
     </style>
+
+    <style name="spineerh" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/spinner</item>
+    </style>
+
 </resources>
 
 

@@ -130,7 +130,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 for (i in 0..4) {
                     when (tab?.position) {
                         i -> tab.setIcon(iconImage[i])
-                        4 -> {fabStart.show();fabStart.hide();buttonMenu.visibility = View.VISIBLE}
+                        4 -> {fabStart.show();buttonMenu.visibility = View.VISIBLE}
                     }
                 }
             }

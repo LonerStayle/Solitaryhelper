@@ -34,24 +34,23 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="#4C4A4A"
+            android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="전화가 온척 연기를 하기위한 기능입니다. \n 어색한 상황일 떄 억지로 폰을 만지작 하는것보단 \n정말 전화가 온척 회피하게끔 있게 만들어봤습니다."
+            android:text="전화가 온척 연기를 하기위한 기능입니다. \n 알림 방식 지정, 나중에 사용하기 기능이 가능합니다."
+            android:textColor="#4C4A4A"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <View
             android:id="@+id/view"
-            android:layout_width="3dp"
+            android:layout_width="1dp"
             android:layout_height="200dp"
-            android:backgroundTint="@color/colorLightBrown"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="64dp"
+         android:background="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.37" />
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <NumberPicker
             android:id="@+id/numberPicker_noticeSetting"
@@ -81,11 +80,11 @@
             android:id="@+id/editText_nameWrite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:drawableStart="@drawable/ic_baseline_person_outline_24"
             android:ems="8"
+            android:hint="상대방 이름"
             android:inputType="textPersonName"
-            android:hint="통화 할 상대의 이름을 적어주세요."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numberPicker_delayNoticationEnabled" />
@@ -93,9 +92,10 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="62dp"
+            android:padding="8dp"
             android:background="@drawable/sms_setting_button_background"
             android:gravity="center"
             android:orientation="vertical"
@@ -112,7 +112,7 @@
                 android:padding="4dp"
                 android:text="전화 시작하기"
                 android:textColor="@android:color/black"
-                android:textSize="24sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText_nameWrite" />

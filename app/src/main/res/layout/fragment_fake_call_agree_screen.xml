@@ -23,14 +23,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#222121"
     >
 
-    <Button
+    <ImageView
         android:id="@+id/button_allClaer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:text="종료하기"
+        android:src="@drawable/ic_baseline_call_end_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -120,29 +122,33 @@
         android:id="@+id/imageView_profile"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:imageUrl="@{image}"
+        android:src="@drawable/newsample0"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/newsample0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.84000003"
+         />
 
     <TextView
         android:id="@+id/textView_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@{second}"
-        tools:text = "00"
+        android:textColor="#fff"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toTopOf="@+id/textView12" />
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        tools:text="00" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:text=":"
         android:textSize="16sp"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -151,10 +157,10 @@
         android:id="@+id/textView_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@{name}"
-        android:textColor="@android:color/black"
+        android:textColor="#FFFFFF"
         android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
@@ -167,6 +173,8 @@
         android:text="@{miunet}"
         android:textSize="16sp"
         tools:text = "00"
+        android:drawableStart="@drawable/ic_baseline_call_24_mini"
+        android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/textView12" />
 

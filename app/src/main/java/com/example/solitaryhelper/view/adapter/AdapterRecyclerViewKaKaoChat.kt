@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -195,10 +196,9 @@ class AdapterRecyclerViewKaKaoChat(
             text = chatList[holder.adapterPosition].textList
             time = kakaoTimeDisplay(chatList[holder.adapterPosition].timeList)
             goneVisible = nameVisibleList!![holder.adapterPosition]
-            cardView.visibility = profileVisibleList!![holder.adapterPosition]
             profileImageVisible = profileVisibleList!![holder.adapterPosition]
             timeVisible = timeVisibleList!![holder.adapterPosition]
-            profile = kaKaoProfile
+            imageViewImageProfile.setImageURI(Uri.parse(kaKaoProfile) )
             name = kaKaoName
 
         }

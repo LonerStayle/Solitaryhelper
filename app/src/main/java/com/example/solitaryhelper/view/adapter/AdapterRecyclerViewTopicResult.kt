@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderTopicReusltBinding
 import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlog
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverNews
 import com.example.solitaryhelper.view.utill.toPicTextControl
 
 /**
@@ -37,7 +37,7 @@ class AdapterRecyclerViewTopicResult(
         holder.binding?.apply {
                 title = toPicTextControl(blogList[holder.adapterPosition].title)
                 description = toPicTextControl( blogList[holder.adapterPosition].description)
-                imageUrl = imageList[holder.adapterPosition]
+                imageViewImage.setImageURI(Uri.parse(imageList[holder.adapterPosition]))
         }
 
         holder.itemView.setOnClickListener {

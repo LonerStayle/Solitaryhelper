@@ -45,9 +45,13 @@ class FragmentTopicResult :
         const val MIDDLE_AGE_GIRL = 30002
     }
 
-   private val dp by lazy{ resources.displayMetrics.density}
-    private val recyclerViewAnim by lazy{ AnimationUtils.loadAnimation(requireContext()
-        ,R.anim.topic_recyclerview)}
+    private val dp by lazy { resources.displayMetrics.density }
+    private val recyclerViewAnim by lazy {
+        AnimationUtils.loadAnimation(
+            requireContext()
+            , R.anim.topic_recyclerview
+        )
+    }
     private var currentAgeGroup by Delegates.notNull<Int>()
     private var newsData: NaverNews? = null
     private val topicArgs by lazy {
@@ -84,6 +88,7 @@ class FragmentTopicResult :
         textViewCurrentTime.text =
             SimpleDateFormat("yyyy년 mm월 dd일 기준", Locale.KOREAN).format(Date())
     }
+
     private fun FragmentTopicResultBinding.setNewsTrendObserver() {
 
         viewModelTopic.newsTrend.observe(viewLifecycleOwner, Observer { list ->
@@ -305,7 +310,8 @@ class FragmentTopicResult :
                 delay(2600L)
                 root.setBackgroundColor(Color.parseColor("#000000"))
                 imageList = Array(blogList.size) { "" }
-var i = 0
+
+                var i = 0
                 while (i < blogList.size) {
                     imageList!![i] =
                         (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
@@ -326,8 +332,8 @@ var i = 0
                         }
                     }
                 setVisible()
-                imageViewNews.animate().translationY(1000*dp).setDuration(1L).withEndAction {
-                    imageViewNews.animate().translationY(0*dp).setDuration(2000).withEndAction {
+                imageViewNews.animate().translationY(1000 * dp).setDuration(1L).withEndAction {
+                    imageViewNews.animate().translationY(26 * dp).setDuration(3000).withEndAction {
                         recyclerViewTopicResult.visibility = View.VISIBLE
 
                     }

@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.dest.fake_call
 
+import android.net.Uri
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallAgreeScreenBinding
 import com.example.solitaryhelper.view.base.BaseFragment
@@ -29,7 +30,6 @@ class FragmentFakeCallAgreeScreen :
     }
 
     override fun FragmentFakeCallAgreeScreenBinding.setCreateView() {
-        context?.toastDebugTest("아직 준비중인 UI입니다.")
 
         setData()
         setTime()
@@ -51,13 +51,18 @@ class FragmentFakeCallAgreeScreen :
 
     private fun FragmentFakeCallAgreeScreenBinding.setData() {
         name = args.name
-        image = Contents.IMAGE_URL_DEFAULT_FILE_PATH + args.image
     }
 
     private fun FragmentFakeCallAgreeScreenBinding.setButtonClearClickListener() {
         buttonAllClaer.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 context?.toastDebugTest("통화가 종료됩니다.")
+                textViewMiunet.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_baseline_call_end_24_mini,
+                    0,
+                    0,
+                    0
+                )
                 timer.cancel()
                 delay(2000)
                 requireActivity().finish()

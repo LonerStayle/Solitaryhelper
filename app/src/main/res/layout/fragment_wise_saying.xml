@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/kaKaoTalkFontColor">
+        android:background="#fff">
 
         <ImageView
             android:id="@+id/button_BubbleDataUse"
@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@={wiseText}"
-            android:textColor="#FFF"
-            android:textSize="20sp"
+            android:textColor="#000"
+            android:textSize="16sp"
             android:textStyle="italic"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,7 +80,7 @@
             android:layout_marginEnd="8dp"
             android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
             android:text="언제든지 명언보기"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="16sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/button_BubbleDataUse"
@@ -95,7 +95,8 @@
             android:text="어서오세요\n 아싸의 마음의 양식을 쌓을 곳입니다..\n
 진정한 아싸는 내면의 가치를 \n
 아름답게 느낄줄 압니다."
-            android:textColor="#fff"
+            android:textColor="#000"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

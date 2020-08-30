@@ -57,7 +57,7 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
             findNavController().navigate(
                 FragmentFakeCallDirections.actionFragmentFakeCallToFragmentFakeCallAgreeScreen(
                     name = textViewName.text.toString(),
-                    image = resources.getIdentifier(
+                    image =Contents.IMAGE_URL_DEFAULT_FILE_PATH+resources.getIdentifier(
                         "sample0",
                         "drawable",
                         requireActivity().packageName
@@ -158,7 +158,7 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
 
     override fun onPause() {
         if (args.callMode == 3) {
-            sound.reset()
+
             sound.release()
         }
 

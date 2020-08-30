@@ -28,23 +28,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:visibility="gone"
-            android:layout_marginTop="8dp"
             android:textColor="#fff"
+            android:textSize="12sp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_data" />
 
         <TextView
             android:id="@+id/textView_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
+            android:text="새로운 정보를 원하시면 \n 나갔다가 다시 실행하시면 됩니다."
             android:textColor="#fff"
-            android:text="새로운 정보를 원하시면 나갔다가 다시 실행하시면 됩니다."
+            android:textSize="16sp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_currentTime" />
+            app:layout_constraintTop_toTopOf="@+id/spinKit" />
 
         <ImageView
             android:id="@+id/imageView_news"

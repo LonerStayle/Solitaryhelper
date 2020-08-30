@@ -11,9 +11,7 @@
         <variable
             name="description"
             type="String" />
-        <variable
-            name="imageUrl"
-            type="String" />
+
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/layout_select"
@@ -22,12 +20,10 @@
     android:padding="12dp">
 
     <ImageView
-        android:id="@+id/imageView7"
-        imageUrl="@{imageUrl}"
+        android:id="@+id/imageView_image"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,15 +33,17 @@
         android:id="@+id/textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#60ffffff"
+        android:background="#40000000"
         android:maxLength="16"
         android:maxLines="1"
         android:text="@{title}"
-        android:textSize="12sp"
+        android:textSize="14sp"
+        android:textColor="#fff"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView7"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_image"
+        app:layout_constraintStart_toStartOf="@+id/imageView_image"
+        app:layout_constraintTop_toTopOf="@+id/imageView_image"
+        app:layout_constraintVertical_bias="0.90999997"
         tools:text=" aaaa" />
 
     <TextView
@@ -62,12 +60,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="#60ffffff"
+        android:background="#40000000"
         android:maxLines="2"
         android:text="@{description}"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textStyle="normal"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="@+id/imageView_image"
         app:layout_constraintTop_toBottomOf="@+id/textView_title"
         tools:text=" aaaa" />
 

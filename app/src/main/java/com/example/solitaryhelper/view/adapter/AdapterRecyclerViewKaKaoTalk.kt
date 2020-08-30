@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,7 @@ class AdapterRecyclerViewKaKaoTalk(
 
         holder.binding?.apply {
             kaKaoData = kaKaoDataList[holder.adapterPosition]
+            imageViewImageProfile.setImageURI(Uri.parse(kaKaoDataList[holder.adapterPosition].image))
             lastIndex = kaKaoDataList[holder.adapterPosition].itemLastText
             noticeScore = kaKaoDataList[holder.adapterPosition].chatNotification.toString()
             setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList

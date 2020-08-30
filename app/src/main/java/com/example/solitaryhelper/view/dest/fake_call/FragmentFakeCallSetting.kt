@@ -16,6 +16,7 @@ import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.dataclass.TimeSpinnerModel
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import kotlinx.coroutines.*
 
@@ -33,7 +34,7 @@ class FragmentFakeCallSetting :
 
 
     override fun FragmentFakeCallSettingBinding.setCreateView() {
-        context?.toastDebugTest("아직 완성하지 못한 UI입니다.")
+        keyBoardShowHiding(requireContext(), editTextNameWrite)
         numberPickerSetting()
 //        setSpinnerAdapter()
 

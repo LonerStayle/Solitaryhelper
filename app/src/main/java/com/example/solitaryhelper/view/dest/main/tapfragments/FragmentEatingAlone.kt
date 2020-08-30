@@ -44,13 +44,12 @@ class FragmentEatingAlone :
     var fusedLocationClient: FusedLocationProviderClient? = null
     var locationCallback: LocationCallback? = null
     var locationRequest: LocationRequest? = null
-//    private val mapView by lazy { MapView(requireActivity()) }
+    private val mapView by lazy { MapView(requireActivity()) }
     var playerLatitude: Double? = null
     var playerLongitude: Double? = null
 
     private val eatingList by lazy { resources.getStringArray(R.array.eatingList) }
     private var fristRun: Boolean = false
-
 
 
     override fun FragmentEatingAloneBinding.setEventListener() {
@@ -103,67 +102,67 @@ class FragmentEatingAlone :
         }
     }
 
-//    private fun setMap() {
-//
-//
-//        if (playerLatitude == null || playerLongitude == null)
-//            mapView.setMapCenterPoint(
-//                MapPoint.mapPointWithGeoCoord(37.551444, 126.994359),
-//                true
-//            )
-//        else
-//            mapView.setMapCenterPoint(
-//                MapPoint.mapPointWithGeoCoord(
-//                    playerLatitude!!,
-//                    playerLongitude!!
-//                ), true
-//            )
-//
-//
-//        mapView.setZoomLevel(3, true)
-//        mapView.zoomIn(true)
-//        mapView.zoomOut(true)
-//
-//
-//    }
-//
-//    private fun mapLocationPlus() {
-//        CoroutineScope(Dispatchers.Main).launch {
-//            var latitudRandom: Double
-//            var longitudeRandom: Double
-//
-//            var i = 0
-//            while (i < 20) {
-//
-//                mapView.addPOIItem(MapPOIItem().apply {
-//
-//                    if (playerLatitude == null || playerLongitude == null) {
-//                        latitudRandom =
-//                            Math.random() * ((37.551444 + 0.005) - (37.551444 - 0.005)) + (37.551444 - 0.005)
-//                        longitudeRandom =
-//                            Math.random() * ((126.994359 + 0.005) - (126.994359 - 0.005)) + (126.994359 - 0.005)
-//
-//                        itemName =
-//                            "서울 기준 혼밥집 위치를 잡아봤습니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
-//                    } else {
-//                        latitudRandom =
-//                            Math.random() * (playerLatitude!! + 0.005 - playerLatitude!! - 0.005) + playerLatitude!! - 0.005
-//                        longitudeRandom =
-//                            Math.random() * (playerLongitude!! + 0.005 - playerLongitude!! - 0.005) + playerLongitude!! - 0.005
-//
-//                        itemName =
-//                            "근처에 확인된 혼밥집들입니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
-//                    }
-//                    tag = i
-//                    mapPoint = MapPoint.mapPointWithGeoCoord(latitudRandom, longitudeRandom)
-//                    markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
-//                    selectedMarkerType =
-//                        MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-//                })
-//                i++
-//            }
-//        }
-//    }
+    private fun setMap() {
+
+
+        if (playerLatitude == null || playerLongitude == null)
+            mapView.setMapCenterPoint(
+                MapPoint.mapPointWithGeoCoord(37.551444, 126.994359),
+                true
+            )
+        else
+            mapView.setMapCenterPoint(
+                MapPoint.mapPointWithGeoCoord(
+                    playerLatitude!!,
+                    playerLongitude!!
+                ), true
+            )
+
+
+        mapView.setZoomLevel(3, true)
+        mapView.zoomIn(true)
+        mapView.zoomOut(true)
+
+
+    }
+
+    private fun mapLocationPlus() {
+        CoroutineScope(Dispatchers.Main).launch {
+            var latitudRandom: Double
+            var longitudeRandom: Double
+
+            var i = 0
+            while (i < 20) {
+
+                mapView.addPOIItem(MapPOIItem().apply {
+
+                    if (playerLatitude == null || playerLongitude == null) {
+                        latitudRandom =
+                            Math.random() * ((37.551444 + 0.005) - (37.551444 - 0.005)) + (37.551444 - 0.005)
+                        longitudeRandom =
+                            Math.random() * ((126.994359 + 0.005) - (126.994359 - 0.005)) + (126.994359 - 0.005)
+
+                        itemName =
+                            "서울 기준 혼밥집 위치를 잡아봤습니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
+                    } else {
+                        latitudRandom =
+                            Math.random() * (playerLatitude!! + 0.005 - playerLatitude!! - 0.005) + playerLatitude!! - 0.005
+                        longitudeRandom =
+                            Math.random() * (playerLongitude!! + 0.005 - playerLongitude!! - 0.005) + playerLongitude!! - 0.005
+
+                        itemName =
+                            "근처에 확인된 혼밥집들입니다.\n 빠른 혼밥 장소를 찾으시려면 상단버튼을 눌러주세요 "
+                    }
+                    tag = i
+                    mapPoint = MapPoint.mapPointWithGeoCoord(latitudRandom, longitudeRandom)
+                    markerType = MapPOIItem.MarkerType.BluePin // 기본으로 제공하는 BluePin 마커 모양.
+                    selectedMarkerType =
+                        MapPOIItem.MarkerType.RedPin // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+                })
+                i++
+            }
+        }
+    }
 
     private fun initLocation() {
 
@@ -229,37 +228,43 @@ class FragmentEatingAlone :
                     override fun onLocationResult(locationResult: LocationResult?) {
                         locationResult?.let {
                             for ((i, location) in it.locations.withIndex()) {
-                                playerLatitude = location.latitude; playerLongitude =location.longitude
+                                playerLatitude = location.latitude; playerLongitude =
+                                    location.longitude
                                 Log.d("opop8", "#$i ${location.latitude} , ${location.longitude}")
                             }
                         }
                     }
                 }
 
-            fusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+            fusedLocationClient?.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.myLooper()
+            )
         }
 
     }
 
-//    override fun onResume() {
-//        if (fristRun)
+    override fun onResume() {
+        if (fristRun)
 //            mapViewContainer.addView(mapView)
-//        else
-//            fristRun = false
-//
-//        super.onResume()
-//    }
+        else
+            fristRun = false
+
+        super.onResume()
+    }
 
     override fun onPause() {
 //        mapViewContainer.removeView(mapView)
-        fusedLocationClient?.removeLocationUpdates(locationCallback)
-        binding.mapViewAfter.visibility = View.VISIBLE
+//        fusedLocationClient?.removeLocationUpdates(locationCallback)
+//        binding.mapViewAfter.visibility = View.VISIBLE
         super.onPause()
     }
 
-//    override fun onStop() {
-
-//        super.onStop()
+    override fun onStop() {
+//        mapViewContainer.removeView(mapView)
+        super.onStop()
+    }
 }
 
 
