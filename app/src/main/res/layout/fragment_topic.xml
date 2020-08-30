@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/imageView_guide"
-            android:layout_width="124dp"
-            android:layout_height="124dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:layout_marginTop="32dp"
             android:src="@drawable/question"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
             android:layout_width="164dp"
             android:layout_height="50dp"
             android:layout_marginStart="124dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:max="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
             android:id="@+id/textView_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:hint="위에 바를 선택해주세요"
             android:text="@={ageText}"
             app:layout_constraintEnd_toEndOf="@+id/seekBar"
@@ -89,7 +89,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:gravity="center"
             android:text="오랜만에 집나가는\n 아싸들을 위한 바깥세상 따라잡기"
             android:textColor="#000"
@@ -102,12 +102,12 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="성별과 나이를 선택하세요"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <TextView
             android:id="@+id/textViewGender"

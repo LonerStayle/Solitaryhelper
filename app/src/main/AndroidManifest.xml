@@ -26,22 +26,26 @@
 
 
         <activity android:name=".view.activity.AppGuideActivity"
+
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
         <activity android:name=".view.activity.MainActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
+<!--                <action android:name="android.intent.action.MAIN" />-->
                 <data android:scheme="kakaomap://open" />
                 <data android:scheme="https://map.kakao.com"/>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
             </intent-filter>
 
         </activity>

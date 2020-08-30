@@ -6,7 +6,7 @@ data class KaKaoTalkData(
     val id:Long,
     val name:String,
     val image:String,
-    val textBoxList:MutableList<MutableList<String>>,
+    val textBoxList: MutableList<Array<String>>,
     var itemLastText: String,
     var chatNotification: Int,
     var messageArrivalTime: Array<Array<String>>?,

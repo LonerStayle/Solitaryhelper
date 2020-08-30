@@ -38,14 +38,14 @@ class AppGuideActivity : AppCompatActivity() {
         if (!PrefCheckRun.getInstance(this@AppGuideActivity).appGuideFirstRunUserMark) {
 
 
-            CoroutineScope(Dispatchers.Main).launch {
-                setAdapter()
-                delay(3000)
-                imageViewAppLogo.visibility = View.GONE
-                textViewLogoText.visibility = View.GONE
-                viewPagerAppGuide.visibility = View.VISIBLE
-                linerLayoutIndicators.visibility = View.VISIBLE
-            }
+        CoroutineScope(Dispatchers.Main).launch {
+            setAdapter()
+            delay(3000)
+            imageViewAppLogo.visibility = View.GONE
+            textViewLogoText.visibility = View.GONE
+            viewPagerAppGuide.visibility = View.VISIBLE
+            linerLayoutIndicators.visibility = View.VISIBLE
+        }
 
         } else {
 

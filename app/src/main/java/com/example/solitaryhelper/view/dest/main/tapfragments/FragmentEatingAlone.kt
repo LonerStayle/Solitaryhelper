@@ -255,6 +255,9 @@ class FragmentEatingAlone :
     }
 
     override fun onPause() {
+//        binding.textViewInfoThree.visibility = View.VISIBLE
+//        binding.textViewInfoTwo.visibility = View.VISIBLE
+//        binding.textViewInfoOne.visibility = View.VISIBLE
 //        mapViewContainer.removeView(mapView)
 //        fusedLocationClient?.removeLocationUpdates(locationCallback)
 //        binding.mapViewAfter.visibility = View.VISIBLE

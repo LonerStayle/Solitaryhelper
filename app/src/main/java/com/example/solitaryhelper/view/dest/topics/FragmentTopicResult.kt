@@ -86,7 +86,7 @@ class FragmentTopicResult :
 
     private fun FragmentTopicResultBinding.setTime() {
         textViewCurrentTime.text =
-            SimpleDateFormat("yyyy년 mm월 dd일 기준", Locale.KOREAN).format(Date())
+            SimpleDateFormat("yyyy년 MM월 dd일 기준", Locale.KOREAN).format(Date())
     }
 
     private fun FragmentTopicResultBinding.setNewsTrendObserver() {

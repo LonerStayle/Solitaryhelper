@@ -7,9 +7,7 @@
         <variable
             name="test"
             type="String" />
-        <variable
-            name="image"
-            type="String" />
+
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -18,7 +16,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="16dp"
         android:layout_margin="10dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,19 +28,19 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            imageUrl="@{image}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adjustViewBounds="true"
             android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
             android:background="#40000000"
             android:gravity="center"
-            android:layout_gravity="center|bottom"
+
             android:text="@{test}"
             android:textColor="#fff"
             android:textSize="14sp"

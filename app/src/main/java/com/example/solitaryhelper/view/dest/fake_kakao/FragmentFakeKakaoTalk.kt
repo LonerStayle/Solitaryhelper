@@ -12,14 +12,13 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-import com.example.solitaryhelper.view.utill.chatTextListControl
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 import java.util.Collections.swap
-import java.util.logging.Handler
 import kotlin.random.Random
 
 class FragmentFakeKakaoTalk :
@@ -29,7 +28,7 @@ class FragmentFakeKakaoTalk :
 
     companion object {
         var itemOrderList =
-            arrayOf(0, 1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19)
+            arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
     }
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
@@ -45,7 +44,6 @@ class FragmentFakeKakaoTalk :
     }
 
 
-
     override fun FragmentFakeKakaoTalkBinding.setLiveDataInObserver() {
         setAdapterDataUpdate()
 
@@ -53,7 +51,7 @@ class FragmentFakeKakaoTalk :
 
     //랜덤 광고사진 가져오기
     private fun setImageViewAd() {
-        val imageList = Array<String> (3){""}
+        val imageList = Array<String>(3) { "" }
         for (i in 0..2) {
             imageList[i] = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
                 "kakao_ad${i}",
@@ -108,29 +106,29 @@ class FragmentFakeKakaoTalk :
             val visibleSettingList: Array<Int>
             val timeList: Array<Array<String>>?
             val kaKaoTextList = mutableListOf(
-                         chatTextListControl(resources.getStringArray(R.array.sample_list1)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list2)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list3)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list4)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list5)),
+                resources.getStringArray(R.array.sample_list1),
+                resources.getStringArray(R.array.sample_list2),
+                resources.getStringArray(R.array.sample_list3),
+                resources.getStringArray(R.array.sample_list4),
+                resources.getStringArray(R.array.sample_list5),
 
-                         chatTextListControl(resources.getStringArray(R.array.sample_list6)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list7)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list8)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list9)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list10)),
+                resources.getStringArray(R.array.sample_list6),
+                resources.getStringArray(R.array.sample_list7),
+                resources.getStringArray(R.array.sample_list8),
+                resources.getStringArray(R.array.sample_list9),
+                resources.getStringArray(R.array.sample_list10),
 
-                         chatTextListControl(resources.getStringArray(R.array.sample_list11)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list12)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list13)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list14)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list15)),
+                resources.getStringArray(R.array.sample_list11),
+                resources.getStringArray(R.array.sample_list12),
+                resources.getStringArray(R.array.sample_list13),
+                resources.getStringArray(R.array.sample_list14),
+                resources.getStringArray(R.array.sample_list15),
 
-                         chatTextListControl(resources.getStringArray(R.array.sample_list16)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list17)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list18)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list19)),
-                         chatTextListControl(resources.getStringArray(R.array.sample_list20))
+                resources.getStringArray(R.array.sample_list16),
+                resources.getStringArray(R.array.sample_list17),
+                resources.getStringArray(R.array.sample_list18),
+                resources.getStringArray(R.array.sample_list19),
+                resources.getStringArray(R.array.sample_list20)
 
             )
 
@@ -162,11 +160,12 @@ class FragmentFakeKakaoTalk :
             val kakaoDataList = mutableListOf<KaKaoTalkData>()
             kaKaoImageProfileList = Array(kaKaoTextList.size) { "" }
             for (i in kaKaoTextList.indices) {
-                kaKaoImageProfileList[i]=(Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                    "newsample$i",
-                    "drawable",
-                    requireActivity().packageName
-                ).toString())
+                kaKaoImageProfileList[i] =
+                    (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                        "newsample$i",
+                        "drawable",
+                        requireActivity().packageName
+                    ).toString())
 
                 kakaoDataList.add(
                     KaKaoTalkData(
@@ -194,8 +193,8 @@ class FragmentFakeKakaoTalk :
                 lastTime[i] = kakaoDataList[i].messageArrivalTime?.get(i)?.last()!!
                 kakaoDataList[i].itemTimeLast = lastTime[i]
             }
-            PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
 
+            PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
             return kakaoDataList.toMutableList()
 
 //            timeList = viewModelKaKaoTalk.setTimeList(kakaoDataList.toList())
@@ -214,7 +213,8 @@ class FragmentFakeKakaoTalk :
 //
 //            return shuffleMode.toMutableList()
         }
-            viewModelShared.firstRunKaKaoTalkSetting(setCreateAnItemToSendToTheAdapter())
+
+        viewModelShared.firstRunKaKaoTalkSetting(setCreateAnItemToSendToTheAdapter())
     }
 
     private fun setAdapterDataUpdate() {
@@ -224,9 +224,8 @@ class FragmentFakeKakaoTalk :
 
                 if (!noticeitemPositionChange) {
 
-
                     binding.recyclerViewKaKaoChatList.adapter =
-                        AdapterRecyclerViewKaKaoTalk(it)
+                        AdapterRecyclerViewKaKaoTalk(it, requireContext())
                         { position ->
 
                             (binding.recyclerViewKaKaoChatList.adapter as
@@ -246,7 +245,7 @@ class FragmentFakeKakaoTalk :
                                 FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
                                     profileImage = it[0].image,
                                     name = it[0].name,
-                                    ListBox = it.toTypedArray()[0].textBoxList[it[0].id.toInt()].toTypedArray(),
+                                    ListBox = it[0].textBoxList[it[0].id.toInt()],
                                     itemIdPosition = it[0].id,
                                     selectChatRoomCount = roomSeletCount,
                                     timeList = it[0].messageArrivalTime?.get(position)!!
@@ -255,7 +254,7 @@ class FragmentFakeKakaoTalk :
 
                             (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
                                 swap(this.kaKaoDataList, 0, position)
-Log.d("opop5", "talk 프레그먼트 이미지 문제관련 확인")
+                                Log.d("opop5", "talk 프레그먼트 이미지 문제관련 확인")
                             }
                         }
 
@@ -322,8 +321,14 @@ Log.d("opop5", "talk 프레그먼트 이미지 문제관련 확인")
                 }
 
             })
+
+
     }
 
+    override fun onStop() {
+        Log.d("opopop", "온스탑체크")
+        super.onStop()
+    }
 
 }
 

@@ -23,8 +23,6 @@ import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-import com.example.solitaryhelper.view.utill.chatTextControl
-import com.example.solitaryhelper.view.utill.chatTextListControl
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.viewmodel.SharedViewModel
 import kotlinx.coroutines.*
@@ -302,6 +300,8 @@ class FragmentFakeKakaoChat :
     private fun FragmentFakeKakaoChatBinding.setMyTestSendButtonClickListener() {
 
         buttonSend.setOnClickListener {
+            editTextTalkBox.text.toString()
+
             keyBoardShowHiding(requireContext(), editTextTalkBox)
 
             if (TextUtils.isEmpty(editTextTalkBox.text))
@@ -310,12 +310,11 @@ class FragmentFakeKakaoChat :
             buttonClick = true
             when (args.itemIdPosition) {
 
-
                 0L -> {
                     viewModelKaKaoChat.insertItemAdd(
 
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
 
@@ -327,7 +326,7 @@ class FragmentFakeKakaoChat :
                 1L -> {
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -338,7 +337,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -349,7 +348,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -360,7 +359,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -371,7 +370,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd6(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -382,7 +381,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd7(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -393,7 +392,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd8(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -404,7 +403,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd9(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -415,7 +414,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd10(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -426,7 +425,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd11(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -437,7 +436,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd12(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -448,7 +447,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd13(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -459,7 +458,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd14(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -470,7 +469,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd15(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -481,7 +480,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd16(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -492,7 +491,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd17(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -503,7 +502,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd18(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -514,7 +513,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd19(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -525,7 +524,7 @@ class FragmentFakeKakaoChat :
 
                     viewModelKaKaoChat.insertItemAdd20(
                         KaKaoTalkChatData(
-                            textList = editTextTalkBox.text.toString(),
+                            textList =  editTextTalkBox.text.toString(),
                             user = true,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -580,7 +579,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -588,7 +587,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             0,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -600,7 +599,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -616,7 +615,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd2(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -624,7 +623,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             1,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -636,7 +635,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -652,7 +651,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd3(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -660,7 +659,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             2,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -672,7 +671,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -688,7 +687,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd4(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -696,7 +695,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             3,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -708,7 +707,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -724,7 +723,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd5(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -732,7 +731,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             4,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -744,7 +743,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -760,7 +759,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd6(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -768,7 +767,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             5,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -780,7 +779,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -796,7 +795,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd7(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -804,7 +803,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             6,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -816,7 +815,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -832,7 +831,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd8(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -840,7 +839,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             7,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -852,7 +851,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -868,7 +867,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd9(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -876,7 +875,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             8,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -888,7 +887,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -904,7 +903,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd10(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -912,7 +911,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             9,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -924,7 +923,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -940,7 +939,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd11(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -948,7 +947,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             10,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -960,7 +959,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -976,7 +975,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd12(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -984,7 +983,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             11,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -996,7 +995,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1012,7 +1011,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd13(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1020,7 +1019,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             12,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1032,7 +1031,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1048,7 +1047,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd14(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1056,7 +1055,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             13,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1068,7 +1067,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1084,7 +1083,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd15(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1092,7 +1091,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             14,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1104,7 +1103,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1120,7 +1119,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd16(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1128,7 +1127,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             15,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1140,7 +1139,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1156,7 +1155,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd17(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1164,7 +1163,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             16,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1176,7 +1175,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1192,7 +1191,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd18(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1200,7 +1199,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             17,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1212,7 +1211,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1228,7 +1227,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd19(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1236,7 +1235,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             18,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1248,7 +1247,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1264,7 +1263,7 @@ class FragmentFakeKakaoChat :
                     positionSendRunCheck = true
                     viewModelKaKaoChat.insertItemAdd20(
                         KaKaoTalkChatData(
-                            textList = chatTextControl(shuffleMode[0]),
+                            textList = shuffleMode[0],
                             user = false,
                             timeList = Contents.timePattern.format(Date())
                         )
@@ -1272,7 +1271,7 @@ class FragmentFakeKakaoChat :
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
                             19,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             Contents.timePattern.format(Date())
                         )
                     )
@@ -1284,7 +1283,7 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            chatTextControl(shuffleMode[0]),
+                            shuffleMode[0],
                             activtyContext
                         )
                     }
@@ -1327,7 +1326,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1357,7 +1355,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1387,7 +1384,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1417,7 +1413,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1447,7 +1442,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1477,7 +1471,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1507,7 +1500,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1537,7 +1529,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1567,7 +1558,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1597,7 +1587,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1627,7 +1616,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1657,7 +1645,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1687,7 +1674,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1718,7 +1704,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1748,7 +1733,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1778,7 +1762,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1808,7 +1791,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1838,7 +1820,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1868,7 +1849,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)
@@ -1899,7 +1879,6 @@ class FragmentFakeKakaoChat :
                         (operationByPosition() && !onCreateViewFirstRun) -> {
                             Log.d("opop2", "안 비었을때 실행")
                             (recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                                it[it.lastIndex].textList = chatTextControl(it.last().textList)
                                 this.chatList = it
 
                                 notifyItemChanged(chatList.lastIndex - 1)

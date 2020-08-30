@@ -22,6 +22,13 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
     private val kakaoTextList by lazy {
         resources.getStringArray(R.array.kaKaoExampleList)
     }
+    private val callTextList by lazy {
+        resources.getStringArray(R.array.callExampleList)
+    }
+    private val smsTextList by lazy {
+        resources.getStringArray(R.array.smsExampleList)
+    }
+
 
     private var kakaoImageList: Array<String>? = null
     private var callImageList: Array<String>? = null
@@ -42,20 +49,39 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
     }
 
     private fun FragmentSkillBinding.setAdapter() {
-        val itemList = mutableListOf<ViewPagerItem>()
-        kakaoImageList = Array(4) { "" }
-        for (i in kakaoImageList!!.indices) {
+        val kakaoitemList = mutableListOf<ViewPagerItem>()
+        val callitemList = mutableListOf<ViewPagerItem>()
+        val smsitemList = mutableListOf<ViewPagerItem>()
+        kakaoImageList = Array(6) { "" }
+        for (i in 5 downTo 0) {
             kakaoImageList!![i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                "example_imagekakao${i + 1}",
+                "guide_kakao${i}",
                 "drawable",
                 requireActivity().packageName
             ).toString())
-            itemList.add(ViewPagerItem(kakaoImageList!![i], kakaoTextList[i]))
-
-            viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(itemList)
-            viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(itemList)
-            viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(itemList)
+            kakaoitemList.add(ViewPagerItem(kakaoImageList!![i], kakaoTextList[i]))
         }
+            callImageList = Array(4) {""}
+            for (i in 0..3) {
+                callImageList!![i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                    "guide_call${i}",
+                    "drawable",
+                    requireActivity().packageName
+                ).toString())
+                callitemList.add(ViewPagerItem(kakaoImageList!![i], callTextList[i]))
+            }
+                smsImageList = Array(1) {(Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                    "sample0",
+                    "drawable",
+                    requireActivity().packageName
+                ).toString())}
+            smsitemList.add(ViewPagerItem(smsImageList!![0],smsTextList[0]))
+
+
+                viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(kakaoitemList)
+            viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(callitemList)
+            viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(smsitemList)
+
     }
 
 

@@ -11,7 +11,7 @@ import com.example.solitaryhelper.databinding.ViewholderChatbotMyTextBinding
 
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.view.dest.main.tapfragments.FragmentChatBot
-import com.example.solitaryhelper.view.utill.chatTextControl
+
 
 class AdapterRecyclerViewChatBot(
     var textList:MutableList<FragmentChatBot.ChatListControl>
@@ -66,7 +66,7 @@ class AdapterRecyclerViewChatBot(
         }
 
         holder.chatbotBinding?.apply {
-            chatBotText = chatTextControl(textList[position].text)
+            chatBotText = textList[position].text
         }
     }
 }

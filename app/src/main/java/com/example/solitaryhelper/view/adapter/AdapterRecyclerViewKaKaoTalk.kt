@@ -1,15 +1,18 @@
 package com.example.solitaryhelper.view.adapter
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkTalkBinding
 import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk
+import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.kakaoTimeDisplay
 
 
@@ -17,7 +20,7 @@ import com.example.solitaryhelper.view.utill.kakaoTimeDisplay
 import kotlin.random.Random
 
 class AdapterRecyclerViewKaKaoTalk(
-    var kaKaoDataList: MutableList<KaKaoTalkData> = mutableListOf(),
+    var kaKaoDataList: MutableList<KaKaoTalkData> = mutableListOf(), var context: Context,
     val clickEvent: (Int) -> Unit
 
 
@@ -49,7 +52,10 @@ class AdapterRecyclerViewKaKaoTalk(
             imageViewImageProfile.setImageURI(Uri.parse(kaKaoDataList[holder.adapterPosition].image))
             lastIndex = kaKaoDataList[holder.adapterPosition].itemLastText
             noticeScore = kaKaoDataList[holder.adapterPosition].chatNotification.toString()
+
+            if(PrefCheckRun.getInstance(context).kaKaoTalkFirstRunCheck)
             setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList
+
             time = kaKaoDataList[holder.adapterPosition].itemTimeLast?.let { kakaoTimeDisplay(it) }
         }
 

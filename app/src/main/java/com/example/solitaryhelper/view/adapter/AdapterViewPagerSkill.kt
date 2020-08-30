@@ -2,6 +2,7 @@ package com.example.solitaryhelper.view.adapter
 
 import android.content.Context
 import android.graphics.Rect
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class AdapterViewPagerSkill(var itemList: List<FragmentSkill.ViewPagerItem> = li
 
         holder.binding?.apply {
             test = itemList[position].text
-            image = itemList[position].image
+            imageView2.setImageURI(Uri.parse(itemList[position].image))
         }
     }
 

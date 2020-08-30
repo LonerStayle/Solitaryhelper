@@ -805,10 +805,22 @@
 
 <string-array name="kaKaoExampleList">
 
-    <item>1.실제 UI 반영</item>
-    <item>채팅창에 들어가게 되면 미리 정해진 채팅들이 존재합니다. 기다리면 자동으로 카톡이 옵니다. </item>
-    <item>사용자도 똑같이 반응하여 채팅을 하실 수 가 있습니다.</item>
-    <item>채팅창에서 랜덤한 시간대로 새로운 메세지를 계속 보냅니다. 카톡 알림음괴 함께 합니다.</item>
+    <item>1.카카오톡 UI 반영</item>
+    <item>2.자동 챗 기능</item>
+    <item>3.알림 표시가 생김 </item>
+    <item>4.카카오톡 UI 반영 (2)</item>
+    <item>5.수 많은 가짜 대화상대</item>
+    <item>6.카카오톡 UI 반영 (3)</item>
 
 </string-array>
+    <string-array name="callExampleList">
+        <item>무음,진동,벨소리 설정 기능</item>
+        <item>(ON)예약 기능</item>
+        <item>전화통화 UI</item>
+        <item>전화통화 중 UI(시간 움직임)</item>
+    </string-array>
+
+    <string-array name="smsExampleList">
+        <item>아직 구현이 안된 기능 입니다.</item>
+    </string-array>
 </resources>
