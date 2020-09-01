@@ -1,17 +1,35 @@
 package com.example.solitaryhelper.viewmodel
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import com.example.solitaryhelper.localdb.dao.KaKaoDao
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
-import java.text.FieldPosition
+import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
 
-class KaKaoTalkViewModel : ViewModel() {
+class KaKaoTalkViewModel(private val dataSource:KaKaoDao) : ViewModel() {
+    val ioScope = CoroutineScope(Dispatchers.IO + Job())
+    val kakaoData:LiveData<List<KaKaoTalkData>>
+    get() = dataSource.getAllList()
+
+    fun insertKaKao(kaoTalkData: KaKaoTalkData){
+        ioScope.launch {
+            dataSource.insert(kaoTalkData)
+        }
+    }
+    fun allListInsert(kaoTalkData: List<KaKaoTalkData>){
+        ioScope.launch {
+            dataSource.insertAllList(kaoTalkData)
+        }
+    }
+
 
     private var timeChatListPosition0: Array<String>? = null
     private var timeChatListPosition1: Array<String>? = null
@@ -37,7 +55,6 @@ class KaKaoTalkViewModel : ViewModel() {
 
     @SuppressLint("SimpleDateFormat")
     fun setTimeList(dataList: List<KaKaoTalkData>): Array<Array<String>> {
-        var timeAllList: Array<Array<String>>
 
         timeChatListPosition0 = Array(dataList[0].textBoxList.size) { "" }
         timeChatListPosition1 = Array(dataList[1].textBoxList.size) { "" }
@@ -157,7 +174,7 @@ class KaKaoTalkViewModel : ViewModel() {
         }
 
 
-        timeAllList = arrayOf(
+        return arrayOf(
             timeChatListPosition19!!,
             timeChatListPosition18!!,
             timeChatListPosition17!!,
@@ -179,7 +196,6 @@ class KaKaoTalkViewModel : ViewModel() {
             timeChatListPosition1!!,
             timeChatListPosition0!!
         )
-        return timeAllList
     }
 
 }

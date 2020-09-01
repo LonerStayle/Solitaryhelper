@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun18 = false
         PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun19 = false
         PrefCheckRun.getInstance(this@MainActivity).kakaoChatObserverControlFirstRun20 = false
-
+       
 //        getAppKeyHash()
 
     }

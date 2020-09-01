@@ -8,13 +8,8 @@ import com.example.solitaryhelper.localdb.entitiy.UserProfile
 
 
 @Dao
-interface RoomDao {
+interface SmsDao {
 
-    @Query("SELECT * FROM UserProfile")
-    fun getUserProfile(): LiveData<UserProfile>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserProfile(userProfile: UserProfile)
 
     @Query("SELECT * FROM Sms")
     fun getSmsList():LiveData<List<Sms>>

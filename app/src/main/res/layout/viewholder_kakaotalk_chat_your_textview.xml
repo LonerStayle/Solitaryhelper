@@ -17,6 +17,7 @@
         <variable
             name="text"
             type="String" />
+
         <variable
             name="time"
             type="String" />
@@ -31,40 +32,39 @@
 
 
         <variable
-            name="goneVisible"
+            name="nameVisible"
             type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:paddingStart="8dp">
 
-<androidx.cardview.widget.CardView
-    android:id="@+id/cardView"
-    app:cardCornerRadius="12dp"
-    android:layout_width="38dp"
-    android:layout_height="42dp"
-    android:visibility="@{profileImageVisible}"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageView_imageProfile"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="38dp"
+            android:layout_height="42dp"
+            android:visibility="@{profileImageVisible}"
+            app:cardCornerRadius="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/imageView_imageProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <TextView
@@ -76,47 +76,42 @@
             android:text="@{name}"
             android:textColor="@color/veryLightWhite"
             android:textSize="10sp"
-            android:visibility="@{goneVisible}"
+            android:visibility="@{nameVisible}"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
             tools:text="loner" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_profile"
-            android:layout_width="250dp"
+
+        <TextView
+            android:id="@+id/textView_textPreview"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/textView_name"
-            app:layout_constraintTop_toBottomOf="@+id/textView_name">
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/kakao_textbubble"
+            android:maxWidth="230dp"
+            android:padding="6dp"
+            android:text="@{text}"
+            android:textColor="#0E0E0E"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/textView_name"
+            tools:text="안녕하세요 로너입니다." />
 
-            <TextView
-                android:id="@+id/textView_textPreview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/kakao_textbubble"
-                android:padding="6dp"
-                android:text="@{text}"
-                android:textColor="#0E0E0E"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="안녕하세요 로너입니다." />
+        <TextView
+            android:id="@+id/textView_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="2dp"
+            android:text="@{time}"
+            android:textColor="@color/veryLightWhite"
+            android:textSize="8sp"
+            android:visibility="@{timeVisible}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_textPreview"
+            app:layout_constraintStart_toEndOf="@+id/textView_textPreview"
+            tools:text="오전 몇시" />
 
-            <TextView
-                android:id="@+id/textView_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="2dp"
-                android:text="@{time}"
-                android:textColor="@color/veryLightWhite"
-                android:textSize="8sp"
-                android:visibility="@{timeVisible}"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_textPreview"
-                app:layout_constraintStart_toEndOf="@+id/textView_textPreview"
-                tools:text="오전 몇시" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

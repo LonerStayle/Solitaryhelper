@@ -62,7 +62,7 @@ class AppGuideActivity : AppCompatActivity() {
 
         for (i in imageList!!.indices) {
             imageList!![i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH+resources.getIdentifier(
-                "sample$i", "drawable",
+                "guide_sample$i", "drawable",
                 packageName
             ).toString())
         }

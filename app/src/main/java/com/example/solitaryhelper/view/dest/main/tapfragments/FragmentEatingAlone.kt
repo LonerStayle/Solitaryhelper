@@ -245,29 +245,29 @@ class FragmentEatingAlone :
 
     }
 
-    override fun onResume() {
-        if (fristRun)
+//    override fun onResume() {
+//        if (fristRun)
 //            mapViewContainer.addView(mapView)
-        else
-            fristRun = false
+//        else
+//            fristRun = false
 
-        super.onResume()
-    }
-
-    override fun onPause() {
+//        super.onResume()
+//    }
+//
+//    override fun onPause() {
 //        binding.textViewInfoThree.visibility = View.VISIBLE
 //        binding.textViewInfoTwo.visibility = View.VISIBLE
 //        binding.textViewInfoOne.visibility = View.VISIBLE
 //        mapViewContainer.removeView(mapView)
 //        fusedLocationClient?.removeLocationUpdates(locationCallback)
 //        binding.mapViewAfter.visibility = View.VISIBLE
-        super.onPause()
-    }
+//        super.onPause()
+//    }
 
-    override fun onStop() {
+//    override fun onStop() {
 //        mapViewContainer.removeView(mapView)
-        super.onStop()
-    }
+//        super.onStop()
+//    }
 }
 
 

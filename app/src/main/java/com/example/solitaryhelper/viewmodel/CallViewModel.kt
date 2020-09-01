@@ -2,21 +2,15 @@ package com.example.solitaryhelper.viewmodel
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.view.dataclass.KaKaoTalkData
 
 
 class CallViewModel : ViewModel() {

@@ -1,17 +1,19 @@
 package com.example.solitaryhelper.localdb
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.example.solitaryhelper.localdb.dao.RoomDao
-import com.example.solitaryhelper.localdb.entitiy.Sms
-import com.example.solitaryhelper.localdb.entitiy.UserProfile
+import androidx.room.*
+import com.example.solitaryhelper.localdb.dao.KaKaoDao
+import com.example.solitaryhelper.localdb.dao.SmsDao
+import com.example.solitaryhelper.localdb.dao.UserDao
+import com.example.solitaryhelper.localdb.entitiy.*
 
 
-@Database(entities = [UserProfile::class,Sms::class], exportSchema = false, version = 1)
+@Database(entities = [UserProfile::class,Sms::class,KaKaoTalkData::class], exportSchema = false, version = 1)
+@TypeConverters(ConverterKaKaoTalkData::class)
 abstract class SolitaryHelperDatabase : RoomDatabase() {
-    abstract val dataSource: RoomDao
+    abstract val userDataSource:UserDao
+    abstract val smsDataSource:SmsDao
+    abstract val kaKaoDataSource:KaKaoDao
 
     companion object {
         @Volatile
@@ -20,7 +22,7 @@ abstract class SolitaryHelperDatabase : RoomDatabase() {
             INSTANCE ?: Room.databaseBuilder(
                 context,
                 SolitaryHelperDatabase::class.java,
-                "SolitaryHelperDatabase"
+                "SolitaryHelper_Database"
             ).fallbackToDestructiveMigration()
                 .build().also {
                     INSTANCE = it

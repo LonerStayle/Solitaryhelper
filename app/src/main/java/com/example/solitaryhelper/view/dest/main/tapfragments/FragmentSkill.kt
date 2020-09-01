@@ -14,7 +14,7 @@ import com.example.solitaryhelper.view.utill.toastDebugTest
 class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill) {
 
 
-        data class ViewPagerItem(
+    data class ViewPagerItem(
         var image: String,
         var text: String
     )
@@ -43,6 +43,10 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
 
     override fun FragmentSkillBinding.setCreateView() {
         setAdapter()
+        setViewPagerAnim()
+    }
+
+    private fun FragmentSkillBinding.setViewPagerAnim() {
         viewModelSkill.setViewPagerSetting(viewPagerFakekakaoTalkInfo, requireContext())
         viewModelSkill.setViewPagerSetting(viewPagerFakeSmsInfo, requireContext())
         viewModelSkill.setViewPagerSetting(viewPagerFakeCallInfo, requireContext())
@@ -61,26 +65,29 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
             ).toString())
             kakaoitemList.add(ViewPagerItem(kakaoImageList!![i], kakaoTextList[i]))
         }
-            callImageList = Array(4) {""}
-            for (i in 0..3) {
-                callImageList!![i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                    "guide_call${i}",
-                    "drawable",
-                    requireActivity().packageName
-                ).toString())
-                callitemList.add(ViewPagerItem(kakaoImageList!![i], callTextList[i]))
-            }
-                smsImageList = Array(1) {(Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                    "sample0",
-                    "drawable",
-                    requireActivity().packageName
-                ).toString())}
-            smsitemList.add(ViewPagerItem(smsImageList!![0],smsTextList[0]))
+        callImageList = Array(4) { "" }
+        for (i in 0..3) {
+            callImageList!![i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                "guide_call$i",
+                "drawable",
+                requireActivity().packageName
+            ).toString())
+            callitemList.add(ViewPagerItem(callImageList!![i], callTextList[i]))
+        }
+
+        smsImageList = Array(1) {
+            (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                "newsample0",
+                "drawable",
+                requireActivity().packageName
+            ).toString())
+        }
+        smsitemList.add(ViewPagerItem(smsImageList!![0], smsTextList[0]))
 
 
-                viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(kakaoitemList)
-            viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(callitemList)
-            viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(smsitemList)
+        viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(kakaoitemList)
+        viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(callitemList)
+        viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(smsitemList)
 
     }
 
@@ -106,6 +113,7 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
         }
     }
 }
+
 
 
 

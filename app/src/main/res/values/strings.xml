@@ -805,13 +805,18 @@
 
 <string-array name="kaKaoExampleList">
 
+
+
+
+
+
+
     <item>1.카카오톡 UI 반영</item>
     <item>2.자동 챗 기능</item>
     <item>3.알림 표시가 생김 </item>
     <item>4.카카오톡 UI 반영 (2)</item>
     <item>5.수 많은 가짜 대화상대</item>
     <item>6.카카오톡 UI 반영 (3)</item>
-
 </string-array>
     <string-array name="callExampleList">
         <item>무음,진동,벨소리 설정 기능</item>

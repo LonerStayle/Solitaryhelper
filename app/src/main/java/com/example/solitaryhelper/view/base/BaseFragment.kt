@@ -35,13 +35,17 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
     protected val viewModelSkill by viewModels<SkillViewModel> { SkillViewModelFactory() }
     protected val viewModelMain by viewModels<MainViewModel> {
         val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
-        val factory = MainViewModelFactory(dataBase.dataSource)
+        val factory = MainViewModelFactory(dataBase.userDataSource)
         factory
     }
     protected val viewModelShared by lazy {
         ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
     }
-    protected val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel>()
+    protected val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel> {
+        val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
+        val factory = KaKaoTalkViewModelFactory(dataBase.kaKaoDataSource)
+        factory
+    }
     protected val viewModelKaKaoChat by lazy {
         ViewModelProvider(
             requireActivity(),
@@ -52,7 +56,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
 
     protected val viewModelSms by viewModels<SmsViewModel> {
         val database = SolitaryHelperDatabase.getInstance(requireContext())
-        val factory = SmsViewModelFactory(database.dataSource)
+        val factory = SmsViewModelFactory(database.smsDataSource)
         factory
     }
     protected val viewModelTopic by viewModels<TopicViewModel> { TopicViewModelFactory() }
