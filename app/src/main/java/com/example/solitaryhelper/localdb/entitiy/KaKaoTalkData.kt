@@ -18,9 +18,10 @@ data class KaKaoTalkData(
     var chatNotification: Int,
 
     @TypeConverters(ConverterKaKaoTalkData::class)
-    var messageArrivalTime: List<String>,
+    var messageArrivalTime: List<String>?,
     var visibleSettingList: Int?,
     var itemTimeLast:String?
+
 )
 
 

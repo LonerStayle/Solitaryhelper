@@ -2,6 +2,7 @@ package com.example.solitaryhelper.view.adapter
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,8 @@ class AdapterRecyclerViewKaKaoTalk(
             if(PrefCheckRun.getInstance(context).kaKaoTalkFirstRunCheck)
                 setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList
 
-            time = kaKaoDataList[holder.adapterPosition].itemTimeLast?.let { kakaoTimeDisplay(it) }
+
+            time = kakaoTimeDisplay(kaKaoDataList[holder.adapterPosition].itemTimeLast!!)
         }
 
         holder.itemView.setOnClickListener {

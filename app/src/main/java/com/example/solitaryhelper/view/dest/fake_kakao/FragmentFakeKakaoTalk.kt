@@ -12,17 +12,14 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
-import java.util.Collections.swap
 import kotlin.random.Random
+
 class FragmentFakeKakaoTalk :
     BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
-    private var noticeitemPositionChange = false
     private var roomSeletCount = 0
 
     companion object {
@@ -49,7 +46,7 @@ class FragmentFakeKakaoTalk :
 
     //랜덤 광고사진 가져오기
     private fun setImageViewAd() {
-        val imageList = Array<String>(3) { "" }
+        val imageList = Array(3) { "" }
         for (i in 0..2) {
             imageList[i] = (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
                 "kakao_ad${i}",
@@ -90,6 +87,7 @@ class FragmentFakeKakaoTalk :
         recyclerViewKaKaoChatList.setHasFixedSize(true)
     }
 
+
     private fun setSendToAdapterToData() {
 
 
@@ -99,40 +97,38 @@ class FragmentFakeKakaoTalk :
             val kaKaoImageProfileList: Array<String>?
             val itemLastText: Array<String>?
             val chatNotification: Array<Int>?
-            val lastTime: Array<String>?
+
             val visibleSettingList: Array<Int>
-            val timeList: Array<Array<String>>?
-            val kaKaoTextList = mutableListOf(
-                resources.getStringArray(R.array.sample_list1),
-                resources.getStringArray(R.array.sample_list2),
-                resources.getStringArray(R.array.sample_list3),
-                resources.getStringArray(R.array.sample_list4),
-                resources.getStringArray(R.array.sample_list5),
+            var timeList: Array<Array<String>>?
+            val kaKaoTextList = arrayOf(
+                    resources.getStringArray(R.array.sample_list1),
+                    resources.getStringArray(R.array.sample_list2),
+                    resources.getStringArray(R.array.sample_list3),
+                    resources.getStringArray(R.array.sample_list4),
+                    resources.getStringArray(R.array.sample_list5),
 
-                resources.getStringArray(R.array.sample_list6),
-                resources.getStringArray(R.array.sample_list7),
-                resources.getStringArray(R.array.sample_list8),
-                resources.getStringArray(R.array.sample_list9),
-                resources.getStringArray(R.array.sample_list10),
+                    resources.getStringArray(R.array.sample_list6),
+                    resources.getStringArray(R.array.sample_list7),
+                    resources.getStringArray(R.array.sample_list8),
+                    resources.getStringArray(R.array.sample_list9),
+                    resources.getStringArray(R.array.sample_list10),
 
-                resources.getStringArray(R.array.sample_list11),
-                resources.getStringArray(R.array.sample_list12),
-                resources.getStringArray(R.array.sample_list13),
-                resources.getStringArray(R.array.sample_list14),
-                resources.getStringArray(R.array.sample_list15),
+                    resources.getStringArray(R.array.sample_list11),
+                    resources.getStringArray(R.array.sample_list12),
+                    resources.getStringArray(R.array.sample_list13),
+                    resources.getStringArray(R.array.sample_list14),
+                    resources.getStringArray(R.array.sample_list15),
 
-                resources.getStringArray(R.array.sample_list16),
-                resources.getStringArray(R.array.sample_list17),
-                resources.getStringArray(R.array.sample_list18),
-                resources.getStringArray(R.array.sample_list19),
-                resources.getStringArray(R.array.sample_list20)
-
-            )
+                    resources.getStringArray(R.array.sample_list16),
+                    resources.getStringArray(R.array.sample_list17),
+                    resources.getStringArray(R.array.sample_list18),
+                    resources.getStringArray(R.array.sample_list19),
+                    resources.getStringArray(R.array.sample_list20))
 
 
             itemLastText = Array(kaKaoTextList.size) { "" }
             chatNotification = Array(kaKaoTextList.size) { 0 }
-            lastTime = Array(kaKaoTextList.size) { "" }
+
             visibleSettingList = Array(kaKaoTextList.size) { 0 }
 
 
@@ -165,6 +161,10 @@ class FragmentFakeKakaoTalk :
                         requireActivity().packageName
                     ).toString())
 
+                Log.d("opop111111", "${kakaoDataList.size}")
+                timeList = viewModelKaKaoTalk.setTimeList(kaKaoTextList)
+
+
                 kakaoDataList.add(
                     KaKaoTalkData(
                         i.toLong(),
@@ -173,25 +173,12 @@ class FragmentFakeKakaoTalk :
                         kaKaoTextList[i].toMutableList(),
                         itemLastText[i],
                         chatNotification[i],
-                        listOf(""),
+                        timeList[i].toList(),
                         visibleSettingList[i],
-                        null
+                        timeList[i].last()
                     )
                 )
             }
-
-            timeList = viewModelKaKaoTalk.setTimeList(kakaoDataList)
-
-            for (i in timeList.indices) {
-                kakaoDataList[i].messageArrivalTime = timeList[i].toList()
-            }
-
-
-            for (i in kakaoDataList.indices) {
-                lastTime[i] = kakaoDataList[i].messageArrivalTime.last()!!
-                kakaoDataList[i].itemTimeLast = lastTime[i]
-            }
-
 
             return kakaoDataList.toMutableList()
 
@@ -211,7 +198,8 @@ class FragmentFakeKakaoTalk :
 //
 //            return shuffleMode.toMutableList()
         }
-            viewModelKaKaoTalk.allListInsert(setCreateAnItemToSendToTheAdapter())
+
+        viewModelKaKaoTalk.allListInsert(setCreateAnItemToSendToTheAdapter())
     }
 
     private fun setAdapterDataUpdate() {
@@ -219,49 +207,38 @@ class FragmentFakeKakaoTalk :
             viewLifecycleOwner,
             Observer {
 
-            if(it.isNullOrEmpty()){
-                setSendToAdapterToData()
+                if (it.isNullOrEmpty()) {
+                    setSendToAdapterToData()
+                    return@Observer
+                }
                 PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
-            }
+                binding.recyclerViewKaKaoChatList.adapter =
+                    AdapterRecyclerViewKaKaoTalk(it as MutableList<KaKaoTalkData>, requireContext())
+                    { position ->
 
-                if (!noticeitemPositionChange) {
+                        (binding.recyclerViewKaKaoChatList.adapter as
+                                AdapterRecyclerViewKaKaoTalk).apply {
 
-                    binding.recyclerViewKaKaoChatList.adapter =
-                        AdapterRecyclerViewKaKaoTalk(it as MutableList<KaKaoTalkData>, requireContext())
-                        { position ->
+                            ++roomSeletCount
+                            this.kaKaoDataList[position].visibleSettingList = View.GONE
+                            this.kaKaoDataList[position].chatNotification = 0
+                            notifyDataSetChanged()
 
-                            (binding.recyclerViewKaKaoChatList.adapter as
-                                    AdapterRecyclerViewKaKaoTalk).apply {
-                                swap(this.kaKaoDataList, 0, position)
-                                ++roomSeletCount
-
-                                this.kaKaoDataList[0].visibleSettingList = View.GONE
-                                this.kaKaoDataList[0].chatNotification = 0
-
-//                                viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
-//                                { list -> list.chatNotification })
-
-                            }
-
-                            findNavController().navigate(
-                                FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
-                                    profileImage = it[0].image,
-                                    name = it[0].name,
-                                    ListBox = it[0].textBoxList.toTypedArray(),
-                                    itemIdPosition = it[0].id,
-                                    selectChatRoomCount = roomSeletCount,
-                                    timeList = it[0].messageArrivalTime.toTypedArray()
-                                )
-                            )
-
-                            (binding.recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
-                                swap(this.kaKaoDataList, 0, position)
-                                Log.d("opop5", "talk 프레그먼트 이미지 문제관련 확인")
-                            }
                         }
 
+                        findNavController().navigate(
+                            FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
+                                profileImage = it[position].image,
+                                name = it[position].name,
+                                ListBox = it[it[position].id.toInt()].textBoxList.toTypedArray(),
+                                itemIdPosition = it[position].id,
+                                selectChatRoomCount = roomSeletCount,
+                                timeList = it[it[position].id.toInt()].messageArrivalTime!!.toTypedArray()
+                            )
+                        )
 
-                }
+                    }
+
             })
 
     }

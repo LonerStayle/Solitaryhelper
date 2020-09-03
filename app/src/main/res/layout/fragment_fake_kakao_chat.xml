@@ -96,6 +96,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:background="#3F51B5"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"

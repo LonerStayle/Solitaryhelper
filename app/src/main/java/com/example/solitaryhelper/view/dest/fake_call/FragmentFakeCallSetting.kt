@@ -1,24 +1,16 @@
 package com.example.solitaryhelper.view.dest.fake_call
 
-import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallSettingBinding
 
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.view.dataclass.TimeSpinnerModel
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.view.utill.toastDebugTest
-import kotlinx.coroutines.*
 
 class FragmentFakeCallSetting :
     BaseFragment<FragmentFakeCallSettingBinding>(R.layout.fragment_fake_call_setting) {
