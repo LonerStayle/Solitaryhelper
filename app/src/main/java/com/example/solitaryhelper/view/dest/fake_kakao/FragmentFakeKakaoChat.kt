@@ -278,11 +278,18 @@ class FragmentFakeKakaoChat :
 
         viewModelKaKaoChat.chatListPlus.observe(viewLifecycleOwner, Observer {
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                val textList = this.chatList.textList as MutableList
+                val user = this.chatList.user?.toMutableList()
+                val timeList = this.chatList.timeList.toMutableList()
+                textList.add(it.textList); user!!.add(it.user);timeList.add(it.timeList)
 
-                this.chatList.textList.toMutableList().add(it.textList)
-                this.chatList.user?.toMutableList()?.add(it.user)
-                this.chatList.timeList.toMutableList().add(it.timeList)
-                notifyDataSetChanged()
+                val newData = KaKaoTalkChatData(
+                    textList = textList,
+                    user = user,
+                    timeList = timeList
+                )
+                this.chatList = newData
+
                 notifyItemChanged(chatList.textList.lastIndex - 1)
                 notifyItemInserted(chatList.textList.lastIndex)
 
