@@ -1,10 +1,7 @@
 package com.example.solitaryhelper.localdb.dao
 
-import androidx.room.Dao
-import androidx.room.Query
 import androidx.lifecycle.LiveData
-import androidx.room.Insert
-import androidx.room.Update
+import androidx.room.*
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
 
 @Dao
@@ -16,7 +13,7 @@ interface KaKaoDao {
     @Insert
     fun insert(kaoTalkData: KaKaoTalkData)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllList(kaoTalkData: List<KaKaoTalkData>)
 
     @Update
