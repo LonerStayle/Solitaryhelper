@@ -15,7 +15,7 @@ import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.kakaoTimeDisplay
 
 class AdapterRecyclerViewKaKaoTalk(
-    var kaKaoDataList: MutableList<KaKaoTalkData> = mutableListOf(), var context: Context,
+    var kaKaoDataList: MutableList<KaKaoTalkData> = mutableListOf(),
     val clickEvent: (Int) -> Unit
 
 
@@ -46,8 +46,8 @@ class AdapterRecyclerViewKaKaoTalk(
             lastIndex = kaKaoDataList[holder.adapterPosition].itemLastText
             noticeScore = kaKaoDataList[holder.adapterPosition].chatNotification.toString()
 
-            if(PrefCheckRun.getInstance(context).kaKaoTalkFirstRunCheck)
-                setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList
+
+            setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList
 
 
             time = kakaoTimeDisplay(kaKaoDataList[holder.adapterPosition].itemTimeLast!!)

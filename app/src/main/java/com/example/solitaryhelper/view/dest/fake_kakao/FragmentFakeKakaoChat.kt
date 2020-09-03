@@ -131,8 +131,10 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setData() {
-        if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck)
+        if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck) {
+            PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck = true
             viewModelKaKaoTalk.kakaoData.observe(viewLifecycleOwner, Observer {
+
                 for (i in it.indices) {
                     viewModelKaKaoChat.insert(
                         KaKaoTalkChatData(
@@ -143,9 +145,9 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-                PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck = true
-            })
 
+            })
+        }
 
     }
 
@@ -206,7 +208,8 @@ class FragmentFakeKakaoChat :
 
 
             autoChatDoubleCheckRun[args.itemIdPosition.toInt()] = true
-            delay(Contents.AUTO_CHAT_DEALY)
+//            delay(Contents.AUTO_CHAT_DEALY)
+            delay(5000)
             if (!autoChatRun)
                 return
 
@@ -238,9 +241,8 @@ class FragmentFakeKakaoChat :
                     binding.name!!,
                     shuffleMode[0]
                 )
+
             }
-
-
         }
     }
 
@@ -260,7 +262,7 @@ class FragmentFakeKakaoChat :
 
         viewModelKaKaoChat.chatList.observe(viewLifecycleOwner, Observer {
 
-            if (!inUse && PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck) {
+            if (!inUse) {
                 Log.d("opop1", "비었을떄 실행")
                 recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                     args.profileImage,
@@ -269,15 +271,17 @@ class FragmentFakeKakaoChat :
                 )
 
                 inUse = true
+
             } else {
                 return@Observer
             }
-            recyclerViewKaKaoChat.scrollToPosition(it.lastIndex)
+
             buttonClick = false
+
         })
 
         viewModelKaKaoChat.chatListPlus.observe(viewLifecycleOwner, Observer {
-            (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+            (binding.recyclerViewKaKaoChat.adapter as? AdapterRecyclerViewKaKaoChat)?.apply {
                 val textList = this.chatList.textList as MutableList
                 val user = this.chatList.user?.toMutableList()
                 val timeList = this.chatList.timeList.toMutableList()
@@ -295,6 +299,7 @@ class FragmentFakeKakaoChat :
 
 
                 viewModelKaKaoChat.insert(this.chatList)
+                recyclerViewKaKaoChat.scrollToPosition(this.chatList.timeList.lastIndex)
             }
         })
     }
