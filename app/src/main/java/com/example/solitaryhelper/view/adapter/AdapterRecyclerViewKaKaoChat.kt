@@ -94,7 +94,7 @@ RecyclerView.Adapter<AdapterRecyclerViewKaKaoChat.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
 
-        return if (chatList.user!!.last()) {
+        return if (chatList.user!![position]) {
             MY_TEXT_SEND
         } else {
             YOUR_TEXT_SEND

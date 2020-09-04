@@ -40,7 +40,12 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
             dataSource.insert(kakao)
         }
     }
-
+    //챗 리스트 인서트
+    fun listInsert(kakao: List<KaKaoTalkChatData>) {
+        ioScope.launch {
+            dataSource.allInsert(kakao)
+        }
+    }
     fun insertCopyData(data:KaKaoTalkChatDataCopy){
         _chatListPlus.postValue(data)
     }

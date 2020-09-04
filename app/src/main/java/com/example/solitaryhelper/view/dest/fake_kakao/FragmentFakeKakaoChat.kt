@@ -132,11 +132,13 @@ class FragmentFakeKakaoChat :
 
     private fun setData() {
         if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck) {
-            PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck = true
-            viewModelKaKaoTalk.kakaoData.observe(viewLifecycleOwner, Observer {
 
+
+            viewModelKaKaoTalk.kakaoData.observe(viewLifecycleOwner, Observer {
+                val setDataList: MutableList<KaKaoTalkChatData> = mutableListOf()
                 for (i in it.indices) {
-                    viewModelKaKaoChat.insert(
+                    Log.d("opop8888", "인덱스 갯수체크${it.size - 1}")
+                    setDataList.add(
                         KaKaoTalkChatData(
                             it[i].id,
                             it[i].textBoxList,
@@ -145,7 +147,8 @@ class FragmentFakeKakaoChat :
                         )
                     )
                 }
-
+                viewModelKaKaoChat.listInsert(setDataList)
+                PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck = true
             })
         }
 
@@ -261,6 +264,9 @@ class FragmentFakeKakaoChat :
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 
         viewModelKaKaoChat.chatList.observe(viewLifecycleOwner, Observer {
+            if(it.isNullOrEmpty())
+                return@Observer
+
 
             if (!inUse) {
                 Log.d("opop1", "비었을떄 실행")
