@@ -63,6 +63,8 @@ class FragmentFakeCallSetting :
     private fun FragmentFakeCallSettingBinding.numberPickerSetting() {
         numberPickerNoticeSetting.displayedValues = arrayOf("무음", "진동", "벨소리")
         numberPickerDelayNoticationEnabled.displayedValues = arrayOf("OFF", "ON")
+
+
     }
 
 }

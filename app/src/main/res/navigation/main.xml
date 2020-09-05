@@ -60,10 +60,8 @@
         tools:layout="@layout/fragment_fake_kakao_talk">
         <action
             android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
-            app:destination="@id/fragmentFakeKakaoChat" />
-        <action
-            android:id="@+id/action_fragmentFakeKakaoTalk_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/fragmentFakeKakaoChat"
+            app:popUpTo="@id/fragmentFakeKakaoTalk" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeKakaoChat"
@@ -82,9 +80,6 @@
         <argument
             android:name="itemIdPosition"
             app:argType="long" />
-        <action
-            android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk"
-            app:destination="@id/fragmentFakeKakaoTalk" />
         <argument
             android:name="selectChatRoomCount"
             app:argType="integer" />

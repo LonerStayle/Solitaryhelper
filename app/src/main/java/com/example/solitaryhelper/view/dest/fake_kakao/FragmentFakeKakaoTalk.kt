@@ -28,7 +28,8 @@ class FragmentFakeKakaoTalk :
     }
 
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {
-        setBackButtonListener()
+//        setBackButtonListener()
+        Log.d("opop888888","왜 널처리가 돼? 온크레이트뷰 또실행돼?")
     }
 
     override fun FragmentFakeKakaoTalkBinding.setCreateView() {
@@ -40,7 +41,7 @@ class FragmentFakeKakaoTalk :
 
 
     override fun FragmentFakeKakaoTalkBinding.setLiveDataInObserver() {
-//        setAdapterDataUpdate()
+        setAdapterDataUpdate()
 
     }
 
@@ -206,13 +207,13 @@ class FragmentFakeKakaoTalk :
 
 
 
-    private fun setBackButtonListener() {
-
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_fragmentFakeKakaoTalk_to_mainFragment)
-        }
-
-    }
+//    private fun setBackButtonListener() {
+//
+//        requireActivity().onBackPressedDispatcher.addCallback(this) {
+//            findNavController().navigate(R.id.action_fragmentFakeKakaoTalk_to_mainFragment)
+//        }
+//
+//    }
 
     private fun FragmentFakeKakaoTalkBinding.setAdapterDataUpdate() {
         var setViewModel = false
@@ -225,16 +226,21 @@ class FragmentFakeKakaoTalk :
                     setSendToAdapterToData()
                     return@Observer
                 }
-                if (FragmentFakeKakaoChat.positionSendRunCheck == true || setViewModel) {
-                    FragmentFakeKakaoChat.positionSendRunCheck = false
-                    setViewModel = true
-                    return@Observer
-                }
 
          PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
-                recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(it as MutableList<KaKaoTalkData>)
+                recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(it.toMutableList())
                 { position ->
+                    (recyclerViewKaKaoChatList.adapter as
+                            AdapterRecyclerViewKaKaoTalk).apply {
+                        ++roomSeletCount
+                        this.kaKaoDataList[position].apply {
+                            visibleSettingList = View.GONE
+                            chatNotification = 0
 
+                        }
+
+                        viewModelKaKaoTalk.allListInsert(this.kaKaoDataList)
+                    }
                     findNavController().navigate(
                         FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
                             profileImage = it[position].image,
@@ -246,16 +252,7 @@ class FragmentFakeKakaoTalk :
                         )
                     )
 
-                    (recyclerViewKaKaoChatList.adapter as
-                            AdapterRecyclerViewKaKaoTalk).apply {
-                        ++roomSeletCount
-                        this.kaKaoDataList[position].apply {
-                            visibleSettingList = View.GONE
-                            chatNotification = 0
-                        }
-                        setViewModel = true
-                        viewModelKaKaoTalk.allListInsert(this.kaKaoDataList)
-                    }
+
 
                 }
 
@@ -264,11 +261,11 @@ class FragmentFakeKakaoTalk :
     }
 
     private fun FragmentFakeKakaoTalkBinding.setNewMessageResponse() {
-        setAdapterDataUpdate()
-        viewModelShared.sendToChanges.observe(requireActivity(),
+
+        viewModelShared.sendToChanges.observe(viewLifecycleOwner,
             androidx.lifecycle.Observer { changed ->
 
-                (recyclerViewKaKaoChatList.adapter as? AdapterRecyclerViewKaKaoTalk)?.apply {
+                (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
                     if (FragmentFakeKakaoChat.positionSendRunCheck!!) {
 
@@ -303,6 +300,11 @@ class FragmentFakeKakaoTalk :
                 }
 
             })
+    }
+
+    override fun onDestroy() {
+        Log.d("opop99999", "에이 설마")
+        super.onDestroy()
     }
 
 }

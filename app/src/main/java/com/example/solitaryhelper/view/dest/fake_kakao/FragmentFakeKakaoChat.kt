@@ -227,6 +227,7 @@ class FragmentFakeKakaoChat :
             )
 
 
+
             viewModelShared.sendToChanges(
                 SharedViewModel.SendToChange(
                     args.itemIdPosition.toInt(),
@@ -287,7 +288,7 @@ class FragmentFakeKakaoChat :
         })
 
         viewModelKaKaoChat.chatListPlus.observe(viewLifecycleOwner, Observer {
-            (binding.recyclerViewKaKaoChat.adapter as? AdapterRecyclerViewKaKaoChat)?.apply {
+            (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                 val textList = this.chatList.textList as MutableList
                 val user = this.chatList.user?.toMutableList()
                 val timeList = this.chatList.timeList.toMutableList()

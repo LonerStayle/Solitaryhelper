@@ -25,6 +25,11 @@ class KaKaoTalkViewModel(private val dataSource: KaKaoDao) : ViewModel() {
             dataSource.insertAllList(kaoTalkData)
         }
     }
+    fun insert(kaoTalkData: KaKaoTalkData){
+        ioScope.launch {
+            dataSource.insert(kaoTalkData)
+        }
+    }
 
 
 
