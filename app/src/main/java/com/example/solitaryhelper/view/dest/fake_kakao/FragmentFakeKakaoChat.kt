@@ -62,13 +62,9 @@ class FragmentFakeKakaoChat :
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
 
-        name = args.name
-        viewModelShared; soundPool; soundId
-
         setData()
         setButtonUiControl()
         setRecyclerViewSetting()
-
         setRunAutoChatSetting()
     }
 
@@ -127,8 +123,10 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setData() {
-        if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck) {
+        binding.name = args.name
+        viewModelShared; soundPool; soundId
 
+        if (!isResumed) {
             viewModelKaKaoTalk.kakaoData.observe(viewLifecycleOwner, Observer {
                 val setDataList: MutableList<KaKaoTalkChatData> = mutableListOf()
                 for (i in it.indices) {
@@ -143,7 +141,7 @@ class FragmentFakeKakaoChat :
                     )
                 }
                 viewModelKaKaoChat.listInsert(setDataList)
-                PrefCheckRun.getInstance(requireContext()).kaKaoTalkChatFirstRunCheck = true
+
             })
         }
 
@@ -283,15 +281,17 @@ class FragmentFakeKakaoChat :
         })
 
         viewModelKaKaoChat.chatListPlus.observe(requireActivity(), Observer {
+            //adapter down casting 오류 방지
             if (binding.recyclerViewKaKaoChat.adapter == null) {
                 return@Observer
             }
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
                 Log.d("opop9999", "플러스 실행 확인 ")
+                val dataList = this.chatList
 
-                val textList = this.chatList[args.itemIdPosition.toInt()].textList as MutableList
-                val user = this.chatList[args.itemIdPosition.toInt()].user?.toMutableList()
-                val timeList = this.chatList[args.itemIdPosition.toInt()].timeList.toMutableList()
+                val textList = dataList[args.itemIdPosition.toInt()].textList as MutableList
+                val user = dataList[args.itemIdPosition.toInt()].user?.toMutableList()
+                val timeList = dataList[args.itemIdPosition.toInt()].timeList.toMutableList()
 
                 textList.add(it.textList); user!!.add(it.user);timeList.add(it.timeList)
 
@@ -301,12 +301,12 @@ class FragmentFakeKakaoChat :
                     timeList = timeList
                 )
 
-                (this.chatList as MutableList)[args.itemIdPosition.toInt()] = newData
+                (dataList as MutableList)[args.itemIdPosition.toInt()] = newData
 
                 notifyItemChanged(chatList[args.itemIdPosition.toInt()].textList.lastIndex - 1)
                 notifyItemInserted(chatList[args.itemIdPosition.toInt()].textList.lastIndex)
 
-                recyclerViewKaKaoChat.scrollToPosition(this.chatList[args.itemIdPosition.toInt()].timeList.lastIndex)
+                recyclerViewKaKaoChat.scrollToPosition(dataList[args.itemIdPosition.toInt()].timeList.lastIndex)
 
             }
         })
@@ -315,8 +315,10 @@ class FragmentFakeKakaoChat :
 
     override fun onPause() {
         inUse = false
-        viewModelKaKaoChat.listInsert((binding.recyclerViewKaKaoChat.adapter as
-                AdapterRecyclerViewKaKaoChat).chatList)
+        viewModelKaKaoChat.listInsert(
+            (binding.recyclerViewKaKaoChat.adapter as
+                    AdapterRecyclerViewKaKaoChat).chatList
+        )
         super.onPause()
     }
 }

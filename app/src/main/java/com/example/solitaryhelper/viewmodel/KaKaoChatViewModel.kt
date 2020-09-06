@@ -24,12 +24,12 @@ import kotlinx.coroutines.launch
 
 
 class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
-    val ioScope = CoroutineScope(Dispatchers.IO + Job())
+    private val ioScope = CoroutineScope(Dispatchers.IO + Job())
 
     val chatList: LiveData<List<KaKaoTalkChatData>>
         get() = dataSource.getAllList()
 
-    val _chatListPlus = MutableLiveData<KaKaoTalkChatDataCopy>()
+    private val _chatListPlus = MutableLiveData<KaKaoTalkChatDataCopy>()
     val chatListPlus:LiveData<KaKaoTalkChatDataCopy>
     get() = _chatListPlus
 

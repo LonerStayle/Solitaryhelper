@@ -60,8 +60,7 @@
         tools:layout="@layout/fragment_fake_kakao_talk">
         <action
             android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
-            app:destination="@id/fragmentFakeKakaoChat"
-            app:popUpTo="@id/fragmentFakeKakaoTalk" />
+            app:destination="@id/fragmentFakeKakaoChat" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeKakaoChat"
@@ -70,7 +69,8 @@
         tools:layout="@layout/fragment_fake_kakao_chat">
         <argument
             android:name="name"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="없음" />
         <argument
             android:name="profileImage"
             app:argType="string" />

@@ -1,8 +1,8 @@
 package com.example.solitaryhelper.view.dest.fake_kakao
 
+import android.content.Entity
 import android.util.Log
 import android.view.View
-import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
@@ -12,10 +12,13 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.google.android.gms.common.api.Api
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.Response
 import kotlin.random.Random
 
 class FragmentFakeKakaoTalk :
@@ -226,26 +229,33 @@ class FragmentFakeKakaoTalk :
 
                 recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(it.toMutableList())
                 { position ->
-                    (recyclerViewKaKaoChatList.adapter as
-                            AdapterRecyclerViewKaKaoTalk).apply {
+
+                    val adapter = recyclerViewKaKaoChatList.adapter as
+                            AdapterRecyclerViewKaKaoTalk
+
+                    adapter.apply {
                         ++roomSeletCount
                         this.kaKaoDataList[position].apply {
                             visibleSettingList = View.GONE
                             chatNotification = 0
-
                         }
+
+
                     }
-                    val id = it[position].id.toInt()
-                    findNavController().navigate(
-                        FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
-                            profileImage = it[id].image,
-                            name = it[id].name,
-                            ListBox = it[id].textBoxList.toTypedArray(),
-                            itemIdPosition = id.toLong(),
-                            selectChatRoomCount = roomSeletCount,
-                            timeList = it[id].messageArrivalTime!!.toTypedArray()
+                    with(adapter) {
+                        val sendToData = this.kaKaoDataList[position]
+
+                        findNavController().navigate(
+                            FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
+                                profileImage = sendToData.image,
+                                name = sendToData.name,
+                                ListBox = sendToData.textBoxList.toTypedArray(),
+                                itemIdPosition = position.toLong(),
+                                selectChatRoomCount = roomSeletCount,
+                                timeList = sendToData.messageArrivalTime!!.toTypedArray()
+                            )
                         )
-                    )
+                    }
                 }
                 PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
 
@@ -257,18 +267,19 @@ class FragmentFakeKakaoTalk :
 
         viewModelShared.sendToChanges.observe(requireActivity(),
             androidx.lifecycle.Observer { changed ->
+                //adapter down casting 오류 방지
                 if (recyclerViewKaKaoChatList.adapter == null)
                     return@Observer
                 (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
+
                     for (i in itemOrderList.indices) {
                         itemOrderList[i] = kaKaoDataList[i].id.toInt()
                     }
-
-                    if (changed.sendToPosition != 0)
-                        notifyItemMoved(changed.sendToPosition, 0)
-
                     val index = itemOrderList.indexOf(changed.sendToPosition)
+
+                    if (kaKaoDataList[0].id.toInt() != index)
+                        notifyItemMoved(index, 0)
 
                     this.kaKaoDataList.add(0, this.kaKaoDataList[index])
 
@@ -291,11 +302,14 @@ class FragmentFakeKakaoTalk :
                 }
 
             })
+
     }
 
     override fun onPause() {
-        viewModelKaKaoTalk.allListInsert((binding.recyclerViewKaKaoChatList.adapter as
-                AdapterRecyclerViewKaKaoTalk).kaKaoDataList)
+        viewModelKaKaoTalk.allListInsert(
+            (binding.recyclerViewKaKaoChatList.adapter as
+                    AdapterRecyclerViewKaKaoTalk).kaKaoDataList
+        )
         super.onPause()
     }
 

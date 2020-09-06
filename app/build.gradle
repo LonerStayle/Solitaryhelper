@@ -47,11 +47,11 @@ dependencies {
     implementation libraries
     implementation arch_libraries
 
-    implementation files('libs\\libDaumMapAndroid.jar')
+    implementation files('libs/libDaumMapAndroid.jar')
     kapt librariesKapt
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation testLibraries
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 
 
 
