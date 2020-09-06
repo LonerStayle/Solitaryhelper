@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.viewmodel
 
+import android.app.Notification
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData

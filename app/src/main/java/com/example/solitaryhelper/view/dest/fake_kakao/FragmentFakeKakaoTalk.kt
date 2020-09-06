@@ -25,24 +25,23 @@ class FragmentFakeKakaoTalk :
     companion object {
         var itemOrderList =
             arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
+
     }
 
-    override fun FragmentFakeKakaoTalkBinding.setEventListener() {
-//        setBackButtonListener()
-        Log.d("opop888888","왜 널처리가 돼? 온크레이트뷰 또실행돼?")
-    }
+    private var newMessgeCheck = false
+    override fun FragmentFakeKakaoTalkBinding.setEventListener() {}
 
     override fun FragmentFakeKakaoTalkBinding.setCreateView() {
+
         setImageViewAd()
         setProgrssControl()
-        setNewMessageResponse()
         setRecyclerViewSetting()
     }
 
 
     override fun FragmentFakeKakaoTalkBinding.setLiveDataInObserver() {
         setAdapterDataUpdate()
-
+        setNewMessageResponse()
     }
 
     //랜덤 광고사진 가져오기
@@ -205,8 +204,6 @@ class FragmentFakeKakaoTalk :
     }
 
 
-
-
 //    private fun setBackButtonListener() {
 //
 //        requireActivity().onBackPressedDispatcher.addCallback(this) {
@@ -216,7 +213,6 @@ class FragmentFakeKakaoTalk :
 //    }
 
     private fun FragmentFakeKakaoTalkBinding.setAdapterDataUpdate() {
-        var setViewModel = false
 
         viewModelKaKaoTalk.kakaoData.observe(
             requireActivity(),
@@ -226,8 +222,8 @@ class FragmentFakeKakaoTalk :
                     setSendToAdapterToData()
                     return@Observer
                 }
+//                if(newMessgeCheck) return@Observer
 
-         PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
                 recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(it.toMutableList())
                 { position ->
                     (recyclerViewKaKaoChatList.adapter as
@@ -238,23 +234,20 @@ class FragmentFakeKakaoTalk :
                             chatNotification = 0
 
                         }
-
-                        viewModelKaKaoTalk.allListInsert(this.kaKaoDataList)
                     }
+                    val id = it[position].id.toInt()
                     findNavController().navigate(
                         FragmentFakeKakaoTalkDirections.actionFragmentFakeKakaoTalkToFragmentFakeKakaoChat(
-                            profileImage = it[position].image,
-                            name = it[position].name,
-                            ListBox = it[it[position].id.toInt()].textBoxList.toTypedArray(),
-                            itemIdPosition = it[position].id,
+                            profileImage = it[id].image,
+                            name = it[id].name,
+                            ListBox = it[id].textBoxList.toTypedArray(),
+                            itemIdPosition = id.toLong(),
                             selectChatRoomCount = roomSeletCount,
-                            timeList = it[it[position].id.toInt()].messageArrivalTime!!.toTypedArray()
+                            timeList = it[id].messageArrivalTime!!.toTypedArray()
                         )
                     )
-
-
-
                 }
+                PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
 
             })
 
@@ -262,49 +255,49 @@ class FragmentFakeKakaoTalk :
 
     private fun FragmentFakeKakaoTalkBinding.setNewMessageResponse() {
 
-        viewModelShared.sendToChanges.observe(viewLifecycleOwner,
+        viewModelShared.sendToChanges.observe(requireActivity(),
             androidx.lifecycle.Observer { changed ->
-
+                if (recyclerViewKaKaoChatList.adapter == null)
+                    return@Observer
                 (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
-                    if (FragmentFakeKakaoChat.positionSendRunCheck!!) {
-
-                        for (i in itemOrderList.indices) {
-                            itemOrderList[i] = kaKaoDataList[i].id.toInt()
-                        }
-
-                        if (changed.sendToPosition != 0)
-                            notifyItemMoved(changed.sendToPosition, 0)
-
-                        val index = itemOrderList.indexOf(changed.sendToPosition)
-
-                        this.kaKaoDataList.add(0, this.kaKaoDataList[index])
-
-                        this.kaKaoDataList[0].apply {
-                            itemLastText = changed.sendToLastText
-                            itemTimeLast = changed.sendToLastTime
-                            chatNotification += 1
-                            visibleSettingList = View.VISIBLE
-                        }
-                        this.kaKaoDataList.removeAt(index + 1)
-
-                        notifyItemRangeChanged(0, 5)
-                        viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
-                        { list -> list.chatNotification })
-
-                        viewModelKaKaoTalk.allListInsert(this.kaKaoDataList)
-
-
+                    for (i in itemOrderList.indices) {
+                        itemOrderList[i] = kaKaoDataList[i].id.toInt()
                     }
+
+                    if (changed.sendToPosition != 0)
+                        notifyItemMoved(changed.sendToPosition, 0)
+
+                    val index = itemOrderList.indexOf(changed.sendToPosition)
+
+                    this.kaKaoDataList.add(0, this.kaKaoDataList[index])
+
+                    this.kaKaoDataList[0].apply {
+                        itemLastText = changed.sendToLastText
+                        itemTimeLast = changed.sendToLastTime
+                        chatNotification += 1
+                        visibleSettingList = View.VISIBLE
+                    }
+                    this.kaKaoDataList.removeAt(index + 1)
+
+                    notifyItemRangeChanged(0, 5)
+                    viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
+                    { list -> list.chatNotification })
+
+                    Log.d("opop989898", changed.sendToLastTime)
+
+                    newMessgeCheck = true
 
                 }
 
             })
     }
 
-    override fun onDestroy() {
-        Log.d("opop99999", "에이 설마")
-        super.onDestroy()
+    override fun onPause() {
+        viewModelKaKaoTalk.allListInsert((binding.recyclerViewKaKaoChatList.adapter as
+                AdapterRecyclerViewKaKaoTalk).kaKaoDataList)
+        super.onPause()
     }
+
 
 }
