@@ -280,9 +280,9 @@ class FragmentFakeKakaoChat :
 
         })
 
-        viewModelKaKaoChat.chatListPlus.observe(requireActivity(), Observer {
+        viewModelKaKaoChat.chatListPlus.observe(requireActivity(), Observer {newData->
             //adapter down casting 오류 방지
-            if (binding.recyclerViewKaKaoChat.adapter == null) {
+            if (binding.recyclerViewKaKaoChat.adapter == null && !isResumed) {
                 return@Observer
             }
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
@@ -293,15 +293,15 @@ class FragmentFakeKakaoChat :
                 val user = dataList[args.itemIdPosition.toInt()].user?.toMutableList()
                 val timeList = dataList[args.itemIdPosition.toInt()].timeList.toMutableList()
 
-                textList.add(it.textList); user!!.add(it.user);timeList.add(it.timeList)
+                textList.add(newData.textList); user!!.add(newData.user);timeList.add(newData.timeList)
 
-                val newData = KaKaoTalkChatData(
+                val newDataUpdate = KaKaoTalkChatData(
                     textList = textList,
                     user = user,
                     timeList = timeList
                 )
 
-                (dataList as MutableList)[args.itemIdPosition.toInt()] = newData
+                (dataList as MutableList)[args.itemIdPosition.toInt()] = newDataUpdate
 
                 notifyItemChanged(chatList[args.itemIdPosition.toInt()].textList.lastIndex - 1)
                 notifyItemInserted(chatList[args.itemIdPosition.toInt()].textList.lastIndex)

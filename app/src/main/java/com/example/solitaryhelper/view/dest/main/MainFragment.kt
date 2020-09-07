@@ -44,8 +44,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             R.drawable.ic_baseline_chatbot_select_24
         )
     }
+
+    private val toolbarTitleList = arrayOf("아싸를 위한 스킬","블로그로 최신 트렌드 읽기","집 주변 혼밥 찾기","감성 변태","고민 상담")
     private val iconText by lazy { resources.getStringArray(R.array.icon_text) }
     private var fabStartEventInClickCheck = false
+    private val naviIconBackground by lazy{R.drawable.ic_baseline_menu_24}
     private val uiScope = CoroutineScope(Dispatchers.Main)
     private val naviHeaderBinding by lazy {
         DataBindingUtil.inflate<HeaderNavigationMainBinding>(
@@ -58,22 +61,23 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
 
     override fun FragmentMainBinding.setCreateView() {
-
+        setToolbarSetting()
         setNavigationViewAndHeaderViewSetting()
         setViewPagerAndTabLayoutSetting()
         setIdCreate()
+
     }
 
     override fun FragmentMainBinding.setEventListener() {
-
         setTabIconClickListener()
         setFabCallClickListener()
         setFabKakaoTalkClickListener()
         setFabSmsClickListener()
         setFabStartClickListener()
-        setButtonMenuClickListener()
+        setToolbarButtonClickListener()
         setNavigationViewClickListener()
         setbackButtonClickListener()
+
 
     }
 
@@ -120,8 +124,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 for (i in 0..4) {
                     when (tab?.position) {
-                        i -> tab.setIcon(iconSelectImage[i])
-                        4 -> {fabStart.hide();buttonMenu.visibility = View.GONE}
+                        i -> {
+                            tab.setIcon(iconSelectImage[i])
+                        toolBar.title = toolbarTitleList[i]
+                        }
+                        4 -> fabStart.hide()
+
+
                     }
                 }
             }
@@ -130,7 +139,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 for (i in 0..4) {
                     when (tab?.position) {
                         i -> tab.setIcon(iconImage[i])
-                        4 -> {fabStart.show();buttonMenu.visibility = View.VISIBLE}
+                        4 -> fabStart.show();
+
+
                     }
                 }
             }
@@ -167,9 +178,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
     }
 
-    private fun FragmentMainBinding.setButtonMenuClickListener() {
-        buttonMenu.setOnClickListener {
-            drawerLayoutMain.open()
+    private fun FragmentMainBinding.setToolbarButtonClickListener() {
+        toolBar.setNavigationOnClickListener {
+                drawerLayoutMain.open()
+            }
+        }
+
+    private fun FragmentMainBinding.setToolbarSetting() {
+        with(toolBar){
+            setNavigationIcon(naviIconBackground)
+            title = toolbarTitleList[0]
         }
     }
 

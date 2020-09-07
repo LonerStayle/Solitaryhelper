@@ -13,10 +13,7 @@ import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.google.android.gms.common.api.Api
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import okhttp3.MediaType
 import okhttp3.Response
 import kotlin.random.Random
@@ -28,7 +25,7 @@ class FragmentFakeKakaoTalk :
     companion object {
         var itemOrderList =
             arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
-
+      var kaKaoTalkFirstRunCheck = false
     }
 
     private var newMessgeCheck = false
@@ -61,8 +58,9 @@ class FragmentFakeKakaoTalk :
     }
 
     private fun FragmentFakeKakaoTalkBinding.setProgrssControl() {
-        if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck) {
+        if (!kaKaoTalkFirstRunCheck) {
             CoroutineScope(Dispatchers.Main).launch {
+
                 progressbarLayout.visibility = View.VISIBLE
                 imageViewKaKao.visibility = View.VISIBLE
                 bottomLayout.visibility = View.GONE
@@ -81,7 +79,9 @@ class FragmentFakeKakaoTalk :
                 imageViewAd.visibility = View.VISIBLE
                 textView2.visibility = View.VISIBLE
                 linearLayoutButtonList.visibility = View.VISIBLE
+               kaKaoTalkFirstRunCheck = true
             }
+
         }
     }
 
@@ -239,8 +239,7 @@ class FragmentFakeKakaoTalk :
                             visibleSettingList = View.GONE
                             chatNotification = 0
                         }
-
-
+                        viewModelKaKaoTalk.allListInsert(kaKaoDataList)
                     }
                     with(adapter) {
                         val sendToData = this.kaKaoDataList[position]
@@ -257,7 +256,7 @@ class FragmentFakeKakaoTalk :
                         )
                     }
                 }
-                PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
+
 
             })
 
@@ -268,7 +267,7 @@ class FragmentFakeKakaoTalk :
         viewModelShared.sendToChanges.observe(requireActivity(),
             androidx.lifecycle.Observer { changed ->
                 //adapter down casting 오류 방지
-                if (recyclerViewKaKaoChatList.adapter == null)
+                if (recyclerViewKaKaoChatList.adapter == null&&!isResumed)
                     return@Observer
                 (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
@@ -278,8 +277,10 @@ class FragmentFakeKakaoTalk :
                     }
                     val index = itemOrderList.indexOf(changed.sendToPosition)
 
-                    if (kaKaoDataList[0].id.toInt() != index)
+//                    if (kaKaoDataList[0].id.toInt() != index)
                         notifyItemMoved(index, 0)
+
+
 
                     this.kaKaoDataList.add(0, this.kaKaoDataList[index])
 
@@ -305,12 +306,12 @@ class FragmentFakeKakaoTalk :
 
     }
 
-    override fun onPause() {
+    override fun onStop() {
+        super.onStop()
         viewModelKaKaoTalk.allListInsert(
             (binding.recyclerViewKaKaoChatList.adapter as
                     AdapterRecyclerViewKaKaoTalk).kaKaoDataList
         )
-        super.onPause()
     }
 
 

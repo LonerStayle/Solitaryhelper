@@ -70,9 +70,10 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         binding = this
 
 
-        setEventListener()
+
         setCreateView()
         setLiveDataInObserver()
+        setEventListener()
         root
 
     }

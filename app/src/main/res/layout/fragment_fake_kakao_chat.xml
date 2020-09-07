@@ -22,11 +22,11 @@
             android:id="@+id/imageView6"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_backButton"
             app:layout_constraintEnd_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/imageView_backButton" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -36,7 +36,7 @@
             android:background="#FFFFFF"
             android:orientation="horizontal"
             android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/view3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -109,7 +109,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="28dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -129,11 +129,11 @@
             android:id="@+id/imageView5"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/menu2"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_backButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/imageView_backButton" />
 
         <TextView
             android:id="@+id/textView_thisName"
@@ -142,12 +142,21 @@
             android:text="@{name}"
             android:textColor="#F1FAFF"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView_kaKaoChat"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_backButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.47"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView_backButton"
             tools:text="로너" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:background="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
