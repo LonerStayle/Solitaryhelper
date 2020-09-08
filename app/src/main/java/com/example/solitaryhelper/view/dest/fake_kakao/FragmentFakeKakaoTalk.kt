@@ -21,18 +21,19 @@ import kotlin.random.Random
 
 class FragmentFakeKakaoTalk :
     BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
-    private var roomSeletCount = 0
 
     companion object {
         var itemOrderList =
             arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
         var kaKaoTalkFirstRunCheck = false
+
     }
 
-    private var newMessgeCheck = false
+
     override fun FragmentFakeKakaoTalkBinding.setEventListener() {}
 
     override fun FragmentFakeKakaoTalkBinding.setCreateView() {
+
         setWindowUIControl()
         setImageViewAd()
         setProgrssControl()
@@ -215,6 +216,10 @@ class FragmentFakeKakaoTalk :
                     return@Observer
                 }
 
+                if(isResumed && recyclerViewKaKaoChatList.adapter != null){
+                    return@Observer
+                }
+
 
                 recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(it.toMutableList())
                 { position ->
@@ -223,7 +228,7 @@ class FragmentFakeKakaoTalk :
                             AdapterRecyclerViewKaKaoTalk
 
                     adapter.apply {
-                        ++roomSeletCount
+
                         this.kaKaoDataList[position].apply {
                             visibleSettingList = View.GONE
                             chatNotification = 0
@@ -302,8 +307,8 @@ class FragmentFakeKakaoTalk :
 
                     Log.d("opop989898", changed.sendToLastTime)
 
-                    newMessgeCheck = true
 
+                    viewModelKaKaoTalk.allListInsert(kaKaoDataList)
                 }
 
             })
