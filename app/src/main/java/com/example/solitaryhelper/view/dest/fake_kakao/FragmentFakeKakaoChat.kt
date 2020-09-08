@@ -2,22 +2,19 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 
 import android.app.NotificationManager
 import android.content.Context
-import android.graphics.Color
 import android.media.SoundPool
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
 
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
+import com.example.solitaryhelper.localdb.entitiy.*
 import com.example.solitaryhelper.view.activity.autoChatRun
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatDataCopy
-import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
+import com.example.solitaryhelper.view.adapter.kakao_chat.*
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 
@@ -45,13 +42,13 @@ class FragmentFakeKakaoChat :
         const val NOTIFICATION_ID_2 = 1002
 
         var autoChatDoubleCheckRun = Array(20) { false }
-
+        private var inUse = false
 
     }
 
     private val dp by lazy { resources.displayMetrics.densityDpi }
     private var buttonClick = false
-    private var inUse = false
+
     private val soundId by lazy { soundPool.load(requireContext(), R.raw.kakaotalkpool, 1) }
 
 
@@ -82,21 +79,21 @@ class FragmentFakeKakaoChat :
                         setBackgroundResource(0)
                         setImageResource(R.drawable.kakao_chat_bottom0)
                         setPadding(0, 0, 0, 0)
-                        layoutParams.height = 24*dp
-                        layoutParams.width = 24*dp
+                        layoutParams.height = 24 * dp
+                        layoutParams.width = 24 * dp
                     }
                 }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-                    buttonSend.apply {
-                        setImageResource(R.drawable.ic_baseline_arrow_upward_24)
-                        setPadding(2, 2, 2, 2)
-                        setBackgroundResource(R.drawable.kakao_chat_button)
-                        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                        layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-                    }
+                buttonSend.apply {
+                    setImageResource(R.drawable.ic_baseline_arrow_upward_24)
+                    setPadding(2, 2, 2, 2)
+                    setBackgroundResource(R.drawable.kakao_chat_button)
+                    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+                }
 
 
             }
@@ -107,8 +104,8 @@ class FragmentFakeKakaoChat :
                         setBackgroundResource(0)
                         setImageResource(R.drawable.kakao_chat_bottom0)
                         setPadding(0, 0, 0, 0)
-                        layoutParams.height = 24*dp
-                        layoutParams.width = 24*dp
+                        layoutParams.height = 24 * dp
+                        layoutParams.width = 24 * dp
                     }
                 }
             }
@@ -123,6 +120,7 @@ class FragmentFakeKakaoChat :
     }
 
     private fun FragmentFakeKakaoChatBinding.setRecyclerViewSetting() {
+        recyclerViewKaKaoChat.adapter?.notifyDataSetChanged()
         (recyclerViewKaKaoChat.adapter as? AdapterRecyclerViewKaKaoChat)?.setHasStableIds(true)
         recyclerViewKaKaoChat.setHasFixedSize(true)
         recyclerViewKaKaoChat.disableItemAnimator()
@@ -130,29 +128,235 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setData() {
-
-
         binding.name = args.name
         viewModelShared; soundPool; soundId
+    }
 
-//        if (!isResumed) {
-        viewModelKaKaoTalk.kakaoData.observe(viewLifecycleOwner, Observer {
-            val setDataList: MutableList<KaKaoTalkChatData> = mutableListOf()
-            for (i in it.indices) {
-                Log.d("opop8888", "인덱스 갯수체크${it.size - 1}")
-                setDataList.add(
-                    KaKaoTalkChatData(
-                        it[i].id,
-                        it[i].textBoxList,
-                        MutableList(args.ListBox.size) { false },
-                        it[i].messageArrivalTime!!
+    private fun setUpFirstRunViewModel() {
+
+        when (args.itemIdPosition) {
+            0L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert(
+                        KaKaoTalkChatData(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
                     )
-                )
+                }
             }
-            viewModelKaKaoChat.listInsert(setDataList)
+            1L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert1(
+                        KaKaoTalkChatData1(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            2L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert2(
+                        KaKaoTalkChatData2(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            3L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert3(
+                        KaKaoTalkChatData3(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            4L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert4(
+                        KaKaoTalkChatData4(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            5L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert5(
+                        KaKaoTalkChatData5(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            6L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert6(
+                        KaKaoTalkChatData6(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            7L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert7(
+                        KaKaoTalkChatData7(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            8L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert8(
+                        KaKaoTalkChatData8(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            9L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert9(
+                        KaKaoTalkChatData9(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            10L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert10(
+                        KaKaoTalkChatData10(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            11L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert11(
+                        KaKaoTalkChatData11(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            12L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert12(
+                        KaKaoTalkChatData12(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            13L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert13(
+                        KaKaoTalkChatData13(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            14L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert14(
+                        KaKaoTalkChatData14(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            15L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert15(
+                        KaKaoTalkChatData15(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            16L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert16(
+                        KaKaoTalkChatData16(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            17L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert17(
+                        KaKaoTalkChatData17(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            18L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert18(
+                        KaKaoTalkChatData18(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
+            19L -> {
+                for (i in args.ListBox.indices) {
+                    viewModelKaKaoChat.insert19(
+                        KaKaoTalkChatData19(
+                            textList = args.ListBox[i],
+                            user = false,
+                            timeList = args.timeList[i]
+                        )
+                    )
+                }
+            }
 
-        })
-//        }
+        }
 
     }
 
@@ -169,8 +373,8 @@ class FragmentFakeKakaoChat :
             buttonClick = true
 
 
-            viewModelKaKaoChat.insertCopyData(
-                KaKaoTalkChatDataCopy(
+            viewModelKaKaoChat.insert(
+                KaKaoTalkChatData(
                     textList = editTextTalkBox.text.toString(),
                     user = true,
                     timeList = Contents.timePattern.format(Date())
@@ -185,7 +389,7 @@ class FragmentFakeKakaoChat :
 
         fun setAutoChat() {
             CoroutineScope(Dispatchers.Main).launch {
-                if (args.selectChatRoomCount <= 5)
+                if (autoChatDoubleCheckRun.filter { it }.size <= 5)
                     setCoroutine()
             }
         }
@@ -204,48 +408,774 @@ class FragmentFakeKakaoChat :
         val manager =
             requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         viewModelKaKaoChat.clearExistingNotifications(0, manager = manager)
+
 // 백그라운드에서 살 수 있도록 초기화
         val context = requireContext()
         requireActivity().baseContext
 
         while (autoChatRun) {
-
-
-            autoChatDoubleCheckRun[args.itemIdPosition.toInt()] = true
+            when (args.itemIdPosition) {
+                0L -> {
+                    autoChatDoubleCheckRun[0] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
-            delay(5000)
-            if (!autoChatRun)
-                return
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
 
-            val shuffleMode = list.shuffled()
+                    val shuffleMode = list.shuffled()
 
-            viewModelKaKaoChat.insertCopyData(
-                KaKaoTalkChatDataCopy(
-                    textList = shuffleMode[0],
-                    user = false,
-                    timeList = Contents.timePattern.format(Date())
-                )
-            )
+                    viewModelKaKaoChat.insert(
+                        KaKaoTalkChatData(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
 
 
-            viewModelShared.sendToChanges(
-                SharedViewModel.SendToChange(
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            0,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
 
-                    args.itemIdPosition.toInt(),
-                    shuffleMode[0],
-                    Contents.timePattern.format(Date())
-                )
-            )
-            soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
 
-            if (!isResumed) {
-                viewModelKaKaoChat.messagingStyle(
-                    R.drawable.newsample2,
-                    context,
-                    manager,
-                    binding.name!!,
-                    shuffleMode[0]
-                )
+                    }
+                }
+                1L -> {
+                    autoChatDoubleCheckRun[1] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert1(
+                        KaKaoTalkChatData1(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            1,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                2L -> {
+                    autoChatDoubleCheckRun[2] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert2(
+                        KaKaoTalkChatData2(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            2,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                3L -> {
+                    autoChatDoubleCheckRun[3] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert3(
+                        KaKaoTalkChatData3(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            3,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                4L -> {
+                    autoChatDoubleCheckRun[4] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert4(
+                        KaKaoTalkChatData4(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            4,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                5L -> {
+                    autoChatDoubleCheckRun[5] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert5(
+                        KaKaoTalkChatData5(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            5,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                6L -> {
+                    autoChatDoubleCheckRun[6] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert6(
+                        KaKaoTalkChatData6(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            6,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                7L -> {
+                    autoChatDoubleCheckRun[7] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert7(
+                        KaKaoTalkChatData7(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            7,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                8L -> {
+                    autoChatDoubleCheckRun[8] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert8(
+                        KaKaoTalkChatData8(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            8,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                9L -> {
+                    autoChatDoubleCheckRun[9] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert9(
+                        KaKaoTalkChatData9(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            9,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                10L -> {
+                    autoChatDoubleCheckRun[10] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert10(
+                        KaKaoTalkChatData10(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            10,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                11L -> {
+                    autoChatDoubleCheckRun[11] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert11(
+                        KaKaoTalkChatData11(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            11,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                12L -> {
+                    autoChatDoubleCheckRun[12] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert12(
+                        KaKaoTalkChatData12(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            12,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                13L -> {
+                    autoChatDoubleCheckRun[13] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert13(
+                        KaKaoTalkChatData13(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            13,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                14L -> {
+                    autoChatDoubleCheckRun[14] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert14(
+                        KaKaoTalkChatData14(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            14,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                15L -> {
+                    autoChatDoubleCheckRun[15] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert15(
+                        KaKaoTalkChatData15(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            15,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                16L -> {
+                    autoChatDoubleCheckRun[16] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert16(
+                        KaKaoTalkChatData16(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            16,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                17L -> {
+                    autoChatDoubleCheckRun[17] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert17(
+                        KaKaoTalkChatData17(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            17,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                18L -> {
+                    autoChatDoubleCheckRun[18] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert18(
+                        KaKaoTalkChatData18(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            18,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+                19L -> {
+                    autoChatDoubleCheckRun[19] = true
+//            delay(Contents.AUTO_CHAT_DEALY)
+                    delay(5000)
+                    if (!autoChatRun)
+                        return
+
+                    val shuffleMode = list.shuffled()
+
+                    viewModelKaKaoChat.insert19(
+                        KaKaoTalkChatData19(
+                            textList = shuffleMode[0],
+                            user = false,
+                            timeList = Contents.timePattern.format(Date())
+                        )
+                    )
+
+
+                    viewModelShared.sendToChanges(
+                        SharedViewModel.SendToChange(
+                            19,
+                            shuffleMode[0],
+                            Contents.timePattern.format(Date())
+                        )
+                    )
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
+
+                    if (!isResumed) {
+                        viewModelKaKaoChat.messagingStyle(
+                            R.drawable.newsample2,
+                            context,
+                            manager,
+                            binding.name!!,
+                            shuffleMode[0]
+                        )
+
+                    }
+                }
+
 
             }
         }
@@ -260,69 +1190,552 @@ class FragmentFakeKakaoChat :
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 
-        viewModelKaKaoChat.chatList.observe(viewLifecycleOwner, Observer {
-            if (it.isNullOrEmpty())
-                return@Observer
-
-            if (!inUse) {
-                recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
-                    args.itemIdPosition.toInt(),
-                    args.profileImage,
-                    args.name,
-                    it
-                )
-
-                inUse = true
-                return@Observer
-            }
-
-
-            buttonClick = false
-
-        })
-
-        viewModelKaKaoChat.chatListPlus.observe(requireActivity(), Observer { newData ->
-            //adapter down casting 오류 방지
-            if (binding.recyclerViewKaKaoChat.adapter == null) {
-                return@Observer
-            }
-            (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
-                Log.d("opop9999", "플러스 실행 확인 ")
-                val dataList = this.chatList
-
-                val textList = dataList[args.itemIdPosition.toInt()].textList as MutableList
-                val user = dataList[args.itemIdPosition.toInt()].user?.toMutableList()
-                val timeList = dataList[args.itemIdPosition.toInt()].timeList!!.toMutableList()
-                try {
-                    textList.add(newData.textList); user!!.add(newData.user);timeList.add(newData.timeList)
-                } catch (e: Exception) {
-
-
+        when (args.itemIdPosition) {
+            0L -> viewModelKaKaoChat.chatList.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
                 }
-                val newDataUpdate = KaKaoTalkChatData(
-                    textList = textList,
-                    user = user,
-                    timeList = timeList
-                )
 
-                (dataList as MutableList)[args.itemIdPosition.toInt()] = newDataUpdate
+                if (!isResumed)
+                    return@Observer
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    Log.d("opop888", "전체리스트 추가 확인")
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
+                        this.chatList = it
 
-                notifyItemChanged(chatList[args.itemIdPosition.toInt()].textList!!.lastIndex - 1)
-                notifyItemInserted(chatList[args.itemIdPosition.toInt()].textList!!.lastIndex)
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            1L -> viewModelKaKaoChat.chatList1.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
 
-                recyclerViewKaKaoChat.scrollToPosition(dataList[args.itemIdPosition.toInt()].timeList!!.lastIndex)
+                if (!isResumed)
+                    return@Observer
 
-            }
-        })
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat1(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat1).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            2L -> viewModelKaKaoChat.chatList2.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat2(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat2).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            3L -> viewModelKaKaoChat.chatList3.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat3(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat3).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            4L -> viewModelKaKaoChat.chatList4.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat4(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat4).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            5L -> viewModelKaKaoChat.chatList5.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat5(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat5).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            6L -> viewModelKaKaoChat.chatList6.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat6(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat6).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            7L -> viewModelKaKaoChat.chatList7.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat7(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat7).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            8L -> viewModelKaKaoChat.chatList8.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat8(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat8).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            9L -> viewModelKaKaoChat.chatList9.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat9(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat9).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            10L -> viewModelKaKaoChat.chatList10.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat10(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat10).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            11L -> viewModelKaKaoChat.chatList11.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat11(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat11).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            12L -> viewModelKaKaoChat.chatList12.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat12(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat12).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            13L -> viewModelKaKaoChat.chatList13.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat13(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat13).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            14L -> viewModelKaKaoChat.chatList14.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat14(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat14).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            15L -> viewModelKaKaoChat.chatList15.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat15(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat15).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            16L -> viewModelKaKaoChat.chatList16.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat16(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat16).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            17L -> viewModelKaKaoChat.chatList17.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat17(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat17).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            18L -> viewModelKaKaoChat.chatList18.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat18(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat18).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+            19L -> viewModelKaKaoChat.chatList19.observe(viewLifecycleOwner, Observer {
+                if (it.isNullOrEmpty()) {
+                    setUpFirstRunViewModel()
+                    return@Observer
+                }
+
+                if (!isResumed)
+                    return@Observer
+
+                Log.d("opop888", "전체리스트 추가 확인")
+                if (recyclerViewKaKaoChat.adapter == null) {
+                    recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat19(
+                        args.profileImage,
+                        args.name,
+                        it
+                    )
+                } else if (recyclerViewKaKaoChat.adapter != null) {
+                    Log.d("opop999", "조금씩 추가확인")
+                    (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat19).apply {
+                        this.chatList = it
+
+                        notifyItemChanged(chatList.lastIndex - 1)
+                        notifyItemInserted(chatList.lastIndex)
+                        recyclerViewKaKaoChat.scrollToPosition(chatList.lastIndex)
+                    }
+                }
+            })
+
+        }
     }
-
 
     override fun onPause() {
         inUse = false
-        viewModelKaKaoChat.listInsert(
-            (binding.recyclerViewKaKaoChat.adapter as
-                    AdapterRecyclerViewKaKaoChat).chatList
-        )
         super.onPause()
     }
 }

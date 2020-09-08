@@ -14,8 +14,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.localdb.dao.KaKaoChatDao
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatDataCopy
+import com.example.solitaryhelper.localdb.entitiy.*
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,16 +27,152 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
 
     val chatList: LiveData<List<KaKaoTalkChatData>>
         get() = dataSource.getAllList()
+    val chatList1: LiveData<List<KaKaoTalkChatData1>>
+        get() = dataSource.getAllList1()
+    val chatList2: LiveData<List<KaKaoTalkChatData2>>
+        get() = dataSource.getAllList2()
+    val chatList3: LiveData<List<KaKaoTalkChatData3>>
+        get() = dataSource.getAllList3()
+    val chatList4: LiveData<List<KaKaoTalkChatData4>>
+        get() = dataSource.getAllList4()
+    val chatList5: LiveData<List<KaKaoTalkChatData5>>
+        get() = dataSource.getAllList5()
+    val chatList6: LiveData<List<KaKaoTalkChatData6>>
+        get() = dataSource.getAllList6()
+    val chatList7: LiveData<List<KaKaoTalkChatData7>>
+        get() = dataSource.getAllList7()
+    val chatList8: LiveData<List<KaKaoTalkChatData8>>
+        get() = dataSource.getAllList8()
+    val chatList9: LiveData<List<KaKaoTalkChatData9>>
+        get() = dataSource.getAllList9()
+    val chatList10: LiveData<List<KaKaoTalkChatData10>>
+        get() = dataSource.getAllList10()
+    val chatList11: LiveData<List<KaKaoTalkChatData11>>
+        get() = dataSource.getAllList11()
+    val chatList12: LiveData<List<KaKaoTalkChatData12>>
+        get() = dataSource.getAllList12()
+    val chatList13: LiveData<List<KaKaoTalkChatData13>>
+        get() = dataSource.getAllList13()
+    val chatList14: LiveData<List<KaKaoTalkChatData14>>
+        get() = dataSource.getAllList14()
+    val chatList15: LiveData<List<KaKaoTalkChatData15>>
+        get() = dataSource.getAllList15()
+    val chatList16: LiveData<List<KaKaoTalkChatData16>>
+        get() = dataSource.getAllList16()
+    val chatList17: LiveData<List<KaKaoTalkChatData17>>
+        get() = dataSource.getAllList17()
+    val chatList18: LiveData<List<KaKaoTalkChatData18>>
+        get() = dataSource.getAllList18()
+    val chatList19: LiveData<List<KaKaoTalkChatData19>>
+        get() = dataSource.getAllList19()
 
-    private val _chatListPlus = MutableLiveData<KaKaoTalkChatDataCopy>()
-    val chatListPlus:LiveData<KaKaoTalkChatDataCopy>
-    get() = _chatListPlus
+//    private val _chatListPlus = MutableLiveData<KaKaoTalkChatDataCopy>()
+//    val chatListPlus:LiveData<KaKaoTalkChatDataCopy>
+//    get() = _chatListPlus
 
+    //    fun insertCopyData(data:KaKaoTalkChatDataCopy){
+//        _chatListPlus.postValue(data)
+//    }
 
     //챗 리스트 인서트
     fun insert(kakao: KaKaoTalkChatData) {
         ioScope.launch {
             dataSource.insert(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert1(kakao: KaKaoTalkChatData1) {
+        ioScope.launch {
+            dataSource.insert1(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert2(kakao: KaKaoTalkChatData2) {
+        ioScope.launch {
+            dataSource.insert2(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert3(kakao: KaKaoTalkChatData3) {
+        ioScope.launch {
+            dataSource.insert3(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert4(kakao: KaKaoTalkChatData4) {
+        ioScope.launch {
+            dataSource.insert4(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert5(kakao: KaKaoTalkChatData5) {
+        ioScope.launch {
+            dataSource.insert5(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert6(kakao: KaKaoTalkChatData6) {
+        ioScope.launch {
+            dataSource.insert6(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert7(kakao: KaKaoTalkChatData7) {
+        ioScope.launch {
+            dataSource.insert7(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert8(kakao: KaKaoTalkChatData8) {
+        ioScope.launch {
+            dataSource.insert8(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert9(kakao: KaKaoTalkChatData9) {
+        ioScope.launch {
+            dataSource.insert9(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert10(kakao: KaKaoTalkChatData10) {
+        ioScope.launch {
+            dataSource.insert10(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert11(kakao: KaKaoTalkChatData11) {
+        ioScope.launch {
+            dataSource.insert11(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert12(kakao: KaKaoTalkChatData12) {
+        ioScope.launch {
+            dataSource.insert12(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert13(kakao: KaKaoTalkChatData13) {
+        ioScope.launch {
+            dataSource.insert13(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert14(kakao: KaKaoTalkChatData14) {
+        ioScope.launch {
+            dataSource.insert14(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert15(kakao: KaKaoTalkChatData15) {
+        ioScope.launch {
+            dataSource.insert15(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert16(kakao: KaKaoTalkChatData16) {
+        ioScope.launch {
+            dataSource.insert16(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert17(kakao: KaKaoTalkChatData17) {
+        ioScope.launch {
+            dataSource.insert17(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert18(kakao: KaKaoTalkChatData18) {
+        ioScope.launch {
+            dataSource.insert18(kakao)
+        }
+    }//챗 리스트 인서트
+    fun insert19(kakao: KaKaoTalkChatData19) {
+        ioScope.launch {
+            dataSource.insert19(kakao)
         }
     }
     //챗 리스트 인서트
@@ -46,9 +181,122 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
             dataSource.allInsert(kakao)
         }
     }
-    fun insertCopyData(data:KaKaoTalkChatDataCopy){
-        _chatListPlus.postValue(data)
+    //챗 리스트 인서트
+    fun listInsert1(kakao: List<KaKaoTalkChatData1>) {
+        ioScope.launch {
+            dataSource.allInsert1(kakao)
+        }
     }
+    //챗 리스트 인서트
+    fun listInsert2(kakao: List<KaKaoTalkChatData2>) {
+        ioScope.launch {
+            dataSource.allInsert2(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert3(kakao: List<KaKaoTalkChatData3>) {
+        ioScope.launch {
+            dataSource.allInsert3(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert4(kakao: List<KaKaoTalkChatData4>) {
+        ioScope.launch {
+            dataSource.allInsert4(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert5(kakao: List<KaKaoTalkChatData5>) {
+        ioScope.launch {
+            dataSource.allInsert5(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert6(kakao: List<KaKaoTalkChatData6>) {
+        ioScope.launch {
+            dataSource.allInsert6(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert7(kakao: List<KaKaoTalkChatData7>) {
+        ioScope.launch {
+            dataSource.allInsert7(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert8(kakao: List<KaKaoTalkChatData8>) {
+        ioScope.launch {
+            dataSource.allInsert8(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert9(kakao: List<KaKaoTalkChatData9>) {
+        ioScope.launch {
+            dataSource.allInsert9(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert10(kakao: List<KaKaoTalkChatData10>) {
+        ioScope.launch {
+            dataSource.allInsert10(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert11(kakao: List<KaKaoTalkChatData11>) {
+        ioScope.launch {
+            dataSource.allInsert11(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert12(kakao: List<KaKaoTalkChatData12>) {
+        ioScope.launch {
+            dataSource.allInsert12(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert13(kakao: List<KaKaoTalkChatData13>) {
+        ioScope.launch {
+            dataSource.allInsert13(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert14(kakao: List<KaKaoTalkChatData14>) {
+        ioScope.launch {
+            dataSource.allInsert14(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert15(kakao: List<KaKaoTalkChatData15>) {
+        ioScope.launch {
+            dataSource.allInsert15(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert16(kakao: List<KaKaoTalkChatData16>) {
+        ioScope.launch {
+            dataSource.allInsert16(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert17(kakao: List<KaKaoTalkChatData17>) {
+        ioScope.launch {
+            dataSource.allInsert17(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert18(kakao: List<KaKaoTalkChatData18>) {
+        ioScope.launch {
+            dataSource.allInsert18(kakao)
+        }
+    }
+    //챗 리스트 인서트
+    fun listInsert19(kakao: List<KaKaoTalkChatData19>) {
+        ioScope.launch {
+            dataSource.allInsert19(kakao)
+        }
+    }
+
+
 
 
     fun clearExistingNotifications(notificationId: Int, manager: NotificationManager) {
@@ -123,88 +371,6 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
 }
-//    fun setTimeVisible(chatList:List<KaKaoTalkChatData>,timeVisibleList: MutableList<Int>?) {
-//        if ((chatList.last().timeList == chatList[chatList.lastIndex - 1].timeList)
-//            && chatList.last().user == chatList[chatList.lastIndex - 1].user
-//        ) {
-//            timeVisibleList?.set(timeVisibleList.lastIndex - 1, View.INVISIBLE)
-//            timeVisibleList?.add(View.VISIBLE)
-//
-//        } else
-//            timeVisibleList?.add(View.VISIBLE)
-//
-//
-//    }
 
 
-//    fun setProfileVisible(chatList:List<KaKaoTalkChatData>,thisprofileVisibleList: MutableList<Int>?) {
-//        if (chatList.last().user != chatList[chatList.lastIndex - 1].user ||
-//            chatList.last().timeList != chatList[chatList.lastIndex-1].timeList) {
-//            thisprofileVisibleList?.add(View.VISIBLE)
-//
-//            Log.d(
-//                "opop9",
-//                "불리언 체크:${chatList.last().user != chatList[chatList.lastIndex - 1].user}\n" +
-//                        "시간 체크:${chatList.last().timeList != chatList[chatList.lastIndex - 1].timeList}"
-//            )
-//        }else
-//            thisprofileVisibleList?.add(View.INVISIBLE)
-//    }
-//val pendingIntent = NavDeepLinkBuilder(context)
-//    .setGraph(R.navigation.nav_graph)
-//    .setDestination(R.id.android)
-//    .setArguments(args)
-//    .createPendingIntent()
-
-//@RequiresApi(Build.VERSION_CODES.Q)
-//fun addNotification(
-//    id: String,
-//    personName: String,
-//    addMessage: String,
-//    @DrawableRes icon: Int,
-//    notificationManager:NotificationManager,
-//    context:Context
-//) {
-//
-//    val receiverHeader = Icon.createWithResource(context, icon)
-//    val receiver = Person.Builder()
-//        .setName(personName)
-//        .setIcon(receiverHeader).build()
-//    val timestamp = System.currentTimeMillis()
-//    val style = Notification.MessagingStyle(receiver)
-//        .addMessage(
-//            Notification.MessagingStyle.Message(
-//                addMessage,
-//                timestamp,
-//                receiver
-//            )
-//        )
-//        .setGroupConversation(true)
-//
-//
-//    val pendingIntent = NavDeepLinkBuilder(context)
-//        .setGraph(R.navigation.main)
-//        .setDestination(R.id.fragmentFakeKakaoChat)
-//        .createPendingIntent()
-//
-//    val senderHeader =
-//        Icon.createWithResource(context, icon)
-//
-//    val bubbleMetadata = Notification.BubbleMetadata.Builder(pendingIntent, senderHeader)
-//        .setDesiredHeight(450)
-//        .setAutoExpandBubble(true)
-//        .setSuppressNotification(true)
-//        .build()
-//
-//    val notification = Notification.Builder(context, id)
-//        .setSmallIcon(icon)
-//        .setContentIntent(pendingIntent)
-//        .setStyle(style)
-//        .setAutoCancel(true)
-//        .setBubbleMetadata(bubbleMetadata)
-//        .build()
-//
-//    notificationManager.notify(99, notification)
-//}

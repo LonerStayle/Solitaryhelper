@@ -48,6 +48,7 @@ class FragmentFakeKakaoTalk :
         requireActivity().window.statusBarColor = Color.BLACK
         requireActivity().window.navigationBarColor = Color.BLACK
     }
+
     //랜덤 광고사진 가져오기
     private fun setImageViewAd() {
         val imageList = Array(3) { "" }
@@ -237,7 +238,6 @@ class FragmentFakeKakaoTalk :
                                 name = kaKaoDataList[position].name,
                                 ListBox = kaKaoDataList[kaKaoDataList[position].id.toInt()].textBoxList.toTypedArray(),
                                 itemIdPosition = kaKaoDataList[position].id,
-                                selectChatRoomCount = roomSeletCount,
                                 timeList = kaKaoDataList[kaKaoDataList[position].id.toInt()].messageArrivalTime!!.toTypedArray()
                             )
                         )
@@ -264,10 +264,23 @@ class FragmentFakeKakaoTalk :
                     }
                     val index = itemOrderList.indexOf(changed.sendToPosition)
 
+//                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                            this.kaKaoDataList.removeIf { i -> i == deleteIndex }
+//                        } else {
 
-                    notifyItemMoved(index, 0)
 
-                    this.kaKaoDataList.add(0, this.kaKaoDataList[index])
+
+
+                    val deleteIndex = kaKaoDataList[index]
+                    val iterator = kaKaoDataList.iterator()
+                    while (iterator.hasNext()) {
+                        val item = iterator.next()
+                        if (item == deleteIndex) {
+                            iterator.remove()
+                        }
+                        Log.d("position check" ,"${kaKaoDataList.size}")
+                }
+                    this.kaKaoDataList.add(0, deleteIndex)
 
                     this.kaKaoDataList[0].apply {
                         itemLastText = changed.sendToLastText
@@ -275,7 +288,13 @@ class FragmentFakeKakaoTalk :
                         chatNotification += 1
                         visibleSettingList = View.VISIBLE
                     }
-                    this.kaKaoDataList.removeAt(index + 1)
+
+                    notifyItemMoved(index, 0)
+
+//                        }
+
+
+//                    this.kaKaoDataList.removeAt(index + 1)
 
                     notifyItemRangeChanged(0, 5)
                     viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy

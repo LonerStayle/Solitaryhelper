@@ -81,9 +81,6 @@
             android:name="itemIdPosition"
             app:argType="long" />
         <argument
-            android:name="selectChatRoomCount"
-            app:argType="integer" />
-        <argument
             android:name="timeList"
             app:argType="string[]" />
     </fragment>

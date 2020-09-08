@@ -49,7 +49,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
     protected val viewModelKaKaoChat by lazy {
         val database = SolitaryHelperDatabase.getInstance(requireContext())
         val factory = KaKaoChatViewModelFactory(database.kakaoChatDataSource)
-        ViewModelProvider(requireActivity(), factory).get(KaKaoChatViewModel::class.java)
+        ViewModelProvider(this@BaseFragment, factory).get(KaKaoChatViewModel::class.java)
     }
     protected val viewModelCall by viewModels<CallViewModel>()
 
