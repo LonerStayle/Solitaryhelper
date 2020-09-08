@@ -46,7 +46,7 @@ class FragmentFakeKakaoChat :
 
     }
 
-    private val dp by lazy { resources.displayMetrics.densityDpi }
+    private val dp by lazy { resources.displayMetrics.density }
     private var buttonClick = false
 
     private val soundId by lazy { soundPool.load(requireContext(), R.raw.kakaotalkpool, 1) }
@@ -72,17 +72,20 @@ class FragmentFakeKakaoChat :
     }
 
     private fun FragmentFakeKakaoChatBinding.setButtonUiControl() {
+
         editTextTalkBox.addTextChangedListener(object : TextWatcher {
+
             override fun afterTextChanged(p0: Editable?) {
-                if (TextUtils.isEmpty(editTextTalkBox.text)) {
-                    buttonSend.apply {
-                        setBackgroundResource(0)
-                        setImageResource(R.drawable.kakao_chat_bottom0)
-                        setPadding(0, 0, 0, 0)
-                        layoutParams.height = 24 * dp
-                        layoutParams.width = 24 * dp
-                    }
+                buttonSend.apply {
+                    setBackgroundResource(0)
+                    setImageResource(R.drawable.kakao_chat_bottom0)
+                    setPadding(0, 0, 0, 0)
+                    layoutParams.height = (26 * dp).toInt()
+                    layoutParams.width = (24 * dp).toInt()
+                    buttonSend.isEnabled = false
+
                 }
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -93,22 +96,14 @@ class FragmentFakeKakaoChat :
                     setBackgroundResource(R.drawable.kakao_chat_button)
                     layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
                     layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-                }
+                    buttonSend.isEnabled = true
 
+
+                }
 
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (TextUtils.isEmpty(editTextTalkBox.text)) {
-                    buttonSend.apply {
-                        setBackgroundResource(0)
-                        setImageResource(R.drawable.kakao_chat_bottom0)
-                        setPadding(0, 0, 0, 0)
-                        layoutParams.height = 24 * dp
-                        layoutParams.width = 24 * dp
-                    }
-                }
-            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
         })
     }
@@ -372,7 +367,6 @@ class FragmentFakeKakaoChat :
 
             buttonClick = true
 
-
             viewModelKaKaoChat.insert(
                 KaKaoTalkChatData(
                     textList = editTextTalkBox.text.toString(),
@@ -448,7 +442,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -486,7 +481,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -524,7 +520,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -562,7 +559,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -600,7 +598,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -638,7 +637,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -676,7 +676,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -714,7 +715,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -752,7 +754,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -790,7 +793,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -828,7 +832,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -866,7 +871,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -904,7 +910,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -942,7 +949,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -980,7 +988,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -1018,7 +1027,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -1056,7 +1066,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -1094,7 +1105,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -1132,7 +1144,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }
@@ -1170,7 +1183,8 @@ class FragmentFakeKakaoChat :
                             context,
                             manager,
                             binding.name!!,
-                            shuffleMode[0]
+                            shuffleMode[0],
+                            requireArguments()
                         )
 
                     }

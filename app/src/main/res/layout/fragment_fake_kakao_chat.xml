@@ -35,7 +35,7 @@
             android:layout_gravity="center"
             android:background="#FFFFFF"
             android:orientation="horizontal"
-            android:padding="4dp"
+            android:padding="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -59,10 +59,12 @@
 
                 <EditText
                     android:id="@+id/editText_TalkBox"
-                    android:layout_width="220dp"
+                    android:layout_width="271dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="0.95"
+                    android:layout_margin="2dp"
+                   android:padding="6dp"
+                    android:layout_weight="0.9"
                     android:background="@android:color/transparent"
                     android:inputType="textMultiLine|textNoSuggestions"
                     android:textCursorDrawable="@null" />
@@ -74,7 +76,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="2dp"
-                    android:layout_weight="0.025"
+                    android:layout_weight="0.05"
                     android:src="@drawable/kakao_chat_bottom2" />
 
                 <ImageView
@@ -83,7 +85,7 @@
                     android:layout_height="26dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
-                    android:layout_weight="0.025"
+                    android:layout_weight="0.05"
                     android:src="@drawable/kakao_chat_bottom0" />
 
 

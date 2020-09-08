@@ -4,6 +4,7 @@ import android.app.*
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -308,7 +309,8 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
         context: Context,
         manager: NotificationManager,
         name: String,
-        message: String
+        message: String,
+        bundle: Bundle
 
     ) {
         clearExistingNotifications(FragmentFakeKakaoChat.NOTIFICATION_ID, manager)
@@ -336,7 +338,8 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
 //        )
         val pendingIntent = NavDeepLinkBuilder(context)
             .setGraph(R.navigation.main)
-            .setDestination(R.id.fragmentAutoChatRunCheck)
+            .setArguments(bundle)
+            .setDestination(R.id.fragmentFakeKakaoChat)
             .createPendingIntent()
 
         val builder = NotificationCompat.Builder(context, channelId)
