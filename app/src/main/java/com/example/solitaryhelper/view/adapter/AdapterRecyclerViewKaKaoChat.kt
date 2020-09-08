@@ -11,7 +11,6 @@ import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
 
 import com.example.solitaryhelper.view.utill.kakaoTimeDisplay
 
@@ -33,7 +32,7 @@ class AdapterRecyclerViewKaKaoChat(
     private var nameVisibleList: MutableList<Int>? = null
     private var timeVisibleList: MutableList<Int>? = null
 
-     inner class ViewHolder : RecyclerView.ViewHolder {
+    inner class ViewHolder : RecyclerView.ViewHolder {
         var myTextBinding: ViewholderKakaotalkChatMyTextviewBinding? = null
         var yourTextviewBinding: ViewholderKakaotalkChatYourTextviewBinding? = null
 
@@ -46,51 +45,58 @@ class AdapterRecyclerViewKaKaoChat(
         }
 
 
-        fun setTimeVisible(timeVisibleList: MutableList<Int>, chatList: List<KaKaoTalkChatData>) {
+        fun setTimeVisible(timeVisibleList: MutableList<Int>, chatList: List<KaKaoTalkChatData>,id:Int) {
 
 
-            for (i in 1 until chatList[id].textList.size) {
+                for (i in 1 until chatList[id].textList!!.size) {
 
-                if ((chatList[id].timeList[i] == chatList[id].timeList[i - 1]) &&
-                    chatList[id].user!![i] == chatList[id].user!![i - 1]
-                ) {
+                    if ((chatList[id].timeList!![i] == chatList[id].timeList!![i - 1]) &&
+                        chatList[id].user!![i] == chatList[id].user!![i - 1]
+                    ) {
 
-                    timeVisibleList[i - 1] = View.INVISIBLE
-                    timeVisibleList.add(View.VISIBLE)
+                        timeVisibleList[i - 1] = View.INVISIBLE
+                        timeVisibleList.add(View.VISIBLE)
 
-                } else {
-                    timeVisibleList.add(View.VISIBLE)
+                    } else {
+                        timeVisibleList.add(View.VISIBLE)
 
+                    }
                 }
-            }
+
         }
 
-        fun setProfileVisible(profileVisibleList: MutableList<Int>, chatList: List<KaKaoTalkChatData>) {
+        fun setProfileVisible(
+            profileVisibleList: MutableList<Int>,
+            chatList: List<KaKaoTalkChatData>,
+            id:Int
+        ) {
 
-            for (i in 1 until chatList[id].textList.size) {
-                if (chatList[id].user!![i] != chatList[id].user!![i - 1] ||
-                    chatList[id].timeList[i] != chatList[id].timeList[i - 1]
-                )
+                for (i in 1 until chatList[id].textList!!.size) {
+                    if (chatList[id].user!![i] != chatList[id].user!![i - 1] ||
+                        chatList[id].timeList!![i] != chatList[id].timeList!![i - 1]
+                    )
 
-                    profileVisibleList.add(View.VISIBLE)
-                else
-                    profileVisibleList.add(View.INVISIBLE)
-            }
+                        profileVisibleList.add(View.VISIBLE)
+                    else
+                        profileVisibleList.add(View.INVISIBLE)
+                }
+
         }
 
-        fun setNameVisible(nameVisibleList: MutableList<Int>, chatList: List<KaKaoTalkChatData>) {
+        fun setNameVisible(nameVisibleList: MutableList<Int>, chatList: List<KaKaoTalkChatData>,id: Int) {
 
-            for (i in 1 until chatList[id].textList.size) {
-                if (chatList[id].user!![i] != chatList[id].user!![i - 1] ||
-                    chatList[id].timeList[i] != chatList[id].timeList[i - 1]
-                )
-                    nameVisibleList.add(View.VISIBLE)
-                else
-                    nameVisibleList.add(View.GONE)
-            }
+
+                for (i in 1 until chatList[id].textList!!.size) {
+                    if (chatList[id].user!![i] != chatList[id].user!![i - 1] ||
+                        chatList[id].timeList!![i] != chatList[id].timeList!![i - 1]
+                    )
+                        nameVisibleList.add(View.VISIBLE)
+                    else
+                        nameVisibleList.add(View.GONE)
+                }
+
+
         }
-
-
     }
 
 
@@ -127,7 +133,7 @@ class AdapterRecyclerViewKaKaoChat(
     }
 
 
-    override fun getItemCount(): Int = chatList[id].textList.size
+    override fun getItemCount(): Int = chatList[id].textList!!.size
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -138,9 +144,9 @@ class AdapterRecyclerViewKaKaoChat(
         nameVisibleList = MutableList(1) { View.VISIBLE }
 
 //        if (profileVisibleList?.size == 1) {
-        holder.setProfileVisible(profileVisibleList!!, chatList)
-        holder.setTimeVisible(timeVisibleList!!, chatList)
-        holder.setNameVisible(nameVisibleList!!, chatList)
+        holder.setProfileVisible(profileVisibleList!!, chatList,id)
+        holder.setTimeVisible(timeVisibleList!!, chatList,id)
+        holder.setNameVisible(nameVisibleList!!, chatList,id)
 //        }
 //        else {
 //            holder.setProfileVisibleToLastIndex(profileVisibleList!!, chatList.lastIndex)
@@ -150,15 +156,14 @@ class AdapterRecyclerViewKaKaoChat(
 
         holder.myTextBinding?.apply {
 
-            text = chatList[id].textList[holder.adapterPosition]
-            time = kakaoTimeDisplay(chatList[id].timeList[holder.adapterPosition])
+            text = chatList[id].textList!![holder.adapterPosition]
+            time = kakaoTimeDisplay(chatList[id].timeList!![holder.adapterPosition])
         }
 
         holder.yourTextviewBinding?.apply {
 
-            text = chatList[id].textList[holder.adapterPosition]
-            time = kakaoTimeDisplay(chatList[id].timeList[holder.adapterPosition])
-
+            text = chatList[id].textList!![holder.adapterPosition]
+            time = kakaoTimeDisplay(chatList[id].timeList!![holder.adapterPosition])
             // 비지블 설정
             nameVisible = nameVisibleList!![holder.adapterPosition]
             profileImageVisible = profileVisibleList!![holder.adapterPosition]

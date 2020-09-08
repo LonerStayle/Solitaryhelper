@@ -2,24 +2,24 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.Color
 import android.media.SoundPool
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
 import com.example.solitaryhelper.view.activity.autoChatRun
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatDataCopy
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoChat
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.view.pref.PrefCheckRun
 
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.viewmodel.SharedViewModel
@@ -49,7 +49,7 @@ class FragmentFakeKakaoChat :
 
     }
 
-
+    private val dp by lazy { resources.displayMetrics.densityDpi }
     private var buttonClick = false
     private var inUse = false
     private val soundId by lazy { soundPool.load(requireContext(), R.raw.kakaotalkpool, 1) }
@@ -78,31 +78,38 @@ class FragmentFakeKakaoChat :
         editTextTalkBox.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (TextUtils.isEmpty(editTextTalkBox.text)) {
-                    buttonSend.setBackgroundResource(0)
-                    buttonSend.setImageResource(R.drawable.kakao_chat_bottom0)
-                    buttonSend.setPadding(0, 0, 0, 0)
+                    buttonSend.apply {
+                        setBackgroundResource(0)
+                        setImageResource(R.drawable.kakao_chat_bottom0)
+                        setPadding(0, 0, 0, 0)
+                        layoutParams.height = 24*dp
+                        layoutParams.width = 24*dp
+                    }
                 }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (TextUtils.isEmpty(editTextTalkBox.text)) {
-                    buttonSend.setBackgroundResource(0)
-                    buttonSend.setImageResource(R.drawable.kakao_chat_bottom0)
-                    buttonSend.setPadding(0, 0, 0, 0)
 
-                }
-                buttonSend.setImageResource(R.drawable.ic_baseline_arrow_upward_24)
-                buttonSend.setPadding(2, 2, 2, 2)
-                buttonSend.setBackgroundResource(R.drawable.kakao_chat_button)
+                    buttonSend.apply {
+                        setImageResource(R.drawable.ic_baseline_arrow_upward_24)
+                        setPadding(2, 2, 2, 2)
+                        setBackgroundResource(R.drawable.kakao_chat_button)
+                        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                        layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+                    }
+
 
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (TextUtils.isEmpty(editTextTalkBox.text)) {
-                    buttonSend.setBackgroundResource(0)
-                    buttonSend.setImageResource(R.drawable.kakao_chat_bottom0)
-                    buttonSend.setPadding(0, 0, 0, 0)
-
+                    buttonSend.apply {
+                        setBackgroundResource(0)
+                        setImageResource(R.drawable.kakao_chat_bottom0)
+                        setPadding(0, 0, 0, 0)
+                        layoutParams.height = 24*dp
+                        layoutParams.width = 24*dp
+                    }
                 }
             }
 
@@ -123,27 +130,29 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setData() {
+
+
         binding.name = args.name
         viewModelShared; soundPool; soundId
 
-        if (!isResumed) {
-            viewModelKaKaoTalk.kakaoData.observe(viewLifecycleOwner, Observer {
-                val setDataList: MutableList<KaKaoTalkChatData> = mutableListOf()
-                for (i in it.indices) {
-                    Log.d("opop8888", "인덱스 갯수체크${it.size - 1}")
-                    setDataList.add(
-                        KaKaoTalkChatData(
-                            it[i].id,
-                            it[i].textBoxList,
-                            MutableList(args.ListBox.size) { false },
-                            it[i].messageArrivalTime!!
-                        )
+//        if (!isResumed) {
+        viewModelKaKaoTalk.kakaoData.observe(viewLifecycleOwner, Observer {
+            val setDataList: MutableList<KaKaoTalkChatData> = mutableListOf()
+            for (i in it.indices) {
+                Log.d("opop8888", "인덱스 갯수체크${it.size - 1}")
+                setDataList.add(
+                    KaKaoTalkChatData(
+                        it[i].id,
+                        it[i].textBoxList,
+                        MutableList(args.ListBox.size) { false },
+                        it[i].messageArrivalTime!!
                     )
-                }
-                viewModelKaKaoChat.listInsert(setDataList)
+                )
+            }
+            viewModelKaKaoChat.listInsert(setDataList)
 
-            })
-        }
+        })
+//        }
 
     }
 
@@ -151,7 +160,6 @@ class FragmentFakeKakaoChat :
     private fun FragmentFakeKakaoChatBinding.setMyTestSendButtonClickListener() {
 
         buttonSend.setOnClickListener {
-
 
             keyBoardShowHiding(requireContext(), editTextTalkBox)
 
@@ -210,7 +218,7 @@ class FragmentFakeKakaoChat :
                 return
 
             val shuffleMode = list.shuffled()
-//            FragmentFakeKakaoTalk.chatUse = true
+
             viewModelKaKaoChat.insertCopyData(
                 KaKaoTalkChatDataCopy(
                     textList = shuffleMode[0],
@@ -248,11 +256,6 @@ class FragmentFakeKakaoChat :
         imageViewBackButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        textViewTotalChatScore.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-
     }
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
@@ -261,9 +264,7 @@ class FragmentFakeKakaoChat :
             if (it.isNullOrEmpty())
                 return@Observer
 
-
             if (!inUse) {
-                Log.d("opop1", "${args.itemIdPosition.toInt()}")
                 recyclerViewKaKaoChat.adapter = AdapterRecyclerViewKaKaoChat(
                     args.itemIdPosition.toInt(),
                     args.profileImage,
@@ -280,9 +281,9 @@ class FragmentFakeKakaoChat :
 
         })
 
-        viewModelKaKaoChat.chatListPlus.observe(requireActivity(), Observer {newData->
+        viewModelKaKaoChat.chatListPlus.observe(requireActivity(), Observer { newData ->
             //adapter down casting 오류 방지
-            if (binding.recyclerViewKaKaoChat.adapter == null && !isResumed) {
+            if (binding.recyclerViewKaKaoChat.adapter == null) {
                 return@Observer
             }
             (binding.recyclerViewKaKaoChat.adapter as AdapterRecyclerViewKaKaoChat).apply {
@@ -291,10 +292,13 @@ class FragmentFakeKakaoChat :
 
                 val textList = dataList[args.itemIdPosition.toInt()].textList as MutableList
                 val user = dataList[args.itemIdPosition.toInt()].user?.toMutableList()
-                val timeList = dataList[args.itemIdPosition.toInt()].timeList.toMutableList()
+                val timeList = dataList[args.itemIdPosition.toInt()].timeList!!.toMutableList()
+                try {
+                    textList.add(newData.textList); user!!.add(newData.user);timeList.add(newData.timeList)
+                } catch (e: Exception) {
 
-                textList.add(newData.textList); user!!.add(newData.user);timeList.add(newData.timeList)
 
+                }
                 val newDataUpdate = KaKaoTalkChatData(
                     textList = textList,
                     user = user,
@@ -303,10 +307,10 @@ class FragmentFakeKakaoChat :
 
                 (dataList as MutableList)[args.itemIdPosition.toInt()] = newDataUpdate
 
-                notifyItemChanged(chatList[args.itemIdPosition.toInt()].textList.lastIndex - 1)
-                notifyItemInserted(chatList[args.itemIdPosition.toInt()].textList.lastIndex)
+                notifyItemChanged(chatList[args.itemIdPosition.toInt()].textList!!.lastIndex - 1)
+                notifyItemInserted(chatList[args.itemIdPosition.toInt()].textList!!.lastIndex)
 
-                recyclerViewKaKaoChat.scrollToPosition(dataList[args.itemIdPosition.toInt()].timeList.lastIndex)
+                recyclerViewKaKaoChat.scrollToPosition(dataList[args.itemIdPosition.toInt()].timeList!!.lastIndex)
 
             }
         })

@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#fff</item>
-        <item name="colorPrimaryDark">#000</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+<!--        <item name="colorPrimary">#fff</item>-->
+<!--        <item name="colorPrimaryDark">#000</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+<!--        <item name="android:windowTranslucentNavigation">true</item>-->
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
     </style>
 <style name="tab_textSize" parent="TextAppearance.Design.Tab">
     <item name="android:textSize">10sp</item>

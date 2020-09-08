@@ -8,8 +8,9 @@ import androidx.room.TypeConverters
 //
 @Entity
 data class KaKaoTalkData(
-    @PrimaryKey
+
     val id:Long,
+    @PrimaryKey
     val name:String,
     val image:String,
     @TypeConverters(ConverterKaKaoTalkData::class)

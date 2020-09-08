@@ -1,9 +1,13 @@
 package com.example.solitaryhelper.view.dest.main
 
 
+import android.graphics.Color
+import android.os.Build
 import android.text.TextUtils
 import android.view.View
+import android.view.WindowManager
 import androidx.activity.addCallback
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -61,12 +65,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
 
     override fun FragmentMainBinding.setCreateView() {
+
+        setWindowUI()
         setToolbarSetting()
         setNavigationViewAndHeaderViewSetting()
         setViewPagerAndTabLayoutSetting()
         setIdCreate()
 
     }
+
+
 
     override fun FragmentMainBinding.setEventListener() {
         setTabIconClickListener()
@@ -78,6 +86,17 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setNavigationViewClickListener()
         setbackButtonClickListener()
 
+
+    }
+
+
+    private fun setWindowUI() {
+        requireActivity().window.statusBarColor = Color.TRANSPARENT
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            requireActivity().window.navigationBarColor = resources.getColor(R.color.veryLightWhite,null)
+        else
+            requireActivity().window.navigationBarColor = resources.getColor(R.color.veryLightWhite)
 
     }
 

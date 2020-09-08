@@ -7,9 +7,10 @@ import com.example.solitaryhelper.localdb.dao.KaKaoDao
 import com.example.solitaryhelper.localdb.dao.SmsDao
 import com.example.solitaryhelper.localdb.dao.UserDao
 import com.example.solitaryhelper.localdb.entitiy.*
+import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
 
 
-@Database(entities = [UserProfile::class,Sms::class,KaKaoTalkData::class,KaKaoTalkChatData::class], exportSchema = false, version = 1)
+@Database(entities = [UserProfile::class,Sms::class,KaKaoTalkData::class, KaKaoTalkChatData::class], exportSchema = false, version = 1)
 @TypeConverters(ConverterKaKaoTalkData::class,ConverterKaKaoChatDataUser::class)
 abstract class SolitaryHelperDatabase : RoomDatabase() {
     abstract val userDataSource:UserDao

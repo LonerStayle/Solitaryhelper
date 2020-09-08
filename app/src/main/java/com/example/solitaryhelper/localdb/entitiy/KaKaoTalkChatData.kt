@@ -9,10 +9,10 @@ data class KaKaoTalkChatData(
     @PrimaryKey
     val id:Long = 0L,
     @TypeConverters(ConverterKaKaoTalkData::class)
-    var textList: List<String>,
+    var textList: List<String>?,
     @TypeConverters(ConverterKaKaoChatDataUser::class)
-    val user: MutableList<Boolean>?,
+    val user: List<Boolean>?,
     @TypeConverters(ConverterKaKaoTalkData::class)
-    val timeList:List<String>
+    val timeList:List<String>?
 )
 

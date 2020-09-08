@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkTalkBinding
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
+import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk.Companion.itemOrderList
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.kakaoTimeDisplay
 
@@ -41,15 +42,12 @@ class AdapterRecyclerViewKaKaoTalk(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding?.apply {
+
             kaKaoData = kaKaoDataList[holder.adapterPosition]
             imageViewImageProfile.setImageURI(Uri.parse(kaKaoDataList[holder.adapterPosition].image))
             lastIndex = kaKaoDataList[holder.adapterPosition].itemLastText
             noticeScore = kaKaoDataList[holder.adapterPosition].chatNotification.toString()
-
-
             setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList
-
-
             time = kakaoTimeDisplay(kaKaoDataList[holder.adapterPosition].itemTimeLast!!)
         }
 
