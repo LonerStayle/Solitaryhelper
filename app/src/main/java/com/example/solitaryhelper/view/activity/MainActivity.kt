@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk.Companion.kaKaoTalkFirstRunCheck
+
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import java.security.MessageDigest
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         autoChatRun = true
 
-        kaKaoTalkFirstRunCheck = false
+        PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
 //        getAppKeyHash()
 
     }

@@ -10,6 +10,7 @@
             type="String" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootView_kaKaoTalk"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -106,31 +107,7 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progressbarLayout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="#FAFF00"
-            android:visibility="gone"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <ImageView
-                android:id="@+id/imageView_kaKao"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/kakao_talk_logo" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/bottomLayout"
@@ -173,6 +150,30 @@
                 android:layout_weight="1"
                 android:src="@drawable/kakao_bottomicon4" />
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/progressbarLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FAFF00"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView_kaKao"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/kakao_talk_logo" />
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

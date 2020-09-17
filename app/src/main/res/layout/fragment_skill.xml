@@ -16,16 +16,15 @@
             android:orientation="vertical">
 
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager_fakekakaoTalkInfo"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_margin="16dp"
-        android:clipToPadding="false"
-        android:focusableInTouchMode="true"
-        android:fillViewport= "true"
-        android:overScrollMode="never"
-        />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager_fakekakaoTalkInfo"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_margin="16dp"
+                android:clipToPadding="false"
+                android:fillViewport="true"
+                android:focusableInTouchMode="true"
+                android:overScrollMode="never" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +51,7 @@
                     android:layout_marginTop="8dp"
                     android:text="나도 친한사람이 많다! 카톡하는척 하기!"
                     android:textColor="#000"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoTitle" />
 
@@ -63,7 +62,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="어색한 사람 과 단둘이 있게 되었다구요? 혹은 어색한 상황에서 억지로 커뮤니티 사이트를 들어가서 어색한 티 내면서 불편하게 계시지 않았습니까? 그 불편함을 회피할 수 있도록 카톡 기능을 준비해봤습니다. "
+                    android:text="어색한 사람 과 단둘이 있게 되었다구요? SNS보면서 어색하게 내면서 불편하게 계시지 않았습니까? 그 불편함을 회피할 수 있도록 가짜 카톡 도와드리겠습니다. "
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -84,12 +83,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoText" />
 
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@android:color/darker_gray"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager_fakeCallInfo"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="250dp"
                 android:layout_margin="16dp"
                 android:focusableInTouchMode="true"
                 android:fillViewport= "true"
@@ -120,8 +128,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="전화를 이용해서 상황을 급하게 회피하자!"
-                    android:textSize="18sp"
                     android:textColor="#000"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_callTitle" />
 
@@ -132,7 +140,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="혹시 불편한 자리에 억지로 계시지 않습니까? 혹은 꼴봬기 싫은 녀석이 있는데 빨리 자리를 회피하고 싶지 않으신가요 전화가 온 구실로 그자리를 피할수 있도록 도와드리겠습니다. "
+                    android:text="혹시 불편한 자리에 억지로 계시지 않습니까? 가짜 전화가 그자리를 피할수 있도록 도와드리겠습니다. "
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +165,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager_fakeSmsInfo"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="250dp"
                 android:layout_margin="16dp"
                 android:focusableInTouchMode="true"
                 android:clipToPadding="false"
@@ -186,9 +194,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:textColor="#000"
                     android:text="가기 싫은 인싸들의 장소 미리 도망치자!"
-                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_smsTitle" />
 

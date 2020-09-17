@@ -49,10 +49,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         )
     }
 
-    private val toolbarTitleList = arrayOf("아싸를 위한 스킬","블로그로 최신 트렌드 읽기","집 주변 혼밥 찾기","감성 변태","고민 상담")
+    private val toolbarTitleList =
+        arrayOf("아싸를 위한 스킬", "블로그로 최신 트렌드 읽기", "집 주변 혼밥 찾기", "감성 변태", "고민 상담")
     private val iconText by lazy { resources.getStringArray(R.array.icon_text) }
     private var fabStartEventInClickCheck = false
-    private val naviIconBackground by lazy{R.drawable.ic_baseline_menu_24}
+    private val naviIconBackground by lazy { R.drawable.ic_baseline_menu_24 }
     private val uiScope = CoroutineScope(Dispatchers.Main)
     private val naviHeaderBinding by lazy {
         DataBindingUtil.inflate<HeaderNavigationMainBinding>(
@@ -75,7 +76,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
 
-
     override fun FragmentMainBinding.setEventListener() {
         setTabIconClickListener()
         setFabCallClickListener()
@@ -91,13 +91,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
 
     private fun setWindowUI() {
-        requireActivity().window.statusBarColor = Color.TRANSPARENT
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            requireActivity().window.navigationBarColor = resources.getColor(R.color.veryLightWhite,null)
-        else
-            requireActivity().window.navigationBarColor = resources.getColor(R.color.veryLightWhite)
-
+            requireActivity().window.navigationBarColor = Color.GRAY
+            requireActivity().window.statusBarColor = Color.GRAY
     }
 
     override fun FragmentMainBinding.setLiveDataInObserver() {
@@ -109,10 +104,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             if (it == null) {
                 PrefCheckRun.getInstance(requireContext()).idEmptyCheck = false
                 return@Observer
-            }
-            else {
+            } else {
                 naviHeaderBinding.textViewId.text = it.userId
-                PrefCheckRun.getInstance(requireContext()).idEmptyCheck= true
+                PrefCheckRun.getInstance(requireContext()).idEmptyCheck = true
             }
         })
     }
@@ -129,7 +123,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             for (i in 0..4) {
                 when (position) {
                     i -> {
-                        tab.text = iconText[i]; tab.setIcon(iconImage[i])
+                        tab.text = iconText[i]
+                        if(i == 0)
+                            tab.setIcon(iconSelectImage[i])
+                        else
+                        tab.setIcon(iconImage[i])
                     }
                 }
             }
@@ -143,11 +141,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 for (i in 0..4) {
                     when (tab?.position) {
+
                         i -> {
+                            if(i == 0 || i == 4)
+                                fabStart.hide()
+
                             tab.setIcon(iconSelectImage[i])
-                        toolBar.title = toolbarTitleList[i]
+                            toolBar.title = toolbarTitleList[i]
                         }
-                        4 -> fabStart.hide()
 
 
                     }
@@ -157,9 +158,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 for (i in 0..4) {
                     when (tab?.position) {
-                        i -> tab.setIcon(iconImage[i])
-                        4 -> fabStart.show();
 
+                        i -> {
+                            if(i == 0 || i == 4)
+                                fabStart.hide()
+                            tab.setIcon(iconImage[i])
+                        }
 
                     }
                 }
@@ -199,12 +203,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     private fun FragmentMainBinding.setToolbarButtonClickListener() {
         toolBar.setNavigationOnClickListener {
-                drawerLayoutMain.open()
-            }
+            drawerLayoutMain.open()
         }
+    }
 
     private fun FragmentMainBinding.setToolbarSetting() {
-        with(toolBar){
+        with(toolBar) {
             setNavigationIcon(naviIconBackground)
             title = toolbarTitleList[0]
         }

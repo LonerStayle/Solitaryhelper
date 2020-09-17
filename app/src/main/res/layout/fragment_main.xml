@@ -80,9 +80,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tabIndicatorColor="@color/colorPointYellow"
-                app:tabRippleColor="@color/colorPointYellow"
-                app:tabSelectedTextColor="@color/colorPointYellow"
+                app:tabIndicatorColor="@android:color/black"
+                app:tabRippleColor="@android:color/black"
+                app:tabSelectedTextColor="@android:color/black"
                 app:tabTextAppearance="@style/tab_textSize">
 
             </com.google.android.material.tabs.TabLayout>

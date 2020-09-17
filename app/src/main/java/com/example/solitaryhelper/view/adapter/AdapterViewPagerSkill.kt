@@ -31,8 +31,7 @@ class AdapterViewPagerSkill(var itemList: List<FragmentSkill.ViewPagerItem> = li
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding?.apply {
-            test = itemList[position].text
-            imageView2.setImageURI(Uri.parse(itemList[position].image))
+           imageUrl = itemList[holder.adapterPosition].image
         }
     }
 

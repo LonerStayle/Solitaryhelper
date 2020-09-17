@@ -9,9 +9,7 @@ class PrefCheckRun private constructor (val context: Context){
         APP_GUIDE_FIRST_RUN,
         ID_EMPTY_CHECK,
         CALL_DELAY_COTROL,
-
-
-
+        KAKAO_TALK_FIRST_RUN_CHECK
     }
     companion object{
         private var instance:PrefCheckRun? = null
@@ -42,6 +40,13 @@ class PrefCheckRun private constructor (val context: Context){
     set(value) {
         pref.edit().putInt(Key.CALL_DELAY_COTROL.name,value).apply()
     }
+
+    var kaKaoTalkFirstRunCheck:Boolean
+        get() = pref.getBoolean(Key.KAKAO_TALK_FIRST_RUN_CHECK.name,false)
+        set(value) {
+            pref.edit().putBoolean(Key.KAKAO_TALK_FIRST_RUN_CHECK.name,
+                value).apply()
+        }
 
 
 

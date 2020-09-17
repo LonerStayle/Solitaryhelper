@@ -8,8 +8,10 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.ViewGroup
+import androidx.activity.addCallback
 
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
 import com.example.solitaryhelper.localdb.entitiy.*
@@ -58,7 +60,7 @@ class FragmentFakeKakaoChat :
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
-
+//        setBackPressedSetting()
         setData()
         setButtonUiControl()
         setRecyclerViewSetting()
@@ -76,36 +78,40 @@ class FragmentFakeKakaoChat :
         editTextTalkBox.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(p0: Editable?) {
-                buttonSend.apply {
-                    setBackgroundResource(0)
-                    setImageResource(R.drawable.kakao_chat_bottom0)
-                    setPadding(0, 0, 0, 0)
-                    layoutParams.height = (26 * dp).toInt()
-                    layoutParams.width = (24 * dp).toInt()
-                    buttonSend.isEnabled = false
-
-                }
-
+                if (p0.isNullOrEmpty())
+                    setButtonSendChange(false)
+                else
+                    setButtonSendChange(true)
             }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-                buttonSend.apply {
-                    setImageResource(R.drawable.ic_baseline_arrow_upward_24)
-                    setPadding(2, 2, 2, 2)
-                    setBackgroundResource(R.drawable.kakao_chat_button)
-                    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                    layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-                    buttonSend.isEnabled = true
-
-
-                }
-
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                setButtonSendChange(true)
             }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
         })
+    }
+
+    private fun FragmentFakeKakaoChatBinding.setButtonSendChange(textChange: Boolean) {
+        if (!textChange) {
+            buttonSend.apply {
+                setBackgroundResource(0)
+                setImageResource(R.drawable.kakao_chat_bottom0)
+                setPadding(0, 0, 0, 0)
+                layoutParams.height = (26 * dp).toInt()
+                layoutParams.width = (24 * dp).toInt()
+                buttonSend.isEnabled = false
+            }
+        } else {
+            buttonSend.apply {
+                setImageResource(R.drawable.ic_baseline_arrow_upward_24)
+                setPadding(2, 2, 2, 2)
+                setBackgroundResource(R.drawable.kakao_chat_button)
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+                buttonSend.isEnabled = true
+            }
+        }
     }
 
     private fun FragmentFakeKakaoChatBinding.setTotalScore() {
@@ -1199,6 +1205,12 @@ class FragmentFakeKakaoChat :
     private fun FragmentFakeKakaoChatBinding.setBackButtonListener() {
         imageViewBackButton.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+    }
+
+    private fun FragmentFakeKakaoChatBinding.setBackPressedSetting() {
+        requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
+            findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk)
         }
     }
 

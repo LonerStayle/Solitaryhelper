@@ -13,6 +13,7 @@ import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
+import com.example.solitaryhelper.view.pref.PrefCheckRun
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -25,8 +26,6 @@ class FragmentFakeKakaoTalk :
     companion object {
         var itemOrderList =
             arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
-        var kaKaoTalkFirstRunCheck = false
-
     }
 
 
@@ -64,30 +63,22 @@ class FragmentFakeKakaoTalk :
     }
 
     private fun FragmentFakeKakaoTalkBinding.setProgrssControl() {
-        if (!kaKaoTalkFirstRunCheck) {
+        if (!PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck) {
             CoroutineScope(Dispatchers.Main).launch {
 
-                progressbarLayout.visibility = View.VISIBLE
-                imageViewKaKao.visibility = View.VISIBLE
-                bottomLayout.visibility = View.GONE
-                viewLine.visibility = View.GONE
-                recyclerViewKaKaoChatList.visibility = View.GONE
-                imageViewAd.visibility = View.GONE
-                textView2.visibility = View.GONE
-                linearLayoutButtonList.visibility = View.GONE
+                for(i in 0 until rootViewKaKaoTalk.childCount-1){
+                    rootViewKaKaoTalk.getChildAt(i).visibility = View.GONE
+                    progressbarLayout.visibility = View.VISIBLE
+                }
 
-                delay(2000)
-                progressbarLayout.visibility = View.GONE
-                imageViewKaKao.visibility = View.GONE
-                bottomLayout.visibility = View.VISIBLE
-                viewLine.visibility = View.VISIBLE
-                recyclerViewKaKaoChatList.visibility = View.VISIBLE
-                imageViewAd.visibility = View.VISIBLE
-                textView2.visibility = View.VISIBLE
-                linearLayoutButtonList.visibility = View.VISIBLE
-                kaKaoTalkFirstRunCheck = true
+                delay(3500)
+                for(i in 0 until rootViewKaKaoTalk.childCount-1){
+                    rootViewKaKaoTalk.getChildAt(i).visibility = View.VISIBLE
+                    progressbarLayout.visibility = View.GONE
+                }
+
+                PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
             }
-
         }
     }
 
@@ -216,9 +207,10 @@ class FragmentFakeKakaoTalk :
                     return@Observer
                 }
 
-                if(isResumed && recyclerViewKaKaoChatList.adapter != null){
+                //채팅 발생시 다른 옵저버에서 리싸 상태 변경하고 livedata 업데이트 할때
+                if(isResumed && recyclerViewKaKaoChatList.adapter != null)
                     return@Observer
-                }
+
 
 
                 recyclerViewKaKaoChatList.adapter = AdapterRecyclerViewKaKaoTalk(it.toMutableList())
@@ -263,7 +255,6 @@ class FragmentFakeKakaoTalk :
                     return@Observer
                 (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
-
                     for (i in itemOrderList.indices) {
                         itemOrderList[i] = kaKaoDataList[i].id.toInt()
                     }
@@ -273,9 +264,6 @@ class FragmentFakeKakaoTalk :
 //                            this.kaKaoDataList.removeIf { i -> i == deleteIndex }
 //                        } else {
 
-
-
-
                     val deleteIndex = kaKaoDataList[index]
                     val iterator = kaKaoDataList.iterator()
                     while (iterator.hasNext()) {
@@ -283,7 +271,6 @@ class FragmentFakeKakaoTalk :
                         if (item == deleteIndex) {
                             iterator.remove()
                         }
-                        Log.d("position check" ,"${kaKaoDataList.size}")
                 }
                     this.kaKaoDataList.add(0, deleteIndex)
 
@@ -321,6 +308,11 @@ class FragmentFakeKakaoTalk :
                     as AdapterRecyclerViewKaKaoTalk).kaKaoDataList
         )
         super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("test","온데스토리로 죽는건가? ")
     }
 
 }

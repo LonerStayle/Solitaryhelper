@@ -25,6 +25,8 @@ buildscript {
         def apache_commons_version = '3.0'
         def spin_kit = '1.4.0'
         def goolgle_gps_service = '17.0.0'
+        def card_view_version = '30.0.0'
+        def legacy_version ='1.0.0'
         libraries = [
                 //kotlin 기본 라이브러리
                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -34,7 +36,8 @@ buildscript {
                 "androidx.appcompat:appcompat:$app_compat_version",
                 "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
                 "com.google.android.material:material:$material_version",
-                'androidx.legacy:legacy-support-v4:1.0.0',
+                "androidx.legacy:legacy-support-v4:$legacy_version",
+                "com.android.support:cardview-v7:$card_view_version",
                 //리사이클러 뷰
                 "androidx.recyclerview:recyclerview:$recyclerview_version",
 
