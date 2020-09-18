@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.activity
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,11 +19,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+intent
         autoChatRun = true
 
         PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
 //        getAppKeyHash()
-
+Log.d("debugCheck","MainActivity:OnCreate:딥링크를 시 액티비티 재실행 체크")
     }
 
 //    fun getAppKeyHash() {
@@ -41,5 +43,8 @@ class MainActivity : AppCompatActivity() {
 //    }
 //    ST0FQ6GHZF3HQCfm93DR1ZJFlv4=
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }
 

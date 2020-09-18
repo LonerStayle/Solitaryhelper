@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.dest.fake_kakao
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
 import android.media.SoundPool
@@ -60,7 +61,7 @@ class FragmentFakeKakaoChat :
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
-//        setBackPressedSetting()
+
         setData()
         setButtonUiControl()
         setRecyclerViewSetting()
@@ -431,7 +432,6 @@ class FragmentFakeKakaoChat :
                             timeList = Contents.timePattern.format(Date())
                         )
                     )
-
 
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(
@@ -1208,11 +1208,13 @@ class FragmentFakeKakaoChat :
         }
     }
 
-    private fun FragmentFakeKakaoChatBinding.setBackPressedSetting() {
-        requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
-            findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk)
-        }
-    }
+
+//    private fun setBackButtonSetting() {
+//        requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
+//            findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck)
+//        }
+//    }
+
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 

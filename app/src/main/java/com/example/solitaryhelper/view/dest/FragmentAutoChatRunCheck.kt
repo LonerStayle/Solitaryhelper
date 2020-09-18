@@ -32,10 +32,12 @@ class FragmentAutoChatRunCheck :
         CoroutineScope(Dispatchers.Main).launch {
             for (i in 0..19)
                 autoChatDoubleCheckRun[i] = false
+
             autoChatRun = false
+            val intentStart ={ startActivity(Intent(requireContext(),MainActivity::class.java))}
             delay(1500L)
             requireActivity().finish()
-
+            intentStart()
         }
 
     }

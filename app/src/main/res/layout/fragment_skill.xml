@@ -19,18 +19,31 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager_fakekakaoTalkInfo"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="320dp"
                 android:layout_margin="16dp"
                 android:clipToPadding="false"
                 android:fillViewport="true"
                 android:focusableInTouchMode="true"
-                android:overScrollMode="never" />
+                android:overScrollMode="never" >
+
+            </androidx.viewpager2.widget.ViewPager2>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_skillInfoKaKaoTalkIntro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/veryLightGray"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView_fakeKaKaoTitle"
@@ -83,21 +96,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoText" />
 
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    app:layout_constraintBottom_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:background="@android:color/darker_gray"/>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager_fakeCallInfo"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="320dp"
                 android:layout_margin="16dp"
                 android:focusableInTouchMode="true"
                 android:fillViewport= "true"
@@ -109,7 +113,16 @@
                 android:id="@+id/layout_skillInfoCallIntro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/veryLightGray"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
                 <TextView
                     android:id="@+id/textView_callTitle"
                     android:layout_width="wrap_content"
@@ -165,7 +178,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager_fakeSmsInfo"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="320dp"
                 android:layout_margin="16dp"
                 android:focusableInTouchMode="true"
                 android:clipToPadding="false"
@@ -176,6 +189,17 @@
                 android:id="@+id/layout_skillInfoSmsIntro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/veryLightGray"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView_smsTitle"

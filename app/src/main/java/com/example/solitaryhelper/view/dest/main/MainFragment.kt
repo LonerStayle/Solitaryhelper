@@ -91,8 +91,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
 
     private fun setWindowUI() {
-            requireActivity().window.navigationBarColor = Color.GRAY
-            requireActivity().window.statusBarColor = Color.GRAY
+        requireActivity().window.navigationBarColor = Color.TRANSPARENT
     }
 
     override fun FragmentMainBinding.setLiveDataInObserver() {
@@ -124,10 +123,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 when (position) {
                     i -> {
                         tab.text = iconText[i]
-                        if(i == 0)
+                        //앱 첫 시작시 포지션이 1 일때 색감이 안바뀌던것을 조절함
+                        if (i == 0) {
                             tab.setIcon(iconSelectImage[i])
-                        else
-                        tab.setIcon(iconImage[i])
+                            fabStart.hide()
+                        } else
+                            tab.setIcon(iconImage[i])
                     }
                 }
             }
@@ -143,14 +144,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                     when (tab?.position) {
 
                         i -> {
-                            if(i == 0 || i == 4)
+                            if (i == 0 || i == 4)
                                 fabStart.hide()
 
                             tab.setIcon(iconSelectImage[i])
                             toolBar.title = toolbarTitleList[i]
                         }
-
-
                     }
                 }
             }
@@ -160,8 +159,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                     when (tab?.position) {
 
                         i -> {
-                            if(i == 0 || i == 4)
-                                fabStart.hide()
+                            if (i == 0 || i == 4)
+                                fabStart.show()
                             tab.setIcon(iconImage[i])
                         }
 

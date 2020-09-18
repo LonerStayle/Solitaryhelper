@@ -282,7 +282,7 @@ class FragmentFakeKakaoTalk :
                     }
 
                     notifyItemMoved(index, 0)
-
+                    Log.d("debugCheck","FragmentKaKaoTalk_newMessage:절전 상태에서 변화 체크 ")
 //                        }
 
 
@@ -291,8 +291,6 @@ class FragmentFakeKakaoTalk :
                     notifyItemRangeChanged(0, 5)
                     viewModelShared.kaKaoChatTotalNotificationScore(this.kaKaoDataList.sumBy
                     { list -> list.chatNotification })
-
-                    Log.d("opop989898", changed.sendToLastTime)
 
 
                     viewModelKaKaoTalk.allListInsert(kaKaoDataList)

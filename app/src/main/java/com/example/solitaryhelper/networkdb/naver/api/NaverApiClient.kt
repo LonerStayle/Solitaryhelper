@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.networkdb.naver
+package com.example.solitaryhelper.networkdb.naver.api
 
 
 import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlogSearchResult

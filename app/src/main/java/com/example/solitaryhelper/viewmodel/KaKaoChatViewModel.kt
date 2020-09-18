@@ -2,6 +2,7 @@ package com.example.solitaryhelper.viewmodel
 
 import android.app.*
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
@@ -9,13 +10,13 @@ import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.localdb.dao.KaKaoChatDao
 import com.example.solitaryhelper.localdb.entitiy.*
+import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -187,7 +188,7 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
 
 
 
-    fun clearExistingNotifications(notificationId: Int, manager: NotificationManager) {
+    fun clearExistingNotifications(notificationId: Int, manager: NotificationManager ) {
         manager.cancel(notificationId)
     }
 
@@ -199,6 +200,7 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
         message: String,
         bundle: Bundle
 
+
     ) {
         clearExistingNotifications(FragmentFakeKakaoChat.NOTIFICATION_ID, manager)
         clearExistingNotifications(FragmentFakeKakaoChat.NOTIFICATION_ID_2, manager)
@@ -208,39 +210,44 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
         val channelId = "FakeKaKaoTalk"
 
         val userIcon1 = IconCompat.createWithResource(context, icon)
-        val userName1 = name
 
         val timestamp = System.currentTimeMillis()
-        val user1 = androidx.core.app.Person.Builder().setIcon(userIcon1).setName(userName1).build()
+        val user1 = androidx.core.app.Person.Builder().setIcon(userIcon1).setName(name).build()
         val style = NotificationCompat.MessagingStyle(user1)
             .addMessage(message, timestamp, user1)
 
 
-//        val intent = Intent(activityContext, AutoChatRunCheckActiviy::class.java)
+//        val intent = Intent(context, MainActivity::class.java)
 //        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 //
 //        val pendingIntent = PendingIntent.getActivity(
 //            context, 0,
 //            intent, PendingIntent.FLAG_UPDATE_CURRENT
 //        )
-        val pendingIntent = NavDeepLinkBuilder(context)
-            .setGraph(R.navigation.main)
-            .setArguments(bundle)
-            .setDestination(R.id.fragmentFakeKakaoChat)
-            .createPendingIntent()
+        val pendingIntent = NavDeepLinkBuilder(context).run{
+            setGraph(R.navigation.main)
+            setArguments(bundle)
+            setDestination(R.id.fragmentFakeKakaoChat)
+            setComponentName(MainActivity::class.java)
+            createPendingIntent()
+        }
 
-        val builder = NotificationCompat.Builder(context, channelId)
-        builder.setSmallIcon(icon)
-            .setLargeIcon(
-                BitmapFactory.decodeResource(
-                    context.resources,
-                    R.drawable.kakao_talk_logo
+
+        val builder = NotificationCompat.Builder(context, channelId).apply {
+            setSmallIcon(icon)
+            setLargeIcon(
+                    BitmapFactory.decodeResource(
+                        context.resources,
+                        R.drawable.kakao_talk_logo
+                    )
                 )
-            )
-            .setStyle(style)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
+                setStyle(style)
+            setContentIntent(pendingIntent)
+            setAutoCancel(true)
+            priority = NotificationCompat.PRIORITY_HIGH
+
+        }
+
 
 
         val notificationManager = NotificationManagerCompat.from(context)

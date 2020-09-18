@@ -16,4 +16,5 @@
     <color name="kaKaoTalkFontColor">#3C1E1E</color>
     <color name="kakaoTalkNotice">#F87566</color>
     <color name="veryLightWhite">#99FFFFFF</color>
+    <color name="veryLightGray">#99EDE8E8</color>
 </resources>

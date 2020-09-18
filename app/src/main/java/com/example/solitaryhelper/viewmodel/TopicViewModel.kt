@@ -1,13 +1,12 @@
 package com.example.solitaryhelper.viewmodel
 
 import androidx.lifecycle.*
-import com.example.solitaryhelper.networkdb.naver.NaverApiClient
+import com.example.solitaryhelper.networkdb.naver.api.NaverApiClient
 import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlog
 import com.example.solitaryhelper.networkdb.naver.dataholder.NaverNews
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 
 class TopicViewModel : ViewModel() {
 
