@@ -36,6 +36,9 @@ class FragmentFakeKakaoChat :
             requireArguments()
         )
     }
+    private val deepLinkUseCheck by lazy {
+        requireArguments().getBoolean("deepLinkUse", false)
+    }
     private val soundPool by lazy {
         SoundPool.Builder()
             .build()
@@ -62,9 +65,9 @@ class FragmentFakeKakaoChat :
     }
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
-
-        setBackButtonSetting()
+        Log.d("onCreateViewRestart", "$deepLinkUseCheck")
         setData()
+        setBackButtonSetting()
         setButtonUiControl()
         setRecyclerViewSetting()
         setRunAutoChatSetting()
@@ -132,6 +135,7 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setData() {
+        autoChatRun = true
         binding.name = args.name
         viewModelShared; soundPool; soundId
     }
@@ -389,7 +393,7 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setRunAutoChatSetting() {
-        autoChatRun = true
+
         fun setAutoChat() {
             CoroutineScope(Dispatchers.Main).launch {
                 if (autoChatDoubleCheckRun.filter { it }.size <= 5)
@@ -445,6 +449,7 @@ class FragmentFakeKakaoChat :
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
 
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -484,7 +489,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -524,7 +529,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -564,7 +569,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -604,7 +609,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -644,7 +649,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -684,7 +689,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -724,7 +729,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -764,7 +769,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -804,7 +809,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -844,7 +849,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -884,7 +889,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -924,7 +929,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -964,7 +969,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -1004,7 +1009,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -1044,7 +1049,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -1084,7 +1089,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -1124,7 +1129,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -1164,7 +1169,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -1204,7 +1209,7 @@ class FragmentFakeKakaoChat :
                         )
                     )
                     soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f)
-
+                    requireArguments().putBoolean("deepLinkUse", true)
                     if (!isResumed) {
                         viewModelKaKaoChat.messagingStyle(
                             R.drawable.newsample2,
@@ -1232,6 +1237,7 @@ class FragmentFakeKakaoChat :
 
 
     private fun setBackButtonSetting() {
+        PrefCheckRun.getInstance(requireContext()).kaKaoChatNavDeepLinkUseCheck = deepLinkUseCheck
         if (PrefCheckRun.getInstance(requireContext()).kaKaoChatNavDeepLinkUseCheck) {
             requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
                 findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck)

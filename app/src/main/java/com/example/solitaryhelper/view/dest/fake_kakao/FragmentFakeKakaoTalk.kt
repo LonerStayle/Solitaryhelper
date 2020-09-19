@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoTalkBinding
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
+import com.example.solitaryhelper.view.activity.autoChatRun
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
@@ -308,6 +309,7 @@ class FragmentFakeKakaoTalk :
         )
         super.onPause()
     }
+
 
 
 

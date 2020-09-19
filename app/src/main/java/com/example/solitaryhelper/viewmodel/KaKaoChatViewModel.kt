@@ -230,7 +230,6 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
             setArguments(bundle)
             setDestination(R.id.fragmentFakeKakaoChat)
             setComponentName(MainActivity::class.java)
-            PrefCheckRun.getInstance(context).kaKaoChatNavDeepLinkUseCheck = true
             createPendingIntent()
         }
 

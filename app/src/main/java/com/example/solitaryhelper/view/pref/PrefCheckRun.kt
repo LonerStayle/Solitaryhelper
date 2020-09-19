@@ -10,7 +10,8 @@ class PrefCheckRun private constructor (val context: Context){
         ID_EMPTY_CHECK,
         CALL_DELAY_COTROL,
         KAKAO_TALK_FIRST_RUN_CHECK,
-        KAKAO_CHAT_NAV_DEEP_LINK_USE_CHECK
+        KAKAO_CHAT_NAV_DEEP_LINK_USE_CHECK,
+        AUTO_RUN
     }
     companion object{
         private var instance:PrefCheckRun? = null
@@ -53,6 +54,13 @@ class PrefCheckRun private constructor (val context: Context){
         get() = pref.getBoolean(Key.KAKAO_CHAT_NAV_DEEP_LINK_USE_CHECK.name,false)
         set(value) {
             pref.edit().putBoolean(Key.KAKAO_CHAT_NAV_DEEP_LINK_USE_CHECK.name,
+                value).apply()
+        }
+
+    var autoRun:Boolean
+        get() = pref.getBoolean(Key.AUTO_RUN.name,false)
+        set(value) {
+            pref.edit().putBoolean(Key.AUTO_RUN.name,
                 value).apply()
         }
 
