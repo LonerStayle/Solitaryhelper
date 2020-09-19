@@ -9,22 +9,22 @@ import android.util.Log
 import com.example.solitaryhelper.R
 
 import com.example.solitaryhelper.view.pref.PrefCheckRun
-import java.security.MessageDigest
 
-
-var autoChatRun = true
+var autoChatRun:Boolean?=null
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-intent
-        autoChatRun = true
+        if (!PrefCheckRun.getInstance(this).kaKaoChatNavDeepLinkUseCheck)
+            PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
 
-        PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
+
+
 //        getAppKeyHash()
-Log.d("debugCheck","MainActivity:OnCreate:딥링크를 시 액티비티 재실행 체크")
+        Log.d("debugCheck", "MainActivity:OnCreate:딥링크를 시 액티비티 재실행 체크")
     }
 
 //    fun getAppKeyHash() {
@@ -43,8 +43,6 @@ Log.d("debugCheck","MainActivity:OnCreate:딥링크를 시 액티비티 재실�
 //    }
 //    ST0FQ6GHZF3HQCfm93DR1ZJFlv4=
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
+
 }
 

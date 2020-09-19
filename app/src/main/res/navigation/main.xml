@@ -83,6 +83,10 @@
         <action
             android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck"
             app:destination="@id/fragmentAutoChatRunCheck" />
+        <action
+            android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk"
+            app:destination="@id/fragmentFakeKakaoTalk"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFakeCall"

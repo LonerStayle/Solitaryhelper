@@ -71,7 +71,7 @@ class FragmentFakeKakaoTalk :
                     progressbarLayout.visibility = View.VISIBLE
                 }
 
-                delay(3500)
+                delay(3000)
                 for(i in 0 until rootViewKaKaoTalk.childCount-1){
                     rootViewKaKaoTalk.getChildAt(i).visibility = View.VISIBLE
                     progressbarLayout.visibility = View.GONE
@@ -253,6 +253,7 @@ class FragmentFakeKakaoTalk :
                 //adapter down casting 오류 방지
                 if (recyclerViewKaKaoChatList.adapter == null)
                     return@Observer
+
                 (recyclerViewKaKaoChatList.adapter as AdapterRecyclerViewKaKaoTalk).apply {
 
                     for (i in itemOrderList.indices) {
@@ -308,9 +309,6 @@ class FragmentFakeKakaoTalk :
         super.onPause()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("test","온데스토리로 죽는건가? ")
-    }
+
 
 }

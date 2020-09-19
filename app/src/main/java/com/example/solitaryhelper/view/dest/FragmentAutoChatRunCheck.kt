@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.dest
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.activity.autoChatRun
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat.Companion.autoChatDoubleCheckRun
+import com.example.solitaryhelper.view.pref.PrefCheckRun
 import kotlinx.android.synthetic.main.fragment_autochatrun.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,14 +30,17 @@ class FragmentAutoChatRunCheck :
 
     }
 
+    @SuppressLint("RestrictedApi")
     override fun FragmentAutochatrunBinding.setCreateView() {
+        findNavController().backStack.clear()
+        PrefCheckRun.getInstance(requireContext()).kaKaoChatNavDeepLinkUseCheck = false
         CoroutineScope(Dispatchers.Main).launch {
             for (i in 0..19)
                 autoChatDoubleCheckRun[i] = false
 
             autoChatRun = false
             val intentStart ={ startActivity(Intent(requireContext(),MainActivity::class.java))}
-            delay(1500L)
+            delay(1200L)
             requireActivity().finish()
             intentStart()
         }

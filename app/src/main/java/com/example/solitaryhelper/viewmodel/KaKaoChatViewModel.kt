@@ -18,6 +18,7 @@ import com.example.solitaryhelper.localdb.dao.KaKaoChatDao
 import com.example.solitaryhelper.localdb.entitiy.*
 import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat
+import com.example.solitaryhelper.view.pref.PrefCheckRun
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -229,6 +230,7 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
             setArguments(bundle)
             setDestination(R.id.fragmentFakeKakaoChat)
             setComponentName(MainActivity::class.java)
+            PrefCheckRun.getInstance(context).kaKaoChatNavDeepLinkUseCheck = true
             createPendingIntent()
         }
 

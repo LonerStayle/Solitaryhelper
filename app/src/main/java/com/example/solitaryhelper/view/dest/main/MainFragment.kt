@@ -91,7 +91,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
 
     private fun setWindowUI() {
-        requireActivity().window.navigationBarColor = Color.TRANSPARENT
+        requireActivity().window.navigationBarColor = Color.GRAY
     }
 
     override fun FragmentMainBinding.setLiveDataInObserver() {

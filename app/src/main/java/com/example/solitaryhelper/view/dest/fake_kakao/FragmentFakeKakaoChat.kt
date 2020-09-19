@@ -1,6 +1,5 @@
 package com.example.solitaryhelper.view.dest.fake_kakao
 
-import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
 import android.media.SoundPool
@@ -20,6 +19,7 @@ import com.example.solitaryhelper.view.activity.autoChatRun
 import com.example.solitaryhelper.view.adapter.kakao_chat.*
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
+import com.example.solitaryhelper.view.pref.PrefCheckRun
 
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.viewmodel.SharedViewModel
@@ -29,7 +29,8 @@ import java.util.*
 class FragmentFakeKakaoChat :
     BaseFragment<FragmentFakeKakaoChatBinding>(R.layout.fragment_fake_kakao_chat) {
 
-    private val chatbotText by lazy { resources.getStringArray(R.array.chatTalk) }
+
+    private val chatBotText by lazy { resources.getStringArray(R.array.chatTalk) }
     private val args by lazy {
         FragmentFakeKakaoChatArgs.fromBundle(
             requireArguments()
@@ -62,6 +63,7 @@ class FragmentFakeKakaoChat :
 
     override fun FragmentFakeKakaoChatBinding.setCreateView() {
 
+        setBackButtonSetting()
         setData()
         setButtonUiControl()
         setRecyclerViewSetting()
@@ -387,7 +389,7 @@ class FragmentFakeKakaoChat :
     }
 
     private fun setRunAutoChatSetting() {
-
+        autoChatRun = true
         fun setAutoChat() {
             CoroutineScope(Dispatchers.Main).launch {
                 if (autoChatDoubleCheckRun.filter { it }.size <= 5)
@@ -404,7 +406,7 @@ class FragmentFakeKakaoChat :
 
 
     private suspend fun setCoroutine() {
-        val list = chatbotText.toList()
+        val list = chatBotText.toList()
 
         val manager =
             requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -414,13 +416,14 @@ class FragmentFakeKakaoChat :
         val context = requireContext()
         requireActivity().baseContext
 
-        while (autoChatRun) {
+        while (autoChatRun!!) {
             when (args.itemIdPosition) {
                 0L -> {
                     autoChatDoubleCheckRun[0] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -457,8 +460,9 @@ class FragmentFakeKakaoChat :
                 1L -> {
                     autoChatDoubleCheckRun[1] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -496,8 +500,9 @@ class FragmentFakeKakaoChat :
                 2L -> {
                     autoChatDoubleCheckRun[2] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -535,8 +540,9 @@ class FragmentFakeKakaoChat :
                 3L -> {
                     autoChatDoubleCheckRun[3] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -574,8 +580,9 @@ class FragmentFakeKakaoChat :
                 4L -> {
                     autoChatDoubleCheckRun[4] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -613,8 +620,9 @@ class FragmentFakeKakaoChat :
                 5L -> {
                     autoChatDoubleCheckRun[5] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -652,8 +660,9 @@ class FragmentFakeKakaoChat :
                 6L -> {
                     autoChatDoubleCheckRun[6] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -691,8 +700,9 @@ class FragmentFakeKakaoChat :
                 7L -> {
                     autoChatDoubleCheckRun[7] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -730,8 +740,9 @@ class FragmentFakeKakaoChat :
                 8L -> {
                     autoChatDoubleCheckRun[8] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -769,8 +780,9 @@ class FragmentFakeKakaoChat :
                 9L -> {
                     autoChatDoubleCheckRun[9] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -808,8 +820,9 @@ class FragmentFakeKakaoChat :
                 10L -> {
                     autoChatDoubleCheckRun[10] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -847,8 +860,9 @@ class FragmentFakeKakaoChat :
                 11L -> {
                     autoChatDoubleCheckRun[11] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -886,8 +900,9 @@ class FragmentFakeKakaoChat :
                 12L -> {
                     autoChatDoubleCheckRun[12] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -925,8 +940,9 @@ class FragmentFakeKakaoChat :
                 13L -> {
                     autoChatDoubleCheckRun[13] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -964,8 +980,9 @@ class FragmentFakeKakaoChat :
                 14L -> {
                     autoChatDoubleCheckRun[14] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -1003,8 +1020,9 @@ class FragmentFakeKakaoChat :
                 15L -> {
                     autoChatDoubleCheckRun[15] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -1042,8 +1060,9 @@ class FragmentFakeKakaoChat :
                 16L -> {
                     autoChatDoubleCheckRun[16] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -1081,8 +1100,9 @@ class FragmentFakeKakaoChat :
                 17L -> {
                     autoChatDoubleCheckRun[17] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -1120,8 +1140,9 @@ class FragmentFakeKakaoChat :
                 18L -> {
                     autoChatDoubleCheckRun[18] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -1159,8 +1180,9 @@ class FragmentFakeKakaoChat :
                 19L -> {
                     autoChatDoubleCheckRun[19] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
+
                     delay(5000)
-                    if (!autoChatRun)
+                    if (!autoChatRun!!)
                         return
 
                     val shuffleMode = list.shuffled()
@@ -1209,12 +1231,17 @@ class FragmentFakeKakaoChat :
     }
 
 
-//    private fun setBackButtonSetting() {
-//        requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
-//            findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck)
-//        }
-//    }
-
+    private fun setBackButtonSetting() {
+        if (PrefCheckRun.getInstance(requireContext()).kaKaoChatNavDeepLinkUseCheck) {
+            requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
+                findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck)
+            }
+        } else {
+            requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
+                findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk)
+            }
+        }
+    }
 
     private fun FragmentFakeKakaoChatBinding.setAdapter() {
 
