@@ -42,8 +42,6 @@ object NaverApiClient {
             @Query("sort") sort:String = "sim"
         ): NaverBlogSearchResult
 
-
-
         @Headers(
             "X-Naver-Client-Id:pub4rM_15_MjWrXxTr2G",
             "X-Naver-Client-Secret:A33PjCevlz"
@@ -55,8 +53,6 @@ object NaverApiClient {
             @Query("display") display: Int = 20,
             @Query("sort") sort:String = "sim"
         ): NaverNewsSearchResult
-
     }
-
 
 
