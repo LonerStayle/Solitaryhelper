@@ -10,8 +10,6 @@ import com.example.solitaryhelper.view.itemDecoration.HorizontalMarginItemDecora
 class SkillViewModel:ViewModel() {
 
 
-
-
      fun setViewPagerSetting(viewPager: ViewPager2,context:Context) {
         /**
          * 복붙한거라서 시간내서 꼭 연구하기.

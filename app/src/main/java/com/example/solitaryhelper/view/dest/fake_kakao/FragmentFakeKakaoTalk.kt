@@ -73,11 +73,13 @@ class FragmentFakeKakaoTalk :
                 }
 
                 delay(3000)
+                if(!isResumed)
+                    return@launch
+
                 for(i in 0 until rootViewKaKaoTalk.childCount-1){
                     rootViewKaKaoTalk.getChildAt(i).visibility = View.VISIBLE
                     progressbarLayout.visibility = View.GONE
                 }
-
                 PrefCheckRun.getInstance(requireContext()).kaKaoTalkFirstRunCheck = true
             }
         }

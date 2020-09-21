@@ -1,18 +1,16 @@
 package com.example.solitaryhelper.view.dest.main.tapfragments
 
-
+import android.annotation.SuppressLint
+import android.view.MotionEvent
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
-
 import com.example.solitaryhelper.databinding.FragmentSkillBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerSkill
-
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.view.utill.toastDebugTest
 
 class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill) {
-
 
     data class ViewPagerItem(
         var image: String,
@@ -36,9 +34,7 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
 
 
     override fun FragmentSkillBinding.setEventListener() {
-        setLayoutFakeKaKaoTalkInfoClickListener()
-        setLayoutSkillInfoCallIntro()
-        setLayoutSkillInfoSmsIntro()
+        setClickEvent()
     }
 
     override fun FragmentSkillBinding.setCreateView() {
@@ -56,6 +52,7 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
         val kakaoitemList = mutableListOf<ViewPagerItem>()
         val callitemList = mutableListOf<ViewPagerItem>()
         val smsitemList = mutableListOf<ViewPagerItem>()
+
         kakaoImageList = Array(6) { "" }
         for (i in 5 downTo 0) {
             kakaoImageList!![i] += (Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
@@ -91,27 +88,74 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    fun FragmentSkillBinding.setClickEvent() {
 
-    private fun FragmentSkillBinding.setLayoutFakeKaKaoTalkInfoClickListener() {
-        layoutSkillInfoKaKaoTalkIntro.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeKakaoTalk)
+
+        fun touchEvent(afterLogic: () -> Unit): View.OnTouchListener {
+            return View.OnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        view.alpha = 0.5f
+                        view.scaleY = 2.0f
+                        view.scaleX = 2.0f
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        view.animate().alpha(1.0f).scaleY(1.0f).scaleX(1.0f)
+                            .setDuration(300L).withEndAction { afterLogic() }.start()
+                    }
+
+
+                    else -> {
+                        view.animate().alpha(1.0f).scaleX(1.0f).scaleX(1.0f)
+                            .setDuration(200L).start()
+                    }
+                }
+                true
+            }
+        }
+
+        imageViewQuickKaKaoButton.setOnTouchListener(touchEvent
+        { setGoToTheKaKaoTalk() })
+
+        imageViewQuickCallButton.setOnTouchListener(touchEvent
+        { setGoToTheCallSetting() })
+
+        imageViewQuickSmsButton.setOnTouchListener(touchEvent
+        { setGoToTheSmsSetting() })
+
+        textViewKaKaoTitle.setOnClickListener{
+            setGoToTheKaKaoTalk()
+        }
+        layoutSkillInfoKaKaoTalkIntro.setOnClickListener{
+            setGoToTheKaKaoTalk()
+        }
+        textViewCallTitle.setOnClickListener{
+            setGoToTheCallSetting()
+        }
+        layoutSkillInfoCallIntro.setOnClickListener{
+            setGoToTheCallSetting()
+        }
+        textViewSmsTitle.setOnClickListener{
+            setGoToTheSmsSetting()
+        }
+        layoutSkillInfoSmsIntro.setOnClickListener{
+            setGoToTheSmsSetting()
         }
     }
 
-    private fun FragmentSkillBinding.setLayoutSkillInfoCallIntro() {
-
-        layoutSkillInfoCallIntro.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCallSetting)
-//            context?.toastDebugTest("아직 준비중인 기능입니다. \n UI만 완성후 바로 공개 예정.")
-        }
+    private fun setGoToTheKaKaoTalk() {
+        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeKakaoTalk)
     }
 
-    private fun FragmentSkillBinding.setLayoutSkillInfoSmsIntro() {
-        layoutSkillInfoSmsIntro.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSmsSetting)
-//         context?.toastDebugTest("아직 준비중인 기능입니다. \n UI만 완성후 바로 공개 예정.")
-        }
+    private fun setGoToTheCallSetting() {
+        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCallSetting)
     }
+
+    private fun setGoToTheSmsSetting() {
+        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSmsSetting)
+    }
+
 }
 
 

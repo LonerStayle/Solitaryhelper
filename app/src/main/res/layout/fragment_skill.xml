@@ -14,224 +14,333 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_kaKaoTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:drawableStart="@drawable/kakao_talk_logo_24"
-                android:text="가짜 카카오톡"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager_fakekakaoTalkInfo"
-                android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:layout_margin="16dp"
-                android:clipToPadding="false"
-                android:fillViewport="true"
-                android:focusableInTouchMode="true"
-                android:overScrollMode="never">
-
-            </androidx.viewpager2.widget.ViewPager2>
-
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_skillInfoKaKaoTalkIntro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="8dp"
-                android:outlineProvider="@color/veryLightGray"
-                android:layout_margin="12dp">
-
-                <TextView
-                    android:id="@+id/textView_fakeKaKaoSubTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/skill_kakaoSubTitle"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView_fakeKaKaoText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/skil_kakaoText"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoSubTitle" />
-
-                <TextView
-                    android:id="@+id/textView_fakeKaKaoSubText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:padding="4dp"
-                    android:text="@string/skill_kakaoSubText"
-                    android:textSize="10dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoText" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@color/lightGray" />
-            <TextView
-                android:id="@+id/textView_callTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:drawableStart="@drawable/ic_baseline_phone_in_call_24"
-                android:text="가짜 전화"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager_fakeCallInfo"
-                android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:layout_margin="16dp"
-                android:clipToPadding="false"
-                android:fillViewport="true"
-                android:focusableInTouchMode="true"
-                android:overScrollMode="never" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_skillInfoCallIntro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-
-                <TextView
-                    android:id="@+id/textView_callSubTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/skill_callSubTitle"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView_callText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/skill_callText"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView_callSubTitle" />
-
-                <TextView
-                    android:id="@+id/textView_callSubText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/skill_callSubText"
-                    android:textSize="10dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView_callText" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/view7"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@color/lightGray" />
-
-            <TextView
-                android:id="@+id/textView_smsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:drawableStart="@drawable/ic_round_mode_sms_24"
-                android:text="가짜 문자"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager_fakeSmsInfo"
-                android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:layout_margin="16dp"
-                android:clipToPadding="false"
-                android:fillViewport="true"
-                android:focusableInTouchMode="true"
-                android:overScrollMode="never" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_skillInfoSmsIntro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <TextView
-                    android:id="@+id/textView_smsSubTitle"
+                    android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:text="문자 빨리 시작하기"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView_quickSmsButton"
+                    app:layout_constraintStart_toStartOf="@+id/imageView_quickSmsButton"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_quickSmsButton" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전화 빨리 시작하기"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView_quickCallButton"
+                    app:layout_constraintStart_toStartOf="@+id/imageView_quickCallButton"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_quickCallButton" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="카톡 빨리 시작하기"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView_quickKaKaoButton"
+                    app:layout_constraintStart_toStartOf="@+id/imageView_quickKaKaoButton"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_quickKaKaoButton" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imageView_quickKaKaoButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/skill_smsSubTitle"
-                    android:textColor="#000"
-                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/kakao_talklogo_512"
+                    app:civ_border_color="@color/colorPointYellow"
+                    app:civ_border_width="0.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView_quickCallButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView_smsText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imageView_quickCallButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/skill_smsText"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView_smsSubTitle" />
+                    android:layout_marginBottom="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_phone_in_call_48"
+                    app:civ_border_color="@color/colorPointYellow"
+                    app:civ_border_width="0.5dp"
 
-                <TextView
-                    android:id="@+id/textView_smsSubText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/skill_smsSubText"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView_smsText" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imageView_quickSmsButton"
+                    android:layout_width="52dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/colorLightBlue"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/message_smslogo512"
+                    app:civ_border_color="@color/colorPointYellow"
+                    app:civ_border_width="0.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageView_quickCallButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#fcfcfc"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_kaKaoTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawableStart="@drawable/kakao_talk_logo_24"
+                        android:text="@string/skill_kaKaoTitle"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager_fakekakaoTalkInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp"
+                        android:layout_margin="16dp"
+                        android:clipToPadding="false"
+                        android:fillViewport="true"
+                        android:focusableInTouchMode="true"
+                        android:overScrollMode="never">
+
+                    </androidx.viewpager2.widget.ViewPager2>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_skillInfoKaKaoTalkIntro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
+
+                        <TextView
+                            android:id="@+id/textView_fakeKaKaoSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/skill_kakaoSubTitle"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView_fakeKaKaoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/skil_kakaoText"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoSubTitle" />
+
+                        <TextView
+                            android:id="@+id/textView_fakeKaKaoSubText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="8dp"
+                            android:padding="4dp"
+                            android:text="@string/skill_kakaoSubText"
+                            android:textSize="10dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#fcfcfc"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_callTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawableStart="@drawable/ic_baseline_phone_in_call_24"
+                        android:text="가짜 전화"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager_fakeCallInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp"
+                        android:layout_margin="16dp"
+                        android:clipToPadding="false"
+                        android:fillViewport="true"
+                        android:focusableInTouchMode="true"
+                        android:overScrollMode="never" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_skillInfoCallIntro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
+
+
+                        <TextView
+                            android:id="@+id/textView_callSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/skill_callSubTitle"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView_callText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/skill_callText"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_callSubTitle" />
+
+                        <TextView
+                            android:id="@+id/textView_callSubText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/skill_callSubText"
+                            android:textSize="10dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_callText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#fcfcfc"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_smsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawableStart="@drawable/ic_round_mode_sms_24"
+                        android:text="가짜 문자"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager_fakeSmsInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp"
+                        android:layout_margin="16dp"
+                        android:clipToPadding="false"
+                        android:fillViewport="true"
+                        android:focusableInTouchMode="true"
+                        android:overScrollMode="never" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_skillInfoSmsIntro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
+
+
+                        <TextView
+                            android:id="@+id/textView_smsSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/skill_smsSubTitle"
+                            android:textColor="#000"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView_smsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/skill_smsText"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_smsSubTitle" />
+
+                        <TextView
+                            android:id="@+id/textView_smsSubText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="16dp"
+                            android:text="@string/skill_smsSubText"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_smsText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

@@ -1,14 +1,15 @@
 <resources>
     <string name="app_name">아싸도우미\n(아싸전용 어플)</string>
-    <string name="skil_kakaoText">어색한 사람 과 단둘이 있게 되었다구요?\n SNS보면서 어색하게 내면서 불편하게 계시지 않았습니까?\n 그 불편함을 회피할 수 있도록 가짜 카톡 도와드리겠습니다.</string>
+    <string name="skil_kakaoText">어색한 사람과 단 둘이 있게 되었다구요? 억지로 인터넷 보면서 어색하고 불편하게 계셨다면 바쁜 카톡으로 자연스레 회피할 수 있게 도와드립니다.</string>
     <string name="skill_kakaoSubTitle">나도 친한사람이 많다! 카톡하는척 하기!</string>
     <string name="skill_kakaoSubText">#어색함 피하기, #인싸인척 하기, #카카오톡으로 바쁜척 하기</string>
     <string name="skill_callSubTitle">전화를 이용해서 상황을 급하게 회피하자!</string>
-    <string name="skill_callText">혹시 불편한 자리에 억지로 계시지 않습니까?\n가짜 전화가 그자리를 피할수 있도록 도와드리겠습니다.</string>
+    <string name="skill_callText">혹시 어색한 상황을 당장 도망치고 싶으신가요? 가짜 전화가 그자리를 피할수 있도록 도와드립니다.</string>
     <string name="skill_callSubText">#도망치기,#상황 회피하기, #불쾌한 상황 피하기</string>
-    <string name="skill_smsText">억지로 생긴 술자리나 어색한 자리는\n 아싸들에게 매우 힘든 장소가 됩니다.\n그렇다면 장소에 가기 전에 문자로 급한 상황을 조성하여,\n 급한일이 생겨..도망쳐 보는것은 어떨까요?</string>
+    <string name="skill_smsText">약속은 이미 잡혔지만 인싸들 자리에 가기 싫어졌다구요? 미리 문자로 급한 상황을 조성하여, 급한일이 생겨..핑계를 만들어줍니다.</string>
     <string name="skill_smsSubTitle">가기 싫은 인싸들의 장소 미리 도망치자!</string>
     <string name="skill_smsSubText">#사전 예방, #알리바이 만들기, #어쩔 수 없는 상황 만들기</string>
+    <string name="skill_kaKaoTitle">가짜 카카오톡</string>
     <!--    메인-->
     <string-array name="icon_text">
         <item>아싸 스킬</item>
@@ -813,11 +814,6 @@
     </string-array>
 
 <string-array name="kaKaoExampleList">
-
-
-
-
-
 
 
     <item>1.카카오톡 UI 반영</item>

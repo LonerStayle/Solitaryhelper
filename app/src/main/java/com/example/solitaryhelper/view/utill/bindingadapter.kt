@@ -9,13 +9,22 @@ import com.example.solitaryhelper.view.contents.Contents
 
 
 @BindingAdapter("imageUrl")
-fun imageUrl(view:ImageView,url:String) = Glide.with(view.context).load(url).dontAnimate().into(view)
+fun imageUrl(view: ImageView, url: String) =
+    Glide.with(view.context).load(url).dontAnimate().into(view)
+
+@BindingAdapter("imageUrlFitCenter")
+fun imageUrlFitCenter(view: ImageView, url: String) =
+    Glide.with(view.context).load(url).fitCenter().into(view)
 
 @BindingAdapter("min")
-fun min(view:NumberPicker,min:Int) { view.minValue = min}
+fun min(view: NumberPicker, min: Int) {
+    view.minValue = min
+}
 
 @BindingAdapter("max")
-fun max(view: NumberPicker,max:Int) { view.maxValue = max}
+fun max(view: NumberPicker, max: Int) {
+    view.maxValue = max
+}
 
 
 

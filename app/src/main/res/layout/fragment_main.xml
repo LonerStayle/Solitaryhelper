@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="titleText"
+            type="String" />
+    </data>
+
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout_main"
@@ -106,12 +113,25 @@
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/main_toolbar_background"
                 android:titleTextColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:titleTextAppearance="@style/Toolbar.TitleText"
-                tools:targetApi="m" />
+                tools:targetApi="m">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingEnd="40dp"
+                    android:text="@{titleText}"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:ignore="RtlSymmetry" />
+
+            </Toolbar>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

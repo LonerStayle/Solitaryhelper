@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkTalkBinding
 import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
@@ -44,7 +45,10 @@ class AdapterRecyclerViewKaKaoTalk(
         holder.binding?.apply {
 
             kaKaoData = kaKaoDataList[holder.adapterPosition]
-            imageViewImageProfile.setImageURI(Uri.parse(kaKaoDataList[holder.adapterPosition].image))
+
+            Glide.with(imageViewImageProfile.context)
+                .load(kaKaoDataList[holder.adapterPosition].image).centerCrop()
+                .into(imageViewImageProfile)
             lastIndex = kaKaoDataList[holder.adapterPosition].itemLastText
             noticeScore = kaKaoDataList[holder.adapterPosition].chatNotification.toString()
             setVisible = kaKaoDataList[holder.adapterPosition].visibleSettingList

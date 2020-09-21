@@ -148,7 +148,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                                 fabStart.hide()
 
                             tab.setIcon(iconSelectImage[i])
-                            toolBar.title = toolbarTitleList[i]
+                            titleText = toolbarTitleList[i]
                         }
                     }
                 }
@@ -209,7 +209,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private fun FragmentMainBinding.setToolbarSetting() {
         with(toolBar) {
             setNavigationIcon(naviIconBackground)
-            title = toolbarTitleList[0]
+            titleText = toolbarTitleList[0]
         }
     }
 
