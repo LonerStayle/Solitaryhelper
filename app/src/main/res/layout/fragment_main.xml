@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingEnd="40dp"
+                    android:paddingEnd="46dp"
                     android:text="@{titleText}"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"

@@ -21,6 +21,7 @@ import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_fake_call_setting.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -301,6 +302,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 logic()
             }
         }
+    }
+
+    override fun onResume() {
+        if(binding.navigationViewMain.getHeaderView(0) == null)
+            binding.navigationViewMain.addHeaderView(naviHeaderBinding.root)
+        super.onResume()
     }
 
     override fun onPause() {
