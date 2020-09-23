@@ -85,7 +85,7 @@ buildscript {
 
                 //circularimageview
                 "com.mikhaellopez:circularimageview:$circularImageView_version",
-                'de.hdodenhof:circleimageview:3.0.0'
+
         ]
         arch_libraries = [
                 // Navigation

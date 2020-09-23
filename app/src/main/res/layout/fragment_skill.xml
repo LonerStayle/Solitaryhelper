@@ -51,47 +51,51 @@
                     app:layout_constraintStart_toStartOf="@+id/imageView_quickKaKaoButton"
                     app:layout_constraintTop_toBottomOf="@+id/imageView_quickKaKaoButton" />
 
-                <com.mikhaellopez.circularimageview.CircularImageView
+                <ImageButton
                     android:id="@+id/imageView_quickKaKaoButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/circle"
+                    android:elevation="4dp"
+                    android:padding="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/kakao_talklogo_512"
-                    app:civ_border_color="@color/colorPointYellow"
-                    app:civ_border_width="0.5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView_quickCallButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.mikhaellopez.circularimageview.CircularImageView
+                <ImageButton
                     android:id="@+id/imageView_quickCallButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/circle"
+                    android:backgroundTint="#76FF03"
+                    android:elevation="4dp"
+                    android:padding="8dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_baseline_phone_in_call_48"
-                    app:civ_border_color="@color/colorPointYellow"
-                    app:civ_border_width="0.5dp"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.mikhaellopez.circularimageview.CircularImageView
+                <ImageButton
                     android:id="@+id/imageView_quickSmsButton"
-                    android:layout_width="52dp"
-                    android:layout_height="50dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/circle"
                     android:backgroundTint="@color/colorLightBlue"
+                    android:elevation="4dp"
+                    android:padding="8dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/message_smslogo512"
-                    app:civ_border_color="@color/colorPointYellow"
-                    app:civ_border_width="0.5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/imageView_quickCallButton"
@@ -101,9 +105,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:cardBackgroundColor="#fcfcfc"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp"
@@ -114,15 +118,27 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView_kaKaoTitle"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:drawableStart="@drawable/kakao_talk_logo_24"
-                        android:text="@string/skill_kaKaoTitle"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/kakao_talklogo_512" />
+
+                        <TextView
+                            android:id="@+id/textView_kaKaoTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/skill_kaKaoTitle"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/viewPager_fakekakaoTalkInfo"

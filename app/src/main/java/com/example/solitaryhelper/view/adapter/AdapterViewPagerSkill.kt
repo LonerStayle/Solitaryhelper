@@ -13,7 +13,8 @@ import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderViewpagerSkillBinding
 import com.example.solitaryhelper.view.dest.main.tapfragments.FragmentSkill
 
-class AdapterViewPagerSkill(var itemList: List<FragmentSkill.ViewPagerItem> = listOf()) :
+class AdapterViewPagerSkill(var itemList: List<FragmentSkill.ViewPagerItem> = listOf(),
+val imageClickEvent:()->Unit ) :
     RecyclerView.Adapter<AdapterViewPagerSkill.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -31,6 +32,9 @@ class AdapterViewPagerSkill(var itemList: List<FragmentSkill.ViewPagerItem> = li
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding?.apply {
+           imageViewInformationImage.setOnClickListener {
+               imageClickEvent()
+           }
            imageUrl = itemList[holder.adapterPosition].image
         }
     }

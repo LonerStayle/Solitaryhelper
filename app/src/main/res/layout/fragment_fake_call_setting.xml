@@ -19,38 +19,24 @@
             app:layout_constraintStart_toStartOf="@+id/numberPicker_delayNoticationEnabled" />
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="가짜 전화"
-            android:textColor="#222121"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="전화가 온척 연기를 하기위한 기능입니다. \n 알림 방식 지정, 나중에 사용하기 기능이 가능합니다."
             android:textColor="#4C4A4A"
+            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:id="@+id/view"
             android:layout_width="1dp"
             android:layout_height="200dp"
-            android:layout_marginTop="64dp"
-         android:background="#000000"
+            android:background="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <NumberPicker
             android:id="@+id/numberPicker_noticeSetting"
@@ -129,5 +115,24 @@
             app:layout_constraintBottom_toTopOf="@+id/numberPicker_noticeSetting"
             app:layout_constraintEnd_toEndOf="@+id/numberPicker_noticeSetting"
             app:layout_constraintStart_toStartOf="@+id/numberPicker_noticeSetting" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:srcCompat="@drawable/fakesmsintro" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:background="#fff"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

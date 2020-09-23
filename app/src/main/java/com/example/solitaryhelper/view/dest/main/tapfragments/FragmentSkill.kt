@@ -82,9 +82,9 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
         smsitemList.add(ViewPagerItem(smsImageList!![0], smsTextList[0]))
 
 
-        viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(kakaoitemList)
-        viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(callitemList)
-        viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(smsitemList)
+        viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(kakaoitemList){setGoToTheKaKaoTalk()}
+        viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(callitemList){setGoToTheCallSetting()}
+        viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(smsitemList){setGoToTheSmsSetting()}
 
     }
 
@@ -106,7 +106,7 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
                     }
 
 
-                    else -> {
+                    MotionEvent.ACTION_MOVE -> {
                         view.animate().alpha(1.0f).scaleX(1.0f).scaleX(1.0f)
                             .setDuration(200L).start()
                     }

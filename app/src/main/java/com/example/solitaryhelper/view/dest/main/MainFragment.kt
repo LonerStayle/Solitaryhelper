@@ -63,7 +63,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         )
     }
 
-    private val dialog by lazy { DialogCustom(requireContext()) }
+    private val dialog by lazy { DialogCustom(requireContext(),R.layout.dialog_main_id_create) }
 
 
     override fun FragmentMainBinding.setCreateView() {
@@ -93,6 +93,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     private fun setWindowUI() {
         requireActivity().window.navigationBarColor = Color.GRAY
+        requireActivity().window.statusBarColor = Color.TRANSPARENT
     }
 
     override fun FragmentMainBinding.setLiveDataInObserver() {
@@ -268,7 +269,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun setIdCreate() {
-        val textId = dialog.dialogMainIdCreateBinding.editTextCreateId.text
+        val textId = dialog.dialogCustomCreateBinding.editTextCreateId.text
         fun logicInMakeId() {
             if (TextUtils.isEmpty(textId))
                 context?.toastDebugTest("닉네임을 설정해주세요.")
@@ -284,7 +285,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
             dialog.dialogMainIdCreate()
 
-            dialog.dialogMainIdCreateBinding.buttonCreateId.setOnClickListener {
+            dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
                 logicInMakeId()
 
             }
@@ -298,7 +299,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             dialog.dialogMainIdCreate()
             dialog.dialogCreate.show()
 
-            dialog.dialogMainIdCreateBinding.buttonCreateId.setOnClickListener {
+            dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
                 logic()
             }
         }
