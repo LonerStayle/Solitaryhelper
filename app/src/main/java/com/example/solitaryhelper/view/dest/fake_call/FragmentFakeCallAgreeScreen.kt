@@ -1,8 +1,10 @@
 package com.example.solitaryhelper.view.dest.fake_call
 
+import android.content.Intent
 import android.net.Uri
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallAgreeScreenBinding
+import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.utill.toastDebugTest
@@ -20,10 +22,9 @@ class FragmentFakeCallAgreeScreen :
         )
     }
 
-    companion object {
-        var time = 0
-        val timer = Timer()
-    }
+       private var time = 0
+        private val timer: Timer? = Timer()
+
 
     override fun FragmentFakeCallAgreeScreenBinding.setEventListener() {
         setButtonClearClickListener()
@@ -33,6 +34,8 @@ class FragmentFakeCallAgreeScreen :
 
         setData()
         setTime()
+
+
     }
 
     private fun FragmentFakeCallAgreeScreenBinding.setTime() {
@@ -46,7 +49,7 @@ class FragmentFakeCallAgreeScreen :
                 }
             }
         }
-        timer.schedule(timeTask, 0, 1000)
+        timer?.schedule(timeTask, 0, 1000)
     }
 
     private fun FragmentFakeCallAgreeScreenBinding.setData() {
@@ -63,16 +66,19 @@ class FragmentFakeCallAgreeScreen :
                     0,
                     0
                 )
-                timer.cancel()
+                timer?.cancel()
                 delay(2000)
+                val intent = Intent(requireActivity(),MainActivity::class.java)
                 requireActivity().finish()
+                startActivity(intent)
             }
 
         }
     }
 
-    override fun onPause() {
-        timer.cancel()
-        super.onPause()
+    override fun onDestroy() {
+        timer?.cancel()
+        time = 0
+        super.onDestroy()
     }
 }

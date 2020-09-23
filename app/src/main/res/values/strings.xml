@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">아싸도우미\n(아싸전용 어플)</string>
-    <string name="skil_kakaoText">어색한 사람과 단 둘이 있게 되었다구요? 억지로 인터넷 보면서 어색하고 불편하게 계셨다면 바쁜 카톡으로 자연스레 회피할 수 있게 도와드립니다.</string>
+    <string name="skill_kakaoText">어색한 사람과 단 둘이 있게 되었다구요? 억지로 인터넷 보면서 어색하고 불편하게 계셨다면 바쁜 카톡으로 자연스레 회피할 수 있게 도와드립니다.</string>
     <string name="skill_kakaoSubTitle">나도 친한사람이 많다! 카톡하는척 하기!</string>
     <string name="skill_kakaoSubText">#어색함 피하기, #인싸인척 하기, #카카오톡으로 바쁜척 하기</string>
     <string name="skill_callSubTitle">전화를 이용해서 상황을 급하게 회피하자!</string>
@@ -10,6 +10,11 @@
     <string name="skill_smsSubTitle">가기 싫은 인싸들의 장소 미리 도망치자!</string>
     <string name="skill_smsSubText">#사전 예방, #알리바이 만들기, #어쩔 수 없는 상황 만들기</string>
     <string name="skill_kaKaoTitle">가짜 카카오톡</string>
+    <string name="callSetting_nameInfo">상대방 이름을 적어주세요</string>
+    <string name="callSetting_explanation">전화가 온척 연기를 하기위한 기능입니다. \n 알림 방식 지정, 나중에 사용하기 기능이 가능합니다.</string>
+    <string name="callSetting_reservation">통화 예약</string>
+    <string name="callSetting_callStart">전화 시작하기</string>
+    <string name="callSetting_notice">통화 알림</string>
     <!--    메인-->
     <string-array name="icon_text">
         <item>아싸 스킬</item>

@@ -174,7 +174,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@string/skil_kakaoText"
+                            android:text="@string/skill_kakaoText"
                             android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/textView_fakeKaKaoSubTitle" />

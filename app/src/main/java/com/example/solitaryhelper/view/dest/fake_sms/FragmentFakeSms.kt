@@ -8,12 +8,9 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewSmsCustom
 import com.example.solitaryhelper.view.base.BaseFragment
 
 class FragmentFakeSms:BaseFragment<FragmentFakeSmsBinding>(R.layout.fragment_fake_sms){
-    override fun FragmentFakeSmsBinding.setEventListener() {
+    override fun FragmentFakeSmsBinding.setEventListener() {}
 
-    }
-
-    override fun FragmentFakeSmsBinding.setCreateView() {
-    }
+    override fun FragmentFakeSmsBinding.setCreateView() {}
 
     override fun FragmentFakeSmsBinding.setLiveDataInObserver() {
         viewModelSms.SmsList.observe(viewLifecycleOwner, Observer {

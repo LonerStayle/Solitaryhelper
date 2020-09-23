@@ -41,8 +41,8 @@ class FragmentFakeCallSetting :
 
     private fun FragmentFakeCallSettingBinding.setButtonCallStartListener() {
         buttonCallStart.setOnClickListener {
-            Log.d("opop4","넘버피커 값:${numberPickerDelayNoticationEnabled.value}\n" +
-                    "딜레이 값 ${PrefCheckRun.getInstance(requireContext()).callDelayCotrol}")
+//            Log.d("opop4","넘버피커 값:${numberPickerDelayNoticationEnabled.value}\n" +
+//                    "딜레이 값 ${PrefCheckRun.getInstance(requireContext()).callDelayCotrol}")
             if (TextUtils.isEmpty(editTextNameWrite.text.toString()))
                 context?.toastDebugTest("수신 받을 가짜 이름을 적어주세요")
 
@@ -61,9 +61,8 @@ class FragmentFakeCallSetting :
     }
 
     private fun FragmentFakeCallSettingBinding.numberPickerSetting() {
-        numberPickerNoticeSetting.displayedValues = arrayOf("무음", "진동", "벨소리")
+        numberPickerNoticeSetting.displayedValues = arrayOf("무음", "진동", "벨소리","")
         numberPickerDelayNoticationEnabled.displayedValues = arrayOf("OFF", "ON")
-
 
     }
 
