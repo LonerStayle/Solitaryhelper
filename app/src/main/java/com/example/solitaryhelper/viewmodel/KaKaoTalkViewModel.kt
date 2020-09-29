@@ -3,14 +3,13 @@ package com.example.solitaryhelper.viewmodel
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
-import com.example.solitaryhelper.localdb.dao.KaKaoDao
+import com.example.solitaryhelper.database.localdb.dao.KaKaoDao
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
+import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 
 

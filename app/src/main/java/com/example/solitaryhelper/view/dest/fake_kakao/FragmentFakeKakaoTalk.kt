@@ -3,14 +3,11 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 import android.graphics.Color
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoTalkBinding
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
-import com.example.solitaryhelper.view.activity.autoChatRun
+import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkData
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents

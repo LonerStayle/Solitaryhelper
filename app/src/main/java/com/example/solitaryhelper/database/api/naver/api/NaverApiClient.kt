@@ -1,8 +1,8 @@
-package com.example.solitaryhelper.networkdb.naver.api
+package com.example.solitaryhelper.database.api.naver.api
 
 
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlogSearchResult
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverNewsSearchResult
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverBlogSearchResult
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverNewsSearchResult
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

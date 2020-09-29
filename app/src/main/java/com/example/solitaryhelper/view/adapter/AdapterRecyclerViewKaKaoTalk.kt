@@ -1,8 +1,5 @@
 package com.example.solitaryhelper.view.adapter
 
-import android.content.Context
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkTalkBinding
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
-import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk.Companion.itemOrderList
-import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkData
 import com.example.solitaryhelper.view.utill.kakaoTimeDisplay
 
 class AdapterRecyclerViewKaKaoTalk(

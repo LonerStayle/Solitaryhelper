@@ -1,7 +1,6 @@
-package com.example.solitaryhelper.localdb.entitiy
+package com.example.solitaryhelper.database.localdb.entitiy
 
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.google.gson.Gson
 
 class ConverterKaKaoChatDataUser {

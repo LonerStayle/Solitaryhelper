@@ -1,8 +1,7 @@
-package com.example.solitaryhelper.localdb.entitiy
+package com.example.solitaryhelper.database.localdb.entitiy
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 
 //@Entity
 //data class KaKaoTalkChatData(

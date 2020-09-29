@@ -1,8 +1,8 @@
-package com.example.solitaryhelper.localdb.dao
+package com.example.solitaryhelper.database.localdb.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData
+import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkData
 
 @Dao
 interface KaKaoDao {

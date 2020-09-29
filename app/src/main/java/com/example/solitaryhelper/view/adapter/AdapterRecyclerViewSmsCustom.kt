@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderSmsCustomMytextBinding
 import com.example.solitaryhelper.databinding.ViewholderSmsCustomYourtextBinding
-import com.example.solitaryhelper.localdb.entitiy.Sms
+import com.example.solitaryhelper.database.localdb.entitiy.Sms
 
 class AdapterRecyclerViewSmsCustom(var smsList: MutableList<Sms>) :
     RecyclerView.Adapter<AdapterRecyclerViewSmsCustom.ViewHolder>() {

@@ -1,10 +1,7 @@
-package com.example.solitaryhelper.localdb.entitiy
+package com.example.solitaryhelper.database.localdb.entitiy
 
-import androidx.room.Embedded
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class ConverterKaKaoTalkData {
 

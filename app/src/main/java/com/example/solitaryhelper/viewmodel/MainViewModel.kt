@@ -1,9 +1,8 @@
 package com.example.solitaryhelper.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
-import com.example.solitaryhelper.localdb.dao.SmsDao
-import com.example.solitaryhelper.localdb.dao.UserDao
-import com.example.solitaryhelper.localdb.entitiy.UserProfile
+import com.example.solitaryhelper.database.localdb.dao.UserDao
+import com.example.solitaryhelper.database.localdb.entitiy.UserProfile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

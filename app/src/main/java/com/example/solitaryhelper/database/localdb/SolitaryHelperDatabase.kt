@@ -1,17 +1,18 @@
-package com.example.solitaryhelper.localdb
+package com.example.solitaryhelper.database.localdb
 
 import android.content.Context
 import androidx.room.*
-import com.example.solitaryhelper.localdb.dao.KaKaoChatDao
-import com.example.solitaryhelper.localdb.dao.KaKaoDao
-import com.example.solitaryhelper.localdb.dao.SmsDao
-import com.example.solitaryhelper.localdb.dao.UserDao
-import com.example.solitaryhelper.localdb.entitiy.*
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData
+import com.example.solitaryhelper.database.localdb.dao.KaKaoChatDao
+import com.example.solitaryhelper.database.localdb.dao.KaKaoDao
+import com.example.solitaryhelper.database.localdb.dao.SmsDao
+import com.example.solitaryhelper.database.localdb.dao.UserDao
+import com.example.solitaryhelper.database.localdb.entitiy.*
+import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkChatData
 
 
 @Database(
-    entities = [UserProfile::class, Sms::class, KaKaoTalkData::class,KaKaoTalkChatData::class,
+    entities = [UserProfile::class, Sms::class, KaKaoTalkData::class,
+        KaKaoTalkChatData::class,
         KaKaoTalkChatData1::class, KaKaoTalkChatData2::class, KaKaoTalkChatData3::class,
         KaKaoTalkChatData4::class, KaKaoTalkChatData5::class, KaKaoTalkChatData6::class,
         KaKaoTalkChatData7::class, KaKaoTalkChatData8::class, KaKaoTalkChatData9::class,

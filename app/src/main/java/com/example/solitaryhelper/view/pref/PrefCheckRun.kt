@@ -57,12 +57,6 @@ class PrefCheckRun private constructor (val context: Context){
                 value).apply()
         }
 
-    var autoRun:Boolean
-        get() = pref.getBoolean(Key.AUTO_RUN.name,false)
-        set(value) {
-            pref.edit().putBoolean(Key.AUTO_RUN.name,
-                value).apply()
-        }
 
 
 }

@@ -1,10 +1,8 @@
-package com.example.solitaryhelper.localdb.dao
+package com.example.solitaryhelper.database.localdb.dao
 
-import android.service.autofill.UserData
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.solitaryhelper.localdb.entitiy.Sms
-import com.example.solitaryhelper.localdb.entitiy.UserProfile
+import com.example.solitaryhelper.database.localdb.entitiy.Sms
 
 
 @Dao

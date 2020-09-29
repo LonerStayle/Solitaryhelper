@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatMyTextviewBinding
 import com.example.solitaryhelper.databinding.ViewholderKakaotalkChatYourTextviewBinding
-import com.example.solitaryhelper.localdb.entitiy.KaKaoTalkChatData10
+import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkChatData10
 
 import com.example.solitaryhelper.view.utill.kakaoTimeDisplay
 
@@ -85,7 +85,7 @@ class AdapterRecyclerViewKaKaoChat10(
 
             for (i in 1 until chatList.size) {
                 if (chatList[i].user != chatList[i].user ||
-                    chatList[i].timeList!! != chatList[i].timeList
+                    chatList[i].timeList != chatList[i].timeList
                 )
                     nameVisibleList.add(View.VISIBLE)
                 else

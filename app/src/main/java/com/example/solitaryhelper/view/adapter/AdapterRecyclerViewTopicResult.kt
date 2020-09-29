@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.ViewholderTopicReusltBinding
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlog
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverBlog
 import com.example.solitaryhelper.view.utill.toPicTextControl
 
 /**

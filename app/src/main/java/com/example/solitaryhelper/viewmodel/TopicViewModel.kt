@@ -1,14 +1,16 @@
 package com.example.solitaryhelper.viewmodel
 
-import androidx.lifecycle.*
-import com.example.solitaryhelper.networkdb.naver.api.NaverApiClient
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlog
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverNews
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverBlog
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverNews
+import com.example.solitaryhelper.repository.NaverApiRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TopicViewModel : ViewModel() {
+class TopicViewModel(private val repository: NaverApiRepository) : ViewModel() {
 
     private val _blogMovie = MutableLiveData<List<NaverBlog>>()
     val blogMovie: LiveData<List<NaverBlog>>
@@ -61,25 +63,26 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogMovie(movie: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "$movie 최신 영화 상영작").items
+
+            val movie = repository.searchBlog(query = "$movie 최신 영화 상영작")
             _blogMovie.postValue(movie)
-            //2020년 8월 최신 영화 상영작
+
         }
     }
 
     fun insertBlogMusic(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "멜론 $music 노래 듣기").items
-            _blogMusic.postValue(movie)
+            val music = repository.searchBlog(query = "멜론 $music 노래 듣기")
+            _blogMusic.postValue(music)
 
-//            멜론 2020년 8월 노래 듣기
+
         }
     }
 
     fun insertBlogFashion(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "$music 패션 트렌드").items
-            _blogFashion.postValue(movie)
+            val fashionTrend = repository.searchBlog(query = "$music 패션 트렌드")
+            _blogFashion.postValue(fashionTrend)
 
 //    2020년 8월 패션 트렌드
         }
@@ -88,8 +91,8 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungManFashion(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "$music 남자 옷 추천").items
-            _blogYoungManFashion.postValue(movie)
+            val youngManFashion = repository.searchBlog(query = "$music 남자 옷 추천")
+            _blogYoungManFashion.postValue(youngManFashion)
 
 //      2020년 남자 옷 추천
         }
@@ -97,8 +100,8 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungGirlFashion(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "$music 여자 옷 추천").items
-            _blogYoungManFashion.postValue(movie)
+            val youngGirlFashion = repository.searchBlog(query = "$music 여자 옷 추천")
+            _blogYoungManFashion.postValue(youngGirlFashion)
 
 //      2020년 여자 옷 추천
         }
@@ -107,9 +110,8 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungManHair(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie =
-                NaverApiClient.api.searchBlog(query = "$music 남자 헤어스타일 추천").items
-            _blogYoungManHair.postValue(movie)
+            val youngManHair = repository.searchBlog(query = "$music 남자 헤어스타일 추천")
+            _blogYoungManHair.postValue(youngManHair)
 
 //       2020년 8월 남자 헤어스타일 추천
         }
@@ -117,9 +119,9 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogYoungGirlHair(music: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie =
-                NaverApiClient.api.searchBlog(query = "$music 여자 헤어스타일 추천").items
-            _blogYoungGirlFashion.postValue(movie)
+            val youngGirlHair =
+                repository.searchBlog(query = "$music 여자 헤어스타일 추천")
+            _blogYoungGirlFashion.postValue(youngGirlHair)
 
 //     2020년 8월 여자 헤어스타일 추천
         }
@@ -127,8 +129,8 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogOldMANFashion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "중년 남성옷").items
-            _blogOldManFashion.postValue(movie)
+            val oldMANFashion = repository.searchBlog(query = "중년 남성옷")
+            _blogOldManFashion.postValue(oldMANFashion)
 
 //     중년 남성 옷
         }
@@ -136,8 +138,8 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogOldGirlFashion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie = NaverApiClient.api.searchBlog(query = "중년 여성옷").items
-            _blogOldGirlFashion.postValue(movie)
+            val oldGirlFashion = repository.searchBlog(query = "중년 여성옷")
+            _blogOldGirlFashion.postValue(oldGirlFashion)
 
 //     중년 여성 옷
         }
@@ -145,9 +147,9 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogStudentManFashion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie =
-                NaverApiClient.api.searchBlog(query = "10대 남성 옷", display = 100).items
-            _blogStudentManFashion.postValue(movie)
+            val studentManFashion =
+                repository.searchBlog(query = "10대 남성 옷", display = 100)
+            _blogStudentManFashion.postValue(studentManFashion)
 
 //     10대 남성 옷
         }
@@ -155,9 +157,9 @@ class TopicViewModel : ViewModel() {
 
     fun insertBlogStudentGirlFashion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie =
-                NaverApiClient.api.searchBlog(query = "10대 여성 옷", display = 100).items
-            _blogStudentGirlFashion.postValue(movie)
+            val studentGirlFashion =
+                repository.searchBlog(query = "10대 여성 옷", display = 100)
+            _blogStudentGirlFashion.postValue(studentGirlFashion)
 
             // 10대 여성 옷
         }
@@ -165,15 +167,14 @@ class TopicViewModel : ViewModel() {
 
     fun insertNaverNewsSearch() {
         CoroutineScope(Dispatchers.IO).launch {
-            val movie =
-                NaverApiClient.api.searchNews(
+            val naverNewsSearch =
+                repository.searchNews(
                     query = "재미 유행 인기 예능",
                     display = 100
-                ).items
-            _newsTrend.postValue(movie)
+                )
+            _newsTrend.postValue(naverNewsSearch)
 
             //     재미 유행 인기 예능
-
         }
 
     }

@@ -1,8 +1,8 @@
 package com.example.solitaryhelper.viewmodel
 
 import androidx.lifecycle.*
-import com.example.solitaryhelper.localdb.dao.SmsDao
-import com.example.solitaryhelper.localdb.entitiy.Sms
+import com.example.solitaryhelper.database.localdb.dao.SmsDao
+import com.example.solitaryhelper.database.localdb.entitiy.Sms
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

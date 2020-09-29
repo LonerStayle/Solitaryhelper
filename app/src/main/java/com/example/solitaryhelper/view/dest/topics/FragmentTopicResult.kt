@@ -10,8 +10,8 @@ import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 
 import com.example.solitaryhelper.databinding.FragmentTopicResultBinding
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverBlog
-import com.example.solitaryhelper.networkdb.naver.dataholder.NaverNews
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverBlog
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverNews
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewTopicResult
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
@@ -21,7 +21,6 @@ import com.example.solitaryhelper.view.contents.Contents.topicTimeYearMonth
 import com.example.solitaryhelper.view.utill.toPicTextControl
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.view.utill.topicTimeDisplay
-import kotlinx.android.synthetic.main.fragment_topic_result.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -3,14 +3,12 @@ package com.example.solitaryhelper.view.dest.fake_sms.settingfragments
 import android.graphics.Color
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeSmsSettingCustomBinding
-import com.example.solitaryhelper.localdb.entitiy.Sms
+import com.example.solitaryhelper.database.localdb.entitiy.Sms
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewSmsCustom
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import java.util.*
 

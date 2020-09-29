@@ -1,11 +1,11 @@
-package com.example.solitaryhelper.localdb.dao
+package com.example.solitaryhelper.database.localdb.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.solitaryhelper.localdb.entitiy.UserProfile
+import com.example.solitaryhelper.database.localdb.entitiy.UserProfile
 
 @Dao
 interface UserDao {

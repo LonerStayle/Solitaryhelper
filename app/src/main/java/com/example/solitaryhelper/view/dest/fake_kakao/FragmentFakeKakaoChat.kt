@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
-import com.example.solitaryhelper.localdb.entitiy.*
+import com.example.solitaryhelper.database.localdb.entitiy.*
 import com.example.solitaryhelper.view.activity.autoChatRun
 import com.example.solitaryhelper.view.adapter.kakao_chat.*
 import com.example.solitaryhelper.view.base.BaseFragment

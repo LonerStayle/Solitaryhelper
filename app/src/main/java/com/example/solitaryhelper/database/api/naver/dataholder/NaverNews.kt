@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.networkdb.naver.dataholder
+package com.example.solitaryhelper.database.api.naver.dataholder
 
 
 data class NaverNews(

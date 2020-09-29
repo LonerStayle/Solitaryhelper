@@ -8,7 +8,7 @@
 
         <variable
             name="kaKaoData"
-            type="com.example.solitaryhelper.localdb.entitiy.KaKaoTalkData" />
+            type="com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkData" />
 
         <variable
             name="lastIndex"

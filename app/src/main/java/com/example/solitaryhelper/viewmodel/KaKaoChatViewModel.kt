@@ -2,7 +2,6 @@ package com.example.solitaryhelper.viewmodel
 
 import android.app.*
 import android.content.Context
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
@@ -14,11 +13,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.localdb.dao.KaKaoChatDao
-import com.example.solitaryhelper.localdb.entitiy.*
+import com.example.solitaryhelper.database.localdb.dao.KaKaoChatDao
+import com.example.solitaryhelper.database.localdb.entitiy.*
 import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat
-import com.example.solitaryhelper.view.pref.PrefCheckRun
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
