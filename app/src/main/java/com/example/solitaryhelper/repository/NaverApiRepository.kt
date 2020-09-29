@@ -11,16 +11,13 @@ import kotlinx.coroutines.launch
 import retrofit2.http.Query
 
 interface NaverApiDataSource {
-
     suspend fun searchBlog(
         query: String, display: Int = 10, sort: String = "sim"): List<NaverBlog>
 
     suspend fun searchNews(
         query: String, display: Int = 20, sort:String = "sim"): List<NaverNews>
 
-
 }
-
 
 class NaverApiRepository: NaverApiDataSource {
     override suspend fun searchBlog(

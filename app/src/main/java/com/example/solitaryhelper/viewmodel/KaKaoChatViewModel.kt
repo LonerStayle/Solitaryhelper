@@ -15,6 +15,7 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.database.localdb.dao.KaKaoChatDao
 import com.example.solitaryhelper.database.localdb.entitiy.*
+import com.example.solitaryhelper.repository.KaKaoChatDataRepository
 import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat
 import kotlinx.coroutines.CoroutineScope
@@ -23,49 +24,49 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
+class KaKaoChatViewModel(private val repository: KaKaoChatDataRepository ) : ViewModel() {
     private val ioScope = CoroutineScope(Dispatchers.IO + Job())
 
     val chatList: LiveData<List<KaKaoTalkChatData>>
-        get() = dataSource.getAllList()
+        get() = repository.getAllList()
     val chatList1: LiveData<List<KaKaoTalkChatData1>>
-        get() = dataSource.getAllList1()
+        get() = repository.getAllList1()
     val chatList2: LiveData<List<KaKaoTalkChatData2>>
-        get() = dataSource.getAllList2()
+        get() = repository.getAllList2()
     val chatList3: LiveData<List<KaKaoTalkChatData3>>
-        get() = dataSource.getAllList3()
+        get() = repository.getAllList3()
     val chatList4: LiveData<List<KaKaoTalkChatData4>>
-        get() = dataSource.getAllList4()
+        get() = repository.getAllList4()
     val chatList5: LiveData<List<KaKaoTalkChatData5>>
-        get() = dataSource.getAllList5()
+        get() = repository.getAllList5()
     val chatList6: LiveData<List<KaKaoTalkChatData6>>
-        get() = dataSource.getAllList6()
+        get() = repository.getAllList6()
     val chatList7: LiveData<List<KaKaoTalkChatData7>>
-        get() = dataSource.getAllList7()
+        get() = repository.getAllList7()
     val chatList8: LiveData<List<KaKaoTalkChatData8>>
-        get() = dataSource.getAllList8()
+        get() = repository.getAllList8()
     val chatList9: LiveData<List<KaKaoTalkChatData9>>
-        get() = dataSource.getAllList9()
+        get() = repository.getAllList9()
     val chatList10: LiveData<List<KaKaoTalkChatData10>>
-        get() = dataSource.getAllList10()
+        get() = repository.getAllList10()
     val chatList11: LiveData<List<KaKaoTalkChatData11>>
-        get() = dataSource.getAllList11()
+        get() = repository.getAllList11()
     val chatList12: LiveData<List<KaKaoTalkChatData12>>
-        get() = dataSource.getAllList12()
+        get() = repository.getAllList12()
     val chatList13: LiveData<List<KaKaoTalkChatData13>>
-        get() = dataSource.getAllList13()
+        get() = repository.getAllList13()
     val chatList14: LiveData<List<KaKaoTalkChatData14>>
-        get() = dataSource.getAllList14()
+        get() = repository.getAllList14()
     val chatList15: LiveData<List<KaKaoTalkChatData15>>
-        get() = dataSource.getAllList15()
+        get() = repository.getAllList15()
     val chatList16: LiveData<List<KaKaoTalkChatData16>>
-        get() = dataSource.getAllList16()
+        get() = repository.getAllList16()
     val chatList17: LiveData<List<KaKaoTalkChatData17>>
-        get() = dataSource.getAllList17()
+        get() = repository.getAllList17()
     val chatList18: LiveData<List<KaKaoTalkChatData18>>
-        get() = dataSource.getAllList18()
+        get() = repository.getAllList18()
     val chatList19: LiveData<List<KaKaoTalkChatData19>>
-        get() = dataSource.getAllList19()
+        get() = repository.getAllList19()
 
 //    private val _chatListPlus = MutableLiveData<KaKaoTalkChatDataCopy>()
 //    val chatListPlus:LiveData<KaKaoTalkChatDataCopy>
@@ -78,116 +79,126 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
     //챗 리스트 인서트
     fun insert(kakao: KaKaoTalkChatData) {
         ioScope.launch {
-            dataSource.insert(kakao)
+            repository.insert(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert1(kakao: KaKaoTalkChatData1) {
         ioScope.launch {
-            dataSource.insert1(kakao)
+            repository.insert1(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert2(kakao: KaKaoTalkChatData2) {
         ioScope.launch {
-            dataSource.insert2(kakao)
+            repository.insert2(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert3(kakao: KaKaoTalkChatData3) {
         ioScope.launch {
-            dataSource.insert3(kakao)
+            repository.insert3(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert4(kakao: KaKaoTalkChatData4) {
         ioScope.launch {
-            dataSource.insert4(kakao)
+            repository.insert4(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert5(kakao: KaKaoTalkChatData5) {
         ioScope.launch {
-            dataSource.insert5(kakao)
+            repository.insert5(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert6(kakao: KaKaoTalkChatData6) {
         ioScope.launch {
-            dataSource.insert6(kakao)
+            repository.insert6(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert7(kakao: KaKaoTalkChatData7) {
         ioScope.launch {
-            dataSource.insert7(kakao)
+            repository.insert7(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert8(kakao: KaKaoTalkChatData8) {
         ioScope.launch {
-            dataSource.insert8(kakao)
+            repository.insert8(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert9(kakao: KaKaoTalkChatData9) {
         ioScope.launch {
-            dataSource.insert9(kakao)
+            repository.insert9(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert10(kakao: KaKaoTalkChatData10) {
         ioScope.launch {
-            dataSource.insert10(kakao)
+            repository.insert10(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert11(kakao: KaKaoTalkChatData11) {
         ioScope.launch {
-            dataSource.insert11(kakao)
+            repository.insert11(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert12(kakao: KaKaoTalkChatData12) {
         ioScope.launch {
-            dataSource.insert12(kakao)
+            repository.insert12(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert13(kakao: KaKaoTalkChatData13) {
         ioScope.launch {
-            dataSource.insert13(kakao)
+            repository.insert13(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert14(kakao: KaKaoTalkChatData14) {
         ioScope.launch {
-            dataSource.insert14(kakao)
+            repository.insert14(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert15(kakao: KaKaoTalkChatData15) {
         ioScope.launch {
-            dataSource.insert15(kakao)
+            repository.insert15(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert16(kakao: KaKaoTalkChatData16) {
         ioScope.launch {
-            dataSource.insert16(kakao)
+            repository.insert16(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert17(kakao: KaKaoTalkChatData17) {
         ioScope.launch {
-            dataSource.insert17(kakao)
+            repository.insert17(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert18(kakao: KaKaoTalkChatData18) {
         ioScope.launch {
-            dataSource.insert18(kakao)
+            repository.insert18(kakao)
         }
     }//챗 리스트 인서트
+
     fun insert19(kakao: KaKaoTalkChatData19) {
         ioScope.launch {
-            dataSource.insert19(kakao)
-        }
-    }
-    //챗 리스트 인서트
-    fun listInsert(kakao: List<KaKaoTalkChatData>) {
-        ioScope.launch {
-            dataSource.allInsert(kakao)
+            repository.insert19(kakao)
         }
     }
 
 
-
-
-
-    fun clearExistingNotifications(notificationId: Int, manager: NotificationManager ) {
+    fun clearExistingNotifications(notificationId: Int, manager: NotificationManager) {
         manager.cancel(notificationId)
     }
 
@@ -223,7 +234,7 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
 //            context, 0,
 //            intent, PendingIntent.FLAG_UPDATE_CURRENT
 //        )
-        val pendingIntent = NavDeepLinkBuilder(context).run{
+        val pendingIntent = NavDeepLinkBuilder(context).run {
             setGraph(R.navigation.main)
             setArguments(bundle)
             setDestination(R.id.fragmentFakeKakaoChat)
@@ -235,18 +246,17 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
         val builder = NotificationCompat.Builder(context, channelId).apply {
             setSmallIcon(icon)
             setLargeIcon(
-                    BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.kakao_talk_logo
-                    )
+                BitmapFactory.decodeResource(
+                    context.resources,
+                    R.drawable.kakao_talk_logo
                 )
-                setStyle(style)
+            )
+            setStyle(style)
             setContentIntent(pendingIntent)
             setAutoCancel(true)
             priority = NotificationCompat.PRIORITY_HIGH
 
         }
-
 
 
         val notificationManager = NotificationManagerCompat.from(context)
@@ -267,6 +277,6 @@ class KaKaoChatViewModel(private val dataSource: KaKaoChatDao) : ViewModel() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+
+
 }
-
-

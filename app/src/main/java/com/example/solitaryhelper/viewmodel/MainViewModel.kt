@@ -3,21 +3,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import com.example.solitaryhelper.database.localdb.dao.UserDao
 import com.example.solitaryhelper.database.localdb.entitiy.UserProfile
+import com.example.solitaryhelper.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val dataSource:UserDao):ViewModel() {
+class MainViewModel(private val repository: UserRepository):ViewModel() {
 
     private val iOScope = CoroutineScope(Dispatchers.IO+ Job())
 
     val userProfile:LiveData<UserProfile>
-    get() = dataSource.getUserProfile()
+    get() = repository.getUserProfile()
 
     fun insertUserProfileId(id:String){
         iOScope.launch {
-           dataSource.insertUserProfile(UserProfile(0,id,0,""))
+           repository.insertUserProfile(UserProfile(0,id,0,""))
         }
     }
 

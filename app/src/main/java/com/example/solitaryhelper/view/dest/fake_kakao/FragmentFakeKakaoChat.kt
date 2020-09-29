@@ -1242,10 +1242,6 @@ class FragmentFakeKakaoChat :
             requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
                 findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck)
             }
-        } else {
-            requireActivity().onBackPressedDispatcher.addCallback(this@FragmentFakeKakaoChat) {
-                findNavController().navigate(R.id.action_fragmentFakeKakaoChat_to_fragmentFakeKakaoTalk)
-            }
         }
     }
 

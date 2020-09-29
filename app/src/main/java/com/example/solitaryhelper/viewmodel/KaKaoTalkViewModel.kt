@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.example.solitaryhelper.database.localdb.dao.KaKaoDao
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkData
+import com.example.solitaryhelper.repository.KaKaoTalkRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -13,20 +14,20 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class KaKaoTalkViewModel(private val dataSource: KaKaoDao) : ViewModel() {
+class KaKaoTalkViewModel(private val repository: KaKaoTalkRepository) : ViewModel() {
     val ioScope = CoroutineScope(Dispatchers.IO + Job())
     val kakaoData: LiveData<List<KaKaoTalkData>>
-        get() = dataSource.getAllList()
+        get() = repository.getAllList()
 
 
     fun allListInsert(kaoTalkData: List<KaKaoTalkData>) {
         ioScope.launch {
-            dataSource.insertAllList(kaoTalkData)
+            repository.insertAllList(kaoTalkData)
         }
     }
     fun insert(kaoTalkData: KaKaoTalkData){
         ioScope.launch {
-            dataSource.insert(kaoTalkData)
+            repository.insert(kaoTalkData)
         }
     }
 

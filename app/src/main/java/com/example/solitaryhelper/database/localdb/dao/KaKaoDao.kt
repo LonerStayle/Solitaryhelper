@@ -16,6 +16,4 @@ interface KaKaoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllList(kaoTalkData: List<KaKaoTalkData>)
 
-    @Update
-    fun update(kaoTalkData: KaKaoTalkData)
 }
