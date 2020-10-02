@@ -32,20 +32,24 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
     private var callImageList: Array<String>? = null
     private var smsImageList: Array<String>? = null
 
-
-    override fun FragmentSkillBinding.setEventListener() {
-        setClickEvent()
-    }
-
     override fun FragmentSkillBinding.setCreateView() {
+        thisFragment = this@FragmentSkill
         setAdapter()
         setViewPagerAnim()
     }
 
+    override fun FragmentSkillBinding.setEventListener() {
+        setTouchEvent()
+    }
+
+
+
     private fun FragmentSkillBinding.setViewPagerAnim() {
+
         viewModelSkill.setViewPagerSetting(viewPagerFakekakaoTalkInfo, requireContext())
         viewModelSkill.setViewPagerSetting(viewPagerFakeSmsInfo, requireContext())
         viewModelSkill.setViewPagerSetting(viewPagerFakeCallInfo, requireContext())
+
     }
 
     private fun FragmentSkillBinding.setAdapter() {
@@ -81,33 +85,32 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
         }
         smsitemList.add(ViewPagerItem(smsImageList!![0], smsTextList[0]))
 
-
-        viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(kakaoitemList){setGoToTheKaKaoTalk()}
-        viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(callitemList){setGoToTheCallSetting()}
-        viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(smsitemList){setGoToTheSmsSetting()}
+        viewPagerFakekakaoTalkInfo.adapter = AdapterViewPagerSkill(kakaoitemList){setGoToTheKaKaoTalk(null)}
+        viewPagerFakeCallInfo.adapter = AdapterViewPagerSkill(callitemList){setGoToTheCallSetting(null)}
+        viewPagerFakeSmsInfo.adapter = AdapterViewPagerSkill(smsitemList){setGoToTheSmsSetting(null)}
 
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun FragmentSkillBinding.setClickEvent() {
-
+    fun FragmentSkillBinding.setTouchEvent() {
 
         fun touchEvent(afterLogic: () -> Unit): View.OnTouchListener {
             return View.OnTouchListener { view, motionEvent ->
                 when (motionEvent.action) {
+
                     MotionEvent.ACTION_DOWN -> {
                         view.alpha = 0.5f
                         view.scaleY = 2.0f
                         view.scaleX = 2.0f
                     }
+
                     MotionEvent.ACTION_UP -> {
                         view.animate().alpha(1.0f).scaleY(1.0f).scaleX(1.0f)
                             .setDuration(300L).withEndAction { afterLogic() }.start()
                     }
 
-
-                    MotionEvent.ACTION_MOVE -> {
-                        view.animate().alpha(1.0f).scaleX(1.0f).scaleX(1.0f)
+                    else -> {
+                        view.animate().alpha(1.0f).scaleX(1.0f).scaleY(1.0f)
                             .setDuration(200L).start()
                     }
                 }
@@ -116,43 +119,25 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
         }
 
         imageViewQuickKaKaoButton.setOnTouchListener(touchEvent
-        { setGoToTheKaKaoTalk() })
+        { setGoToTheKaKaoTalk(null) })
 
         imageViewQuickCallButton.setOnTouchListener(touchEvent
-        { setGoToTheCallSetting() })
+        { setGoToTheCallSetting(null) })
 
         imageViewQuickSmsButton.setOnTouchListener(touchEvent
-        { setGoToTheSmsSetting() })
+        { setGoToTheSmsSetting(null) })
 
-        textViewKaKaoTitle.setOnClickListener{
-            setGoToTheKaKaoTalk()
-        }
-        layoutSkillInfoKaKaoTalkIntro.setOnClickListener{
-            setGoToTheKaKaoTalk()
-        }
-        textViewCallTitle.setOnClickListener{
-            setGoToTheCallSetting()
-        }
-        layoutSkillInfoCallIntro.setOnClickListener{
-            setGoToTheCallSetting()
-        }
-        textViewSmsTitle.setOnClickListener{
-            setGoToTheSmsSetting()
-        }
-        layoutSkillInfoSmsIntro.setOnClickListener{
-            setGoToTheSmsSetting()
-        }
     }
 
-    private fun setGoToTheKaKaoTalk() {
+     fun setGoToTheKaKaoTalk(v:View?) {
         findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeKakaoTalk)
     }
 
-    private fun setGoToTheCallSetting() {
+     fun setGoToTheCallSetting(v:View?) {
         findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCallSetting)
     }
 
-    private fun setGoToTheSmsSetting() {
+     fun setGoToTheSmsSetting(v:View?) {
         findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSmsSetting)
     }
 

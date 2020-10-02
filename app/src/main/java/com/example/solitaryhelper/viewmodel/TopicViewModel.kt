@@ -63,7 +63,6 @@ class TopicViewModel(private val repository: NaverApiRepository) : ViewModel() {
 
     fun insertBlogMovie(movie: String) {
         CoroutineScope(Dispatchers.IO).launch {
-
             val movie = repository.searchBlog(query = "$movie 최신 영화 상영작")
             _blogMovie.postValue(movie)
 

@@ -2,7 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+<data>
+    <variable
+        name="thisFragment"
+        type="com.example.solitaryhelper.view.dest.main.tapfragments.FragmentSkill" />
+</data>
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -135,6 +139,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/skill_kaKaoTitle"
+                            android:onClick="@{thisFragment::setGoToTheKaKaoTalk}"
                             android:textSize="24sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -156,6 +161,7 @@
                         android:id="@+id/layout_skillInfoKaKaoTalkIntro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="@{thisFragment::setGoToTheKaKaoTalk}"
                         android:layout_margin="8dp">
 
                         <TextView
@@ -217,6 +223,7 @@
                         android:layout_margin="8dp"
                         android:drawableStart="@drawable/ic_baseline_phone_in_call_24"
                         android:text="가짜 전화"
+                        android:onClick="@{thisFragment::setGoToTheCallSetting}"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -236,6 +243,7 @@
                         android:id="@+id/layout_skillInfoCallIntro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="@{thisFragment::setGoToTheCallSetting}"
                         android:layout_margin="8dp">
 
 
@@ -297,6 +305,7 @@
                         android:layout_margin="8dp"
                         android:drawableStart="@drawable/ic_round_mode_sms_24"
                         android:text="가짜 문자"
+                        android:onClick="@{thisFragment::setGoToTheSmsSetting}"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -316,6 +325,7 @@
                         android:id="@+id/layout_skillInfoSmsIntro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="@{thisFragment::setGoToTheSmsSetting}"
                         android:layout_margin="8dp">
 
 

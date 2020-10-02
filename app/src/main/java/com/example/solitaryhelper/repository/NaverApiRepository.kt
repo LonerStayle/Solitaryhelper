@@ -20,6 +20,7 @@ interface NaverApiDataSource {
 }
 
 class NaverApiRepository: NaverApiDataSource {
+
     override suspend fun searchBlog(
         query: String,
         display: Int,
