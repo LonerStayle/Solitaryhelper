@@ -52,13 +52,11 @@ class FragmentEatingAlone :
     private var fristRun: Boolean = false
 
 
-    override fun FragmentEatingAloneBinding.setEventListener() {
-
-        buttonClickListener()
-    }
+    override fun FragmentEatingAloneBinding.setEventListener() {}
 
 
     override fun FragmentEatingAloneBinding.setCreateView() {
+        thisFragment = this@FragmentEatingAlone
         initLocation()
 //        mapViewContainer.addView(mapView)
 //        mapLocationPlus()
@@ -66,9 +64,7 @@ class FragmentEatingAlone :
 
     }
 
-    private fun FragmentEatingAloneBinding.buttonClickListener() {
-
-        buttonSendEatingHouse.setOnClickListener {
+     fun setButtonClickListener(v:View) {
 
             try {
                 val shuffled = eatingList.toList().shuffled()
@@ -99,11 +95,10 @@ class FragmentEatingAlone :
                 startActivity(intent)
             }
 
-        }
+
     }
 
     private fun setMap() {
-
 
         if (playerLatitude == null || playerLongitude == null)
             mapView.setMapCenterPoint(

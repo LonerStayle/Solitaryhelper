@@ -2,12 +2,8 @@ package com.example.solitaryhelper.view.dest.main
 
 
 import android.graphics.Color
-import android.os.Build
 import android.text.TextUtils
-import android.view.View
-import android.view.WindowManager
 import androidx.activity.addCallback
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -21,12 +17,10 @@ import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_fake_call_setting.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.apache.commons.lang3.StringUtils
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
@@ -63,7 +57,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         )
     }
 
-    private val dialog by lazy { DialogCustom(requireContext(),R.layout.dialog_main_id_create) }
+    private val dialog by lazy { DialogCustom(requireContext(),R.layout.dialog_main_id_create,
+    R.style.Theme_AppCompat_Light_Dialog_Alert) }
 
 
     override fun FragmentMainBinding.setCreateView() {
@@ -281,7 +276,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
         if (!PrefCheckRun.getInstance(requireContext()).idEmptyCheck) {
 
-            dialog.dialogMainIdCreate()
+            dialog.dialogViewCreate()
 
             dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
                 logicInMakeId()
@@ -294,7 +289,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private fun setButtonIdChangeClickListener(logic: () -> Unit) {
 
         naviHeaderBinding.buttonIdChange.setOnClickListener {
-            dialog.dialogMainIdCreate()
+            dialog.dialogViewCreate()
             dialog.dialogCreate.show()
 
             dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {

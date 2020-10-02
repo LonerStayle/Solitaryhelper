@@ -1,13 +1,16 @@
 package com.example.solitaryhelper.view.dest.fake_call
 
+import android.app.TimePickerDialog
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallSettingBinding
 
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
+import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.view.utill.toastDebugTest
@@ -20,12 +23,12 @@ class FragmentFakeCallSetting :
 
     override fun FragmentFakeCallSettingBinding.setEventListener() {
 //        setSpinnerItemSelectListener()
-        setButtonCallStartListener()
 
     }
 
 
     override fun FragmentFakeCallSettingBinding.setCreateView() {
+        thisFragment = this@FragmentFakeCallSetting
         keyBoardShowHiding(requireContext(), editTextNameWrite)
         numberPickerSetting()
 //        setSpinnerAdapter()
@@ -34,19 +37,21 @@ class FragmentFakeCallSetting :
 
     private fun FragmentFakeCallSettingBinding.setNumberPickerDelayNoticationEnabledSelectListener() {
         when (numberPickerDelayNoticationEnabled.value) {
-            1 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol = Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
-            2 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol = Contents.CALL_DELAY_NOTICATION_ENABLED_ON
+            1 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
+                Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
+            2 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
+                Contents.CALL_DELAY_NOTICATION_ENABLED_ON
         }
     }
 
-    private fun FragmentFakeCallSettingBinding.setButtonCallStartListener() {
-        buttonCallStart.setOnClickListener {
+    fun setButtonCallStartListener(v: View) {
+
 //            Log.d("opop4","넘버피커 값:${numberPickerDelayNoticationEnabled.value}\n" +
 //                    "딜레이 값 ${PrefCheckRun.getInstance(requireContext()).callDelayCotrol}")
-            if (TextUtils.isEmpty(editTextNameWrite.text.toString()))
-                context?.toastDebugTest("수신 받을 가짜 이름을 적어주세요")
-
-            else {
+        if (TextUtils.isEmpty(binding.editTextNameWrite.text.toString()))
+            context?.toastDebugTest("수신 받을 가짜 이름을 적어주세요")
+        else {
+            binding.apply {
                 findNavController().navigate(
                     FragmentFakeCallSettingDirections.actionFragmentFakeCallGuideToFragmentFakeCall(
                         callPartyName = editTextNameWrite.text.toString(),
@@ -61,8 +66,12 @@ class FragmentFakeCallSetting :
     }
 
     private fun FragmentFakeCallSettingBinding.numberPickerSetting() {
-        numberPickerNoticeSetting.displayedValues = arrayOf("무음", "진동", "벨소리","")
+        numberPickerNoticeSetting.displayedValues = arrayOf("무음", "진동", "벨소리", "")
         numberPickerDelayNoticationEnabled.displayedValues = arrayOf("OFF", "ON")
+
+    }
+
+    fun setButtonTimePickerClickListener(v: View) {
 
     }
 

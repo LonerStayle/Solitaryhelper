@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
-
+<data>
+    <variable
+        name="thisFragment"
+        type="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallSetting" />
+</data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,8 +27,8 @@
         <View
             android:id="@+id/view"
             android:layout_width="1dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="8dp"
             android:background="#dcdcdc"
             app:layout_constraintBottom_toTopOf="@+id/button_callStart"
             app:layout_constraintStart_toEndOf="@+id/numberPicker_noticeSetting"
@@ -33,11 +37,11 @@
         <NumberPicker
             android:id="@+id/numberPicker_noticeSetting"
 
-            min="@{1}"
             max="@{3}"
+            min="@{1}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="32dp"
             android:theme="@style/AppTheme.Picker"
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +53,7 @@
             min="@{1}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:theme="@style/AppTheme.Picker"
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintStart_toEndOf="@+id/view"
@@ -79,6 +83,7 @@
             android:textColor="@android:color/black"
             android:textSize="23sp"
             android:textStyle="bold"
+            android:onClick="@{thisFragment::setButtonCallStartListener}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -98,7 +103,7 @@
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
-            android:layout_height="220dp"
+            android:layout_height="140dp"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             bind:layout_constraintEnd_toEndOf="parent"
@@ -134,10 +139,31 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="textEnd"
             android:text="통화 알림\n무음,벨소리,진동 중에 선택\n\n딜레이 사용\n전화 예약사용이 가능합니다.\nex:30초 설정시 30초 후에 전화"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <Button
+            android:id="@+id/button_timepicker"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/callsetting_button_timepicker"
+            android:text="알람 시간 설정하기"
+            android:textColor="#fff"
+            android:textCursorDrawable="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/numberPicker_delayNoticationEnabled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/numberPicker_delayNoticationEnabled"
             app:layout_constraintTop_toTopOf="@+id/numberPicker_delayNoticationEnabled" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
