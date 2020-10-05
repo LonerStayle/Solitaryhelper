@@ -86,6 +86,15 @@ buildscript {
                 //circularimageview
                 "com.mikhaellopez:circularimageview:$circularImageView_version",
 
+                /*
+                파이버에이스
+                 */
+
+                //인증
+                 "com.google.firebase:firebase-auth:19.3.2",
+                //애널리틱스
+                 "com.google.firebase:firebase-analytics:17.2.0"
+
         ]
         arch_libraries = [
                 // Navigation
@@ -113,6 +122,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:4.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0"
+        classpath 'com.google.gms:google-services:4.3.4'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

@@ -21,9 +21,6 @@ class FragmentTopic : BaseFragment<FragmentTopicBinding>(R.layout.fragment_topic
 
     override fun FragmentTopicBinding.setCreateView() {
         setSpinnerAdapter()
-        imageViewGuide.setOnClickListener {
-            findNavController().navigate(R.id.mainToFragmentTopicGuide)
-        }
     }
 
     private fun FragmentTopicBinding.setButtonSearch() {
@@ -69,13 +66,8 @@ class FragmentTopic : BaseFragment<FragmentTopicBinding>(R.layout.fragment_topic
                     else -> "20~30대"
                 }
             }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-
-            }
+            override fun onStartTrackingTouch(p0: SeekBar?) {}
+            override fun onStopTrackingTouch(p0: SeekBar?) {}
 
         })
     }

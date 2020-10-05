@@ -21,9 +21,7 @@ class MainActivity : AppCompatActivity() {
         if (!PrefCheckRun.getInstance(this).kaKaoChatNavDeepLinkUseCheck)
             PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
 
-
-//        getAppKeyHash()
-        Log.d("debugCheck", "MainActivity:OnCreate:딥링크를 시 액티비티 재실행 체크")
+        //        getAppKeyHash()
     }
 
 //    fun getAppKeyHash() {

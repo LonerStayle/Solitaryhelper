@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 
     <application
@@ -25,39 +25,43 @@
         tools:targetApi="n">
 
 
-
-        <activity android:name=".view.activity.AppGuideActivity"
+        <activity
+            android:name=".view.activity.AppGuideActivity"
 
             android:screenOrientation="portrait">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.activity.LoginActivity">
 
-        <activity android:name=".view.activity.MainActivity"
+        </activity>
+        <activity
+            android:name=".view.activity.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
 
             <intent-filter>
-<!--                <action android:name="android.intent.action.MAIN" />-->
+                <!--                <action android:name="android.intent.action.MAIN" />-->
                 <data android:scheme="kakaomap://open" />
-                <data android:scheme="https://map.kakao.com"/>
+                <data android:scheme="https://map.kakao.com" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
+                <!--                <category android:name="android.intent.category.LAUNCHER"/>-->
             </intent-filter>
 
         </activity>
 
-        <activity android:name=".view.activity.WiseSayingActivity"
+        <activity
+            android:name=".view.activity.WiseSayingActivity"
             android:allowEmbedded="true"
             android:documentLaunchMode="always"
-            android:resizeableActivity="true">
-        </activity>
+            android:resizeableActivity="true"></activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

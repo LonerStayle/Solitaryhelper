@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+    <variable
+        name="loginActivity"
+        type="com.example.solitaryhelper.view.activity.LoginActivity" />
+</data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_dialoglayout_background"
+        android:padding="30dp">
+        <TextView
+            android:id="@+id/textView_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전화번호를 적어주세요"
+            android:textColor="#222222"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editText_phoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_background"
+            android:gravity="center"
+            android:hint="-없이 적어주시면 됩니다."
+
+
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="#222222"
+            android:textCursorDrawable="@null"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/button_phoneNumberCheck"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Title"
+            tools:ignore="TextFields" />
+
+        <Button
+            android:id="@+id/button_phoneNumberCheck"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:onClick="@{loginActivity::setButtonPhoneNumberCheckClickListener}"
+            android:text="확인"
+            app:layout_constraintBottom_toBottomOf="@+id/editText_phoneNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editText_phoneNumber" />
+
+
+        <Button
+            android:id="@+id/button_phoneAuthReQuest"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:text="인증번호 재요청"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editText_phoneNumberCheck"
+            app:layout_constraintStart_toEndOf="@+id/button_phoneAuthRequestCheck"
+            app:layout_constraintTop_toTopOf="@+id/editText_phoneNumberCheck"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/button_phoneAuthRequestCheck"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:text="인증 확인"
+            android:textSize="10sp"
+            android:onClick="@{loginActivity::setButtonPhoneAuthRequestCheckClickListener}"
+            app:layout_constraintBottom_toBottomOf="@+id/editText_phoneNumberCheck"
+            app:layout_constraintStart_toEndOf="@+id/editText_phoneNumberCheck"
+            app:layout_constraintTop_toTopOf="@+id/editText_phoneNumberCheck"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/editText_phoneNumberCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_background"
+            android:ems="6"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:maxLength="14"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@null"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            tools:ignore="TextFields" />
+
+        <Button
+            android:id="@+id/button_phoneNumberAuthCreateId"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/main_dialogbutton_background"
+            android:text="계정 만들기"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:onClick="@{loginActivity::setButtonPhoneNumberAuthCreateIdClickListener}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_phoneAuthRequestCheck" />
+
+
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="인증해주세요"
+            android:textColor="#222222"
+            app:layout_constraintStart_toStartOf="@+id/editText_phoneNumber"
+            app:layout_constraintTop_toBottomOf="@+id/editText_phoneNumber" />
+
+
+        <TextView
+            android:id="@+id/textView_countTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "714632094152",
+    "firebase_url": "https://solitaryhelper.firebaseio.com",
+    "project_id": "solitaryhelper",
+    "storage_bucket": "solitaryhelper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714632094152:android:511dc446fb80b180e320fd",
+        "android_client_info": {
+          "package_name": "com.example.solitaryhelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714632094152-jft0vauk4a62mj713onnb5fkda926ddk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.solitaryhelper",
+            "certificate_hash": "493d0543a187645dc74027e6f770d1d5924596fe"
+          }
+        },
+        {
+          "client_id": "714632094152-35o30e6g5mqntghdh1encg8lu2nvq3h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5x-kG0qgB2IH3S-wf-Dw8CRFkYeJbYos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714632094152-35o30e6g5mqntghdh1encg8lu2nvq3h7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

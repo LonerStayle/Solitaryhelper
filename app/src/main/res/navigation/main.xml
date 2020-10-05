@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.solitaryhelper.view.dest.main.MainFragment"
-        android:label="MainFragment"
-        tools:layout="@layout/fragment_main">
+        android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeCallSetting"
             app:destination="@id/navigation_call" />

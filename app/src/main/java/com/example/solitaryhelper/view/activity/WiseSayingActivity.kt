@@ -1,6 +1,8 @@
 package com.example.solitaryhelper.view.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentWiseSayingBinding
@@ -16,34 +18,29 @@ class WiseSayingActivity :AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wisesaying)
-
         setWiseText()
-        buttonNextClickListener()
-        buttonPrevClickListener()
-
     }
 
-    private fun buttonPrevClickListener() {
-        button_priv.setOnClickListener {
-
+     fun setButtonPrevClickListener(v: View) {
             textView_wiseList.text  = if (stack.isEmpty())
                 wiseList[Random().nextInt(wiseList.size)]
             else
                 stack.pop()
-
-        }
-
     }
 
     private fun setWiseText() {
         textView_wiseList.text  = wiseList[Random().nextInt(wiseList.size)]
     }
 
-    private fun buttonNextClickListener() {
-        button_next.setOnClickListener {
+     fun setButtonNextClickListener(v:View) {
             stack.push(textView_wiseList.text.toString())
             textView_wiseList.text = wiseList[Random().nextInt(wiseList.size)]
-        }
 
     }
+
+     fun setButtonGototheMainActivity(v:View){
+        startActivity(Intent(this,MainActivity::class.java))
+    }
+
+
 }

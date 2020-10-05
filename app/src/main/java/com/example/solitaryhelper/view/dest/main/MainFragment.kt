@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
+import com.example.solitaryhelper.databinding.DialogMainIdCreateBinding
 import com.example.solitaryhelper.databinding.FragmentMainBinding
 import com.example.solitaryhelper.databinding.HeaderNavigationMainBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerMain
@@ -59,11 +60,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private val dialog by lazy {
-        DialogCustom(
+        DialogCustom<DialogMainIdCreateBinding>(
             requireContext(), R.layout.dialog_main_id_create,
             R.style.Theme_AppCompat_Light_Dialog_Alert
         )
     }
+
 
     override fun FragmentMainBinding.setCreateView() {
         thisFragment = this@MainFragment
@@ -204,14 +206,19 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.item_userProfileDetail -> {
+                    findNavController().navigate(R.id.action_mainFragment_to_userProfileDetailFragment)
                 }
                 R.id.item_wiseSayingList -> {
+                    findNavController().navigate(R.id.action_mainFragment_to_fragmentWiseSaying)
                 }
                 R.id.item_ranking -> {
+                    findNavController().navigate(R.id.action_mainFragment_to_rankingFragment)
                 }
                 R.id.item_helperInWishList -> {
+                    findNavController().navigate(R.id.action_mainFragment_to_helperInWishListFragment)
                 }
                 R.id.item_contactTheDeveloper -> {
+                    findNavController().navigate(R.id.action_mainFragment_to_contactTheDeveloperFragment)
                 }
                 R.id.item_setting -> {
                     requireContext().startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).also {
@@ -250,6 +257,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun setIdCreate() {
+        dialog.dialogViewCreate()
+
         val textId = dialog.dialogCustomCreateBinding.editTextCreateId.text
         fun logicInMakeId() {
             if (TextUtils.isEmpty(textId))
@@ -262,7 +271,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
         fun setButtonIdChangeClickListener(logic: () -> Unit) {
             naviHeaderBinding.buttonIdChange.setOnClickListener {
-                dialog.dialogViewCreate()
                 dialog.dialogCreate.show()
                 dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
                     logic()
@@ -272,7 +280,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setButtonIdChangeClickListener { logicInMakeId() }
 
         if (!PrefCheckRun.getInstance(requireContext()).idEmptyCheck) {
-            dialog.dialogViewCreate()
             dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
                 logicInMakeId()
             }
