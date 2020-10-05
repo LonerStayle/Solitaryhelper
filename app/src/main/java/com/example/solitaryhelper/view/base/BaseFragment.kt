@@ -21,33 +21,20 @@ import com.example.solitaryhelper.viewmodel.factory.*
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
 
     protected lateinit var binding: VDB
-    protected val viewModelSkill by viewModels<SkillViewModel> { SkillViewModelFactory() }
-    protected val viewModelMain by viewModels<MainViewModel> {
+    private val factory by lazy {
         val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
-        val factory = MainViewModelFactory(dataBase.userDataSource)
-        factory
+        ViewModelFactory(dataBase.kakaoChatDataSource,dataBase.kaKaoDataSource,
+            dataBase.smsDataSource,dataBase.userDataSource)
     }
-    protected val viewModelShared by lazy {
-        ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-    }
-    protected val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel> {
-        val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
-        val factory = KaKaoTalkViewModelFactory(dataBase.kaKaoDataSource)
-        factory
-    }
-    protected val viewModelKaKaoChat by lazy {
-        val database = SolitaryHelperDatabase.getInstance(requireContext())
-        val factory = KaKaoChatViewModelFactory(database.kakaoChatDataSource)
-        ViewModelProvider(this@BaseFragment, factory).get(KaKaoChatViewModel::class.java)
-    }
-    protected val viewModelCall by viewModels<CallViewModel>()
 
-    protected val viewModelSms by viewModels<SmsViewModel> {
-        val database = SolitaryHelperDatabase.getInstance(requireContext())
-        val factory = SmsViewModelFactory(database.smsDataSource)
-        factory
-    }
-    protected val viewModelTopic by viewModels<TopicViewModel> { TopicViewModelFactory() }
+    protected val viewModelMain by viewModels<MainViewModel> { factory }
+    protected val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel>{factory}
+    protected val viewModelKaKaoChat by viewModels<KaKaoChatViewModel> { factory }
+    protected val viewModelSms by viewModels<SmsViewModel> { factory }
+    protected val viewModelTopic by viewModels<TopicViewModel> { factory }
+    protected val viewModelShared by viewModels<SharedViewModel>()
+    protected val viewModelCall by viewModels<CallViewModel>()
+    protected val viewModelSkill by viewModels<SkillViewModel>()
 
 
     override fun onCreateView(
@@ -57,8 +44,6 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
     ): View? = DataBindingUtil.inflate<VDB>(inflater, layoutId, container, false).run {
         lifecycleOwner = this@BaseFragment
         binding = this
-
-
 
         setCreateView()
         setLiveDataInObserver()
@@ -71,8 +56,8 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
     }
 
-    abstract fun VDB.setEventListener()
     abstract fun VDB.setCreateView()
+    open fun VDB.setEventListener() = Unit
     open fun VDB.setLiveDataInObserver() = Unit
 
 

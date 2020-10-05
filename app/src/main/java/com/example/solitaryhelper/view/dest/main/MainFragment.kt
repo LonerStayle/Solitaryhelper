@@ -1,8 +1,10 @@
 package com.example.solitaryhelper.view.dest.main
 
-
+import android.content.Intent
 import android.graphics.Color
+import android.provider.Settings
 import android.text.TextUtils
+import android.view.View
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -21,7 +23,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
@@ -57,12 +58,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         )
     }
 
-    private val dialog by lazy { DialogCustom(requireContext(),R.layout.dialog_main_id_create,
-    R.style.Theme_AppCompat_Light_Dialog_Alert) }
-
+    private val dialog by lazy {
+        DialogCustom(
+            requireContext(), R.layout.dialog_main_id_create,
+            R.style.Theme_AppCompat_Light_Dialog_Alert
+        )
+    }
 
     override fun FragmentMainBinding.setCreateView() {
-
+        thisFragment = this@MainFragment
         setWindowUI()
         setToolbarSetting()
         setNavigationViewAndHeaderViewSetting()
@@ -71,14 +75,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     }
 
-
     override fun FragmentMainBinding.setEventListener() {
         setTabIconClickListener()
-        setFabCallClickListener()
-        setFabKakaoTalkClickListener()
-        setFabSmsClickListener()
-        setFabStartClickListener()
-        setToolbarButtonClickListener()
         setNavigationViewClickListener()
         setbackButtonClickListener()
     }
@@ -152,7 +150,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 for (i in 0..4) {
                     when (tab?.position) {
-
                         i -> {
                             if (i == 0 || i == 4)
                                 fabStart.show()
@@ -167,13 +164,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         })
     }
 
-    private fun FragmentMainBinding.setFabStartClickListener() {
-
-        fabStart.setOnClickListener {
+    fun setFabStartClickListener(v: View) {
+        binding.apply {
             fabStartEventInClickCheck = !fabStartEventInClickCheck
             if (fabStartEventInClickCheck) {
                 fabStart.setImageResource(R.drawable.ic_baseline_arrow_drop_up_24)
-
                 uiScope.launch {
                     fabSms.show()
                     delay(100)
@@ -181,7 +176,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                     delay(200)
                     fabKakaoTalk.show()
                 }
-
             } else {
                 fabStart.setImageResource(R.drawable.ic_round_play_arrow_24)
                 uiScope.launch {
@@ -195,10 +189,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
     }
 
-    private fun FragmentMainBinding.setToolbarButtonClickListener() {
-        toolBar.setNavigationOnClickListener {
-            drawerLayoutMain.open()
-        }
+    fun setToolbarButtonClickListener(v: View) {
+        binding.drawerLayoutMain.open()
     }
 
     private fun FragmentMainBinding.setToolbarSetting() {
@@ -208,10 +200,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
     }
 
-
     private fun setNavigationViewClickListener() = with(binding.navigationViewMain) {
-        setNavigationItemSelectedListener {
-            when (it.itemId) {
+        setNavigationItemSelectedListener { menu ->
+            when (menu.itemId) {
+                R.id.item_userProfileDetail -> {
+                }
                 R.id.item_wiseSayingList -> {
                 }
                 R.id.item_ranking -> {
@@ -221,30 +214,25 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 R.id.item_contactTheDeveloper -> {
                 }
                 R.id.item_setting -> {
+                    requireContext().startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).also {
+                       it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
                 }
             }
             return@setNavigationItemSelectedListener false
         }
     }
 
-    private fun FragmentMainBinding.setFabSmsClickListener() {
-
-        fabSms.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSms)
-        }
+    fun setFabSmsClickListener(v: View) {
+        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSms)
     }
 
-    private fun FragmentMainBinding.setFabKakaoTalkClickListener() {
-        fabKakaoTalk.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeKakaoTalk)
-        }
+    fun setFabKakaoTalkClickListener(v: View) {
+        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeKakaoTalk)
     }
 
-    private fun FragmentMainBinding.setFabCallClickListener() {
-
-        fabCall.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCall)
-        }
+    fun setFabCallClickListener(v: View) {
+        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeCall)
     }
 
 
@@ -272,34 +260,28 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             }
         }
 
+        fun setButtonIdChangeClickListener(logic: () -> Unit) {
+            naviHeaderBinding.buttonIdChange.setOnClickListener {
+                dialog.dialogViewCreate()
+                dialog.dialogCreate.show()
+                dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
+                    logic()
+                }
+            }
+        }
         setButtonIdChangeClickListener { logicInMakeId() }
 
         if (!PrefCheckRun.getInstance(requireContext()).idEmptyCheck) {
-
             dialog.dialogViewCreate()
-
             dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
                 logicInMakeId()
-
             }
             dialog.dialogCreate.show()
-        }
-    }
-
-    private fun setButtonIdChangeClickListener(logic: () -> Unit) {
-
-        naviHeaderBinding.buttonIdChange.setOnClickListener {
-            dialog.dialogViewCreate()
-            dialog.dialogCreate.show()
-
-            dialog.dialogCustomCreateBinding.buttonCreateId.setOnClickListener {
-                logic()
-            }
         }
     }
 
     override fun onResume() {
-        if(binding.navigationViewMain.getHeaderView(0) == null)
+        if (binding.navigationViewMain.getHeaderView(0) == null)
             binding.navigationViewMain.addHeaderView(naviHeaderBinding.root)
         super.onResume()
     }

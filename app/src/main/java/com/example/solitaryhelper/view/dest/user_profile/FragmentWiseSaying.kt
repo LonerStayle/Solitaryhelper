@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.dest.main.tapfragments
+package com.example.solitaryhelper.view.dest.user_profile
 
 import android.app.*
 import android.content.Intent
@@ -6,29 +6,21 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Build
-import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
-import androidx.databinding.DataBindingUtil
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.databinding.FragmentMainBinding
 import com.example.solitaryhelper.databinding.FragmentWiseSayingBinding
 import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.activity.WiseSayingActivity
 import com.example.solitaryhelper.view.base.BaseFragment
-import com.example.solitaryhelper.view.dest.main.MainFragment
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_fake_sms.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.random.Random.Default.nextInt
 
 
 class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.fragment_wise_saying) {

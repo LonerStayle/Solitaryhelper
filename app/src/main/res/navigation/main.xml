@@ -12,109 +12,38 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeCallSetting"
-            app:destination="@id/fragmentFakeCallSetting" />
+            app:destination="@id/navigation_call" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeSmsSetting"
-            app:destination="@id/fragmentFakeSmsSetting" />
+            app:destination="@id/navigation_sms" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeKakaoTalk"
-            app:destination="@id/fragmentFakeKakaoTalk" />
+            app:destination="@id/navigation_kaKao" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeCall"
-            app:destination="@id/fragmentFakeCall" />
+            app:destination="@id/navigation_call" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentFakeSms"
-            app:destination="@id/fragmentFakeSms" />
-        <action
-            android:id="@+id/mainToFragmentTopicGuide"
-            app:destination="@id/fragmentTopicGuide" />
+            app:destination="@id/navigation_sms" />
         <action
             android:id="@+id/action_mainFragment_to_fragmentTopicResult"
             app:destination="@id/fragmentTopicResult" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentFakeCallSetting"
-        android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallSetting"
-        android:label="fragmentFakeCallSetting"
-        tools:layout="@layout/fragment_fake_call_setting">
         <action
-            android:id="@+id/action_fragmentFakeCallGuide_to_fragmentFakeCall"
-            app:destination="@id/fragmentFakeCall" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentFakeSmsSetting"
-        android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSmsSetting"
-        android:label="FragmentFakeSmsSetting"
-        tools:layout="@layout/fragment_fake_sms_setting_custom">
+            android:id="@+id/action_mainFragment_to_helperInWishListFragment"
+            app:destination="@id/helperInWishListFragment" />
         <action
-            android:id="@+id/action_fragmentFakeSmsSetting_to_fragmentFakeSms"
-            app:destination="@id/fragmentFakeSms" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentFakeKakaoTalk"
-        android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk"
-        android:label="FragmentFakeKakaoTalk"
-        tools:layout="@layout/fragment_fake_kakao_talk">
+            android:id="@+id/action_mainFragment_to_fragmentWiseSaying"
+            app:destination="@id/fragmentWiseSaying" />
         <action
-            android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
-            app:destination="@id/fragmentFakeKakaoChat" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentFakeKakaoChat"
-        android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat"
-        android:label="FragmentFakeKakaoChat"
-        tools:layout="@layout/fragment_fake_kakao_chat">
-        <argument
-            android:name="name"
-            app:argType="string"
-            android:defaultValue="없음" />
-        <argument
-            android:name="profileImage"
-            app:argType="string" />
-        <argument
-            android:name="ListBox"
-            app:argType="string[]" />
-        <argument
-            android:name="itemIdPosition"
-            app:argType="long" />
-        <argument
-            android:name="timeList"
-            app:argType="string[]" />
+            android:id="@+id/action_mainFragment_to_userProfileDetailFragment"
+            app:destination="@id/userProfileDetailFragment" />
         <action
-            android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck"
-            app:destination="@id/fragmentAutoChatRunCheck" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentFakeCall"
-        android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCall"
-        android:label="FragmentFakeCall"
-        tools:layout="@layout/fragment_fake_call">
-        <argument
-            android:name="callPartyName"
-            app:argType="string"
-            android:defaultValue="임하나" />
-        <argument
-            android:name="callMode"
-            app:argType="integer"
-            android:defaultValue="3" />
-        <argument
-            android:name="callNotication"
-            app:argType="integer"
-            android:defaultValue="1" />
+            android:id="@+id/action_mainFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
         <action
-            android:id="@+id/action_fragmentFakeCall_to_fragmentFakeCallAgreeScreen"
-            app:destination="@id/fragmentFakeCallAgreeScreen" />
+            android:id="@+id/action_mainFragment_to_contactTheDeveloperFragment"
+            app:destination="@id/contactTheDeveloperFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/fragmentFakeSms"
-        android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSms"
-        android:label="FragmentFakeSms"
-        tools:layout="@layout/fragment_fake_sms"/>
-    <fragment
-        android:id="@+id/fragmentTopicGuide"
-        android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicGuide"
-        android:label="fragmentTopicGuide"
-        tools:layout="@layout/fragment_topic_guide"/>
     <fragment
         android:id="@+id/fragmentTopicResult"
         android:name="com.example.solitaryhelper.view.dest.topics.FragmentTopicResult"
@@ -128,20 +57,128 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentFakeCallAgreeScreen"
-        android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallAgreeScreen"
-        android:label="FragmentFakeCallAgreeScreen"
-        tools:layout="@layout/fragment_fake_call_agree_screen">
-        <argument
-            android:name="name"
-            app:argType="string" />
-        <argument
-            android:name="image"
-            app:argType="string" />
-    </fragment>
+        android:id="@+id/contactTheDeveloperFragment"
+        android:name="com.example.solitaryhelper.view.dest.user_profile.ContactTheDeveloperFragment"
+        android:label="ContactTheDeveloperFragment" />
+    <navigation
+        android:id="@+id/navigation_kaKao"
+        app:startDestination="@id/fragmentFakeKakaoTalk">
+        <fragment
+            android:id="@+id/fragmentFakeKakaoTalk"
+            android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoTalk"
+            android:label="FragmentFakeKakaoTalk"
+            tools:layout="@layout/fragment_fake_kakao_talk">
+            <action
+                android:id="@+id/action_fragmentFakeKakaoTalk_to_fragmentFakeKakaoChat"
+                app:destination="@id/fragmentFakeKakaoChat" />
+        </fragment>
+        <fragment
+            android:id="@+id/fragmentFakeKakaoChat"
+            android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentFakeKakaoChat"
+            android:label="FragmentFakeKakaoChat"
+            tools:layout="@layout/fragment_fake_kakao_chat">
+            <argument
+                android:name="name"
+                android:defaultValue="없음"
+                app:argType="string" />
+            <argument
+                android:name="profileImage"
+                app:argType="string" />
+            <argument
+                android:name="ListBox"
+                app:argType="string[]" />
+            <argument
+                android:name="itemIdPosition"
+                app:argType="long" />
+            <argument
+                android:name="timeList"
+                app:argType="string[]" />
+            <action
+                android:id="@+id/action_fragmentFakeKakaoChat_to_fragmentAutoChatRunCheck"
+                app:destination="@id/fragmentAutoChatRunCheck" />
+        </fragment>
+        <fragment
+            android:id="@+id/fragmentAutoChatRunCheck"
+            android:name="com.example.solitaryhelper.view.dest.fake_kakao.FragmentAutoChatRunCheck"
+            android:label="FragmentAutoChatRunCheck"
+            tools:layout="@layout/fragment_autochatrun" />
+    </navigation>
+    <navigation android:id="@+id/navigation_call"
+        app:startDestination="@id/fragmentFakeCallSetting">
+        <fragment
+            android:id="@+id/fragmentFakeCallSetting"
+            android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallSetting"
+            android:label="fragmentFakeCallSetting"
+            tools:layout="@layout/fragment_fake_call_setting">
+            <action
+                android:id="@+id/action_fragmentFakeCallGuide_to_fragmentFakeCall"
+                app:destination="@id/fragmentFakeCall" />
+        </fragment>
+        <fragment
+            android:id="@+id/fragmentFakeCall"
+            android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCall"
+            android:label="FragmentFakeCall"
+            tools:layout="@layout/fragment_fake_call">
+            <argument
+                android:name="callPartyName"
+                android:defaultValue="임하나"
+                app:argType="string" />
+            <argument
+                android:name="callMode"
+                android:defaultValue="3"
+                app:argType="integer" />
+            <argument
+                android:name="callNotication"
+                android:defaultValue="1"
+                app:argType="integer" />
+            <action
+                android:id="@+id/action_fragmentFakeCall_to_fragmentFakeCallAgreeScreen"
+                app:destination="@id/fragmentFakeCallAgreeScreen" />
+        </fragment>
+        <fragment
+            android:id="@+id/fragmentFakeCallAgreeScreen"
+            android:name="com.example.solitaryhelper.view.dest.fake_call.FragmentFakeCallAgreeScreen"
+            android:label="FragmentFakeCallAgreeScreen"
+            tools:layout="@layout/fragment_fake_call_agree_screen">
+            <argument
+                android:name="name"
+                app:argType="string" />
+            <argument
+                android:name="image"
+                app:argType="string" />
+        </fragment>
+    </navigation>
+    <navigation android:id="@+id/navigation_sms"
+        app:startDestination="@id/fragmentFakeSmsSetting">
+        <fragment
+            android:id="@+id/fragmentFakeSmsSetting"
+            android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSmsSetting"
+            android:label="FragmentFakeSmsSetting"
+            tools:layout="@layout/fragment_fake_sms_setting_custom">
+            <action
+                android:id="@+id/action_fragmentFakeSmsSetting_to_fragmentFakeSms"
+                app:destination="@id/fragmentFakeSms" />
+        </fragment>
+        <fragment
+            android:id="@+id/fragmentFakeSms"
+            android:name="com.example.solitaryhelper.view.dest.fake_sms.FragmentFakeSms"
+            android:label="FragmentFakeSms"
+            tools:layout="@layout/fragment_fake_sms" />
+    </navigation>
     <fragment
-        android:id="@+id/fragmentAutoChatRunCheck"
-        android:name="com.example.solitaryhelper.view.dest.FragmentAutoChatRunCheck"
-        android:label="FragmentAutoChatRunCheck"
-        tools:layout="@layout/fragment_autochatrun"/>
+        android:id="@+id/userProfileDetailFragment"
+        android:name="com.example.solitaryhelper.view.dest.user_profile.UserProfileDetailFragment"
+        android:label="UserProfileDetailFragment" />
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.example.solitaryhelper.view.dest.user_profile.RankingFragment"
+        android:label="RankingFragment" />
+    <fragment
+        android:id="@+id/fragmentWiseSaying"
+        android:name="com.example.solitaryhelper.view.dest.user_profile.FragmentWiseSaying"
+        android:label="FragmentWiseSaying" />
+    <fragment
+        android:id="@+id/helperInWishListFragment"
+        android:name="com.example.solitaryhelper.view.dest.user_profile.HelperInWishListFragment"
+        android:label="HelperInWishListFragment" />
 </navigation>

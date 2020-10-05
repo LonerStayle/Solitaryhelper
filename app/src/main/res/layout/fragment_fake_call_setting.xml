@@ -156,7 +156,6 @@
             android:background="@drawable/callsetting_button_timepicker"
             android:text="알람 시간 설정하기"
             android:textColor="#fff"
-            android:textCursorDrawable="#000"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/numberPicker_delayNoticationEnabled"

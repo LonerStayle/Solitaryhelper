@@ -8,7 +8,6 @@
         <variable
             name="wiseText"
             type="String" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

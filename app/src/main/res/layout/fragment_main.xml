@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<variable
+    name="thisFragment"
+    type="com.example.solitaryhelper.view.dest.main.MainFragment" />
         <variable
             name="titleText"
             type="String" />
@@ -32,6 +34,7 @@
                 android:focusable="true"
                 android:visibility="gone"
                 app:backgroundTint="#999C9C9C"
+                android:onClick="@{thisFragment::setFabKakaoTalkClickListener}"
                 app:layout_constraintBottom_toTopOf="@+id/fab_call"
                 app:layout_constraintEnd_toEndOf="@+id/fab_call"
                 app:layout_constraintStart_toStartOf="@+id/fab_call"
@@ -45,6 +48,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="gone"
+                android:onClick="@{thisFragment::setFabCallClickListener}"
                 app:backgroundTint="#999C9C9C"
                 app:layout_constraintBottom_toTopOf="@+id/fab_sms"
                 app:layout_constraintEnd_toEndOf="@+id/fab_sms"
@@ -59,6 +63,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="gone"
+                android:onClick="@{thisFragment::setFabSmsClickListener}"
                 app:backgroundTint="#999C9C9C"
                 app:layout_constraintBottom_toTopOf="@+id/fab_start"
                 app:layout_constraintEnd_toEndOf="@+id/fab_start"
@@ -75,6 +80,7 @@
                 android:focusable="true"
                 app:backgroundTint="#A5232323"
                 app:fabSize="auto"
+                android:onClick="@{thisFragment::setFabStartClickListener}"
                 app:layout_constraintBottom_toTopOf="@+id/tabLayout_main"
                 app:layout_constraintEnd_toEndOf="@+id/viewPager_main"
                 app:rippleColor="@color/colorLightViolet"
@@ -124,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_toolbar_background"
                 android:titleTextColor="@android:color/black"
+                android:onClick="@{thisFragment::setToolbarButtonClickListener}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
