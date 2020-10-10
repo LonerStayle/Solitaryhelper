@@ -1,13 +1,8 @@
 package com.example.solitaryhelper.view.activity
 
-import android.content.Intent
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.solitaryhelper.R
-
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 
 var autoChatRun:Boolean?=null

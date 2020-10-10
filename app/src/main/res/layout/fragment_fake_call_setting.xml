@@ -158,6 +158,7 @@
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:onClick="@{thisFragment::setButtonTimePickerClickListener}"
             app:layout_constraintBottom_toBottomOf="@+id/numberPicker_delayNoticationEnabled"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/numberPicker_delayNoticationEnabled"

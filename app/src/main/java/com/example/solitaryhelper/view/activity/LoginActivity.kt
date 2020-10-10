@@ -43,6 +43,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         loginActivity = this@LoginActivity
         dialog.dialogViewCreate()
         setVisibleControl(View.GONE)
+        buttonMain.setOnClickListener {
+            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+        }
     }
 
     fun setButtonPhoneAuthSignUpClickListener(v: View) {
@@ -123,4 +126,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             }
         }
     }
+
 }

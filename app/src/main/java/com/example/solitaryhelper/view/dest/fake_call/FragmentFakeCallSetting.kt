@@ -4,6 +4,7 @@ import android.app.TimePickerDialog
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.TimePicker
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallSettingBinding
@@ -14,6 +15,8 @@ import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.view.utill.toastDebugTest
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FragmentFakeCallSetting :
     BaseFragment<FragmentFakeCallSettingBinding>(R.layout.fragment_fake_call_setting) {
@@ -72,65 +75,23 @@ class FragmentFakeCallSetting :
     }
 
     fun setButtonTimePickerClickListener(v: View) {
+        val currentHour = SimpleDateFormat("hh", Locale.KOREA).format(Date()).toInt()
+        val currentMinute = SimpleDateFormat("mm", Locale.KOREA).format(Date()).toInt()
+        val callback = TimePickerDialog.OnTimeSetListener { p0, p1, p2 ->
+
+        }
+        TimePickerDialog(
+            requireContext(),
+            R.style.Theme_MaterialComponents_DayNight_Dialog_Alert,
+            callback,
+            currentHour,
+            currentMinute,
+            false
+        ).show()
 
     }
 
 }
-//    private fun FragmentFakeCallSettingBinding.setSpinnerAdapter() {
-//        val spinnerTimeTableDisplay = arrayOf("30초 후", "1분 후", "1분 30초 후,2분 후,3분 후,5분 후", "선택 안함")
-//        val timeSetArray = arrayOf(30000L, 60000L, 90000L, 120000L, 180000L, 300000L, 0L)
-//
-//
-//        spinnerAdapterArray = Array(timeSetArray.size) { TimeSpinnerModel(1L, "") }
-//
-//        for (i in spinnerTimeTableDisplay.indices) {
-//            spinnerAdapterArray!![i].timeSetArray = timeSetArray[i]
-//            spinnerAdapterArray!![i].spinnerTimeTableDisplay = spinnerTimeTableDisplay[i]
-//        }
-//
-//        val spinnerAdapter = ArrayAdapter(
-//            requireContext(),
-//            R.layout.support_simple_spinner_dropdown_item,
-//            spinnerAdapterArray!!
-//        )
-//        spinnerTimeSetting.adapter = spinnerAdapter
-//    }
 
-//private fun FragmentFakeCallSettingBinding.setSpinnerItemSelectListener() {
-//    spinnerTimeSetting.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//        override fun onNothingSelected(p0: AdapterView<*>?) {
-//            sendToTimer = null
-//        }
-//
-//        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//            when (p2) {
-//
-//                0 -> {
-//                    sendToTimer = null; sendToTimer = spinnerAdapterArray!![0].timeSetArray
-//                }
-//                1 -> {
-//                    sendToTimer = null; sendToTimer = spinnerAdapterArray!![1].timeSetArray
-//                }
-//                2 -> {
-//                    sendToTimer = null; sendToTimer = spinnerAdapterArray!![2].timeSetArray
-//                }
-//                3 -> {
-//                    sendToTimer = null; sendToTimer = spinnerAdapterArray!![3].timeSetArray
-//                }
-//                4 -> {
-//                    sendToTimer = null; sendToTimer = spinnerAdapterArray!![4].timeSetArray
-//                }
-//                5 -> {
-//                    sendToTimer = null; sendToTimer = spinnerAdapterArray!![5].timeSetArray
-//                }
-//                6 -> {
-//                    sendToTimer = null; numberPickerTimeEnabled.value = 0
-//                }
-//
-//            }
-//        }
-//
-//    }
-//}
 
 
