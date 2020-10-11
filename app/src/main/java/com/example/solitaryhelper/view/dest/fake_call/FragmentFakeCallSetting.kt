@@ -17,10 +17,13 @@ import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
 class FragmentFakeCallSetting :
     BaseFragment<FragmentFakeCallSettingBinding>(R.layout.fragment_fake_call_setting) {
 
+    private var setAlarmTimeHour: Int? = null
+    private var setAlarmTimeMinute: Int? = null
 //    private var spinnerAdapterArray: Array<TimeSpinnerModel>? = null
 
 
@@ -51,21 +54,33 @@ class FragmentFakeCallSetting :
 
 //            Log.d("opop4","넘버피커 값:${numberPickerDelayNoticationEnabled.value}\n" +
 //                    "딜레이 값 ${PrefCheckRun.getInstance(requireContext()).callDelayCotrol}")
-        if (TextUtils.isEmpty(binding.editTextNameWrite.text.toString()))
-            context?.toastDebugTest("수신 받을 가짜 이름을 적어주세요")
-        else {
-            binding.apply {
-                findNavController().navigate(
-                    FragmentFakeCallSettingDirections.actionFragmentFakeCallGuideToFragmentFakeCall(
-                        callPartyName = editTextNameWrite.text.toString(),
-                        callMode = numberPickerNoticeSetting.value,
-                        callNotication = numberPickerDelayNoticationEnabled.value
 
-                    )
-                )
-                setNumberPickerDelayNoticationEnabledSelectListener()
+        when {
+            TextUtils.isEmpty(binding.editTextNameWrite.text.toString()) -> {
+                context?.toastDebugTest("수신 받을 가짜 이름을 적어주세요")
+                return
             }
+
+            PrefCheckRun.getInstance(requireContext()).callDelayCotrol ==
+                    Contents.CALL_DELAY_NOTICATION_ENABLED_ON &&
+                    setAlarmTimeHour == null || setAlarmTimeMinute == null -> {
+                context?.toastDebugTest("알람 받을 시간을 설정하거나\n혹은 알람 기능을 OFF 해주세요")
+                return
+            }
+
         }
+
+        binding.apply {
+            findNavController().navigate(
+                FragmentFakeCallSettingDirections.actionFragmentFakeCallGuideToFragmentFakeCall(
+                    callPartyName = editTextNameWrite.text.toString(),
+                    callMode = numberPickerNoticeSetting.value,
+                    callNotication = numberPickerDelayNoticationEnabled.value
+                )
+            )
+            setNumberPickerDelayNoticationEnabledSelectListener()
+        }
+
     }
 
     private fun FragmentFakeCallSettingBinding.numberPickerSetting() {
@@ -77,8 +92,10 @@ class FragmentFakeCallSetting :
     fun setButtonTimePickerClickListener(v: View) {
         val currentHour = SimpleDateFormat("hh", Locale.KOREA).format(Date()).toInt()
         val currentMinute = SimpleDateFormat("mm", Locale.KOREA).format(Date()).toInt()
-        val callback = TimePickerDialog.OnTimeSetListener { p0, p1, p2 ->
-
+        val callback = TimePickerDialog.OnTimeSetListener { TimePicker, hour, minute ->
+            setAlarmTimeHour = hour
+            setAlarmTimeMinute = minute
+            Log.d("test", "$setAlarmTimeHour,$setAlarmTimeMinute")
         }
         TimePickerDialog(
             requireContext(),
@@ -88,7 +105,6 @@ class FragmentFakeCallSetting :
             currentMinute,
             false
         ).show()
-
     }
 
 }
