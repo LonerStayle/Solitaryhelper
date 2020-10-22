@@ -3,6 +3,7 @@ package com.example.solitaryhelper.view.dest.fake_sms.settingfragments
 import android.graphics.Color
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeSmsSettingCustomBinding
 import com.example.solitaryhelper.database.localdb.entitiy.Sms
@@ -10,13 +11,15 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewSmsCustom
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.utill.toastDebugTest
+import com.example.solitaryhelper.viewmodel.SmsViewModel
 import java.util.*
 
 class FragmentFakeSmsSettingCustom :
     BaseFragment<FragmentFakeSmsSettingCustomBinding>(R.layout.fragment_fake_sms_setting_custom) {
-
+    private val viewModelSms by viewModels<SmsViewModel> { viewModelFactory }
     private var myTextMode = false
     private var setRecyclerViewAdapter = false
+
 
     override fun FragmentFakeSmsSettingCustomBinding.setEventListener() {
         setYourButtonClickListener()

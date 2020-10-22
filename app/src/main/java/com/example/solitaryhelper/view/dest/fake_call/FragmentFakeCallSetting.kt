@@ -95,7 +95,6 @@ class FragmentFakeCallSetting :
         val callback = TimePickerDialog.OnTimeSetListener { TimePicker, hour, minute ->
             setAlarmTimeHour = hour
             setAlarmTimeMinute = minute
-            Log.d("test", "$setAlarmTimeHour,$setAlarmTimeMinute")
         }
         TimePickerDialog(
             requireContext(),

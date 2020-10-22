@@ -3,14 +3,18 @@ package com.example.solitaryhelper.view.dest.main.tapfragments
 import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentSkillBinding
 import com.example.solitaryhelper.view.adapter.AdapterViewPagerSkill
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
+import com.example.solitaryhelper.viewmodel.SkillViewModel
 
 class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill) {
+
+    private val viewModelSkill by viewModels<SkillViewModel>()
 
     data class ViewPagerItem(
         var image: String,

@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.View
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
@@ -18,6 +19,7 @@ import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.toastDebugTest
+import com.example.solitaryhelper.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +28,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
-
+    private val viewModelMain by viewModels<MainViewModel> { viewModelFactory }
     private val iconImage by lazy {
         mutableListOf(
             R.drawable.ic_baseline_skill_24,

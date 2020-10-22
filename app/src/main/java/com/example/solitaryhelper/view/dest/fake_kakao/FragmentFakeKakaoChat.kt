@@ -9,8 +9,10 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.fragment.app.viewModels
 
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
@@ -22,14 +24,17 @@ import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
+import com.example.solitaryhelper.viewmodel.KaKaoChatViewModel
 import com.example.solitaryhelper.viewmodel.SharedViewModel
 import kotlinx.coroutines.*
 import java.util.*
 
 class FragmentFakeKakaoChat :
     BaseFragment<FragmentFakeKakaoChatBinding>(R.layout.fragment_fake_kakao_chat) {
-
-
+    private val viewModelKaKaoChat by viewModels<KaKaoChatViewModel> { viewModelFactory }
+    private val viewModelShared by lazy{
+        ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+    }
     private val chatBotText by lazy { resources.getStringArray(R.array.chatTalk) }
     private val args by lazy {
         FragmentFakeKakaoChatArgs.fromBundle(

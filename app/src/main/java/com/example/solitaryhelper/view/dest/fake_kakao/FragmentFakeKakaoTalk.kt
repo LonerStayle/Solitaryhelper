@@ -3,7 +3,9 @@ package com.example.solitaryhelper.view.dest.fake_kakao
 import android.graphics.Color
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoTalkBinding
@@ -12,6 +14,8 @@ import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewKaKaoTalk
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.viewmodel.KaKaoTalkViewModel
+import com.example.solitaryhelper.viewmodel.SharedViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -20,7 +24,10 @@ import kotlin.random.Random
 
 class FragmentFakeKakaoTalk :
     BaseFragment<FragmentFakeKakaoTalkBinding>(R.layout.fragment_fake_kakao_talk) {
-
+    private val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel>{viewModelFactory}
+    private val viewModelShared by lazy{
+        ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+    }
     companion object {
         var itemOrderList =
             arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
@@ -199,7 +206,7 @@ class FragmentFakeKakaoTalk :
     private fun FragmentFakeKakaoTalkBinding.setAdapterDataUpdate() {
 
         viewModelKaKaoTalk.kakaoData.observe(
-            requireActivity(),
+            viewLifecycleOwner,
             Observer {
 
                 if (it.isNullOrEmpty()) {

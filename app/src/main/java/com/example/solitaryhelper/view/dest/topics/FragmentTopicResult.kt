@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.solitaryhelper.R
 
@@ -21,6 +22,7 @@ import com.example.solitaryhelper.view.contents.Contents.topicTimeYearMonth
 import com.example.solitaryhelper.view.utill.toPicTextControl
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.view.utill.topicTimeDisplay
+import com.example.solitaryhelper.viewmodel.TopicViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -34,7 +36,7 @@ import kotlin.properties.Delegates
 @SuppressLint("SimpleDateFormat")
 class FragmentTopicResult :
     BaseFragment<FragmentTopicResultBinding>(R.layout.fragment_topic_result) {
-
+    private val viewModelTopic by viewModels<TopicViewModel> { viewModelFactory }
     companion object {
         const val YOUNG_STUDENT_MAN = 10001
         const val YOUNG_STUDENT_GIRL = 10002
@@ -62,6 +64,7 @@ class FragmentTopicResult :
     private var blogList: MutableList<NaverBlog> = mutableListOf()
     private var imageList: Array<String>? = null
     private var apiSetComplete = false
+
 
     override fun FragmentTopicResultBinding.setEventListener() {
         imageViewNewsClickListener()

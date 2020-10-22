@@ -21,20 +21,11 @@ import com.example.solitaryhelper.viewmodel.factory.*
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
 
     protected lateinit var binding: VDB
-    private val factory by lazy {
+    protected val viewModelFactory by lazy {
         val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
         ViewModelFactory(dataBase.kakaoChatDataSource,dataBase.kaKaoDataSource,
             dataBase.smsDataSource,dataBase.userDataSource)
     }
-
-    protected val viewModelMain by viewModels<MainViewModel> { factory }
-    protected val viewModelKaKaoTalk by viewModels<KaKaoTalkViewModel>{factory}
-    protected val viewModelKaKaoChat by viewModels<KaKaoChatViewModel> { factory }
-    protected val viewModelSms by viewModels<SmsViewModel> { factory }
-    protected val viewModelTopic by viewModels<TopicViewModel> { factory }
-    protected val viewModelShared by viewModels<SharedViewModel>()
-    protected val viewModelCall by viewModels<CallViewModel>()
-    protected val viewModelSkill by viewModels<SkillViewModel>()
 
 
     override fun onCreateView(

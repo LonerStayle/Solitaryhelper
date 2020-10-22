@@ -40,11 +40,11 @@ class FragmentEatingAlone :
     companion object {
         const val REQUEST_ACCESS_COARSE_LOCATION_AND_ACCESS_FINE_LOCATION = 1111
     }
-
+    private val mapView by lazy { MapView(requireActivity()) }
     var fusedLocationClient: FusedLocationProviderClient? = null
     var locationCallback: LocationCallback? = null
     var locationRequest: LocationRequest? = null
-    private val mapView by lazy { MapView(requireActivity()) }
+
     var playerLatitude: Double? = null
     var playerLongitude: Double? = null
 

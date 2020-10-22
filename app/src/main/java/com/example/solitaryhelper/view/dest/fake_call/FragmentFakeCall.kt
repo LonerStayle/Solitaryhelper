@@ -12,6 +12,7 @@ import android.support.v4.os.IResultReceiver
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
@@ -19,6 +20,7 @@ import com.example.solitaryhelper.databinding.FragmentFakeCallBinding
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.viewmodel.CallViewModel
 import kotlinx.android.synthetic.main.fragment_fake_call.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,13 +29,13 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment_fake_call) {
-
+    private val viewModelCall by viewModels<CallViewModel>()
     private val args by lazy {
         FragmentFakeCallArgs.fromBundle(requireArguments())
     }
 
-    val vib by lazy { requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
-    val sound by lazy { MediaPlayer.create(requireContext(), R.raw.s8_callsound) }
+    private val vib by lazy { requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
+    private val sound by lazy { MediaPlayer.create(requireContext(), R.raw.s8_callsound) }
 
     override fun FragmentFakeCallBinding.setEventListener() {
         setButtonCallCancleClickListener()
