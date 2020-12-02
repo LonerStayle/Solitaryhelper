@@ -23,8 +23,8 @@ class FragmentFakeSmsSettingPamphlet :
 
     override fun FragmentFakeSmsSettingPamphletBinding.setCreateView() {
 
-//            imageViewFirst.startAnimation(imageAnim)
 
+//            imageViewFirst.startAnimation(imageAnim)
             imageViewTwo.visibility = View.VISIBLE
             textViewTwo.visibility = View.VISIBLE
 //            imageViewTwo.startAnimation(imageAnim)
@@ -32,6 +32,7 @@ class FragmentFakeSmsSettingPamphlet :
 //            imageViewThiree.startAnimation(imageAnim)
             imageViewThiree.visibility = View.VISIBLE
             textViewThree.visibility = View.VISIBLE
+
         }
 
 

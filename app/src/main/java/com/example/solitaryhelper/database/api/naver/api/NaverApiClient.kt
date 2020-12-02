@@ -13,8 +13,6 @@ import retrofit2.http.Query
 
 object NaverApiClient {
 
-
-
     private const val BASE_URL= " https://openapi.naver.com/"
     val api: NaverBlogApi = Retrofit.Builder()
         .baseUrl(BASE_URL)

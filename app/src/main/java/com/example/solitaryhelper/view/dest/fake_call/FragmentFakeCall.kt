@@ -20,6 +20,7 @@ import com.example.solitaryhelper.databinding.FragmentFakeCallBinding
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.view.utill.messagingStyle
 import com.example.solitaryhelper.viewmodel.CallViewModel
 import kotlinx.android.synthetic.main.fragment_fake_call.*
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +30,9 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment_fake_call) {
+    companion object{
+        const val MUSIC_TEST = 4123
+    }
     private val viewModelCall by viewModels<CallViewModel>()
     private val args by lazy {
         FragmentFakeCallArgs.fromBundle(requireArguments())
@@ -98,6 +102,9 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
                 }
 
                 3 -> {
+                    val manager =
+                        requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
 
                     sound.start()
                     sound.isLooping = true

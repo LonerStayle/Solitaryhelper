@@ -15,7 +15,7 @@ import java.util.*
 
 
 class KaKaoTalkViewModel(private val repository: KaKaoTalkRepository) : ViewModel() {
-    val ioScope = CoroutineScope(Dispatchers.IO + Job())
+    private val ioScope = CoroutineScope(Dispatchers.IO + Job())
     val kakaoData: LiveData<List<KaKaoTalkData>>
         get() = repository.getAllList()
 

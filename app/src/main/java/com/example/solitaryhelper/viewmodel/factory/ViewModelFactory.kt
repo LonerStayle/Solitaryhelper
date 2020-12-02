@@ -22,6 +22,7 @@ class ViewModelFactory(
     private val kakaoTalkRepository = KaKaoTalkRepository(kaKaoTalkDataSource)
     private val smsRepository = SmsRepository(smsDataDao)
     private val topicRepository = NaverApiRepository()
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         
         when{

@@ -35,7 +35,6 @@ class FragmentFakeCallAgreeScreen :
         setData()
         setTime()
 
-
     }
 
     private fun FragmentFakeCallAgreeScreenBinding.setTime() {

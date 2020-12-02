@@ -92,7 +92,7 @@ class FragmentFakeCallSetting :
     fun setButtonTimePickerClickListener(v: View) {
         val currentHour = SimpleDateFormat("hh", Locale.KOREA).format(Date()).toInt()
         val currentMinute = SimpleDateFormat("mm", Locale.KOREA).format(Date()).toInt()
-        val callback = TimePickerDialog.OnTimeSetListener { TimePicker, hour, minute ->
+        val callback = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
             setAlarmTimeHour = hour
             setAlarmTimeMinute = minute
         }

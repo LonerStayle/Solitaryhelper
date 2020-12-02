@@ -21,6 +21,7 @@ import com.example.solitaryhelper.viewmodel.factory.*
 abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fragment() {
 
     protected lateinit var binding: VDB
+
     protected val viewModelFactory by lazy {
         val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
         ViewModelFactory(dataBase.kakaoChatDataSource,dataBase.kaKaoDataSource,
