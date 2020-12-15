@@ -24,11 +24,8 @@ class FragmentFakeCallSetting :
 
     private var setAlarmTimeHour: Int? = null
     private var setAlarmTimeMinute: Int? = null
-//    private var spinnerAdapterArray: Array<TimeSpinnerModel>? = null
-
 
     override fun FragmentFakeCallSettingBinding.setEventListener() {
-//        setSpinnerItemSelectListener()
 
     }
 
@@ -37,12 +34,11 @@ class FragmentFakeCallSetting :
         thisFragment = this@FragmentFakeCallSetting
         keyBoardShowHiding(requireContext(), editTextNameWrite)
         numberPickerSetting()
-//        setSpinnerAdapter()
 
     }
 
-    private fun FragmentFakeCallSettingBinding.setNumberPickerDelayNoticationEnabledSelectListener() {
-        when (numberPickerDelayNoticationEnabled.value) {
+    private fun setNumberPickerDelayNoticationEnabledSelectListener() {
+        when (binding.numberPickerDelayNoticationEnabled.value) {
             1 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
                 Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
             2 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
@@ -54,6 +50,8 @@ class FragmentFakeCallSetting :
 
 //            Log.d("opop4","넘버피커 값:${numberPickerDelayNoticationEnabled.value}\n" +
 //                    "딜레이 값 ${PrefCheckRun.getInstance(requireContext()).callDelayCotrol}")
+
+        setNumberPickerDelayNoticationEnabledSelectListener()
 
         when {
             TextUtils.isEmpty(binding.editTextNameWrite.text.toString()) -> {
@@ -71,14 +69,21 @@ class FragmentFakeCallSetting :
         }
 
         binding.apply {
+            if(setAlarmTimeHour == null)
+                setAlarmTimeHour = 0
+
+            if(setAlarmTimeMinute == null)
+                setAlarmTimeMinute = 0
+
             findNavController().navigate(
                 FragmentFakeCallSettingDirections.actionFragmentFakeCallGuideToFragmentFakeCall(
                     callPartyName = editTextNameWrite.text.toString(),
                     callMode = numberPickerNoticeSetting.value,
-                    callNotication = numberPickerDelayNoticationEnabled.value
+                    callNotication = numberPickerDelayNoticationEnabled.value,
+                    setAlarmHour = setAlarmTimeHour!!,
+                     setAlarmTimeMinute!!
                 )
             )
-            setNumberPickerDelayNoticationEnabledSelectListener()
         }
 
     }
@@ -86,7 +91,13 @@ class FragmentFakeCallSetting :
     private fun FragmentFakeCallSettingBinding.numberPickerSetting() {
         numberPickerNoticeSetting.displayedValues = arrayOf("무음", "진동", "벨소리", "")
         numberPickerDelayNoticationEnabled.displayedValues = arrayOf("OFF", "ON")
-
+        
+        numberPickerDelayNoticationEnabled.setOnValueChangedListener { numberPicker, _, _ ->
+            when(numberPicker.value){
+                0 -> buttonTimepicker.visibility = View.GONE
+                1 -> buttonTimepicker.visibility = View.VISIBLE
+            }
+        }
     }
 
     fun setButtonTimePickerClickListener(v: View) {

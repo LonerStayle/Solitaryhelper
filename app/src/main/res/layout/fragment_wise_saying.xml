@@ -63,10 +63,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_mainTabVisible"
+            android:id="@+id/button_closeButton"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/ic_outline_details_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -8,11 +8,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.example.solitaryhelper.R
 import com.example.solitaryhelper.database.localdb.SolitaryHelperDatabase
 import com.example.solitaryhelper.viewmodel.*
 import com.example.solitaryhelper.viewmodel.factory.*
@@ -27,8 +24,6 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
         ViewModelFactory(dataBase.kakaoChatDataSource,dataBase.kaKaoDataSource,
             dataBase.smsDataSource,dataBase.userDataSource)
     }
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

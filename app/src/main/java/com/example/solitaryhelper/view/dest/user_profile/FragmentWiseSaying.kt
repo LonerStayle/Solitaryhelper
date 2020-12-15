@@ -9,6 +9,7 @@ import android.os.Build
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentWiseSayingBinding
 import com.example.solitaryhelper.view.activity.MainActivity
@@ -113,18 +114,8 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
     }
 
     private fun FragmentWiseSayingBinding.buttonMainTabVisible() {
-        var click = false
-        buttonMainTabVisible.setOnClickListener {
-            click = !click
-            val mainTab = requireActivity().findViewById<TabLayout>(R.id.tabLayout_main)
-
-            if (click) {
-                mainTab.visibility = View.GONE
-                it.setBackgroundResource(R.drawable.ic_baseline_keyboard_arrow_up_24)
-            }else {
-                mainTab.visibility = View.VISIBLE
-                it.setBackgroundResource(R.drawable.ic_outline_details_24)
-            }
+        buttonCloseButton.setOnClickListener {
+         findNavController().popBackStack()
         }
     }
 

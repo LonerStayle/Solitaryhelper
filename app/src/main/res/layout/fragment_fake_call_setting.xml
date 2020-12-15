@@ -140,12 +140,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="통화 알림\n무음,벨소리,진동 중에 선택\n\n딜레이 사용\n전화 예약사용이 가능합니다.\nex:30초 설정시 30초 후에 전화"
-            android:textStyle="bold"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/view"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/numberPicker_delayNoticationEnabled"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toTopOf="@+id/view7" />
 
         <Button
             android:id="@+id/button_timepicker"
@@ -154,11 +154,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/callsetting_button_timepicker"
-            android:text="알람 시간 설정하기"
+            android:onClick="@{thisFragment::setButtonTimePickerClickListener}"
+            android:text="알람 시간 \n설정하기"
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:onClick="@{thisFragment::setButtonTimePickerClickListener}"
             app:layout_constraintBottom_toBottomOf="@+id/numberPicker_delayNoticationEnabled"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/numberPicker_delayNoticationEnabled"

@@ -3,19 +3,16 @@ package com.example.solitaryhelper.view.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.solitaryhelper.R
+import com.example.solitaryhelper.databinding.ActivityMainBinding
+import com.example.solitaryhelper.view.base.BaseActivity
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 
 var autoChatRun:Boolean?=null
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        if (!PrefCheckRun.getInstance(this).kaKaoChatNavDeepLinkUseCheck)
-            PrefCheckRun.getInstance(this).kaKaoTalkFirstRunCheck = false
-
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+    override fun ActivityMainBinding.setData() {
+        if (!PrefCheckRun.getInstance(this@MainActivity).kaKaoChatNavDeepLinkUseCheck)
+            PrefCheckRun.getInstance(this@MainActivity).kaKaoTalkFirstRunCheck = false
         //        getAppKeyHash()
     }
 

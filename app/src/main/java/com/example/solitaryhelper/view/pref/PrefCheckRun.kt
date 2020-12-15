@@ -11,7 +11,6 @@ class PrefCheckRun private constructor (val context: Context){
         CALL_DELAY_COTROL,
         KAKAO_TALK_FIRST_RUN_CHECK,
         KAKAO_CHAT_NAV_DEEP_LINK_USE_CHECK,
-        AUTO_RUN
     }
     companion object{
         private var instance:PrefCheckRun? = null

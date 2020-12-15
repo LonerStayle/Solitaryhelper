@@ -23,7 +23,7 @@ class FragmentFakeCallAgreeScreen :
     }
 
        private var time = 0
-        private val timer: Timer? = Timer()
+        private var timer: Timer? = null
 
 
     override fun FragmentFakeCallAgreeScreenBinding.setEventListener() {
@@ -38,6 +38,7 @@ class FragmentFakeCallAgreeScreen :
     }
 
     private fun FragmentFakeCallAgreeScreenBinding.setTime() {
+        timer = Timer()
         val timeTask = object : TimerTask() {
             override fun run() {
                 time++
