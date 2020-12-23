@@ -18,7 +18,6 @@ object NaverApiClient {
         .baseUrl(BASE_URL)
         .client(OkHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
-
         .build()
         .create(NaverBlogApi::class.java)
 

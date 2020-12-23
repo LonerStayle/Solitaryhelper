@@ -133,7 +133,7 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
             val manager =
                 requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             viewModelCall.clearExistingNotifications(444444, manager)
-            val context = requireContext()
+
             args.toBundle().putInt("callNotication", 1)
             val arg = args.toBundle()
             PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
@@ -141,7 +141,7 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
 
             CoroutineScope(Dispatchers.IO).launch {
                 viewModelCall.basic(
-                    manager, context, arg, R.drawable.applogo_hood_line_64,
+                    manager, requireContext(), arg, R.drawable.applogo_hood_line_64,
                     "전화에 응하시겠습니까?", "몰래 눌러주세요", "Call"
                 )
                 requireActivity().finishAffinity()

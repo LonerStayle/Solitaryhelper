@@ -80,7 +80,7 @@ class FragmentFakeCallSetting :
                     callPartyName = editTextNameWrite.text.toString(),
                     callMode = numberPickerNoticeSetting.value,
                     callNotication = numberPickerDelayNoticationEnabled.value,
-                    setAlarmHour = setAlarmTimeHour!!,
+                      setAlarmTimeHour!!,
                      setAlarmTimeMinute!!
                 )
             )
