@@ -180,7 +180,7 @@
         android:label="RankingFragment" />
     <fragment
         android:id="@+id/fragmentWiseSaying"
-        android:name="com.example.solitaryhelper.view.dest.user_profile.FragmentWiseSaying"
+        android:name="com.example.solitaryhelper.view.dest.main.tapfragments.FragmentWiseSaying"
         android:label="FragmentWiseSaying" />
     <fragment
         android:id="@+id/helperInWishListFragment"

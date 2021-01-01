@@ -1,8 +1,10 @@
 package com.example.solitaryhelper.view.dest.fake_call
 
+import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Build
@@ -123,7 +125,7 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
     }
 
     private fun FragmentFakeCallBinding.setCallScreenDelay() {
-
+        val alarmManager = requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
         if (args.callNotication == 2 && PrefCheckRun.getInstance(requireContext()).callDelayCotrol ==
             Contents.CALL_DELAY_NOTICATION_ENABLED_ON
         ) {

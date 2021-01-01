@@ -1,4 +1,4 @@
-package com.example.solitaryhelper.view.dest.user_profile
+package com.example.solitaryhelper.view.dest.main.tapfragments
 
 import android.app.*
 import android.content.Intent
@@ -9,14 +9,12 @@ import android.os.Build
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
-import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentWiseSayingBinding
 import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.activity.WiseSayingActivity
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.utill.toastDebugTest
-import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -50,7 +48,6 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
     override fun FragmentWiseSayingBinding.setEventListener() {
 
         buttonBubbleDataUseClickListener()
-        buttonMainTabVisible()
         buttonPrevClickListener()
         buttonNextClickListener()
 
@@ -113,11 +110,7 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
 
     }
 
-    private fun FragmentWiseSayingBinding.buttonMainTabVisible() {
-        buttonCloseButton.setOnClickListener {
-         findNavController().popBackStack()
-        }
-    }
+
 
     private fun FragmentWiseSayingBinding.buttonBubbleDataUseClickListener() {
         buttonBubbleDataUse.setOnClickListener {

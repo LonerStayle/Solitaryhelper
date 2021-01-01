@@ -50,8 +50,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="아싸 도우미로 이동"
         android:onClick="setButtonGototheMainActivity"
+        android:text="아싸 도우미로 이동하기"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#fff"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
