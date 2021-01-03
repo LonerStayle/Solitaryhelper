@@ -49,6 +49,7 @@ dependencies {
     implementation arch_libraries
 
     implementation files('libs/libDaumMapAndroid.jar')
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     kapt librariesKapt
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation testLibraries

@@ -46,6 +46,10 @@ class ViewModelFactory(
                 @Suppress("unchecked_cast")
                 return MainViewModel(userRepository) as T
             }
+            modelClass.isAssignableFrom(SharedViewModel::class.java) -> {
+                @Suppress("unchecked_cast")
+                return SharedViewModel() as T
+            }
 
         }
 

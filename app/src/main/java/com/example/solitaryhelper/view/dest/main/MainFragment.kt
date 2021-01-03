@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.DialogMainIdCreateBinding
 import com.example.solitaryhelper.databinding.FragmentMainBinding
@@ -20,6 +21,7 @@ import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import com.example.solitaryhelper.viewmodel.MainViewModel
+import com.example.solitaryhelper.viewmodel.SharedViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
@@ -28,7 +30,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
+
     private val viewModelMain by viewModels<MainViewModel> { viewModelFactory }
+    private val sharedViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel::class.java)
+    }
     private val iconImage by lazy {
         mutableListOf(
             R.drawable.ic_baseline_skill_24,
@@ -85,15 +91,19 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setbackButtonClickListener()
     }
 
+    override fun FragmentMainBinding.setLiveDataInObserver() {
+        profileIdSetting()
+        setMainTabVisible()
+    }
+
+
 
     private fun setWindowUI() {
         requireActivity().window.navigationBarColor = Color.GRAY
         requireActivity().window.statusBarColor = Color.TRANSPARENT
     }
 
-    override fun FragmentMainBinding.setLiveDataInObserver() {
-        profileIdSetting()
-    }
+
 
     private fun profileIdSetting() {
         viewModelMain.userProfile.observe(viewLifecycleOwner, Observer {
@@ -104,6 +114,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 naviHeaderBinding.textViewId.text = it.userId
                 PrefCheckRun.getInstance(requireContext()).idEmptyCheck = true
             }
+        })
+    }
+    private fun FragmentMainBinding.setMainTabVisible() {
+        sharedViewModel.mainBottomVisible.observe(requireActivity(), {
+            tabVisible = it
         })
     }
 
@@ -224,7 +239,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 }
                 R.id.item_setting -> {
                     requireContext().startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).also {
-                       it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     })
                 }
             }

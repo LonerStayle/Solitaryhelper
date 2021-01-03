@@ -6,15 +6,21 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.solitaryhelper.R
+import com.example.solitaryhelper.databinding.FragmentMainBinding
 import com.example.solitaryhelper.databinding.FragmentWiseSayingBinding
 import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.activity.WiseSayingActivity
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.utill.toastDebugTest
+import com.example.solitaryhelper.viewmodel.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -26,6 +32,9 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
 
     private val wiseList by lazy {
         resources.getStringArray(R.array.wiseList)
+    }
+    private val sharedViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel::class.java)
     }
     private val stack = Stack<String>()
 
@@ -47,9 +56,10 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
 
     override fun FragmentWiseSayingBinding.setEventListener() {
 
-        buttonBubbleDataUseClickListener()
-        buttonPrevClickListener()
-        buttonNextClickListener()
+        setButtonBottomVisibleClickListener()
+        setButtonBubbleDataUseClickListener()
+        setButtonPrevClickListener()
+        setButtonNextClickListener()
 
     }
 
@@ -88,7 +98,14 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
     }
 
 
-    private fun FragmentWiseSayingBinding.buttonPrevClickListener() {
+    private fun FragmentWiseSayingBinding.setButtonBottomVisibleClickListener() {
+        buttonBottomVisible.setOnClickListener {
+            it.isSelected = !it.isSelected
+            sharedViewModel.setMainBottomVisible(it.isSelected)
+        }
+    }
+
+    private fun FragmentWiseSayingBinding.setButtonPrevClickListener() {
        buttonPriv.setOnClickListener {
            wiseText = if (stack.isEmpty())
                wiseList[Random().nextInt(wiseList.size)]
@@ -102,7 +119,7 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
         wiseText = wiseList[Random().nextInt(wiseList.size)]
     }
 
-    private fun FragmentWiseSayingBinding.buttonNextClickListener() {
+    private fun FragmentWiseSayingBinding.setButtonNextClickListener() {
         buttonNext.setOnClickListener {
             stack.push(wiseText)
             wiseText = wiseList[Random().nextInt(wiseList.size)]
@@ -112,7 +129,7 @@ class FragmentWiseSaying : BaseFragment<FragmentWiseSayingBinding>(R.layout.frag
 
 
 
-    private fun FragmentWiseSayingBinding.buttonBubbleDataUseClickListener() {
+    private fun FragmentWiseSayingBinding.setButtonBubbleDataUseClickListener() {
         buttonBubbleDataUse.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 addShortcutToNotification()
