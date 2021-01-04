@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.viewmodel.factory
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.solitaryhelper.database.localdb.dao.KaKaoChatDao
@@ -14,7 +15,7 @@ class ViewModelFactory(
     kakaoChatDataSource: KaKaoChatDao,
     kaKaoTalkDataSource: KaKaoDao,
     smsDataDao: SmsDao,
-    dataSource: UserDao
+    dataSource: UserDao,
 ) : ViewModelProvider.Factory {
 
     private val userRepository = UserRepository(dataSource)
@@ -23,9 +24,10 @@ class ViewModelFactory(
     private val smsRepository = SmsRepository(smsDataDao)
     private val topicRepository = NaverApiRepository()
 
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        
-        when{
+
+        when {
             modelClass.isAssignableFrom(KaKaoChatViewModel::class.java) -> {
                 @Suppress("unchecked_cast")
                 return KaKaoChatViewModel(kakaoChatDataRepository) as T
@@ -38,7 +40,7 @@ class ViewModelFactory(
                 @Suppress("unchecked_cast")
                 return SmsViewModel(smsRepository) as T
             }
-            modelClass.isAssignableFrom(TopicViewModel::class.java)->{
+            modelClass.isAssignableFrom(TopicViewModel::class.java) -> {
                 @Suppress("unchecked_cast")
                 return TopicViewModel(topicRepository) as T
             }

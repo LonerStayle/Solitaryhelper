@@ -94,8 +94,8 @@ class FragmentFakeCallSetting :
         
         numberPickerDelayNoticationEnabled.setOnValueChangedListener { numberPicker, _, _ ->
             when(numberPicker.value){
-                0 -> buttonTimepicker.visibility = View.GONE
-                1 -> buttonTimepicker.visibility = View.VISIBLE
+                1 -> buttonTimepicker.visibility = View.GONE
+                2 -> buttonTimepicker.visibility = View.VISIBLE
             }
         }
     }
