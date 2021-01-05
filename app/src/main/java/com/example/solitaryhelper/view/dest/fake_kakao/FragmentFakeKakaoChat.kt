@@ -431,7 +431,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[0] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -471,7 +471,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[1] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -511,7 +511,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[2] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -551,7 +551,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[3] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -591,7 +591,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[4] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -631,7 +631,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[5] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -671,7 +671,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[6] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -711,7 +711,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[7] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -751,7 +751,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[8] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -791,7 +791,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[9] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -831,7 +831,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[10] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -871,7 +871,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[11] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -911,7 +911,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[12] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -951,7 +951,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[13] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -991,7 +991,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[14] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -1031,7 +1031,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[15] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -1071,7 +1071,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[16] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -1111,7 +1111,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[17] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -1151,7 +1151,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[18] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -1191,7 +1191,7 @@ class FragmentFakeKakaoChat :
                     autoChatDoubleCheckRun[19] = true
 //            delay(Contents.AUTO_CHAT_DEALY)
 
-                    delay(5000)
+                    delay(((Math.random()*15000)+5000).toLong())
                     if (!autoChatRun!!)
                         return
 
@@ -1204,7 +1204,6 @@ class FragmentFakeKakaoChat :
                             timeList = Contents.timePattern.format(Date())
                         )
                     )
-
 
                     viewModelShared.sendToChanges(
                         SharedViewModel.SendToChange(

@@ -134,7 +134,7 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
             PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
                 Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
 
-            CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.Main).launch {
 
 
                 calendar.timeInMillis = System.currentTimeMillis()

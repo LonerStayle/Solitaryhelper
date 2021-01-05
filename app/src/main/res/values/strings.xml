@@ -710,7 +710,7 @@
 
     <string-array name="chatBotOneSideConversationAnswer">
         <item>넌 누구니?</item>
-        <item>아싸의 대처법 </item>
+        <item>아싸의 대처법\n(다음 메뉴)</item>
     </string-array>
 
     <string-array name="chatBotOneSide">
@@ -718,9 +718,9 @@
     </string-array>
 
     <string-array name="chatBotTwoSideConversationAnswer">
-        <item>혼자 노는법 추천</item>
+        <item>혼자 노는법 추천\n(다음 메뉴)</item>
         <item>인싸가 되고싶어 </item>
-        <item>아싸가 혼밥 하는 방법</item>
+        <item>아싸가 혼밥 하는 방법\n(다음 메뉴)</item>
         <item>뒤로 가기 </item>
     </string-array>
 

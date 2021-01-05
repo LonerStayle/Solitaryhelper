@@ -1,13 +1,18 @@
 package com.example.solitaryhelper.view.dest.fake_call
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallAgreeScreenBinding
 import com.example.solitaryhelper.view.activity.MainActivity
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.utill.toastDebugTest
+import kotlinx.android.synthetic.main.fragment_fake_sms.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,8 +27,8 @@ class FragmentFakeCallAgreeScreen :
         )
     }
 
-       private var time = 0
-        private var timer: Timer? = null
+    private var time = 0
+    private var timer: Timer? = null
 
 
     override fun FragmentFakeCallAgreeScreenBinding.setEventListener() {
@@ -31,7 +36,6 @@ class FragmentFakeCallAgreeScreen :
     }
 
     override fun FragmentFakeCallAgreeScreenBinding.setCreateView() {
-
         setData()
         setTime()
 
@@ -68,13 +72,15 @@ class FragmentFakeCallAgreeScreen :
                 )
                 timer?.cancel()
                 delay(2000)
-                val intent = Intent(requireActivity(),MainActivity::class.java)
+                val intent = Intent(requireActivity(), MainActivity::class.java)
                 requireActivity().finish()
                 startActivity(intent)
             }
 
         }
     }
+
+
 
     override fun onDestroy() {
         timer?.cancel()

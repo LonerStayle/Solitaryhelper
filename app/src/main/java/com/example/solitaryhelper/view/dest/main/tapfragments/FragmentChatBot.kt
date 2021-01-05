@@ -1,6 +1,7 @@
 package com.example.solitaryhelper.view.dest.main.tapfragments
 
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentChatbotBinding
 import com.example.solitaryhelper.view.adapter.AdapterRecyclerViewChatBot
@@ -67,6 +68,8 @@ class FragmentChatBot : BaseFragment<FragmentChatbotBinding>(R.layout.fragment_c
     }
 
     private fun FragmentChatbotBinding.setAdapter() {
+
+
         CoroutineScope(Dispatchers.Main).launch {
             controlList.add(ChatListControl(chatBotGreeting.toList().shuffled()[0]))
             recyclerViewChatBot.adapter = AdapterRecyclerViewChatBot(controlList)
@@ -242,19 +245,20 @@ class FragmentChatBot : BaseFragment<FragmentChatbotBinding>(R.layout.fragment_c
                         textList.add(ChatListControl(chatBotTwoInTwoSide[0]))
                         notifyItemInserted(textList.lastIndex)
                         recyclerViewChatBot.scrollToPosition(controlList.lastIndex)
-                        delay(5000)
+                        recyclerViewChatBot.scrollToPosition(controlList.lastIndex)
+                        delay(3000)
                         textList.add(ChatListControl(chatBotTwoInTwoSide[1]))
                         notifyItemInserted(textList.lastIndex)
                         recyclerViewChatBot.scrollToPosition(controlList.lastIndex)
-                        delay(5000)
+                        delay(3000)
                         textList.add(ChatListControl(chatBotTwoInTwoSide[2]))
                         notifyItemInserted(textList.lastIndex)
                         recyclerViewChatBot.scrollToPosition(controlList.lastIndex)
-                        delay(5000)
+                        delay(3000)
                         textList.add(ChatListControl(chatBotTwoInTwoSide[3]))
                         notifyItemInserted(textList.lastIndex)
                         recyclerViewChatBot.scrollToPosition(controlList.lastIndex)
-                        delay(5000)
+                        delay(3000)
                         textList.add(ChatListControl(chatBotTwoInTwoSide[4]))
                         notifyItemInserted(textList.lastIndex)
                         recyclerViewChatBot.scrollToPosition(controlList.lastIndex)

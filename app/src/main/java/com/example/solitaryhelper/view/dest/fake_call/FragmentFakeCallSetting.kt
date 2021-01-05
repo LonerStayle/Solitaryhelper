@@ -2,22 +2,17 @@ package com.example.solitaryhelper.view.dest.fake_call
 
 import android.app.TimePickerDialog
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
-import android.widget.TimePicker
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeCallSettingBinding
-
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
-import com.example.solitaryhelper.view.dialog.DialogCustom
 import com.example.solitaryhelper.view.pref.PrefCheckRun
 import com.example.solitaryhelper.view.utill.keyBoardShowHiding
 import com.example.solitaryhelper.view.utill.toastDebugTest
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.properties.Delegates
 
 class FragmentFakeCallSetting :
     BaseFragment<FragmentFakeCallSettingBinding>(R.layout.fragment_fake_call_setting) {
@@ -37,21 +32,12 @@ class FragmentFakeCallSetting :
 
     }
 
-    private fun setNumberPickerDelayNoticationEnabledSelectListener() {
-        when (binding.numberPickerDelayNoticationEnabled.value) {
-            1 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
-                Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
-            2 -> PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
-                Contents.CALL_DELAY_NOTICATION_ENABLED_ON
-        }
-    }
 
     fun setButtonCallStartListener(v: View) {
 
 //            Log.d("opop4","넘버피커 값:${numberPickerDelayNoticationEnabled.value}\n" +
 //                    "딜레이 값 ${PrefCheckRun.getInstance(requireContext()).callDelayCotrol}")
 
-        setNumberPickerDelayNoticationEnabledSelectListener()
 
         when {
             TextUtils.isEmpty(binding.editTextNameWrite.text.toString()) -> {
@@ -61,7 +47,7 @@ class FragmentFakeCallSetting :
 
             PrefCheckRun.getInstance(requireContext()).callDelayCotrol ==
                     Contents.CALL_DELAY_NOTICATION_ENABLED_ON &&
-                    setAlarmTimeHour == null || setAlarmTimeMinute == null -> {
+                    (setAlarmTimeHour == null || setAlarmTimeMinute == null)  -> {
                 context?.toastDebugTest("알람 받을 시간을 설정하거나\n혹은 알람 기능을 OFF 해주세요")
                 return
             }
@@ -94,8 +80,16 @@ class FragmentFakeCallSetting :
         
         numberPickerDelayNoticationEnabled.setOnValueChangedListener { numberPicker, _, _ ->
             when(numberPicker.value){
-                1 -> buttonTimepicker.visibility = View.GONE
-                2 -> buttonTimepicker.visibility = View.VISIBLE
+                1 -> {
+                    buttonTimepicker.visibility = View.GONE
+                    PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
+                        Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
+                }
+                2 -> {
+                    buttonTimepicker.visibility = View.VISIBLE
+                    PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
+                        Contents.CALL_DELAY_NOTICATION_ENABLED_ON
+                }
             }
         }
     }
@@ -116,6 +110,8 @@ class FragmentFakeCallSetting :
             false
         ).show()
     }
+
+
 
 }
 
