@@ -1,23 +1,30 @@
 package com.example.solitaryhelper.view.dest.fake_call
 
 import android.app.AlarmManager
+import android.app.Notification
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.ALARM_SERVICE
-import android.content.Intent
 import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.support.v4.os.IResultReceiver
 import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
-import com.example.solitaryhelper.broardcastrecever.AlarmReceiver
 import com.example.solitaryhelper.databinding.FragmentFakeCallBinding
 import com.example.solitaryhelper.view.base.BaseFragment
 import com.example.solitaryhelper.view.contents.Contents
 import com.example.solitaryhelper.view.pref.PrefCheckRun
+import com.example.solitaryhelper.view.utill.messagingStyle
+import com.example.solitaryhelper.viewmodel.CallViewModel
+import kotlinx.android.synthetic.main.fragment_fake_call.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -25,14 +32,14 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment_fake_call) {
-    companion object {
+    companion object{
         const val MUSIC_TEST = 4123
     }
-
     private val args by lazy {
         FragmentFakeCallArgs.fromBundle(requireArguments())
     }
 
+    private val viewModelCall by viewModels<CallViewModel>()
     private val vib by lazy { requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
     private val sound by lazy { MediaPlayer.create(requireContext(), R.raw.s8_callsound) }
 
@@ -58,7 +65,7 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
             findNavController().navigate(
                 FragmentFakeCallDirections.actionFragmentFakeCallToFragmentFakeCallAgreeScreen(
                     name = textViewName.text.toString(),
-                    image = Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                    image =Contents.IMAGE_URL_DEFAULT_FILE_PATH+resources.getIdentifier(
                         "sample0",
                         "drawable",
                         requireActivity().packageName
@@ -97,6 +104,9 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
                 }
 
                 3 -> {
+                    val manager =
+                        requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
 
                     sound.start()
                     sound.isLooping = true
@@ -114,50 +124,30 @@ class FragmentFakeCall : BaseFragment<FragmentFakeCallBinding>(R.layout.fragment
         }
     }
 
-
-    private fun setCallScreenDelay() {
+    private fun FragmentFakeCallBinding.setCallScreenDelay() {
         val alarmManager = requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
-
         if (args.callNotication == 2 && PrefCheckRun.getInstance(requireContext()).callDelayCotrol ==
             Contents.CALL_DELAY_NOTICATION_ENABLED_ON
         ) {
-            binding.buttonVisibleSetting(View.GONE)
-            val calendar = Calendar.getInstance()
 
-            val intent = Intent(requireContext(), AlarmReceiver::class.java)
-            intent.putExtra("args", args.toBundle())
-            val pendingIntent = PendingIntent.getBroadcast(
-                requireContext(), 444444, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
+            layoutScreenCover.visibility = View.VISIBLE
+            buttonVisibleSetting(View.GONE)
+            val manager =
+                requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            viewModelCall.clearExistingNotifications(444444, manager)
 
+            args.toBundle().putInt("callNotication", 1)
+            val arg = args.toBundle()
             PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
                 Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
 
-            CoroutineScope(Dispatchers.Main).launch {
-
-
-                calendar.timeInMillis = System.currentTimeMillis()
-                calendar.set(Calendar.HOUR_OF_DAY, args.setAlarmHour)
-                calendar.set(Calendar.MINUTE, args.setAlarmMinuite)
-                calendar.set(Calendar.SECOND, 0)
-                if (calendar.before(Calendar.getInstance()))
-                    calendar.add(Calendar.DATE, 1)
-
-                alarmManager.setRepeating(
-                    AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                    AlarmManager.INTERVAL_DAY, pendingIntent
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModelCall.basic(
+                    manager, requireContext(), arg, R.drawable.applogo_hood_line_64,
+                    "전화에 응하시겠습니까?", "몰래 눌러주세요", "Call"
                 )
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    alarmManager.setExactAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        calendar.timeInMillis,
-                        pendingIntent
-                    )
-                }
-
                 requireActivity().finishAffinity()
+                
             }
         }
 

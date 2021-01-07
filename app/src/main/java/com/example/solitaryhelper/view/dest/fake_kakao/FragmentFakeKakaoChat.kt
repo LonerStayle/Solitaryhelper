@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
 import com.example.solitaryhelper.databinding.FragmentFakeKakaoChatBinding
 import com.example.solitaryhelper.database.localdb.entitiy.*
+import com.example.solitaryhelper.databinding.FragmentChatbotBinding
 import com.example.solitaryhelper.view.activity.autoChatRun
 import com.example.solitaryhelper.view.adapter.kakao_chat.*
 import com.example.solitaryhelper.view.base.BaseFragment
@@ -48,7 +49,6 @@ class FragmentFakeKakaoChat :
         SoundPool.Builder()
             .build()
     }
-
     companion object {
         const val NOTIFICATION_ID = 1001
         const val NOTIFICATION_ID_2 = 1002
@@ -385,13 +385,14 @@ class FragmentFakeKakaoChat :
 
             buttonClick = true
 
-            viewModelKaKaoChat.insert(
-                KaKaoTalkChatData(
-                    textList = editTextTalkBox.text.toString(),
-                    user = true,
-                    timeList = Contents.timePattern.format(Date())
-                )
-            )
+            for(i in 0..19){
+                when(args.itemIdPosition){
+                    i.toLong() -> buttonMessageInsertList()[i]()
+                }
+            }
+
+
+
 
             editTextTalkBox.setText("")
         }
@@ -1798,6 +1799,212 @@ class FragmentFakeKakaoChat :
     override fun onPause() {
         inUse = false
         super.onPause()
+    }
+    fun FragmentFakeKakaoChatBinding.buttonMessageInsertList():MutableList<()->Unit>{
+        return mutableListOf(
+            {
+                viewModelKaKaoChat.insert(
+                    KaKaoTalkChatData(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            },
+
+            {
+                viewModelKaKaoChat.insert1(
+                    KaKaoTalkChatData1(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert2(
+                    KaKaoTalkChatData2(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert3(
+                    KaKaoTalkChatData3(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert4(
+                    KaKaoTalkChatData4(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert5(
+                    KaKaoTalkChatData5(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert6(
+                    KaKaoTalkChatData6(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert7(
+                    KaKaoTalkChatData7(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert8(
+                    KaKaoTalkChatData8(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert9(
+                    KaKaoTalkChatData9(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert10(
+                    KaKaoTalkChatData10(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert11(
+                    KaKaoTalkChatData11(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert12(
+                    KaKaoTalkChatData12(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert13(
+                    KaKaoTalkChatData13(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert14(
+                    KaKaoTalkChatData14(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert15(
+                    KaKaoTalkChatData15(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert16(
+                    KaKaoTalkChatData16(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert17(
+                    KaKaoTalkChatData17(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert18(
+                    KaKaoTalkChatData18(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+            ,
+            {
+                viewModelKaKaoChat.insert19(
+                    KaKaoTalkChatData19(
+                        textList = editTextTalkBox.text.toString(),
+                        user = true,
+                        timeList = Contents.timePattern.format(Date())
+                    )
+                )
+            }
+
+
+
+        )
     }
 }
 

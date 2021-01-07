@@ -45,12 +45,12 @@ class FragmentFakeCallSetting :
                 return
             }
 
-            PrefCheckRun.getInstance(requireContext()).callDelayCotrol ==
-                    Contents.CALL_DELAY_NOTICATION_ENABLED_ON &&
-                    (setAlarmTimeHour == null || setAlarmTimeMinute == null)  -> {
-                context?.toastDebugTest("알람 받을 시간을 설정하거나\n혹은 알람 기능을 OFF 해주세요")
-                return
-            }
+//            PrefCheckRun.getInstance(requireContext()).callDelayCotrol ==
+//                    Contents.CALL_DELAY_NOTICATION_ENABLED_ON &&
+//                    (setAlarmTimeHour == null || setAlarmTimeMinute == null)  -> {
+//                context?.toastDebugTest("알람 받을 시간을 설정하거나\n혹은 알람 기능을 OFF 해주세요")
+//                return
+//            }
 
         }
 
@@ -86,7 +86,8 @@ class FragmentFakeCallSetting :
                         Contents.CALL_DELAY_NOTICATION_ENABLED_OFF
                 }
                 2 -> {
-                    buttonTimepicker.visibility = View.VISIBLE
+                    /** TODO: 알램매니저 적용시 VISIBLE로 바꾸기*/
+                    buttonTimepicker.visibility = View.GONE
                     PrefCheckRun.getInstance(requireContext()).callDelayCotrol =
                         Contents.CALL_DELAY_NOTICATION_ENABLED_ON
                 }

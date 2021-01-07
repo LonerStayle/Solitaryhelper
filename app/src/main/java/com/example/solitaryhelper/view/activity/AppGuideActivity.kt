@@ -110,7 +110,8 @@ class AppGuideActivity : BaseActivity<ActivityAppGuideBinding>(R.layout.activity
                             }else{
                                 startActivity(
                                     Intent(this@AppGuideActivity,
-                                        LoginActivity::class.java))
+                                        /** TODO:변경예정*/
+                                        MainActivity::class.java))
                                 finish()
                             }
                         }
