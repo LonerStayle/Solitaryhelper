@@ -81,56 +81,58 @@ class KaKaoChatViewModel(private val repository: KaKaoChatDataRepository ) : Vie
         ioScope.launch {
             repository.insert(kakao)
         }
-    }//챗 리스트 인서트
-
+    }
+    //챗 리스트 인서트
     fun insert1(kakao: KaKaoTalkChatData1) {
         ioScope.launch {
             repository.insert1(kakao)
         }
-    }//챗 리스트 인서트
-
+    }
+    //챗 리스트 인서트
     fun insert2(kakao: KaKaoTalkChatData2) {
         ioScope.launch {
             repository.insert2(kakao)
         }
-    }//챗 리스트 인서트
-
+    }
+    //챗 리스트 인서트
     fun insert3(kakao: KaKaoTalkChatData3) {
         ioScope.launch {
             repository.insert3(kakao)
         }
-    }//챗 리스트 인서트
+    }
 
+    //챗 리스트 인서트
     fun insert4(kakao: KaKaoTalkChatData4) {
         ioScope.launch {
             repository.insert4(kakao)
         }
-    }//챗 리스트 인서트
+    }
 
+    //챗 리스트 인서트
     fun insert5(kakao: KaKaoTalkChatData5) {
         ioScope.launch {
             repository.insert5(kakao)
         }
-    }//챗 리스트 인서트
-
+    }
+    //챗 리스트 인서트
     fun insert6(kakao: KaKaoTalkChatData6) {
         ioScope.launch {
             repository.insert6(kakao)
         }
-    }//챗 리스트 인서트
-
+    }
+    //챗 리스트 인서트
     fun insert7(kakao: KaKaoTalkChatData7) {
         ioScope.launch {
             repository.insert7(kakao)
         }
-    }//챗 리스트 인서트
-
+    }
+    //챗 리스트 인서트
     fun insert8(kakao: KaKaoTalkChatData8) {
         ioScope.launch {
             repository.insert8(kakao)
         }
-    }//챗 리스트 인서트
-
+    }
+    //챗 리스트 인서트
     fun insert9(kakao: KaKaoTalkChatData9) {
         ioScope.launch {
             repository.insert9(kakao)
