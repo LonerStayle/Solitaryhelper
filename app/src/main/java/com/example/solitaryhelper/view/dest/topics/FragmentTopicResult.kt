@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
@@ -106,12 +107,12 @@ class FragmentTopicResult :
     private fun setBlogObserver() {
 
         viewModelTopic.blogMovie.observe(viewLifecycleOwner, Observer {
-            it?:return@Observer
+            if(it.isNullOrEmpty()) return@Observer
             val shuffled = it.shuffled()
             blogList.add(shuffled[0])
         })
         viewModelTopic.blogMusic.observe(viewLifecycleOwner, Observer {
-            it?:return@Observer
+            if(it.isNullOrEmpty()) return@Observer
             val shuffled = it.shuffled()
             blogList.add(shuffled[0])
 
