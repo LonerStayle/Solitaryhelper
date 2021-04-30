@@ -24,6 +24,7 @@ class DialogCustom<VDB:ViewDataBinding>(context: Context,@LayoutRes  layout:Int,
 
     fun dialogViewCreate() {
         dialogCreate.setContentView(dialogCustomCreateBinding.root)
+
     }
 }
 

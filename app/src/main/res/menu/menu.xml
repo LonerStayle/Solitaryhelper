@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/item_userProfileDetail"
-        android:title="내 정보 보기"
-        android:icon="@drawable/ic_baseline_person_outline_24"
-        />
+    
     <item
         android:id="@+id/item_wiseSayingList"
         android:title="마음의 양식 쌓기"
         android:icon="@drawable/ic_baseline_wise_list_24"
        />
-    <item
-        android:id="@+id/item_ranking"
-        android:title="랭킹"
-        android:icon="@drawable/ic_baseline_ranking_24"
-        />
-
-    <item
-        android:id="@+id/item_helperInWishList"
-        android:title="아싸 도우미에서 찜한 정보"
-        android:icon="@drawable/ic_baseline_wishlist_24"
-      />
 
     <item
         android:id="@+id/item_contactTheDeveloper"

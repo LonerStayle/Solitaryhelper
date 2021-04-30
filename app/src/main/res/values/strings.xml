@@ -15,6 +15,7 @@
     <string name="callSetting_reservation">통화 예약</string>
     <string name="callSetting_callStart">전화 시작하기</string>
     <string name="callSetting_notice">통화 알림</string>
+    <string name="email">dlwlstjq410@gmail.com</string>
     <!--    메인-->
     <string-array name="icon_text">
         <item>아싸 스킬</item>

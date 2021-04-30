@@ -106,17 +106,18 @@ class FragmentTopicResult :
     private fun setBlogObserver() {
 
         viewModelTopic.blogMovie.observe(viewLifecycleOwner, Observer {
+            it?:return@Observer
             val shuffled = it.shuffled()
             blogList.add(shuffled[0])
-
-
         })
         viewModelTopic.blogMusic.observe(viewLifecycleOwner, Observer {
+            it?:return@Observer
             val shuffled = it.shuffled()
             blogList.add(shuffled[0])
 
         })
         viewModelTopic.blogFashion.observe(viewLifecycleOwner, Observer {
+            it?:return@Observer
             blogList.add(it.shuffled()[0])
             blogList.add(it.shuffled()[1])
             blogList.add(it.shuffled()[2])

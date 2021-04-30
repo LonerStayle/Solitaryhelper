@@ -6,10 +6,7 @@ import com.example.solitaryhelper.database.api.naver.dataholder.NaverNewsSearchR
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Query
+import retrofit2.http.*
 
 object NaverApiClient {
 
@@ -51,5 +48,6 @@ object NaverApiClient {
             @Query("sort") sort:String = "sim"
         ): NaverNewsSearchResult
     }
+
 
 

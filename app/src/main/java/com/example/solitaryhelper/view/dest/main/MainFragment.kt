@@ -117,7 +117,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         })
     }
     private fun FragmentMainBinding.setMainTabVisible() {
-        sharedViewModel.mainBottomVisible.observe(requireActivity(), {
+        sharedViewModel.mainBottomVisible.observe(requireActivity(), Observer{
             tabVisible = it
         })
     }
@@ -222,20 +222,19 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private fun setNavigationViewClickListener() = with(binding.navigationViewMain) {
         setNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
-                R.id.item_userProfileDetail -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_userProfileDetailFragment)
-                }
                 R.id.item_wiseSayingList -> {
                     findNavController().navigate(R.id.action_mainFragment_to_fragmentWiseSaying)
                 }
-                R.id.item_ranking -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_rankingFragment)
-                }
-                R.id.item_helperInWishList -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_helperInWishListFragment)
-                }
                 R.id.item_contactTheDeveloper -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_contactTheDeveloperFragment)
+
+                    Intent(Intent.ACTION_SEND).apply {
+                        type = "plain/Text";
+                        putExtra(Intent.EXTRA_EMAIL, getString(R.string.email))
+                        putExtra(Intent.EXTRA_SUBJECT, "<" + getString(R.string.app_name) +"앱 문의 하기>")
+                        putExtra(Intent.EXTRA_TEXT, "앱 버전 (AppVersion):" + pInfo +
+                                "\n기기명 (Device):\n안드로이드 OS (Android OS):\n내용 (Content):\n")
+                        startActivity(this)
+                    }
                 }
                 R.id.item_setting -> {
                     requireContext().startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).also {

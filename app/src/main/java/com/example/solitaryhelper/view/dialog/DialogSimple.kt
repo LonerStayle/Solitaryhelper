@@ -19,7 +19,6 @@ object DialogSimple {
                 onPositive()
             }
         .setNegativeButton(negativeText) { _, _ ->
-
             onNegative()
         }
         .create()

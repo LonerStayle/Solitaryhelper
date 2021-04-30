@@ -86,11 +86,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="폰 알림창을 확인해주세요."
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:text="필요할때 알림창을 눌러 실행시키면 됩니다."
                 android:textColor="#fff"
-                />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

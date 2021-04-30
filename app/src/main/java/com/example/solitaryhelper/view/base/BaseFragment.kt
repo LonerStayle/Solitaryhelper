@@ -1,5 +1,6 @@
 package com.example.solitaryhelper.view.base
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,9 +22,18 @@ abstract class BaseFragment<VDB : ViewDataBinding>(@LayoutRes val layoutId: Int)
 
     protected val viewModelFactory by lazy {
         val dataBase = SolitaryHelperDatabase.getInstance(requireContext())
-        ViewModelFactory(dataBase.kakaoChatDataSource,dataBase.kaKaoDataSource,
-            dataBase.smsDataSource,dataBase.userDataSource)
+        ViewModelFactory(
+            dataBase.kakaoChatDataSource, dataBase.kaKaoDataSource,
+            dataBase.smsDataSource, dataBase.userDataSource
+        )
     }
+    val pInfo by lazy{
+        requireActivity().packageManager.getPackageInfo(
+            requireActivity().packageName,
+            PackageManager.GET_META_DATA
+        ).versionName
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -1,13 +1,16 @@
 package com.example.solitaryhelper.database.localdb
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.room.*
+import com.example.solitaryhelper.database.api.naver.dataholder.NaverBlog
 import com.example.solitaryhelper.database.localdb.dao.KaKaoChatDao
 import com.example.solitaryhelper.database.localdb.dao.KaKaoDao
 import com.example.solitaryhelper.database.localdb.dao.SmsDao
 import com.example.solitaryhelper.database.localdb.dao.UserDao
 import com.example.solitaryhelper.database.localdb.entitiy.*
 import com.example.solitaryhelper.database.localdb.entitiy.KaKaoTalkChatData
+import kotlinx.android.parcel.Parcelize
 
 
 @Database(
@@ -44,3 +47,9 @@ abstract class SolitaryHelperDatabase : RoomDatabase() {
         }
     }
 }
+
+
+
+
+
+

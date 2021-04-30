@@ -29,4 +29,5 @@ object Contents {
 
      var AUTO_CHAT_DEALY = (Math.random() * (60000 - 3000) + 3000).toLong()
 
+
 }

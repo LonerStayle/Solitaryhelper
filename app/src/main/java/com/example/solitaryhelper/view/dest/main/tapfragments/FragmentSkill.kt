@@ -3,6 +3,7 @@ package com.example.solitaryhelper.view.dest.main.tapfragments
 import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.solitaryhelper.R
@@ -142,7 +143,9 @@ class FragmentSkill : BaseFragment<FragmentSkillBinding>(R.layout.fragment_skill
     }
 
      fun setGoToTheSmsSetting(v:View?) {
-        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSmsSetting)
+         Toast.makeText(requireContext(), "현재 제작 대기중인 기능입니다.", Toast.LENGTH_SHORT).show()
+         return
+//        findNavController().navigate(R.id.action_mainFragment_to_fragmentFakeSmsSetting)
     }
 
 }
